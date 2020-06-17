@@ -1,0 +1,21 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:LightMasterMVVM.ViewModels"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="LightMasterMVVM.Views.UserControl1">
+  <UserControl.DataContext>
+    <vm:TabletViewModel/>
+  </UserControl.DataContext>
+  <StackPanel>
+    <Grid ColumnDefinitions="*,*">
+      <TextBlock Text="Match #" Grid.Column="0"/>
+      <ButtonSpinner AllowSpin="True" Content="{Binding Text}" Grid.Column="1"></ButtonSpinner>
+    </Grid>
+
+
+    <TextBlock Text="Hellooooo!"/>
+  </StackPanel>
+
+</UserControl>

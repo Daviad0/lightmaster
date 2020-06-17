@@ -1,0 +1,46 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:LightMasterMVVM.ViewModels"
+             xmlns:f="clr-namespace:LightMasterMVVM.Assets"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="LightMasterMVVM.Views.Tablets">
+  <UserControl.DataContext>
+    <vm:TabletViewModel/>
+  </UserControl.DataContext>
+  <Grid ColumnDefinitions="260,260,260" RowDefinitions="300,300" HorizontalAlignment="Center">
+    <Border Background="#eeeeee" BorderBrush="LightGray" BorderThickness="2" Height="280" Width="240" CornerRadius="4" Grid.Row="0" Grid.Column="0" Margin="7">
+      <Grid ColumnDefinitions="*" RowDefinitions="230,50">
+        <Image Source="resm:LightMasterMVVM.Assets.Blue1Tablet.png" Margin="0,0,0,5" Grid.Row="0"/>
+        <Grid ColumnDefinitions="*,*,*" Margin="40,0,40,5" Grid.Row="1">
+          <Border Grid.Column="0" BorderBrush="Blue" Background="LightBlue" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
+            <Image Source="resm:LightMasterMVVM.Assets.ui-bluetooth.png" Margin="0,5,0,5"/>
+          </Border>
+          <Border Grid.Column="1" BorderBrush="Gray" Background="LightGray" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
+            <Image Source="resm:LightMasterMVVM.Assets.plugin.png" Margin="0,5,0,5"/>
+          </Border>
+          <Border Grid.Column="2" BorderBrush="DarkOrange" Background="LightGoldenrodYellow" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
+            <Image Source="resm:LightMasterMVVM.Assets.battery-full.png" Margin="0,5,0,5"/>
+          </Border>
+        </Grid>
+
+      </Grid>
+    </Border>
+    <Border Background="#eeeeee" BorderBrush="LightGray" BorderThickness="2" Height="280" Width="240" CornerRadius="4" Grid.Row="0" Grid.Column="1" Margin="7">
+      <Image Source="resm:LightMasterMVVM.Assets.Blue2Tablet.png" Margin="0,0,0,10"/>
+    </Border>
+    <Border Background="#eeeeee" BorderBrush="LightGray" BorderThickness="2" Height="280" Width="240" CornerRadius="4" Grid.Row="0" Grid.Column="2" Margin="7">
+      <Image Source="resm:LightMasterMVVM.Assets.Blue3Tablet.png" Margin="0,0,0,10"/>
+    </Border>
+    <Border Background="#eeeeee" BorderBrush="LightGray" BorderThickness="2" Height="280" Width="240" CornerRadius="4" Grid.Row="1" Grid.Column="0" Margin="7">
+      <Image Source="resm:LightMasterMVVM.Assets.Red1Tablet.png" Margin="0,0,0,10"/>
+    </Border>
+    <Border Background="#eeeeee" BorderBrush="LightGray" BorderThickness="2" Height="280" Width="240" CornerRadius="4" Grid.Row="1" Grid.Column="1" Margin="7">
+      <Image Source="resm:LightMasterMVVM.Assets.Red2Tablet.png" Margin="0,0,0,10"/>
+    </Border>
+    <Border Background="#eeeeee" BorderBrush="LightGray" BorderThickness="2" Height="280" Width="240" CornerRadius="4" Grid.Row="1" Grid.Column="2" Margin="7">
+      <Image Source="resm:LightMasterMVVM.Assets.Red3Tablet.png" Margin="0,0,0,10"/>
+    </Border>
+  </Grid>
+</UserControl>

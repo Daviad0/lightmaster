@@ -1,0 +1,79 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:LightMasterMVVM.ViewModels"
+        xmlns:viewModels="clr-namespace:LightMasterMVVM.ViewModels;assembly=LightMasterMVVM"
+        xmlns:screens="clr-namespace:LightMasterMVVM.Views"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="LightMasterMVVM.Views.MainWindow"
+        Title="LightMasterMVVM">
+
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+  <Window.Styles>
+    <Style Selector="Button.menu">
+      <Setter Property="Button.Background" Value="DarkOrange"/>
+      <Setter Property="Button.BorderBrush" Value="DarkOrange"/>
+      <Setter Property="Button.BorderThickness" Value="0"/>
+      <Setter Property="Button.Foreground" Value="White"/>
+    </Style>
+    <Style Selector="Button.menu:pointerover">
+      <Setter Property="Button.Background" Value="#cc7000"/>
+      <Setter Property="Button.BorderBrush" Value="#cc7000"/>
+      <Setter Property="Button.Foreground" Value="White"/>
+    </Style>
+  </Window.Styles>
+  <Grid>
+    
+    <Grid.RowDefinitions>
+      <RowDefinition Height="50"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="100"/>
+    </Grid.RowDefinitions>
+    <Grid ColumnDefinitions="*,*,*" RowDefinitions="120" Grid.Row="0" Margin="70,10,70,30">
+      <Grid Grid.Column="0" ColumnDefinitions="*" RowDefinitions="80">
+        <Button Command="{Binding ChangeText}" Height="35" Grid.Row="0" Margin="30,0,30,60" CommandParameter="Hello world!" BorderBrush="DarkOrange" Foreground="DarkOrange" Background="White" BorderThickness="3">
+          <TextBlock FontWeight="Bold" Text="{Binding Text}"/>
+        </Button>
+      </Grid>
+      <Grid Grid.Column="1" ColumnDefinitions="*" RowDefinitions="80">
+        <Button BorderBrush="DarkOrange" Grid.Row="0" Margin="30,0,30,60" Height="35" Background="DarkOrange" Foreground="White">
+          <TextBlock FontWeight="Bold" Text="Machine Learning"/>
+        </Button>
+      </Grid>
+      <Grid Grid.Column="2" ColumnDefinitions="*,10" RowDefinitions="80">
+        <Button Command="{Binding ChangeVisibility}" Classes="menu" Height="35" Grid.Row="0" Margin="30,0,30,10" VerticalAlignment="Top">
+          <TextBlock FontWeight="Bold" Text="Change Visibility"/>
+        </Button>
+        <Border Background="DarkOrange" Height="5" Grid.Row="1" Margin="30,2,30,0">
+          
+        </Border>
+      </Grid>
+
+
+
+
+
+    </Grid>
+    <Grid Grid.Row="1" VerticalAlignment="Center">
+      <screens:Tablets x:Name="tablets" IsVisible="{Binding UserControlVisible}" />
+    </Grid>
+    <Grid Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" ColumnDefinitions="100,50" Margin="0,15,0,5">
+      <TextBlock Grid.Column="0" Text="Match 1" FontWeight="ExtraBold" VerticalAlignment="Center" FontSize="17"/>
+      <Grid Grid.Column="1" RowDefinitions="20,20">
+        <TextBlock Text="ABCD" Grid.Row="0" >
+          
+        </TextBlock>
+        <TextBlock Text="EFGH" Grid.Row="1"/>
+      </Grid>
+      
+      
+    </Grid>
+    
+
+  </Grid>
+    
+
+</Window>

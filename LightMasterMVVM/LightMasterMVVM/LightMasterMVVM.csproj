@@ -1,0 +1,99 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <AvaloniaResource Include="**\*.xaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaResource Remove="Assets\battery-full.png" />
+    <AvaloniaResource Remove="Assets\Blue1Tablet.png" />
+    <AvaloniaResource Remove="Assets\Blue2Tablet.png" />
+    <AvaloniaResource Remove="Assets\Blue3Tablet.png" />
+    <AvaloniaResource Remove="Assets\bluetoothlogo.png" />
+    <AvaloniaResource Remove="Assets\icofont.ttf" />
+    <AvaloniaResource Remove="Assets\optionselected.png" />
+    <AvaloniaResource Remove="Assets\plugin.png" />
+    <AvaloniaResource Remove="Assets\plugin.svg" />
+    <AvaloniaResource Remove="Assets\Red1Tablet.png" />
+    <AvaloniaResource Remove="Assets\Red2Tablet.png" />
+    <AvaloniaResource Remove="Assets\Red3Tablet.png" />
+    <AvaloniaResource Remove="Assets\Rubik-Medium.ttf" />
+    <AvaloniaResource Remove="Assets\ui-bluetooth.png" />
+    <AvaloniaResource Remove="Views\Tablets.xaml" />
+    <AvaloniaResource Remove="Views\UserControl1.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Assets\battery-full.png" />
+    <None Remove="Assets\Blue1Tablet.png" />
+    <None Remove="Assets\Blue2Tablet.png" />
+    <None Remove="Assets\Blue3Tablet.png" />
+    <None Remove="Assets\bluetoothlogo.png" />
+    <None Remove="Assets\icofont.ttf" />
+    <None Remove="Assets\optionselected.png" />
+    <None Remove="Assets\plugin.png" />
+    <None Remove="Assets\plugin.svg" />
+    <None Remove="Assets\Red1Tablet.png" />
+    <None Remove="Assets\Red2Tablet.png" />
+    <None Remove="Assets\Red3Tablet.png" />
+    <None Remove="Assets\Rubik-Medium.ttf" />
+    <None Remove="Assets\ui-bluetooth.png" />
+    <None Remove="Views\MainWindow.xaml" />
+    <None Remove="Views\Tablets.xaml" />
+    <None Remove="Views\UserControl1.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\ui-bluetooth.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\battery-full.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\plugin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\bluetoothlogo.png" />
+    <EmbeddedResource Include="Assets\plugin.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Rubik-Medium.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\icofont.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Blue1Tablet.png" />
+    <EmbeddedResource Include="Assets\Blue2Tablet.png" />
+    <EmbeddedResource Include="Assets\Blue3Tablet.png" />
+    <EmbeddedResource Include="Assets\Red1Tablet.png" />
+    <EmbeddedResource Include="Assets\Red2Tablet.png" />
+    <EmbeddedResource Include="Assets\Red3Tablet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\optionselected.png" />
+    <EmbeddedResource Include="Views\MainWindow.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.9.10" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.10" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.10" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\UserControl1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Tablets.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
