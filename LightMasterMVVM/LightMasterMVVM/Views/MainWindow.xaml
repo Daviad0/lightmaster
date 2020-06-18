@@ -39,8 +39,8 @@
         </Button>
       </Grid>
       <Grid Grid.Column="1" ColumnDefinitions="*" RowDefinitions="80">
-        <Button BorderBrush="DarkOrange" Grid.Row="0" Margin="30,0,30,60" Height="35" Background="DarkOrange" Foreground="White">
-          <TextBlock FontWeight="Bold" Text="Machine Learning"/>
+        <Button BorderBrush="DarkOrange" Command="{Binding GetBluetoothDevices}" Grid.Row="0" Margin="30,0,30,60" Height="35" Background="DarkOrange" Foreground="White">
+          <TextBlock FontWeight="Bold" Text="Bluetooth"/>
         </Button>
       </Grid>
       <Grid Grid.Column="2" ColumnDefinitions="*,10" RowDefinitions="80">
@@ -58,7 +58,10 @@
 
     </Grid>
     <Grid Grid.Row="1" VerticalAlignment="Center">
-      <screens:Tablets x:Name="tablets" IsVisible="{Binding UserControlVisible}" />
+      <Border BorderBrush="Transparent">
+        <screens:Tablets x:Name="tablets" DataContext="{Binding TabletViewModel}" IsVisible="{Binding UserControlVisible}"/>
+      </Border>
+      
     </Grid>
     <Grid Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" ColumnDefinitions="100,50" Margin="0,15,0,5">
       <TextBlock Grid.Column="0" Text="Match 1" FontWeight="ExtraBold" VerticalAlignment="Center" FontSize="17"/>

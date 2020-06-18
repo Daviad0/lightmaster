@@ -6,21 +6,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LightMasterMVVM.Views.Tablets">
-  <UserControl.DataContext>
+  <!--<UserControl.DataContext>
     <vm:TabletViewModel/>
-  </UserControl.DataContext>
+  </UserControl.DataContext>-->
   <Grid ColumnDefinitions="260,260,260" RowDefinitions="300,300" HorizontalAlignment="Center">
     <Border Background="#eeeeee" BorderBrush="LightGray" BorderThickness="2" Height="280" Width="240" CornerRadius="4" Grid.Row="0" Grid.Column="0" Margin="7">
       <Grid ColumnDefinitions="*" RowDefinitions="230,50">
         <Image Source="resm:LightMasterMVVM.Assets.Blue1Tablet.png" Margin="0,0,0,5" Grid.Row="0"/>
         <Grid ColumnDefinitions="*,*,*" Margin="40,0,40,5" Grid.Row="1">
-          <Border Grid.Column="0" BorderBrush="Blue" Background="LightBlue" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
+          <Border Grid.Column="0" BorderBrush="{Binding StatusBorderColors[0][11]}" Background="{Binding StatusBackgroundColors[0][11]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
             <Image Source="resm:LightMasterMVVM.Assets.ui-bluetooth.png" Margin="0,5,0,5"/>
           </Border>
-          <Border Grid.Column="1" BorderBrush="Gray" Background="LightGray" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
+          <Border Grid.Column="1" BorderBrush="{Binding StatusBorderColors[1][11]}" Background="{Binding StatusBackgroundColors[1][11]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
             <Image Source="resm:LightMasterMVVM.Assets.plugin.png" Margin="0,5,0,5"/>
           </Border>
-          <Border Grid.Column="2" BorderBrush="DarkOrange" Background="LightGoldenrodYellow" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
+          <Border Grid.Column="2" BorderBrush="{Binding StatusBorderColors[2][11]}" Background="{Binding StatusBackgroundColors[2][11]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
             <Image Source="resm:LightMasterMVVM.Assets.battery-full.png" Margin="0,5,0,5"/>
           </Border>
         </Grid>
@@ -28,19 +28,98 @@
       </Grid>
     </Border>
     <Border Background="#eeeeee" BorderBrush="LightGray" BorderThickness="2" Height="280" Width="240" CornerRadius="4" Grid.Row="0" Grid.Column="1" Margin="7">
-      <Image Source="resm:LightMasterMVVM.Assets.Blue2Tablet.png" Margin="0,0,0,10"/>
+      <Grid ColumnDefinitions="*" RowDefinitions="230,50">
+        <Image Source="resm:LightMasterMVVM.Assets.Blue2Tablet.png" Margin="0,0,0,5" Grid.Row="0"/>
+        <Grid ColumnDefinitions="*,*,*" Margin="40,0,40,5" Grid.Row="1">
+          <Border Grid.Column="0" BorderBrush="{Binding StatusBorderColors[0][12]}" Background="{Binding StatusBackgroundColors[0][12]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
+            <Image Source="resm:LightMasterMVVM.Assets.ui-bluetooth.png" Margin="0,5,0,5"/>
+          </Border>
+          <Border Grid.Column="1" BorderBrush="{Binding StatusBorderColors[1][12]}" Background="{Binding StatusBackgroundColors[1][12]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
+            <Image Source="resm:LightMasterMVVM.Assets.plugin.png" Margin="0,5,0,5"/>
+          </Border>
+          <Border Grid.Column="2" BorderBrush="{Binding StatusBorderColors[2][12]}" Background="{Binding StatusBackgroundColors[2][12]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
+            <Image Source="resm:LightMasterMVVM.Assets.battery-full.png" Margin="0,5,0,5"/>
+          </Border>
+        </Grid>
+
+      </Grid>
     </Border>
     <Border Background="#eeeeee" BorderBrush="LightGray" BorderThickness="2" Height="280" Width="240" CornerRadius="4" Grid.Row="0" Grid.Column="2" Margin="7">
-      <Image Source="resm:LightMasterMVVM.Assets.Blue3Tablet.png" Margin="0,0,0,10"/>
+      <Grid ColumnDefinitions="*" RowDefinitions="230,50">
+        <Image Source="resm:LightMasterMVVM.Assets.Blue3Tablet.png" Margin="0,0,0,5" Grid.Row="0"/>
+        <Grid ColumnDefinitions="*,*,*" Margin="40,0,40,5" Grid.Row="1">
+          <Border Grid.Column="0" BorderBrush="{Binding StatusBorderColors[0][13]}" Background="{Binding StatusBackgroundColors[0][13]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
+            <Image Source="resm:LightMasterMVVM.Assets.ui-bluetooth.png" Margin="0,5,0,5"/>
+          </Border>
+          <Border Grid.Column="1" BorderBrush="{Binding StatusBorderColors[1][13]}" Background="{Binding StatusBackgroundColors[1][13]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
+            <Image Source="resm:LightMasterMVVM.Assets.plugin.png" Margin="0,5,0,5"/>
+          </Border>
+          <Border Grid.Column="2" BorderBrush="{Binding StatusBorderColors[2][13]}" Background="{Binding StatusBackgroundColors[2][13]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
+            <Image Source="resm:LightMasterMVVM.Assets.battery-full.png" Margin="0,5,0,5"/>
+          </Border>
+        </Grid>
+
+      </Grid>
     </Border>
     <Border Background="#eeeeee" BorderBrush="LightGray" BorderThickness="2" Height="280" Width="240" CornerRadius="4" Grid.Row="1" Grid.Column="0" Margin="7">
-      <Image Source="resm:LightMasterMVVM.Assets.Red1Tablet.png" Margin="0,0,0,10"/>
+      <Grid ColumnDefinitions="*" RowDefinitions="230,50">
+        <Image Source="resm:LightMasterMVVM.Assets.Red1Tablet.png" Margin="0,0,0,5" Grid.Row="0"/>
+        <Grid ColumnDefinitions="*,*,*" Margin="40,0,40,5" Grid.Row="1">
+          <Border Grid.Column="0" BorderBrush="{Binding StatusBorderColors[0][21]}" Background="{Binding StatusBackgroundColors[0][21]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
+            <Image Source="resm:LightMasterMVVM.Assets.ui-bluetooth.png" Margin="0,5,0,5"/>
+          </Border>
+          <Border Grid.Column="1" BorderBrush="{Binding StatusBorderColors[1][21]}" Background="{Binding StatusBackgroundColors[1][21]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
+            <Image Source="resm:LightMasterMVVM.Assets.plugin.png" Margin="0,5,0,5"/>
+          </Border>
+          <Border Grid.Column="2" BorderBrush="{Binding StatusBorderColors[2][21]}" Background="{Binding StatusBackgroundColors[2][21]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
+            <Image Source="resm:LightMasterMVVM.Assets.battery-full.png" Margin="0,5,0,5"/>
+          </Border>
+        </Grid>
+
+      </Grid>
     </Border>
     <Border Background="#eeeeee" BorderBrush="LightGray" BorderThickness="2" Height="280" Width="240" CornerRadius="4" Grid.Row="1" Grid.Column="1" Margin="7">
-      <Image Source="resm:LightMasterMVVM.Assets.Red2Tablet.png" Margin="0,0,0,10"/>
+      <Grid ColumnDefinitions="*" RowDefinitions="230,50">
+        <Image Source="resm:LightMasterMVVM.Assets.Red2Tablet.png" Margin="0,0,0,5" Grid.Row="0"/>
+        <Grid ColumnDefinitions="*,*,*" Margin="40,0,40,5" Grid.Row="1">
+          <Border Grid.Column="0" BorderBrush="{Binding StatusBorderColors[0][22]}" Background="{Binding StatusBackgroundColors[0][22]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
+            <Image Source="resm:LightMasterMVVM.Assets.ui-bluetooth.png" Margin="0,5,0,5"/>
+          </Border>
+          <Border Grid.Column="1" BorderBrush="{Binding StatusBorderColors[1][22]}" Background="{Binding StatusBackgroundColors[1][22]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
+            <Image Source="resm:LightMasterMVVM.Assets.plugin.png" Margin="0,5,0,5"/>
+          </Border>
+          <Border Grid.Column="2" BorderBrush="{Binding StatusBorderColors[2][22]}" Background="{Binding StatusBackgroundColors[2][22]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
+            <Image Source="resm:LightMasterMVVM.Assets.battery-full.png" Margin="0,5,0,5"/>
+          </Border>
+        </Grid>
+
+      </Grid>
     </Border>
     <Border Background="#eeeeee" BorderBrush="LightGray" BorderThickness="2" Height="280" Width="240" CornerRadius="4" Grid.Row="1" Grid.Column="2" Margin="7">
-      <Image Source="resm:LightMasterMVVM.Assets.Red3Tablet.png" Margin="0,0,0,10"/>
+      <Grid ColumnDefinitions="*" RowDefinitions="230,50">
+        <Image Source="resm:LightMasterMVVM.Assets.Red3Tablet.png" Margin="0,0,0,5" Grid.Row="0"/>
+        <Grid ColumnDefinitions="*,*,*" Margin="40,0,40,5" Grid.Row="1">
+          <Border Grid.Column="0" BorderBrush="{Binding StatusBorderColors[0][23]}" Background="{Binding StatusBackgroundColors[0][23]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
+            <Image Source="resm:LightMasterMVVM.Assets.ui-bluetooth.png" Margin="0,5,0,5"/>
+          </Border>
+          <Border Grid.Column="1" BorderBrush="{Binding StatusBorderColors[1][23]}" Background="{Binding StatusBackgroundColors[1][23]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
+            <Image Source="resm:LightMasterMVVM.Assets.plugin.png" Margin="0,5,0,5"/>
+          </Border>
+          <Border Grid.Column="2" BorderBrush="{Binding StatusBorderColors[2][23]}" Background="{Binding StatusBackgroundColors[2][23]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
+            <Image Source="resm:LightMasterMVVM.Assets.battery-full.png" Margin="0,5,0,5"/>
+          </Border>
+        </Grid>
+
+      </Grid>
     </Border>
+    <ListBox Items="{Binding TestBTD}" Width="250" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <Border Background="Red" CornerRadius="4" Padding="4">
+            <TextBlock Text="{Binding}" TextWrapping="Wrap"/>
+          </Border>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
   </Grid>
 </UserControl>

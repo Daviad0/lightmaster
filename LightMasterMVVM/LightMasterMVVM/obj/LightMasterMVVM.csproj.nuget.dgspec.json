@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\djree\\source\\repos\\LightMasterMVVM\\LightMasterMVVM\\LightMasterMVVM.csproj": {}
+    "C:\\Users\\djree\\source\\repos\\lightmaster\\LightMasterMVVM\\LightMasterMVVM\\LightMasterMVVM.csproj": {}
   },
   "projects": {
-    "C:\\Users\\djree\\source\\repos\\LightMasterMVVM\\LightMasterMVVM\\LightMasterMVVM.csproj": {
+    "C:\\Users\\djree\\source\\repos\\lightmaster\\LightMasterMVVM\\LightMasterMVVM\\LightMasterMVVM.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\djree\\source\\repos\\LightMasterMVVM\\LightMasterMVVM\\LightMasterMVVM.csproj",
+        "projectUniqueName": "C:\\Users\\djree\\source\\repos\\lightmaster\\LightMasterMVVM\\LightMasterMVVM\\LightMasterMVVM.csproj",
         "projectName": "LightMasterMVVM",
-        "projectPath": "C:\\Users\\djree\\source\\repos\\LightMasterMVVM\\LightMasterMVVM\\LightMasterMVVM.csproj",
+        "projectPath": "C:\\Users\\djree\\source\\repos\\lightmaster\\LightMasterMVVM\\LightMasterMVVM\\LightMasterMVVM.csproj",
         "packagesPath": "C:\\Users\\djree\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\djree\\source\\repos\\LightMasterMVVM\\LightMasterMVVM\\obj\\",
+        "outputPath": "C:\\Users\\djree\\source\\repos\\lightmaster\\LightMasterMVVM\\LightMasterMVVM\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -43,6 +43,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "32feet.NET": {
+              "target": "Package",
+              "version": "[3.5.0, )"
+            },
             "Avalonia": {
               "target": "Package",
               "version": "[0.9.10, )"
@@ -54,6 +58,18 @@
             "Avalonia.ReactiveUI": {
               "target": "Package",
               "version": "[0.9.10, )"
+            },
+            "MvvmLightLibs": {
+              "target": "Package",
+              "version": "[5.4.1.1, )"
+            },
+            "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "System.Windows.Forms": {
+              "target": "Package",
+              "version": "[4.0.0, )"
             }
           },
           "imports": [

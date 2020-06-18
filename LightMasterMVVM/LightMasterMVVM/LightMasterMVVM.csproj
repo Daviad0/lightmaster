@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -82,9 +82,13 @@
     <EmbeddedResource Include="Views\MainWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="32feet.NET" Version="3.5.0" />
     <PackageReference Include="Avalonia" Version="0.9.10" />
     <PackageReference Include="Avalonia.Desktop" Version="0.9.10" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.10" />
+    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+    <PackageReference Include="System.Windows.Forms" Version="4.0.0.0" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\UserControl1.xaml">
