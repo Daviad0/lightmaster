@@ -1,0 +1,24 @@
+{
+  "name": "freedom",
+  "version": "0.1.0",
+  "description": "Isn't it so great to be free?",
+  "engines": {
+    "node": ">=0.10"
+  },
+  "os": [
+    "macos",
+    "linux"
+  ],
+  "author": {
+    "name": "David Reeves"
+  },
+  "dependencies": {
+    "@abandonware/bleno": "github:abandonware/bleno",
+    "bleno": "github:notjosh/bleno#inject-bindings",
+    "bleno-mac": "github:notjosh/bleno-mac",
+    "xpc-connection": "github:sandeepmistry/node-xpc-connection#pull/26/head"
+  },
+  "scripts": {
+    "start": "node main.js"
+  }
+}
