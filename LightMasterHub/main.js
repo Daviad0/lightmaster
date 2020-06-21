@@ -42,3 +42,31 @@ bleno.on('advertisingStart', function(error) {
     ]);
   }
 });
+EchoCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
+  this._value = data;
+
+  console.log('EchoCharacteristic - onWriteRequest: value = ' + this._value.toString('hex'));
+
+  wss.clients.forEach(function each(client) {
+    if (client.readyState === WebSocket.OPEN) {
+      var string = hex2a(this._value.toString('hex'));
+      client.send(string);
+    }
+  });
+
+  if (this._updateValueCallback) {
+    console.log('EchoCharacteristic - onWriteRequest: notifying');
+
+    this._updateValueCallback(this._value);
+  }
+
+  callback(this.RESULT_SUCCESS);
+};
+
+function hex2a(hexx) {
+  var hex = hexx.toString();//force conversion
+  var str = '';
+  for (var i = 0; (i < hex.length && hex.substr(i, 2) !== '00'); i += 2)
+      str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+  return str;
+}

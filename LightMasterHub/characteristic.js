@@ -25,19 +25,7 @@ EchoCharacteristic.prototype.onReadRequest = function(offset, callback) {
   callback(this.RESULT_SUCCESS, this._value);
 };
 
-EchoCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
-  this._value = data;
 
-  console.log('EchoCharacteristic - onWriteRequest: value = ' + this._value.toString('hex'));
-
-  if (this._updateValueCallback) {
-    console.log('EchoCharacteristic - onWriteRequest: notifying');
-
-    this._updateValueCallback(this._value);
-  }
-
-  callback(this.RESULT_SUCCESS);
-};
 
 EchoCharacteristic.prototype.onSubscribe = function(maxValueSize, updateValueCallback) {
   console.log('EchoCharacteristic - onSubscribe');
