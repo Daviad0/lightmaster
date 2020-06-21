@@ -105,23 +105,7 @@ namespace LightMasterMVVM.ViewModels
     {
         public MainWindowViewModel()
         {
-            var exitEvent = new ManualResetEvent(false);
-            var url = new Uri("ws://localhost:8080");
-
-            var client = new WebsocketClient(url);
-            client.ReconnectTimeout = null;
-            /*client.ReconnectionHappened.Subscribe(info =>
-                Log.Information($"Reconnection happened, type: {info.Type}"));*/
-
-            client.MessageReceived.Subscribe(msg => {
-                Console.WriteLine(msg.Text);
-            });
-            client.DisconnectionHappened.Subscribe(msg => {
-                Console.WriteLine("Uh oh! I disconnected!");
-            });
-            client.Start();
-
-            //Task.Run(() => client.Send("{ message }"));
+            
         }
         private TabletViewModel tabletViewModel = new TabletViewModel();
         private string _text = "Initial text";
@@ -152,7 +136,23 @@ namespace LightMasterMVVM.ViewModels
         public void ChangeVisibility()
         {
             tabletViewModel.UserControlVisible = !tabletViewModel.UserControlVisible;
-            
+            var exitEvent = new ManualResetEvent(false);
+            var url = new Uri("ws://localhost:8080");
+
+            var client = new WebsocketClient(url);
+            client.ReconnectTimeout = null;
+            /*client.ReconnectionHappened.Subscribe(info =>
+                Log.Information($"Reconnection happened, type: {info.Type}"));*/
+
+            client.MessageReceived.Subscribe(msg => {
+                Console.WriteLine(msg.Text);
+            });
+            client.DisconnectionHappened.Subscribe(msg => {
+                Console.WriteLine("Uh oh! I disconnected!");
+            });
+            client.Start();
+
+            //Task.Run(() => client.Send("{ message }"));
         }
         public void GetBluetoothDevices()
         {

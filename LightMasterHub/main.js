@@ -49,8 +49,11 @@ EchoCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResp
 
   wss.clients.forEach(function each(client) {
     if (client.readyState === WebSocket.OPEN) {
-      var string = hex2a(this._value.toString('hex'));
-      client.send(string);
+      var hextocheck = "" + this._value;
+      console.log("a");
+      var stringtosend = hex2a(hextocheck.toString('hex'));
+      console.log("b");
+      client.send(stringtosend);
     }
   });
 
