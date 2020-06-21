@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
+using System.Threading;
+using Websocket.Client;
 
 namespace LightMasterMVVM.ViewModels
 {
@@ -101,7 +103,25 @@ namespace LightMasterMVVM.ViewModels
     }
     public class MainWindowViewModel : ViewModelBase
     {
-        
+        public MainWindowViewModel()
+        {
+            var exitEvent = new ManualResetEvent(false);
+            var url = new Uri("wss://xxx");
+
+            using (var client = new WebsocketClient(url))
+            {
+                client.ReconnectTimeout = TimeSpan.FromSeconds(30);
+                /*client.ReconnectionHappened.Subscribe(info =>
+                    Log.Information($"Reconnection happened, type: {info.Type}"));*/
+
+                client.MessageReceived.Subscribe(msg => TabletViewModel.StatusBackgroundColors[0][12] = "Blue");
+                client.Start();
+
+                //Task.Run(() => client.Send("{ message }"));
+
+                exitEvent.WaitOne();
+            }
+        }
         private TabletViewModel tabletViewModel = new TabletViewModel();
         private string _text = "Initial text";
         private bool userControlVisible = true;

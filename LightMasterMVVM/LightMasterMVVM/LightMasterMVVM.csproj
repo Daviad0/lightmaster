@@ -89,6 +89,7 @@
     <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
     <PackageReference Include="System.Windows.Forms" Version="4.0.0.0" />
+    <PackageReference Include="Websocket.Client" Version="4.3.15" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\UserControl1.xaml">
