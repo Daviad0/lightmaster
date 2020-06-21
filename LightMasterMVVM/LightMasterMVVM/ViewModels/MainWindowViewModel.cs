@@ -109,12 +109,16 @@ namespace LightMasterMVVM.ViewModels
             var url = new Uri("ws://localhost:8080");
 
             var client = new WebsocketClient(url);
-            client.ReconnectTimeout = TimeSpan.FromSeconds(30);
+            client.ReconnectTimeout = null;
             /*client.ReconnectionHappened.Subscribe(info =>
                 Log.Information($"Reconnection happened, type: {info.Type}"));*/
 
-            client.MessageReceived.Subscribe(msg => Text = "Yes");
-            client.DisconnectionHappened.Subscribe(msg => Text = "NO");
+            client.MessageReceived.Subscribe(msg => {
+                Console.WriteLine(msg.Text);
+            });
+            client.DisconnectionHappened.Subscribe(msg => {
+                Console.WriteLine("Uh oh! I disconnected!");
+            });
             client.Start();
 
             //Task.Run(() => client.Send("{ message }"));

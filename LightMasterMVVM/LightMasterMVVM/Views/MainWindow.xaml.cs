@@ -2,6 +2,10 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
+using LightMasterMVVM.ViewModels;
+using System;
+using System.Threading;
+using Websocket.Client;
 
 namespace LightMasterMVVM.Views
 {
@@ -13,6 +17,7 @@ namespace LightMasterMVVM.Views
 #if DEBUG
             this.AttachDevTools();
 #endif
+
         }
 
         private void InitializeComponent()

@@ -66,7 +66,7 @@
     <Grid Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" ColumnDefinitions="100,50" Margin="0,15,0,5">
       <TextBlock Grid.Column="0" Text="Match 1" FontWeight="ExtraBold" VerticalAlignment="Center" FontSize="17"/>
       <Grid Grid.Column="1" RowDefinitions="20,20">
-        <TextBlock Text="ABCD" Grid.Row="0" >
+        <TextBlock Text="ABCD" Grid.Row="0" x:Name="testUp" Name="TestUp">
           
         </TextBlock>
         <TextBlock Text="EFGH" Grid.Row="1"/>
