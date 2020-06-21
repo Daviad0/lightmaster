@@ -44,16 +44,14 @@ bleno.on('advertisingStart', function(error) {
 });
 EchoCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
   this._value = data;
+  var hextocheck = this._value.toString('hex');
 
   console.log('EchoCharacteristic - onWriteRequest: value = ' + this._value.toString('hex'));
 
   wss.clients.forEach(function each(client) {
     if (client.readyState === WebSocket.OPEN) {
-      var hextocheck = "" + this._value;
-      console.log("a");
-      var stringtosend = hex2a(hextocheck.toString('hex'));
-      console.log("b");
-      client.send(stringtosend);
+
+      client.send(hex2a(hextocheck));
     }
   });
 
