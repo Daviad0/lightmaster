@@ -125,7 +125,7 @@ C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Numerics.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Numerics.Vectors.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.ObjectModel.dll
-C:\Users\djree\.nuget\packages\system.reactive\4.1.6\lib\netstandard2.0\System.Reactive.dll
+C:\Users\djree\.nuget\packages\system.reactive\4.3.2\lib\netstandard2.0\System.Reactive.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Reflection.DispatchProxy.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Reflection.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Reflection.Emit.dll
@@ -203,4 +203,5 @@ C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Xml.XPath.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Xml.XPath.XDocument.dll
 C:\Users\djree\.nuget\packages\tmds.dbus\0.7.0\lib\netstandard2.0\Tmds.DBus.dll
+C:\Users\djree\.nuget\packages\websocket.client\4.3.15\lib\netstandard2.1\Websocket.Client.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\WindowsBase.dll

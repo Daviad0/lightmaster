@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "oc7Zgi6eiFIAWDsXNMZuE3X3dNOhKV1RI7v61NcjCqwdlitLlMfcHELZMcBgps+5Hubvu1sS+h2cuHZnVSkr2w==",
+  "dgSpecHash": "Ebucmln8GI8NZ2M7rQ3tCi5pUrD3MXLoWY6Hze/r3m8LFfbQVNJ7KtrvK5CV13e65kP/esp932nkIei4UGUtXQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\djree\\source\\repos\\lightmaster\\LightMasterMVVM\\LightMasterMVVM\\LightMasterMVVM.csproj",
   "expectedPackageFiles": [
@@ -141,7 +141,7 @@
     "C:\\Users\\djree\\.nuget\\packages\\system.numerics.vectors\\4.1.1\\system.numerics.vectors.4.1.1.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\system.objectmodel\\4.3.0\\system.objectmodel.4.3.0.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\system.private.uri\\4.3.0\\system.private.uri.4.3.0.nupkg.sha512",
-    "C:\\Users\\djree\\.nuget\\packages\\system.reactive\\4.1.6\\system.reactive.4.1.6.nupkg.sha512",
+    "C:\\Users\\djree\\.nuget\\packages\\system.reactive\\4.3.2\\system.reactive.4.3.2.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\system.reflection.dispatchproxy\\4.0.1\\system.reflection.dispatchproxy.4.0.1.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\system.reflection.emit\\4.3.0\\system.reflection.emit.4.3.0.nupkg.sha512",
@@ -159,7 +159,6 @@
     "C:\\Users\\djree\\.nuget\\packages\\system.runtime.handles\\4.3.0\\system.runtime.handles.4.3.0.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\system.runtime.interopservices\\4.3.0\\system.runtime.interopservices.4.3.0.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\system.runtime.interopservices.runtimeinformation\\4.3.0\\system.runtime.interopservices.runtimeinformation.4.3.0.nupkg.sha512",
-    "C:\\Users\\djree\\.nuget\\packages\\system.runtime.interopservices.windowsruntime\\4.3.0\\system.runtime.interopservices.windowsruntime.4.3.0.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\system.runtime.loader\\4.0.0\\system.runtime.loader.4.0.0.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\system.runtime.numerics\\4.3.0\\system.runtime.numerics.4.3.0.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\system.runtime.serialization.primitives\\4.3.0\\system.runtime.serialization.primitives.4.3.0.nupkg.sha512",
@@ -181,10 +180,11 @@
     "C:\\Users\\djree\\.nuget\\packages\\system.text.encoding.extensions\\4.3.0\\system.text.encoding.extensions.4.3.0.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\system.text.regularexpressions\\4.3.0\\system.text.regularexpressions.4.3.0.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
+    "C:\\Users\\djree\\.nuget\\packages\\system.threading.channels\\4.7.0\\system.threading.channels.4.7.0.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\system.threading.overlapped\\4.0.1\\system.threading.overlapped.4.0.1.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\system.threading.tasks.dataflow\\4.6.0\\system.threading.tasks.dataflow.4.6.0.nupkg.sha512",
-    "C:\\Users\\djree\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.2\\system.threading.tasks.extensions.4.5.2.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.threading.tasks.extensions\\4.3.0\\system.threading.tasks.extensions.4.3.0.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\system.threading.tasks.parallel\\4.0.1\\system.threading.tasks.parallel.4.0.1.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\system.threading.thread\\4.0.0\\system.threading.thread.4.0.0.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\system.threading.threadpool\\4.0.10\\system.threading.threadpool.4.0.10.nupkg.sha512",
@@ -199,6 +199,7 @@
     "C:\\Users\\djree\\.nuget\\packages\\system.xml.xpath\\4.0.1\\system.xml.xpath.4.0.1.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\system.xml.xpath.xdocument\\4.0.1\\system.xml.xpath.xdocument.4.0.1.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\tmds.dbus\\0.7.0\\tmds.dbus.0.7.0.nupkg.sha512",
+    "C:\\Users\\djree\\.nuget\\packages\\websocket.client\\4.3.15\\websocket.client.4.3.15.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\microsoft.netcore.app.host.osx-x64\\3.1.3\\microsoft.netcore.app.host.osx-x64.3.1.3.nupkg.sha512"
   ],
   "logs": [

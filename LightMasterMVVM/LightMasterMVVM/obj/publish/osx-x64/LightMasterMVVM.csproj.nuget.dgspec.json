@@ -72,6 +72,10 @@
             "System.Windows.Forms": {
               "target": "Package",
               "version": "[4.0.0, )"
+            },
+            "Websocket.Client": {
+              "target": "Package",
+              "version": "[4.3.15, )"
             }
           },
           "imports": [
