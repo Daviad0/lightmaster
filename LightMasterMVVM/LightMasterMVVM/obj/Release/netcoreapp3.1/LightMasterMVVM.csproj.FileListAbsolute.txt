@@ -85,7 +85,6 @@ C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Rele
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Release\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Release\netcoreapp3.1\LightMasterMVVM.csprojAssemblyReference.cache
-C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Release\netcoreapp3.1\LightMasterMVVM.csproj.CoreCompileInputs.cache
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Release\netcoreapp3.1\LightMasterMVVM.AssemblyInfoInputs.cache
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Release\netcoreapp3.1\LightMasterMVVM.AssemblyInfo.cs
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Release\netcoreapp3.1\LightMasterMVVM.csproj.CopyComplete

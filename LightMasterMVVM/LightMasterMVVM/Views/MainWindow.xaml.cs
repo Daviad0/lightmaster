@@ -18,6 +18,7 @@ namespace LightMasterMVVM.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+            BluetoothIO.Main();
             
         }
     }
