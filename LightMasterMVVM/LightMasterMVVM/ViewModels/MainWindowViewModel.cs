@@ -106,7 +106,7 @@ namespace LightMasterMVVM.ViewModels
         public MainWindowViewModel()
         {
             var exitEvent = new ManualResetEvent(false);
-            var url = new Uri("wss://xxx");
+            var url = new Uri("ws://localhost:8080");
 
             using (var client = new WebsocketClient(url))
             {
