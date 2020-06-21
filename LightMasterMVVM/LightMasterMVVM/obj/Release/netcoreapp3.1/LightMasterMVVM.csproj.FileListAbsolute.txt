@@ -91,3 +91,4 @@ C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Rele
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Release\netcoreapp3.1\LightMasterMVVM.dll
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Release\netcoreapp3.1\LightMasterMVVM.pdb
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Release\netcoreapp3.1\LightMasterMVVM.genruntimeconfig.cache
+C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Release\netcoreapp3.1\LightMasterMVVM.csproj.CoreCompileInputs.cache

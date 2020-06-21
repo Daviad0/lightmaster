@@ -9,7 +9,7 @@ namespace LightMasterMVVM
 {
     public class BluetoothIO
     {
-        public static void Main()
+        public static void StartBluetooth()
         {
             var proc = new System.Diagnostics.Process();
             proc.StartInfo.CreateNoWindow = true;
