@@ -16,6 +16,7 @@
     "@abandonware/bleno": "github:abandonware/bleno",
     "bleno": "github:notjosh/bleno#inject-bindings",
     "bleno-mac": "github:notjosh/bleno-mac",
+    "ws": "^7.3.0",
     "xpc-connection": "github:sandeepmistry/node-xpc-connection#pull/26/head"
   },
   "scripts": {
