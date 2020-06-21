@@ -139,19 +139,15 @@ namespace LightMasterMVVM.ViewModels
             var exitEvent = new ManualResetEvent(false);
             var url = new Uri("ws://localhost:8080");
 
-            using (var client = new WebsocketClient(url))
-            {
-                client.ReconnectTimeout = TimeSpan.FromSeconds(30);
-                /*client.ReconnectionHappened.Subscribe(info =>
-                    Log.Information($"Reconnection happened, type: {info.Type}"));*/
+            var client = new WebsocketClient(url);
+            client.ReconnectTimeout = TimeSpan.FromSeconds(30);
+            /*client.ReconnectionHappened.Subscribe(info =>
+                Log.Information($"Reconnection happened, type: {info.Type}"));*/
 
-                client.MessageReceived.Subscribe(msg => TabletViewModel.StatusBackgroundColors[0][12] = "Blue");
-                client.Start();
+            client.MessageReceived.Subscribe(msg => TabletViewModel.StatusBackgroundColors[0][12] = "Blue");
+            client.Start();
 
-                //Task.Run(() => client.Send("{ message }"));
-
-                exitEvent.WaitOne();
-            }
+            //Task.Run(() => client.Send("{ message }"));
         }
         public void GetBluetoothDevices()
         {
