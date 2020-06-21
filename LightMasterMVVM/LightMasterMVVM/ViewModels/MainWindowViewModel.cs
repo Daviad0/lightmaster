@@ -83,7 +83,7 @@ namespace LightMasterMVVM.ViewModels
             get => testBTD;
             set => SetProperty(ref testBTD, value);
         }
-        private bool userControlVisible = true;
+        private bool userControlVisible = false;
         public bool UserControlVisible
         {
             get => userControlVisible;
@@ -105,26 +105,11 @@ namespace LightMasterMVVM.ViewModels
     {
         public MainWindowViewModel()
         {
-            var exitEvent = new ManualResetEvent(false);
-            var url = new Uri("ws://localhost:8080");
-
-            using (var client = new WebsocketClient(url))
-            {
-                client.ReconnectTimeout = TimeSpan.FromSeconds(30);
-                /*client.ReconnectionHappened.Subscribe(info =>
-                    Log.Information($"Reconnection happened, type: {info.Type}"));*/
-
-                client.MessageReceived.Subscribe(msg => TabletViewModel.StatusBackgroundColors[0][12] = "Blue");
-                client.Start();
-
-                //Task.Run(() => client.Send("{ message }"));
-
-                exitEvent.WaitOne();
-            }
+            
         }
         private TabletViewModel tabletViewModel = new TabletViewModel();
         private string _text = "Initial text";
-        private bool userControlVisible = true;
+        private bool userControlVisible = false;
         public TabletViewModel TabletViewModel
         {
             get => tabletViewModel;
@@ -151,6 +136,22 @@ namespace LightMasterMVVM.ViewModels
         public void ChangeVisibility()
         {
             tabletViewModel.UserControlVisible = !tabletViewModel.UserControlVisible;
+            var exitEvent = new ManualResetEvent(false);
+            var url = new Uri("ws://localhost:8080");
+
+            using (var client = new WebsocketClient(url))
+            {
+                client.ReconnectTimeout = TimeSpan.FromSeconds(30);
+                /*client.ReconnectionHappened.Subscribe(info =>
+                    Log.Information($"Reconnection happened, type: {info.Type}"));*/
+
+                client.MessageReceived.Subscribe(msg => TabletViewModel.StatusBackgroundColors[0][12] = "Blue");
+                client.Start();
+
+                //Task.Run(() => client.Send("{ message }"));
+
+                exitEvent.WaitOne();
+            }
         }
         public void GetBluetoothDevices()
         {
