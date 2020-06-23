@@ -5,33 +5,13 @@ const wss = new WebSocket.Server({ port: 8080 })
 console.log(wss.path);
 var BlenoPrimaryService = bleno.PrimaryService;
 
-var EchoCharacteristic = require('./characteristic');
+var red1s = require('./red1');
+var red2s = require('./red2');
+var red3s = require('./red3');
+var blue1s = require('./blue1');
+var blue2s = require('./blue2');
+var blue3s = require('./blue3');
 
-var red1s = new EchoCharacteristic()
-red1s.uuid = '6ad0f836b49011eab3de0242ac130001';
-var red2s = new EchoCharacteristic()
-red2s.uuid = '6ad0f836b49011eab3de0242ac130002';
-var red3s = new EchoCharacteristic()
-red3s.uuid = '6ad0f836b49011eab3de0242ac130003';
-var blue1s = new EchoCharacteristic()
-blue1s.uuid = '6ad0f836b49011eab3de0242ac130004';
-var blue2s = new EchoCharacteristic()
-blue2s.uuid = '6ad0f836b49011eab3de0242ac130005';
-var blue3s = new EchoCharacteristic()
-blue3s.uuid = '6ad0f836b49011eab3de0242ac130006';
-
-var red1c = new EchoCharacteristic()
-red1c.uuid = '6ad0f836b49011eab3de0242ac130011';
-var red2c = new EchoCharacteristic()
-red2c.uuid = '6ad0f836b49011eab3de0242ac130012';
-var red3c = new EchoCharacteristic()
-red3c.uuid = '6ad0f836b49011eab3de0242ac130013';
-var blue1c = new EchoCharacteristic()
-blue1c.uuid = '6ad0f836b49011eab3de0242ac130014';
-var blue2c = new EchoCharacteristic()
-blue2c.uuid = '6ad0f836b49011eab3de0242ac130015';
-var blue3c = new EchoCharacteristic()
-blue3c.uuid = '6ad0f836b49011eab3de0242ac130016';
 
 
 console.log('Starting up Lighting Robotics Scouting Service');
@@ -67,13 +47,12 @@ bleno.on('advertisingStart', function(error) {
       new BlenoPrimaryService({
         uuid: '6ad0f836b49011eab3de0242ac130000',
         characteristics: [
-          red1s, red2s, red3s, blue1s, blue2s, blue3s
-        ]
-      }),
-      new BlenoPrimaryService({
-        uuid: '6ad0f836b49011eab3de0242ac130010',
-        characteristics: [
-          red1c, red2c, red3c, blue1c, blue2c, blue3c
+          new red1s(),
+          new red2s(),
+          new red3s(),
+          new blue1s(),
+          new blue2s(),
+          new blue3s()
         ]
       })
     ]);
@@ -84,7 +63,7 @@ red1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   
   var hextocheck = this._value.toString('hex');
 
-  console.log('EchoCharacteristic - onWriteRequest: value = ' + this._value.toString('hex'));
+  console.log('R1 - onWriteRequest: value = ' + this._value.toString('hex'));
 
   wss.clients.forEach(function each(client) {
     if (client.readyState === WebSocket.OPEN) {
@@ -93,7 +72,7 @@ red1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   });
 
   if (this._updateValueCallback) {
-    console.log('EchoCharacteristic - onWriteRequest: notifying');
+    console.log('R1 - onWriteRequest: notifying');
 
     this._updateValueCallback(this._value);
   }
@@ -105,7 +84,7 @@ red2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   
   var hextocheck = this._value.toString('hex');
 
-  console.log('EchoCharacteristic - onWriteRequest: value = ' + this._value.toString('hex'));
+  console.log('R2 - onWriteRequest: value = ' + this._value.toString('hex'));
 
   wss.clients.forEach(function each(client) {
     if (client.readyState === WebSocket.OPEN) {
@@ -114,7 +93,7 @@ red2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   });
 
   if (this._updateValueCallback) {
-    console.log('EchoCharacteristic - onWriteRequest: notifying');
+    console.log('R2 - onWriteRequest: notifying');
 
     this._updateValueCallback(this._value);
   }
@@ -126,7 +105,7 @@ red3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   
   var hextocheck = this._value.toString('hex');
 
-  console.log('EchoCharacteristic - onWriteRequest: value = ' + this._value.toString('hex'));
+  console.log('R3 - onWriteRequest: value = ' + this._value.toString('hex'));
 
   wss.clients.forEach(function each(client) {
     if (client.readyState === WebSocket.OPEN) {
@@ -135,7 +114,7 @@ red3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   });
 
   if (this._updateValueCallback) {
-    console.log('EchoCharacteristic - onWriteRequest: notifying');
+    console.log('R3 - onWriteRequest: notifying');
 
     this._updateValueCallback(this._value);
   }
@@ -147,7 +126,7 @@ blue1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   
   var hextocheck = this._value.toString('hex');
 
-  console.log('EchoCharacteristic - onWriteRequest: value = ' + this._value.toString('hex'));
+  console.log('B1 - onWriteRequest: value = ' + this._value.toString('hex'));
 
   wss.clients.forEach(function each(client) {
     if (client.readyState === WebSocket.OPEN) {
@@ -156,7 +135,7 @@ blue1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   });
 
   if (this._updateValueCallback) {
-    console.log('EchoCharacteristic - onWriteRequest: notifying');
+    console.log('B1 - onWriteRequest: notifying');
 
     this._updateValueCallback(this._value);
   }
@@ -168,7 +147,7 @@ blue2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   
   var hextocheck = this._value.toString('hex');
 
-  console.log('EchoCharacteristic - onWriteRequest: value = ' + this._value.toString('hex'));
+  console.log('B2 - onWriteRequest: value = ' + this._value.toString('hex'));
 
   wss.clients.forEach(function each(client) {
     if (client.readyState === WebSocket.OPEN) {
@@ -177,7 +156,7 @@ blue2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   });
 
   if (this._updateValueCallback) {
-    console.log('EchoCharacteristic - onWriteRequest: notifying');
+    console.log('B2 - onWriteRequest: notifying');
 
     this._updateValueCallback(this._value);
   }
@@ -189,7 +168,7 @@ blue3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   
   var hextocheck = this._value.toString('hex');
 
-  console.log('EchoCharacteristic - onWriteRequest: value = ' + this._value.toString('hex'));
+  console.log('B3 - onWriteRequest: value = ' + this._value.toString('hex'));
 
   wss.clients.forEach(function each(client) {
     if (client.readyState === WebSocket.OPEN) {
@@ -198,7 +177,7 @@ blue3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   });
 
   if (this._updateValueCallback) {
-    console.log('EchoCharacteristic - onWriteRequest: notifying');
+    console.log('B3 - onWriteRequest: notifying');
 
     this._updateValueCallback(this._value);
   }
