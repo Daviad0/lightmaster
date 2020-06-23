@@ -65,11 +65,7 @@ red1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
 
   console.log('R1 - onWriteRequest: value = ' + this._value.toString('hex'));
 
-  wss.clients.forEach(function each(client) {
-    if (client.readyState === WebSocket.OPEN) {
-      client.send(hex2a(hextocheck));
-    }
-  });
+  sendtomaster("R1",hex2a(hextocheck));
 
   if (this._updateValueCallback) {
     console.log('R1 - onWriteRequest: notifying');
@@ -86,11 +82,7 @@ red2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
 
   console.log('R2 - onWriteRequest: value = ' + this._value.toString('hex'));
 
-  wss.clients.forEach(function each(client) {
-    if (client.readyState === WebSocket.OPEN) {
-      client.send(hex2a(hextocheck));
-    }
-  });
+  sendtomaster("R2",hex2a(hextocheck));
 
   if (this._updateValueCallback) {
     console.log('R2 - onWriteRequest: notifying');
@@ -107,11 +99,7 @@ red3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
 
   console.log('R3 - onWriteRequest: value = ' + this._value.toString('hex'));
 
-  wss.clients.forEach(function each(client) {
-    if (client.readyState === WebSocket.OPEN) {
-      client.send(hex2a(hextocheck));
-    }
-  });
+  sendtomaster("R3",hex2a(hextocheck));
 
   if (this._updateValueCallback) {
     console.log('R3 - onWriteRequest: notifying');
@@ -128,11 +116,7 @@ blue1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
 
   console.log('B1 - onWriteRequest: value = ' + this._value.toString('hex'));
 
-  wss.clients.forEach(function each(client) {
-    if (client.readyState === WebSocket.OPEN) {
-      client.send(hex2a(hextocheck));
-    }
-  });
+  sendtomaster("B1",hex2a(hextocheck));
 
   if (this._updateValueCallback) {
     console.log('B1 - onWriteRequest: notifying');
@@ -149,11 +133,7 @@ blue2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
 
   console.log('B2 - onWriteRequest: value = ' + this._value.toString('hex'));
 
-  wss.clients.forEach(function each(client) {
-    if (client.readyState === WebSocket.OPEN) {
-      client.send(hex2a(hextocheck));
-    }
-  });
+  sendtomaster("B2",hex2a(hextocheck));
 
   if (this._updateValueCallback) {
     console.log('B2 - onWriteRequest: notifying');
@@ -170,11 +150,7 @@ blue3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
 
   console.log('B3 - onWriteRequest: value = ' + this._value.toString('hex'));
 
-  wss.clients.forEach(function each(client) {
-    if (client.readyState === WebSocket.OPEN) {
-      client.send(hex2a(hextocheck));
-    }
-  });
+  sendtomaster("B3",hex2a(hextocheck));
 
   if (this._updateValueCallback) {
     console.log('B3 - onWriteRequest: notifying');
@@ -191,4 +167,12 @@ function hex2a(hexx) {
   for (var i = 0; (i < hex.length && hex.substr(i, 2) !== '00'); i += 2)
       str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
   return str;
+}
+
+function sendtomaster(colornum, data){
+  wss.clients.forEach(function each(client) {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(colornum + " >>> " + data);
+    }
+  });
 }
