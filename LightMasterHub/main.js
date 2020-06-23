@@ -172,7 +172,7 @@ function hex2a(hexx) {
 function sendtomaster(colornum, data){
   wss.clients.forEach(function each(client) {
     if (client.readyState === WebSocket.OPEN) {
-      client.send(colornum + " >>> " + data);
+      client.send(colornum + ":" + data);
     }
   });
 }

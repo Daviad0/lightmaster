@@ -18,7 +18,7 @@ namespace LightMasterMVVM.ViewModels
         private Dictionary<int, string>[] statusBorderColors = { 
             new Dictionary<int, string>()
             {
-                { 11, "Blue" },
+                { 11, "Gray" },
                 { 12, "Gray" },
                 { 13, "Gray" },
                 { 21, "Gray" },
@@ -28,7 +28,7 @@ namespace LightMasterMVVM.ViewModels
             new Dictionary<int, string>()
             {
                 { 11, "Gray" },
-                { 12, "Blue" },
+                { 12, "Gray" },
                 { 13, "Gray" },
                 { 21, "Gray" },
                 { 22, "Gray" },
@@ -36,18 +36,18 @@ namespace LightMasterMVVM.ViewModels
             },
             new Dictionary<int, string>()
             {
-                { 11, "Green" },
-                { 12, "Green" },
-                { 13, "Green" },
-                { 21, "Green" },
-                { 22, "DarkOrange" },
-                { 23, "Red" },
+                { 11, "Gray" },
+                { 12, "Gray" },
+                { 13, "Gray" },
+                { 21, "Gray" },
+                { 22, "Gray" },
+                { 23, "Gray" },
             },
         };
         private Dictionary<int, string>[] statusBackgroundColors = {
             new Dictionary<int, string>()
             {
-                { 11, "LightBlue" },
+                { 11, "LightGray" },
                 { 12, "LightGray" },
                 { 13, "LightGray" },
                 { 21, "LightGray" },
@@ -57,7 +57,7 @@ namespace LightMasterMVVM.ViewModels
             new Dictionary<int, string>()
             {
                 { 11, "LightGray" },
-                { 12, "LightBlue" },
+                { 12, "LightGray" },
                 { 13, "LightGray" },
                 { 21, "LightGray" },
                 { 22, "LightGray" },
@@ -65,12 +65,12 @@ namespace LightMasterMVVM.ViewModels
             },
             new Dictionary<int, string>()
             {
-                { 11, "LightGreen" },
-                { 12, "LightGreen" },
-                { 13, "LightGreen" },
-                { 21, "LightGreen" },
-                { 22, "LightSalmon" },
-                { 23, "LightPink" },
+                { 11, "LightGray" },
+                { 12, "LightGray" },
+                { 13, "LightGray" },
+                { 21, "LightGray" },
+                { 22, "LightGray" },
+                { 23, "LightGray" },
             },
         };
         public string Text
@@ -145,6 +145,35 @@ namespace LightMasterMVVM.ViewModels
                 Log.Information($"Reconnection happened, type: {info.Type}"));*/
 
             client.MessageReceived.Subscribe(msg => {
+                string rawdata = msg.Text;
+                int tabletindex = 0;
+                if (rawdata.StartsWith("R1"))
+                {
+                    tabletindex = 21;
+                }
+                if (rawdata.StartsWith("R2"))
+                {
+                    tabletindex = 22;
+                }
+                if (rawdata.StartsWith("R3"))
+                {
+                    tabletindex = 23;
+                }
+                if (rawdata.StartsWith("B1"))
+                {
+                    tabletindex = 11;
+                }
+                if (rawdata.StartsWith("B2"))
+                {
+                    tabletindex = 12;
+                }
+                if (rawdata.StartsWith("B3"))
+                {
+                    tabletindex = 13;
+                }
+                TabletViewModel.StatusBackgroundColors[0][tabletindex] = "LightBlue";
+                TabletViewModel.StatusBorderColors[0][tabletindex] = "Blue";
+
                 Console.WriteLine(msg.Text);
             });
             client.DisconnectionHappened.Subscribe(msg => {

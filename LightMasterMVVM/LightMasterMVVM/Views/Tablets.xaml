@@ -112,14 +112,5 @@
 
       </Grid>
     </Border>
-    <ListBox Items="{Binding TestBTD}" Width="250" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-      <ListBox.ItemTemplate>
-        <DataTemplate>
-          <Border Background="Red" CornerRadius="4" Padding="4">
-            <TextBlock Text="{Binding}" TextWrapping="Wrap"/>
-          </Border>
-        </DataTemplate>
-      </ListBox.ItemTemplate>
-    </ListBox>
   </Grid>
 </UserControl>
