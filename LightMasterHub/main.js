@@ -73,14 +73,9 @@ red1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   var hextocheck = this._value.toString('hex');
 
   console.log('R1 - onWriteRequest: value = ' + this._value.toString('hex'));
-  this._value = "484920544845524521";
   sendtomaster("R1",hex2a(hextocheck));
 
-  if (this._updateValueCallback) {
-    console.log('R1 - onWriteRequest: notifying');
-
-    this._updateValueCallback(this._value);
-  }
+  this._updateValueCallback("484920544845524521");
 
   callback(this.RESULT_SUCCESS);
 };
@@ -102,14 +97,9 @@ red3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   var hextocheck = this._value.toString('hex');
 
   console.log('R3 - onWriteRequest: value = ' + this._value.toString('hex'));
-  this._value = "484920544845524521";
   sendtomaster("R3",hex2a(hextocheck));
 
-  if (this._updateValueCallback) {
-    console.log('R3 - onWriteRequest: notifying');
-
-    this._updateValueCallback(this._value);
-  }
+  this._updateValueCallback("484920544845524521");
 
   callback(this.RESULT_SUCCESS);
 };
@@ -119,14 +109,9 @@ blue1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   var hextocheck = this._value.toString('hex');
 
   console.log('B1 - onWriteRequest: value = ' + this._value.toString('hex'));
-  this._value = "484920544845524521";
   sendtomaster("B1",hex2a(hextocheck));
 
-  if (this._updateValueCallback) {
-    console.log('B1 - onWriteRequest: notifying');
-
-    this._updateValueCallback(this._value);
-  }
+  this._updateValueCallback("484920544845524521");
 
   callback(this.RESULT_SUCCESS);
 };
@@ -136,14 +121,9 @@ blue2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   var hextocheck = this._value.toString('hex');
 
   console.log('B2 - onWriteRequest: value = ' + this._value.toString('hex'));
-  this._value = "484920544845524521";
   sendtomaster("B2",hex2a(hextocheck));
 
-  if (this._updateValueCallback) {
-    console.log('B2 - onWriteRequest: notifying');
-
-    this._updateValueCallback(this._value);
-  }
+  this._updateValueCallback("484920544845524521");
 
   callback(this.RESULT_SUCCESS);
 };
@@ -153,14 +133,9 @@ blue3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   var hextocheck = this._value.toString('hex');
 
   console.log('B3 - onWriteRequest: value = ' + this._value.toString('hex'));
-  this._value = "484920544845524521";
   sendtomaster("B3",hex2a(hextocheck));
 
-  if (this._updateValueCallback) {
-    console.log('B3 - onWriteRequest: notifying');
-
-    this._updateValueCallback(this._value);
-  }
+  this._updateValueCallback("484920544845524521");
 
   callback(this.RESULT_SUCCESS);
 };
