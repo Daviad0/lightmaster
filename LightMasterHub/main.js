@@ -39,6 +39,15 @@ bleno.on('accept', function(clientAddress){
   console.log("Client Accept: " + clientAddress);
 });
 
+bleno.onDisconnect(function(clientAddress){
+  console.log("Disconnect: " + clientAddress)
+});
+
+bleno.onAccept(function(clientAddress){
+  console.log("Accept: " + clientAddress)
+});
+
+
 bleno.on('advertisingStart', function(error) {
   console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
 
@@ -64,7 +73,7 @@ red1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   var hextocheck = this._value.toString('hex');
 
   console.log('R1 - onWriteRequest: value = ' + this._value.toString('hex'));
-
+  this._value = "484920544845524521";
   sendtomaster("R1",hex2a(hextocheck));
 
   if (this._updateValueCallback) {
@@ -81,7 +90,7 @@ red2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   var hextocheck = this._value.toString('hex');
 
   console.log('R2 - onWriteRequest: value = ' + this._value.toString('hex'));
-
+  this._value = "484920544845524521";
   sendtomaster("R2",hex2a(hextocheck));
 
   if (this._updateValueCallback) {
@@ -98,7 +107,7 @@ red3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   var hextocheck = this._value.toString('hex');
 
   console.log('R3 - onWriteRequest: value = ' + this._value.toString('hex'));
-
+  this._value = "484920544845524521";
   sendtomaster("R3",hex2a(hextocheck));
 
   if (this._updateValueCallback) {
@@ -115,7 +124,7 @@ blue1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   var hextocheck = this._value.toString('hex');
 
   console.log('B1 - onWriteRequest: value = ' + this._value.toString('hex'));
-
+  this._value = "484920544845524521";
   sendtomaster("B1",hex2a(hextocheck));
 
   if (this._updateValueCallback) {
@@ -132,7 +141,7 @@ blue2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   var hextocheck = this._value.toString('hex');
 
   console.log('B2 - onWriteRequest: value = ' + this._value.toString('hex'));
-
+  this._value = "484920544845524521";
   sendtomaster("B2",hex2a(hextocheck));
 
   if (this._updateValueCallback) {
@@ -149,7 +158,7 @@ blue3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   var hextocheck = this._value.toString('hex');
 
   console.log('B3 - onWriteRequest: value = ' + this._value.toString('hex'));
-
+  this._value = "484920544845524521";
   sendtomaster("B3",hex2a(hextocheck));
 
   if (this._updateValueCallback) {

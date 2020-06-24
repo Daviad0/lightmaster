@@ -147,12 +147,12 @@ namespace LightMasterMVVM.ViewModels
                     tabletindex = 2;
                 }
 
-                if (rawdata.Substring(2).StartsWith("S:"))
+                if (rawdata.Substring(3).StartsWith("S:"))
                 {
                     TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightBlue";
                     TabletViewModel.BluetoothBorderColors[tabletindex] = "Blue";
                 }
-                else
+                else if (rawdata.Substring(3).StartsWith("B:"))
                 {
                     TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightGreen";
                     TabletViewModel.BatteryBorderColors[tabletindex] = "Green";
