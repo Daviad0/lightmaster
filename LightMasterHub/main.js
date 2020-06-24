@@ -20,7 +20,7 @@ console.log('Starting up Lighting Robotics Scouting Service');
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
     console.log('received: %s', message);
-    red1s._updateValueCallback(toByteArray("484920544845524521"));
+    
     red2s._updateValueCallback(toByteArray("484920544845524521"));
     red3s._updateValueCallback(toByteArray("484920544845524521"));
     blue1s._updateValueCallback(toByteArray("484920544845524521"));
@@ -81,7 +81,7 @@ red1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   console.log('R1 - onWriteRequest: value = ' + this._value.toString('hex'));
   sendtomaster("R1",hex2a(hextocheck));
 
-  
+  this._updateValueCallback(toByteArray("Hi There"));
 
   callback(this.RESULT_SUCCESS);
 };
@@ -93,6 +93,7 @@ red2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   console.log('R2 - onWriteRequest: value = ' + this._value.toString('hex'));
   sendtomaster("R2",hex2a(hextocheck));
 
+  this._updateValueCallback(toByteArray("Hi There"));
 
   callback(this.RESULT_SUCCESS);
 };
@@ -104,6 +105,7 @@ red3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   console.log('R3 - onWriteRequest: value = ' + this._value.toString('hex'));
   sendtomaster("R3",hex2a(hextocheck));
 
+  this._updateValueCallback(toByteArray("Hi There"));
 
   callback(this.RESULT_SUCCESS);
 };
@@ -115,6 +117,7 @@ blue1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   console.log('B1 - onWriteRequest: value = ' + this._value.toString('hex'));
   sendtomaster("B1",hex2a(hextocheck));
 
+  this._updateValueCallback(toByteArray("Hi There"));
 
   callback(this.RESULT_SUCCESS);
 };
@@ -126,6 +129,7 @@ blue2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   console.log('B2 - onWriteRequest: value = ' + this._value.toString('hex'));
   sendtomaster("B2",hex2a(hextocheck));
 
+  this._updateValueCallback(toByteArray("Hi There"));
 
   callback(this.RESULT_SUCCESS);
 };
@@ -137,6 +141,7 @@ blue3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   console.log('B3 - onWriteRequest: value = ' + this._value.toString('hex'));
   sendtomaster("B3",hex2a(hextocheck));
 
+  this._updateValueCallback(toByteArray("Hi There"));
 
   callback(this.RESULT_SUCCESS);
 };
@@ -158,13 +163,6 @@ function sendtomaster(colornum, data){
 }
 
 function toByteArray(string){
-  var bytes = [];
-  var stringtoconvert = string;
-  for (var i = 0; i < stringtoconvert.length; ++i) {
-    var code = stringtoconvert.charCodeAt(i);
-    
-    bytes = bytes.concat([code]);
-  }
-  console.log("CONVERTING");
-  return bytes;
+  var buffer = Buffer.from(string, "utf-8");
+  return buffer;
 }
