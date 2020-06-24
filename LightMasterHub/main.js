@@ -90,14 +90,9 @@ red2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   var hextocheck = this._value.toString('hex');
 
   console.log('R2 - onWriteRequest: value = ' + this._value.toString('hex'));
-  this._value = "484920544845524521";
   sendtomaster("R2",hex2a(hextocheck));
 
-  if (this._updateValueCallback) {
-    console.log('R2 - onWriteRequest: notifying');
-
-    this._updateValueCallback(this._value);
-  }
+  this._updateValueCallback("484920544845524521");
 
   callback(this.RESULT_SUCCESS);
 };
