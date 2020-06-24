@@ -12,7 +12,7 @@ var blue1s = require('./blue1');
 var blue2s = require('./blue2');
 var blue3s = require('./blue3');
 
-
+var sendback = "484920544845524521";
 
 console.log('Starting up Lighting Robotics Scouting Service');
 
@@ -75,7 +75,7 @@ red1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   console.log('R1 - onWriteRequest: value = ' + this._value.toString('hex'));
   sendtomaster("R1",hex2a(hextocheck));
 
-  this._updateValueCallback("484920544845524521");
+  this._updateValueCallback(toByteArray("484920544845524521"));
 
   callback(this.RESULT_SUCCESS);
 };
@@ -87,7 +87,7 @@ red2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   console.log('R2 - onWriteRequest: value = ' + this._value.toString('hex'));
   sendtomaster("R2",hex2a(hextocheck));
 
-  this._updateValueCallback("484920544845524521");
+  this._updateValueCallback(toByteArray("484920544845524521"));
 
   callback(this.RESULT_SUCCESS);
 };
@@ -99,7 +99,7 @@ red3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   console.log('R3 - onWriteRequest: value = ' + this._value.toString('hex'));
   sendtomaster("R3",hex2a(hextocheck));
 
-  this._updateValueCallback("484920544845524521");
+  this._updateValueCallback(toByteArray("484920544845524521"));
 
   callback(this.RESULT_SUCCESS);
 };
@@ -111,7 +111,7 @@ blue1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   console.log('B1 - onWriteRequest: value = ' + this._value.toString('hex'));
   sendtomaster("B1",hex2a(hextocheck));
 
-  this._updateValueCallback("484920544845524521");
+  this._updateValueCallback(toByteArray("484920544845524521"));
 
   callback(this.RESULT_SUCCESS);
 };
@@ -123,7 +123,7 @@ blue2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   console.log('B2 - onWriteRequest: value = ' + this._value.toString('hex'));
   sendtomaster("B2",hex2a(hextocheck));
 
-  this._updateValueCallback("484920544845524521");
+  this._updateValueCallback(toByteArray("484920544845524521"));
 
   callback(this.RESULT_SUCCESS);
 };
@@ -135,7 +135,7 @@ blue3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   console.log('B3 - onWriteRequest: value = ' + this._value.toString('hex'));
   sendtomaster("B3",hex2a(hextocheck));
 
-  this._updateValueCallback("484920544845524521");
+  this._updateValueCallback(toByteArray("484920544845524521"));
 
   callback(this.RESULT_SUCCESS);
 };
@@ -154,4 +154,15 @@ function sendtomaster(colornum, data){
       client.send(colornum + ":" + data);
     }
   });
+}
+
+function toByteArray(string){
+  var bytes = [];
+  var stringtoconvert = string;
+  for (var i = 0; i < stringtoconvert.length; ++i) {
+    var code = stringtoconvert.charCodeAt(i);
+    
+    bytes = bytes.concat([code]);
+  }
+  return bytes;
 }
