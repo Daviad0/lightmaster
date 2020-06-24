@@ -149,13 +149,42 @@ namespace LightMasterMVVM.ViewModels
 
                 if (rawdata.Substring(3).StartsWith("S:"))
                 {
+                    //S = Score
                     TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightBlue";
                     TabletViewModel.BluetoothBorderColors[tabletindex] = "Blue";
                 }
                 else if (rawdata.Substring(3).StartsWith("B:"))
                 {
-                    TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightGreen";
-                    TabletViewModel.BatteryBorderColors[tabletindex] = "Green";
+                    //B = Battery Level
+                    var batterylevel = float.Parse(rawdata.Substring(5)) * 100;
+                    if(batterylevel > 80)
+                    {
+                        TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightGreen";
+                        TabletViewModel.BatteryBorderColors[tabletindex] = "Green";
+                    }
+                    else if(batterylevel > 30 && batterylevel <= 80)
+                    {
+                        TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightSalmon";
+                        TabletViewModel.BatteryBorderColors[tabletindex] = "DarkOrange";
+                    }
+                    else
+                    {
+                        TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightPink";
+                        TabletViewModel.BatteryBorderColors[tabletindex] = "IndianRed";
+                    }
+                    
+                }
+                else if (rawdata.Substring(3).StartsWith("D:"))
+                {
+                    //D = Successful Disconnection
+                    TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightGray";
+                    TabletViewModel.BluetoothBorderColors[tabletindex] = "Gray";
+                }
+                else if (rawdata.Substring(3).StartsWith("E:"))
+                {
+                    //E = Immedient Communication
+                    TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightSalmon";
+                    TabletViewModel.BluetoothBorderColors[tabletindex] = "DarkOrange";
                 }
 
 
