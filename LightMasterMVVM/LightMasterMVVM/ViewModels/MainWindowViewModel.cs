@@ -5,6 +5,7 @@ using LightMasterMVVM.DbAssets;
 using LightMasterMVVM.Models;
 using LightMasterMVVM.Views;
 using Newtonsoft.Json;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -166,17 +167,19 @@ namespace LightMasterMVVM.ViewModels
                     using(var db = new ScoutingContext())
                     {
                         var itemtouse = JsonConvert.DeserializeObject<TeamMatch>(jsontodeserialize);
-                        var previousitem = db.Matches.Where(x => x.TabletId == itemtouse.TabletId && x.MatchNumber == itemtouse.MatchNumber && x.EventCode == itemtouse.EventCode).First();
-                        if(previousitem == null)
+                        try
                         {
-                            itemtouse.MatchID = new Random().Next(1,1000);
-                            db.Matches.Add(itemtouse);
-                        }
-                        else
-                        {
+                            var previousitem = db.Matches.Where(x => x.TabletId == itemtouse.TabletId && x.MatchNumber == itemtouse.MatchNumber && x.EventCode == itemtouse.EventCode).First();
                             itemtouse.MatchID = previousitem.MatchID;
                             db.Matches.Update(itemtouse);
+                            
                         }
+                        catch(NpgsqlException ex)
+                        {
+                            itemtouse.MatchID = new Random().Next(1, 1000);
+                            db.Matches.Add(itemtouse);
+                        }
+                        
                         db.SaveChanges();
                     }
                 }
