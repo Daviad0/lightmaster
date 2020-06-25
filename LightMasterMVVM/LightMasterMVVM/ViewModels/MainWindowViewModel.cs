@@ -169,7 +169,7 @@ namespace LightMasterMVVM.ViewModels
                         var previousitem = db.Matches.Where(x => x.TabletId == itemtouse.TabletId && x.MatchNumber == itemtouse.MatchNumber && x.EventCode == itemtouse.EventCode).First();
                         if(previousitem == null)
                         {
-                            itemtouse.MatchID = 1;
+                            itemtouse.MatchID = new Random().Next(1,1000);
                             db.Matches.Add(itemtouse);
                         }
                         else
