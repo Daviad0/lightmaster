@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace LightMasterMVVM.Models
 {
     public class TeamMatch
     {
+        [Key]
+        public int MatchID { get; set; }
         public int TeamNumber { get; set; }
         public string TeamName { get; set; }
         public string EventCode { get; set; }
