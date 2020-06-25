@@ -841,6 +841,15 @@
           "System.Xml.XDocument": "4.3.0"
         }
       },
+      "Newtonsoft.Json/12.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      },
       "Npgsql/4.1.3.1": {
         "type": "package",
         "dependencies": {
@@ -4383,6 +4392,37 @@
         "dotnet_library_license.txt",
         "netstandard.library.1.6.1.nupkg.sha512",
         "netstandard.library.nuspec"
+      ]
+    },
+    "Newtonsoft.Json/12.0.3": {
+      "sha512": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
+      "type": "package",
+      "path": "newtonsoft.json/12.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
+        "newtonsoft.json.12.0.3.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
       ]
     },
     "Npgsql/4.1.3.1": {
@@ -9837,6 +9877,7 @@
       "Avalonia.ReactiveUI >= 0.9.10",
       "Microsoft.EntityFrameworkCore.Design >= 3.1.5",
       "MvvmLightLibs >= 5.4.1.1",
+      "Newtonsoft.Json >= 12.0.3",
       "Npgsql >= 4.1.3.1",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 3.1.4",
       "System.Configuration.ConfigurationManager >= 4.7.0",
@@ -9845,31 +9886,34 @@
     ]
   },
   "packageFolders": {
-    "/Users/daviado/.nuget/packages/": {},
-    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\djree\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/LightMasterMVVM.csproj",
+      "projectUniqueName": "C:\\Users\\djree\\source\\repos\\lightmaster\\LightMasterMVVM\\LightMasterMVVM\\LightMasterMVVM.csproj",
       "projectName": "LightMasterMVVM",
-      "projectPath": "/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/LightMasterMVVM.csproj",
-      "packagesPath": "/Users/daviado/.nuget/packages/",
-      "outputPath": "/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/obj/",
+      "projectPath": "C:\\Users\\djree\\source\\repos\\lightmaster\\LightMasterMVVM\\LightMasterMVVM\\LightMasterMVVM.csproj",
+      "packagesPath": "C:\\Users\\djree\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\djree\\source\\repos\\lightmaster\\LightMasterMVVM\\LightMasterMVVM\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/NuGet.Config",
-        "/Users/daviado/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\djree\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {},
-        "https://www.myget.org/F/avalonia-ci/api/v2": {}
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
@@ -9911,6 +9955,10 @@
             "target": "Package",
             "version": "[5.4.1.1, )"
           },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[12.0.3, )"
+          },
           "Npgsql": {
             "target": "Package",
             "version": "[4.1.3.1, )"
@@ -9947,7 +9995,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.300/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
       }
     }
   },

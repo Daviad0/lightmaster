@@ -1,13 +1,17 @@
 ﻿using Avalonia.Media;
 using GalaSoft.MvvmLight.Messaging;
 using InTheHand.Net.Sockets;
+using LightMasterMVVM.DbAssets;
+using LightMasterMVVM.Models;
 using LightMasterMVVM.Views;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading;
 using Websocket.Client;
 
@@ -158,6 +162,23 @@ namespace LightMasterMVVM.ViewModels
                     //S = Score
                     TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightBlue";
                     TabletViewModel.BluetoothBorderColors[tabletindex] = "Blue";
+                    var jsontodeserialize = rawdata.Substring(5);
+                    using(var db = new ScoutingContext())
+                    {
+                        var itemtouse = JsonConvert.DeserializeObject<TeamMatch>(jsontodeserialize);
+                        var previousitem = db.Matches.Where(x => x.TabletId == itemtouse.TabletId && x.MatchNumber == itemtouse.MatchNumber && x.EventCode == itemtouse.EventCode).First();
+                        if(previousitem == null)
+                        {
+                            itemtouse.MatchID = 1;
+                            db.Matches.Add(itemtouse);
+                        }
+                        else
+                        {
+                            itemtouse.MatchID = previousitem.MatchID;
+                            db.Matches.Update(itemtouse);
+                        }
+                        db.SaveChanges();
+                    }
                 }
                 else if (rawdata.Substring(3).StartsWith("B:"))
                 {
