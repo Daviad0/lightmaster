@@ -20,12 +20,7 @@ console.log('Starting up Lighting Robotics Scouting Service');
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
     console.log('received: %s', message);
-    
-    red2s._updateValueCallback(toByteArray("484920544845524521"));
-    red3s._updateValueCallback(toByteArray("484920544845524521"));
-    blue1s._updateValueCallback(toByteArray("484920544845524521"));
-    blue2s._updateValueCallback(toByteArray("484920544845524521"));
-    blue3s._updateValueCallback(toByteArray("484920544845524521"));
+  
   });
   console.log('Received connection');
   ws.send('Connection Successfully Received! Client will now receive LIVE tablet updates!');
