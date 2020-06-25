@@ -21,7 +21,7 @@
             <Image Source="resm:LightMasterMVVM.Assets.plugin.png" Margin="0,5,0,5"/>
           </Border>
           <Border Grid.Column="2" BorderBrush="{Binding BatteryBorderColors[0]}" Background="{Binding BatteryBackgroundColors[0]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
-            <Image Source="resm:LightMasterMVVM.Assets.battery-full.png" Margin="0,5,0,5"/>
+            <Image Source="resm:LightMasterMVVM.Assets.battery-full.png" Margin="0,5,0,5" ToolTip.Tip="{Binding BatteryAmounts[0]}" ToolTip.ShowDelay="0"/>
           </Border>
         </Grid>
 
@@ -38,7 +38,7 @@
             <Image Source="resm:LightMasterMVVM.Assets.plugin.png" Margin="0,5,0,5"/>
           </Border>
           <Border Grid.Column="2" BorderBrush="{Binding BatteryBorderColors[1]}" Background="{Binding BatteryBackgroundColors[1]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
-            <Image Source="resm:LightMasterMVVM.Assets.battery-full.png" Margin="0,5,0,5"/>
+            <Image Source="resm:LightMasterMVVM.Assets.battery-full.png" Margin="0,5,0,5" ToolTip.Tip="{Binding BatteryAmounts[1]}" ToolTip.ShowDelay="0"/>
           </Border>
         </Grid>
 
@@ -55,7 +55,7 @@
             <Image Source="resm:LightMasterMVVM.Assets.plugin.png" Margin="0,5,0,5"/>
           </Border>
           <Border Grid.Column="2" BorderBrush="{Binding BatteryBorderColors[2]}" Background="{Binding BatteryBackgroundColors[2]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
-            <Image Source="resm:LightMasterMVVM.Assets.battery-full.png" Margin="0,5,0,5"/>
+            <Image Source="resm:LightMasterMVVM.Assets.battery-full.png" Margin="0,5,0,5" ToolTip.Tip="{Binding BatteryAmounts[2]}" ToolTip.ShowDelay="0"/>
           </Border>
         </Grid>
 
@@ -72,7 +72,7 @@
             <Image Source="resm:LightMasterMVVM.Assets.plugin.png" Margin="0,5,0,5"/>
           </Border>
           <Border Grid.Column="2" BorderBrush="{Binding BatteryBorderColors[3]}" Background="{Binding BatteryBackgroundColors[3]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
-            <Image Source="resm:LightMasterMVVM.Assets.battery-full.png" Margin="0,5,0,5"/>
+            <Image Source="resm:LightMasterMVVM.Assets.battery-full.png" Margin="0,5,0,5" ToolTip.Tip="{Binding BatteryAmounts[3]}" ToolTip.ShowDelay="0"/>
           </Border>
         </Grid>
 
@@ -89,7 +89,7 @@
             <Image Source="resm:LightMasterMVVM.Assets.plugin.png" Margin="0,5,0,5"/>
           </Border>
           <Border Grid.Column="2" BorderBrush="{Binding BatteryBorderColors[4]}" Background="{Binding BatteryBackgroundColors[4]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
-            <Image Source="resm:LightMasterMVVM.Assets.battery-full.png" Margin="0,5,0,5"/>
+            <Image Source="resm:LightMasterMVVM.Assets.battery-full.png" Margin="0,5,0,5" ToolTip.Tip="{Binding BatteryAmounts[4]}" ToolTip.ShowDelay="0"/>
           </Border>
         </Grid>
 
@@ -108,7 +108,7 @@
             <Image Source="resm:LightMasterMVVM.Assets.plugin.png" Margin="0,5,0,5"/>
           </Border>
           <Border Grid.Column="2" BorderBrush="{Binding BatteryBorderColors[5]}" Background="{Binding BatteryBackgroundColors[5]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
-            <Image Source="resm:LightMasterMVVM.Assets.battery-full.png" Margin="0,5,0,5"/>
+            <Image Source="resm:LightMasterMVVM.Assets.battery-full.png" Margin="0,5,0,5" ToolTip.Tip="{Binding BatteryAmounts[5]}" ToolTip.ShowDelay="0"/>
           </Border>
         </Grid>
 

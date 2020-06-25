@@ -23,6 +23,7 @@ namespace LightMasterMVVM.ViewModels
         private ObservableCollection<string> bluetoothBackgroundColors = new ObservableCollection<string>(new string[6] { "LightGray", "LightGray", "LightGray", "LightGray", "LightGray", "LightGray" }.ToList());
         private ObservableCollection<string> cableBackgroundColors = new ObservableCollection<string>(new string[6] { "LightGray", "LightGray", "LightGray", "LightGray", "LightGray", "LightGray" }.ToList());
         private ObservableCollection<string> batteryBackgroundColors = new ObservableCollection<string>(new string[6] { "LightGray", "LightGray", "LightGray", "LightGray", "LightGray", "LightGray" }.ToList());
+        private ObservableCollection<string> batteryAmounts = new ObservableCollection<string>(new string[6] { "Device Not Initialized", "Device Not Initialized", "Device Not Initialized", "Device Not Initialized", "Device Not Initialized", "Device Not Initialized" }.ToList());
         public string Text
         {
             get => _text;
@@ -68,6 +69,11 @@ namespace LightMasterMVVM.ViewModels
         {
             get => batteryBackgroundColors;
             set => SetProperty(ref batteryBackgroundColors, value);
+        }
+        public ObservableCollection<string> BatteryAmounts
+        {
+            get => batteryAmounts;
+            set => SetProperty(ref batteryAmounts, value);
         }
         public void SetTest()
         {

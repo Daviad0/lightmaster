@@ -93,4 +93,4 @@ C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Rele
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Release\netcoreapp3.1\LightMasterMVVM.genruntimeconfig.cache
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Release\netcoreapp3.1\Websocket.Client.dll
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Release\netcoreapp3.1\System.Reactive.xml
-C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Release\netcoreapp3.1\LightMasterMVVM.csproj.CoreCompileInputs.cache
+C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Release\netcoreapp3.1\Npgsql.dll
