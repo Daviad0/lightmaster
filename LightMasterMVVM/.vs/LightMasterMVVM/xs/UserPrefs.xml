@@ -1,18 +1,23 @@
 ﻿<Properties StartupConfiguration="{D1397E30-5D2E-478E-827D-3D8871C098CE}|Default">
   <MonoDevelop.Ide.ItemProperties.LightMasterMVVM PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="LightMasterMVVM/ViewModels/MainWindowViewModel.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="LightMasterMVVM/DbAssets/ScoutingContext.cs">
     <Files>
-      <File FileName="LightMasterMVVM/ViewModels/MainWindowViewModel.cs" Line="148" Column="1" />
+      <File FileName="LightMasterMVVM/ViewModels/MainWindowViewModel.cs" Line="161" Column="18" />
       <File FileName="../../../../../usr/local/share/dotnet/sdk/3.1.300/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" />
+      <File FileName="LightMasterMVVM/ViewModels/ViewModelBase.cs" />
+      <File FileName="LightMasterMVVM/DbAssets/ScoutingContext.cs" Line="17" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="LightMasterMVVM" expanded="True">
             <Node name="LightMasterMVVM" expanded="True">
-              <Node name="ViewModels" expanded="True">
-                <Node name="MainWindowViewModel.cs" selected="True" />
+              <Node name="Assets" expanded="True" />
+              <Node name="DbAssets" expanded="True">
+                <Node name="ScoutingContext.cs" selected="True" />
               </Node>
+              <Node name="ViewModels" expanded="True" />
+              <Node name="Views" expanded="True" />
             </Node>
           </Node>
         </State>

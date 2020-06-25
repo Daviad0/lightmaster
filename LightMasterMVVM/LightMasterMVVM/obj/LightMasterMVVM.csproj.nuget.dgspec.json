@@ -1,33 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\djree\\source\\repos\\lightmaster\\LightMasterMVVM\\LightMasterMVVM\\LightMasterMVVM.csproj": {}
+    "/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/LightMasterMVVM.csproj": {}
   },
   "projects": {
-    "C:\\Users\\djree\\source\\repos\\lightmaster\\LightMasterMVVM\\LightMasterMVVM\\LightMasterMVVM.csproj": {
+    "/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/LightMasterMVVM.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\djree\\source\\repos\\lightmaster\\LightMasterMVVM\\LightMasterMVVM\\LightMasterMVVM.csproj",
+        "projectUniqueName": "/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/LightMasterMVVM.csproj",
         "projectName": "LightMasterMVVM",
-        "projectPath": "C:\\Users\\djree\\source\\repos\\lightmaster\\LightMasterMVVM\\LightMasterMVVM\\LightMasterMVVM.csproj",
-        "packagesPath": "C:\\Users\\djree\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\djree\\source\\repos\\lightmaster\\LightMasterMVVM\\LightMasterMVVM\\obj\\",
+        "projectPath": "/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/LightMasterMVVM.csproj",
+        "packagesPath": "/Users/daviado/.nuget/packages/",
+        "outputPath": "/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\djree\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/NuGet.Config",
+          "/Users/daviado/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://www.myget.org/F/avalonia-ci/api/v2": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
@@ -105,7 +103,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.300/RuntimeIdentifierGraph.json"
         }
       }
     }

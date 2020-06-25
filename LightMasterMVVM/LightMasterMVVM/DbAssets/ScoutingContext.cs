@@ -11,6 +11,6 @@ namespace LightMasterMVVM.DbAssets
         public DbSet<TeamMatch> Matches { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql("Host=localhost:5432;Database=lightscoutx;Username=strategy_member;Password=strategy");
+            => optionsBuilder.UseNpgsql("Server=localhost;Port=5432;Database=lightscoutx;User Id=strategy_member;Password=strategy");
     }
 }
