@@ -3,6 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:LightMasterMVVM.ViewModels"
              xmlns:f="clr-namespace:LightMasterMVVM.Assets"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:cmd ="http://www.galasoft.ch/mvvmlight"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LightMasterMVVM.Views.Tablets">
@@ -12,7 +15,10 @@
   <Grid ColumnDefinitions="260,260,260" RowDefinitions="300,300" HorizontalAlignment="Center">
     <Border Background="#eeeeee" BorderBrush="LightGray" BorderThickness="2" Height="280" Width="240" CornerRadius="4" Grid.Row="0" Grid.Column="0" Margin="7">
       <Grid ColumnDefinitions="*" RowDefinitions="230,50">
-        <Image Source="resm:LightMasterMVVM.Assets.Blue1Tablet.png" Margin="0,0,0,5" Grid.Row="0"/>
+        
+        <Image Source="resm:LightMasterMVVM.Assets.Blue1Tablet.png" Margin="0,0,0,5" Grid.Row="0">
+          
+        </Image>
         <Grid ColumnDefinitions="*,*,*" Margin="40,0,40,5" Grid.Row="1">
           <Border Grid.Column="0" BorderBrush="{Binding BluetoothBorderColors[0]}" Background="{Binding BluetoothBackgroundColors[0]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
             <Image Source="resm:LightMasterMVVM.Assets.ui-bluetooth.png" Margin="0,5,0,5"/>
@@ -24,7 +30,6 @@
             <Image Source="resm:LightMasterMVVM.Assets.battery-full.png" Margin="0,5,0,5" ToolTip.Tip="{Binding BatteryAmounts[0]}" ToolTip.ShowDelay="0"/>
           </Border>
         </Grid>
-
       </Grid>
     </Border>
     <Border Background="#eeeeee" BorderBrush="LightGray" BorderThickness="2" Height="280" Width="240" CornerRadius="4" Grid.Row="0" Grid.Column="1" Margin="7">
@@ -99,7 +104,7 @@
       <Grid ColumnDefinitions="*" RowDefinitions="230,50">
         
         <Image Source="resm:LightMasterMVVM.Assets.Red3Tablet.png" Margin="0,0,0,5" Grid.Row="0"/>
-        <Button Command="{Binding SetTest}" Content="{Binding Text}" Grid.Row="0" Opacity="1"/>
+        
         <Grid ColumnDefinitions="*,*,*" Margin="40,0,40,5" Grid.Row="1">
           <Border Grid.Column="0" BorderBrush="{Binding BluetoothBorderColors[5]}" Background="{Binding BluetoothBackgroundColors[5]}" CornerRadius="3" Height="35" Width="35" BorderThickness="1" VerticalAlignment="Center">
             <Image Source="resm:LightMasterMVVM.Assets.ui-bluetooth.png" Margin="0,5,0,5"/>

@@ -34,18 +34,18 @@
     </Grid.RowDefinitions>
     <Grid ColumnDefinitions="*,*,*" RowDefinitions="120" Grid.Row="0" Margin="70,10,70,30">
       <Grid Grid.Column="0" ColumnDefinitions="*" RowDefinitions="80">
-        <Button Command="{Binding ChangeText}" Height="35" Grid.Row="0" Margin="30,0,30,60" CommandParameter="Hello world!" BorderBrush="DarkOrange" Foreground="DarkOrange" Background="White" BorderThickness="3">
-          <TextBlock FontWeight="Bold" Text="{Binding Text}"/>
+        <Button Command="{Binding SeeMatches}" Height="35" Grid.Row="0" Margin="30,0,30,60" CommandParameter="Hello world!" BorderBrush="DarkOrange" Foreground="DarkOrange" Background="White" BorderThickness="3">
+          <TextBlock FontWeight="Bold" Text="See Matches"/>
         </Button>
       </Grid>
       <Grid Grid.Column="1" ColumnDefinitions="*" RowDefinitions="80">
-        <Button BorderBrush="DarkOrange" Command="{Binding GetBluetoothDevices}" Grid.Row="0" Margin="30,0,30,60" Height="35" Background="DarkOrange" Foreground="White">
-          <TextBlock FontWeight="Bold" Text="Bluetooth"/>
+        <Button BorderBrush="DarkOrange" Command="{Binding SeeTablets}" Grid.Row="0" Margin="30,0,30,60" Height="35" Background="DarkOrange" Foreground="White">
+          <TextBlock FontWeight="Bold" Text="See Tablets"/>
         </Button>
       </Grid>
       <Grid Grid.Column="2" ColumnDefinitions="*,10" RowDefinitions="80">
-        <Button Command="{Binding ChangeVisibility}" Classes="menu" Height="35" Grid.Row="0" Margin="30,0,30,10" VerticalAlignment="Top">
-          <TextBlock FontWeight="Bold" Text="Change Visibility"/>
+        <Button Command="{Binding StartCheck}" Classes="menu" Height="35" Grid.Row="0" Margin="30,0,30,10" VerticalAlignment="Top">
+          <TextBlock FontWeight="Bold" Text="Start BT Check"/>
         </Button>
         <Border Background="DarkOrange" Height="5" Grid.Row="1" Margin="30,2,30,0">
           
@@ -58,18 +58,33 @@
 
     </Grid>
     <Grid Grid.Row="1" VerticalAlignment="Center">
-      <Border BorderBrush="Transparent">
+      <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0">
         <screens:Tablets x:Name="tablets" DataContext="{Binding TabletViewModel}" IsVisible="{Binding UserControlVisible}"/>
+      </Border>
+      <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0">
+        <screens:Matches x:Name="matches" DataContext="{Binding MatchViewModel}" IsVisible="{Binding UserControlVisible}"/>
       </Border>
       
     </Grid>
     <Grid Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" ColumnDefinitions="100,50" Margin="0,15,0,5">
-      <TextBlock Grid.Column="0" Text="Match 1" FontWeight="ExtraBold" VerticalAlignment="Center" FontSize="17"/>
+      <TextBlock Grid.Column="0" Text="{Binding MatchNumString}" FontWeight="ExtraBold" VerticalAlignment="Center" FontSize="17"/>
       <Grid Grid.Column="1" RowDefinitions="20,20">
-        <TextBlock Text="ABCD" Grid.Row="0" x:Name="testUp" Name="TestUp">
-          
-        </TextBlock>
-        <TextBlock Text="EFGH" Grid.Row="1"/>
+        <Button Grid.Row="0" Command="{Binding NextMatch}">
+          <Button.Template>
+            <ControlTemplate TargetType="{x:Type Button}">
+              <TextBlock Text="ABCD" x:Name="testUp" Name="TestUp"/>
+            </ControlTemplate>
+          </Button.Template>
+        </Button>
+
+
+        <Button Grid.Row="1" Command="{Binding PrevMatch}">
+          <Button.Template>
+            <ControlTemplate TargetType="{x:Type Button}">
+              <TextBlock Text="EFGH" x:Name="testDown" Name="TestDown"/>
+            </ControlTemplate>
+          </Button.Template>
+        </Button>
       </Grid>
       
       

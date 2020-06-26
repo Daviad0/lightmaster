@@ -27,6 +27,7 @@
     <AvaloniaResource Remove="Assets\Red3Tablet.png" />
     <AvaloniaResource Remove="Assets\Rubik-Medium.ttf" />
     <AvaloniaResource Remove="Assets\ui-bluetooth.png" />
+    <AvaloniaResource Remove="Views\Matches.xaml" />
     <AvaloniaResource Remove="Views\Tablets.xaml" />
     <AvaloniaResource Remove="Views\UserControl1.xaml" />
   </ItemGroup>
@@ -46,6 +47,7 @@
     <None Remove="Assets\Rubik-Medium.ttf" />
     <None Remove="Assets\ui-bluetooth.png" />
     <None Remove="Views\MainWindow.xaml" />
+    <None Remove="Views\Matches.xaml" />
     <None Remove="Views\Tablets.xaml" />
     <None Remove="Views\UserControl1.xaml" />
   </ItemGroup>
@@ -104,6 +106,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Tablets.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Matches.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>

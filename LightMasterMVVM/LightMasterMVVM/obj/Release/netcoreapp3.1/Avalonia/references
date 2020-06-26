@@ -31,12 +31,31 @@ C:\Users\djree\.nuget\packages\mvvmlightlibs\5.4.1.1\lib\net45\GalaSoft.MvvmLigh
 C:\Users\djree\.nuget\packages\mvvmlightlibs\5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll
 C:\Users\djree\.nuget\packages\32feet.net\3.5.0\lib\net\InTheHand.Net.Personal.dll
 C:\Users\djree\.nuget\packages\jetbrains.annotations\10.3.0\lib\netstandard1.0\JetBrains.Annotations.dll
+C:\Users\djree\.nuget\packages\microsoft.bcl.asyncinterfaces\1.1.1\ref\netstandard2.1\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\djree\.nuget\packages\microsoft.bcl.hashcode\1.1.0\ref\netcoreapp2.1\Microsoft.Bcl.HashCode.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\Microsoft.CSharp.dll
+C:\Users\djree\.nuget\packages\microsoft.entityframeworkcore.abstractions\3.1.5\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\djree\.nuget\packages\microsoft.entityframeworkcore\3.1.5\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\djree\.nuget\packages\microsoft.entityframeworkcore.relational\3.1.5\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\djree\.nuget\packages\microsoft.extensions.caching.abstractions\3.1.5\lib\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\djree\.nuget\packages\microsoft.extensions.caching.memory\3.1.5\lib\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\djree\.nuget\packages\microsoft.extensions.configuration.abstractions\3.1.5\lib\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\djree\.nuget\packages\microsoft.extensions.configuration.binder\3.1.5\lib\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\djree\.nuget\packages\microsoft.extensions.configuration\3.1.5\lib\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+C:\Users\djree\.nuget\packages\microsoft.extensions.dependencyinjection.abstractions\3.1.5\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\djree\.nuget\packages\microsoft.extensions.dependencyinjection\3.1.5\lib\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\djree\.nuget\packages\microsoft.extensions.logging.abstractions\3.1.5\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\djree\.nuget\packages\microsoft.extensions.logging\3.1.5\lib\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+C:\Users\djree\.nuget\packages\microsoft.extensions.options\3.1.5\lib\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\Users\djree\.nuget\packages\microsoft.extensions.primitives\3.1.5\lib\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\Microsoft.VisualBasic.Core.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\Microsoft.VisualBasic.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\Microsoft.Win32.Primitives.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\mscorlib.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\netstandard.dll
+C:\Users\djree\.nuget\packages\newtonsoft.json\12.0.3\lib\netstandard2.0\Newtonsoft.Json.dll
+C:\Users\djree\.nuget\packages\npgsql\4.1.3.1\lib\netcoreapp3.0\Npgsql.dll
+C:\Users\djree\.nuget\packages\npgsql.entityframeworkcore.postgresql\3.1.4\lib\netstandard2.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\djree\.nuget\packages\reactiveui\10.3.6\lib\netcoreapp3.0\ReactiveUI.dll
 C:\Users\djree\.nuget\packages\serilog\2.5.0\lib\netstandard1.3\Serilog.dll
 C:\Users\djree\.nuget\packages\serilog.sinks.debug\1.0.0\lib\netstandard1.0\Serilog.Sinks.Debug.dll
@@ -53,7 +72,7 @@ C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Buffers.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Collections.Concurrent.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Collections.dll
-C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\djree\.nuget\packages\system.collections.immutable\1.7.1\lib\netstandard2.0\System.Collections.Immutable.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Collections.NonGeneric.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Collections.Specialized.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.ComponentModel.Annotations.dll
@@ -71,7 +90,7 @@ C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Data.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Diagnostics.Contracts.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Diagnostics.Debug.dll
-C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\djree\.nuget\packages\system.diagnostics.diagnosticsource\4.7.1\lib\netstandard1.3\System.Diagnostics.DiagnosticSource.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Diagnostics.FileVersionInfo.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Diagnostics.Process.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Diagnostics.StackTrace.dll

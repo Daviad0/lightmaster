@@ -13,11 +13,63 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using System.Threading;
 using Websocket.Client;
 
 namespace LightMasterMVVM.ViewModels
 {
+    public class MatchViewModel : ViewModelBase
+    {
+        private string testText = "abc";
+        private TeamMatch red1CurrentMatch = new TeamMatch();
+        private TeamMatch red2CurrentMatch = new TeamMatch();
+        private TeamMatch red3CurrentMatch = new TeamMatch();
+        private TeamMatch blue1CurrentMatch = new TeamMatch();
+        private TeamMatch blue2CurrentMatch = new TeamMatch();
+        private TeamMatch blue3CurrentMatch = new TeamMatch();
+        private bool userControlVisible = true;
+        public bool UserControlVisible
+        {
+            get => userControlVisible;
+            set => SetProperty(ref userControlVisible, value);
+        }
+        public string TestText
+        {
+            get => testText;
+            set => SetProperty(ref testText, value);
+        }
+        public TeamMatch Red1CurrentMatch
+        {
+            get => red1CurrentMatch;
+            set => SetProperty(ref red1CurrentMatch, value);
+        }
+        public TeamMatch Red2CurrentMatch
+        {
+            get => red2CurrentMatch;
+            set => SetProperty(ref red2CurrentMatch, value);
+        }
+        public TeamMatch Red3CurrentMatch
+        {
+            get => red3CurrentMatch;
+            set => SetProperty(ref red3CurrentMatch, value);
+        }
+        public TeamMatch Blue1CurrentMatch
+        {
+            get => blue1CurrentMatch;
+            set => SetProperty(ref blue1CurrentMatch, value);
+        }
+        public TeamMatch Blue2CurrentMatch
+        {
+            get => blue2CurrentMatch;
+            set => SetProperty(ref blue2CurrentMatch, value);
+        }
+        public TeamMatch Blue3CurrentMatch
+        {
+            get => blue3CurrentMatch;
+            set => SetProperty(ref blue3CurrentMatch, value);
+        }
+    }
     public class TabletViewModel : ViewModelBase
     {
         private List<string> testBTD = new List<string>();
@@ -93,7 +145,10 @@ namespace LightMasterMVVM.ViewModels
         {
             
         }
+        public int currentMatchNum = 1;
+        private string matchNumString = "Match 1";
         private TabletViewModel tabletViewModel = new TabletViewModel();
+        private MatchViewModel matchViewModel = new MatchViewModel();
         private string _text = "Initial text";
         private bool userControlVisible = false;
         public TabletViewModel TabletViewModel
@@ -101,7 +156,17 @@ namespace LightMasterMVVM.ViewModels
             get => tabletViewModel;
             set => SetProperty(ref tabletViewModel, value);
         }
-        
+        public string MatchNumString
+        {
+            get => matchNumString;
+            set => SetProperty(ref matchNumString, value);
+        }
+        public MatchViewModel MatchViewModel
+        {
+            get => matchViewModel;
+            set => SetProperty(ref matchViewModel, value);
+        }
+
         public string Text
         {
             get => _text;
@@ -119,9 +184,9 @@ namespace LightMasterMVVM.ViewModels
         {
             Text = (string)text;
         }
-        public void ChangeVisibility()
+        public void StartCheck()
         {
-            tabletViewModel.UserControlVisible = !tabletViewModel.UserControlVisible;
+            
             var exitEvent = new ManualResetEvent(false);
             var url = new Uri("ws://localhost:8080");
 
@@ -169,9 +234,18 @@ namespace LightMasterMVVM.ViewModels
                         var itemtouse = JsonConvert.DeserializeObject<TeamMatch>(jsontodeserialize);
                         try
                         {
-                            var previousitem = db.Matches.Where(x => x.TabletId == itemtouse.TabletId && x.MatchNumber == itemtouse.MatchNumber && x.EventCode == itemtouse.EventCode).First();
-                            itemtouse.MatchID = previousitem.MatchID;
-                            db.Matches.Update(itemtouse);
+                            var previousitem = db.Matches.Where(x => x.TabletId == itemtouse.TabletId && x.MatchNumber == itemtouse.MatchNumber && x.EventCode == itemtouse.EventCode).FirstOrDefault();
+                            if(previousitem == null)
+                            {
+                                itemtouse.MatchID = new Random().Next(1, 1000);
+                                db.Matches.Add(itemtouse);
+                            }
+                            else
+                            {
+                                itemtouse.MatchID = previousitem.MatchID;
+                                db.Entry(previousitem).CurrentValues.SetValues(itemtouse);
+                            }
+                           
                             
                         }
                         catch(NpgsqlException ex)
@@ -238,6 +312,29 @@ namespace LightMasterMVVM.ViewModels
                 Console.WriteLine(d.DeviceName);
             }
             tabletViewModel.TestBTD = items;
+        }
+        public void SeeMatches()
+        {
+            tabletViewModel.UserControlVisible = false;
+            matchViewModel.UserControlVisible = true;   
+        }
+        public void SeeTablets()
+        {
+            matchViewModel.UserControlVisible = false;
+            tabletViewModel.UserControlVisible = true;
+        }
+        public void NextMatch()
+        {
+            currentMatchNum++;
+            MatchNumString = "Match " + currentMatchNum.ToString();
+        }
+        public void PrevMatch()
+        {
+            if(currentMatchNum > 1)
+            {
+                currentMatchNum--;
+            }
+            MatchNumString = "Match " + currentMatchNum.ToString();
         }
     }
 }
