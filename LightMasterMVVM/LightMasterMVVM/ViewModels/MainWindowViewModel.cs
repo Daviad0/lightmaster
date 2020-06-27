@@ -328,10 +328,6 @@ namespace LightMasterMVVM.ViewModels
                 else
                 {
                     var matchtoput = new TeamMatchView();
-                    matchtoput.APowerCellInner = r1selectedmatch.PowerCellInner[0];
-                    matchtoput.APowerCellOuter = r1selectedmatch.PowerCellOuter[0];
-                    matchtoput.APowerCellLower = r1selectedmatch.PowerCellLower[0];
-                    matchtoput.APowerCellMissed = r1selectedmatch.PowerCellMissed[0];
                     matchtoput.A_InitiationLine = r1selectedmatch.A_InitiationLine;
                     matchtoput.DisabledSeconds = r1selectedmatch.DisabledSeconds;
                     matchtoput.EventCode = r1selectedmatch.EventCode;
@@ -345,21 +341,28 @@ namespace LightMasterMVVM.ViewModels
                     matchtoput.TeamNumber = r1selectedmatch.TeamNumber;
                     matchtoput.T_ControlPanelPosition = r1selectedmatch.T_ControlPanelPosition;
                     matchtoput.T_ControlPanelRotation = r1selectedmatch.T_ControlPanelRotation;
-                    foreach(var value in r1selectedmatch.PowerCellInner.Skip(1))
+                    if (r1selectedmatch.PowerCellMissed != null)
                     {
-                        matchtoput.TPowerCellInner += value;
-                    }
-                    foreach (var value in r1selectedmatch.PowerCellOuter.Skip(1))
-                    {
-                        matchtoput.TPowerCellOuter += value;
-                    }
-                    foreach (var value in r1selectedmatch.PowerCellLower.Skip(1))
-                    {
-                        matchtoput.TPowerCellLower += value;
-                    }
-                    foreach (var value in r1selectedmatch.PowerCellMissed.Skip(1))
-                    {
-                        matchtoput.TPowerCellMissed += value;
+                        matchtoput.APowerCellInner = r1selectedmatch.PowerCellInner[0];
+                        matchtoput.APowerCellOuter = r1selectedmatch.PowerCellOuter[0];
+                        matchtoput.APowerCellLower = r1selectedmatch.PowerCellLower[0];
+                        matchtoput.APowerCellMissed = r1selectedmatch.PowerCellMissed[0];
+                        foreach (var value in r1selectedmatch.PowerCellInner.Skip(1))
+                        {
+                            matchtoput.TPowerCellInner += value;
+                        }
+                        foreach (var value in r1selectedmatch.PowerCellOuter.Skip(1))
+                        {
+                            matchtoput.TPowerCellOuter += value;
+                        }
+                        foreach (var value in r1selectedmatch.PowerCellLower.Skip(1))
+                        {
+                            matchtoput.TPowerCellLower += value;
+                        }
+                        foreach (var value in r1selectedmatch.PowerCellMissed.Skip(1))
+                        {
+                            matchtoput.TPowerCellMissed += value;
+                        }
                     }
                     MatchViewModel.Red1CurrentMatch = matchtoput;
                 }
@@ -372,10 +375,6 @@ namespace LightMasterMVVM.ViewModels
                 else
                 {
                     var matchtoput = new TeamMatchView();
-                    matchtoput.APowerCellInner = r2selectedmatch.PowerCellInner[0];
-                    matchtoput.APowerCellOuter = r2selectedmatch.PowerCellOuter[0];
-                    matchtoput.APowerCellLower = r2selectedmatch.PowerCellLower[0];
-                    matchtoput.APowerCellMissed = r2selectedmatch.PowerCellMissed[0];
                     matchtoput.A_InitiationLine = r2selectedmatch.A_InitiationLine;
                     matchtoput.DisabledSeconds = r2selectedmatch.DisabledSeconds;
                     matchtoput.EventCode = r2selectedmatch.EventCode;
@@ -389,21 +388,28 @@ namespace LightMasterMVVM.ViewModels
                     matchtoput.TeamNumber = r2selectedmatch.TeamNumber;
                     matchtoput.T_ControlPanelPosition = r2selectedmatch.T_ControlPanelPosition;
                     matchtoput.T_ControlPanelRotation = r2selectedmatch.T_ControlPanelRotation;
-                    foreach (var value in r2selectedmatch.PowerCellInner.Skip(1))
+                    if (r2selectedmatch.PowerCellMissed != null)
                     {
-                        matchtoput.TPowerCellInner += value;
-                    }
-                    foreach (var value in r2selectedmatch.PowerCellOuter.Skip(1))
-                    {
-                        matchtoput.TPowerCellOuter += value;
-                    }
-                    foreach (var value in r2selectedmatch.PowerCellLower.Skip(1))
-                    {
-                        matchtoput.TPowerCellLower += value;
-                    }
-                    foreach (var value in r2selectedmatch.PowerCellMissed.Skip(1))
-                    {
-                        matchtoput.TPowerCellMissed += value;
+                        matchtoput.APowerCellInner = r2selectedmatch.PowerCellInner[0];
+                        matchtoput.APowerCellOuter = r2selectedmatch.PowerCellOuter[0];
+                        matchtoput.APowerCellLower = r2selectedmatch.PowerCellLower[0];
+                        matchtoput.APowerCellMissed = r2selectedmatch.PowerCellMissed[0];
+                        foreach (var value in r2selectedmatch.PowerCellInner.Skip(1))
+                        {
+                            matchtoput.TPowerCellInner += value;
+                        }
+                        foreach (var value in r2selectedmatch.PowerCellOuter.Skip(1))
+                        {
+                            matchtoput.TPowerCellOuter += value;
+                        }
+                        foreach (var value in r2selectedmatch.PowerCellLower.Skip(1))
+                        {
+                            matchtoput.TPowerCellLower += value;
+                        }
+                        foreach (var value in r2selectedmatch.PowerCellMissed.Skip(1))
+                        {
+                            matchtoput.TPowerCellMissed += value;
+                        }
                     }
                     MatchViewModel.Red2CurrentMatch = matchtoput;
                 }
@@ -416,10 +422,6 @@ namespace LightMasterMVVM.ViewModels
                 else
                 {
                     var matchtoput = new TeamMatchView();
-                    matchtoput.APowerCellInner = r3selectedmatch.PowerCellInner[0];
-                    matchtoput.APowerCellOuter = r3selectedmatch.PowerCellOuter[0];
-                    matchtoput.APowerCellLower = r3selectedmatch.PowerCellLower[0];
-                    matchtoput.APowerCellMissed = r3selectedmatch.PowerCellMissed[0];
                     matchtoput.A_InitiationLine = r3selectedmatch.A_InitiationLine;
                     matchtoput.DisabledSeconds = r3selectedmatch.DisabledSeconds;
                     matchtoput.EventCode = r3selectedmatch.EventCode;
@@ -433,21 +435,28 @@ namespace LightMasterMVVM.ViewModels
                     matchtoput.TeamNumber = r3selectedmatch.TeamNumber;
                     matchtoput.T_ControlPanelPosition = r3selectedmatch.T_ControlPanelPosition;
                     matchtoput.T_ControlPanelRotation = r3selectedmatch.T_ControlPanelRotation;
-                    foreach (var value in r3selectedmatch.PowerCellInner.Skip(1))
+                    if (r3selectedmatch.PowerCellMissed != null)
                     {
-                        matchtoput.TPowerCellInner += value;
-                    }
-                    foreach (var value in r3selectedmatch.PowerCellOuter.Skip(1))
-                    {
-                        matchtoput.TPowerCellOuter += value;
-                    }
-                    foreach (var value in r3selectedmatch.PowerCellLower.Skip(1))
-                    {
-                        matchtoput.TPowerCellLower += value;
-                    }
-                    foreach (var value in r3selectedmatch.PowerCellMissed.Skip(1))
-                    {
-                        matchtoput.TPowerCellMissed += value;
+                        matchtoput.APowerCellInner = r3selectedmatch.PowerCellInner[0];
+                        matchtoput.APowerCellOuter = r3selectedmatch.PowerCellOuter[0];
+                        matchtoput.APowerCellLower = r3selectedmatch.PowerCellLower[0];
+                        matchtoput.APowerCellMissed = r3selectedmatch.PowerCellMissed[0];
+                        foreach (var value in r3selectedmatch.PowerCellInner.Skip(1))
+                        {
+                            matchtoput.TPowerCellInner += value;
+                        }
+                        foreach (var value in r3selectedmatch.PowerCellOuter.Skip(1))
+                        {
+                            matchtoput.TPowerCellOuter += value;
+                        }
+                        foreach (var value in r3selectedmatch.PowerCellLower.Skip(1))
+                        {
+                            matchtoput.TPowerCellLower += value;
+                        }
+                        foreach (var value in r3selectedmatch.PowerCellMissed.Skip(1))
+                        {
+                            matchtoput.TPowerCellMissed += value;
+                        }
                     }
                     MatchViewModel.Red3CurrentMatch = matchtoput;
                 }
@@ -460,10 +469,6 @@ namespace LightMasterMVVM.ViewModels
                 else
                 {
                     var matchtoput = new TeamMatchView();
-                    matchtoput.APowerCellInner = b1selectedmatch.PowerCellInner[0];
-                    matchtoput.APowerCellOuter = b1selectedmatch.PowerCellOuter[0];
-                    matchtoput.APowerCellLower = b1selectedmatch.PowerCellLower[0];
-                    matchtoput.APowerCellMissed = b1selectedmatch.PowerCellMissed[0];
                     matchtoput.A_InitiationLine = b1selectedmatch.A_InitiationLine;
                     matchtoput.DisabledSeconds = b1selectedmatch.DisabledSeconds;
                     matchtoput.EventCode = b1selectedmatch.EventCode;
@@ -477,21 +482,28 @@ namespace LightMasterMVVM.ViewModels
                     matchtoput.TeamNumber = b1selectedmatch.TeamNumber;
                     matchtoput.T_ControlPanelPosition = b1selectedmatch.T_ControlPanelPosition;
                     matchtoput.T_ControlPanelRotation = b1selectedmatch.T_ControlPanelRotation;
-                    foreach (var value in b1selectedmatch.PowerCellInner.Skip(1))
+                    if (b1selectedmatch.PowerCellMissed != null)
                     {
-                        matchtoput.TPowerCellInner += value;
-                    }
-                    foreach (var value in b1selectedmatch.PowerCellOuter.Skip(1))
-                    {
-                        matchtoput.TPowerCellOuter += value;
-                    }
-                    foreach (var value in b1selectedmatch.PowerCellLower.Skip(1))
-                    {
-                        matchtoput.TPowerCellLower += value;
-                    }
-                    foreach (var value in b1selectedmatch.PowerCellMissed.Skip(1))
-                    {
-                        matchtoput.TPowerCellMissed += value;
+                        matchtoput.APowerCellInner = b1selectedmatch.PowerCellInner[0];
+                        matchtoput.APowerCellOuter = b1selectedmatch.PowerCellOuter[0];
+                        matchtoput.APowerCellLower = b1selectedmatch.PowerCellLower[0];
+                        matchtoput.APowerCellMissed = b1selectedmatch.PowerCellMissed[0];
+                        foreach (var value in b1selectedmatch.PowerCellInner.Skip(1))
+                        {
+                            matchtoput.TPowerCellInner += value;
+                        }
+                        foreach (var value in b1selectedmatch.PowerCellOuter.Skip(1))
+                        {
+                            matchtoput.TPowerCellOuter += value;
+                        }
+                        foreach (var value in b1selectedmatch.PowerCellLower.Skip(1))
+                        {
+                            matchtoput.TPowerCellLower += value;
+                        }
+                        foreach (var value in b1selectedmatch.PowerCellMissed.Skip(1))
+                        {
+                            matchtoput.TPowerCellMissed += value;
+                        }
                     }
                     MatchViewModel.Blue1CurrentMatch = matchtoput;
                 }
@@ -504,10 +516,6 @@ namespace LightMasterMVVM.ViewModels
                 else
                 {
                     var matchtoput = new TeamMatchView();
-                    matchtoput.APowerCellInner = b2selectedmatch.PowerCellInner[0];
-                    matchtoput.APowerCellOuter = b2selectedmatch.PowerCellOuter[0];
-                    matchtoput.APowerCellLower = b2selectedmatch.PowerCellLower[0];
-                    matchtoput.APowerCellMissed = b2selectedmatch.PowerCellMissed[0];
                     matchtoput.A_InitiationLine = b2selectedmatch.A_InitiationLine;
                     matchtoput.DisabledSeconds = b2selectedmatch.DisabledSeconds;
                     matchtoput.EventCode = b2selectedmatch.EventCode;
@@ -521,21 +529,28 @@ namespace LightMasterMVVM.ViewModels
                     matchtoput.TeamNumber = b2selectedmatch.TeamNumber;
                     matchtoput.T_ControlPanelPosition = b2selectedmatch.T_ControlPanelPosition;
                     matchtoput.T_ControlPanelRotation = b2selectedmatch.T_ControlPanelRotation;
-                    foreach (var value in b2selectedmatch.PowerCellInner.Skip(1))
+                    if (b2selectedmatch.PowerCellMissed != null)
                     {
-                        matchtoput.TPowerCellInner += value;
-                    }
-                    foreach (var value in b2selectedmatch.PowerCellOuter.Skip(1))
-                    {
-                        matchtoput.TPowerCellOuter += value;
-                    }
-                    foreach (var value in b2selectedmatch.PowerCellLower.Skip(1))
-                    {
-                        matchtoput.TPowerCellLower += value;
-                    }
-                    foreach (var value in b2selectedmatch.PowerCellMissed.Skip(1))
-                    {
-                        matchtoput.TPowerCellMissed += value;
+                        matchtoput.APowerCellInner = b2selectedmatch.PowerCellInner[0];
+                        matchtoput.APowerCellOuter = b2selectedmatch.PowerCellOuter[0];
+                        matchtoput.APowerCellLower = b2selectedmatch.PowerCellLower[0];
+                        matchtoput.APowerCellMissed = b2selectedmatch.PowerCellMissed[0];
+                        foreach (var value in b2selectedmatch.PowerCellInner.Skip(1))
+                        {
+                            matchtoput.TPowerCellInner += value;
+                        }
+                        foreach (var value in b2selectedmatch.PowerCellOuter.Skip(1))
+                        {
+                            matchtoput.TPowerCellOuter += value;
+                        }
+                        foreach (var value in b2selectedmatch.PowerCellLower.Skip(1))
+                        {
+                            matchtoput.TPowerCellLower += value;
+                        }
+                        foreach (var value in b2selectedmatch.PowerCellMissed.Skip(1))
+                        {
+                            matchtoput.TPowerCellMissed += value;
+                        }
                     }
                     MatchViewModel.Blue2CurrentMatch = matchtoput;
                 }
@@ -548,10 +563,7 @@ namespace LightMasterMVVM.ViewModels
                 else
                 {
                     var matchtoput = new TeamMatchView();
-                    matchtoput.APowerCellInner = b3selectedmatch.PowerCellInner[0];
-                    matchtoput.APowerCellOuter = b3selectedmatch.PowerCellOuter[0];
-                    matchtoput.APowerCellLower = b3selectedmatch.PowerCellLower[0];
-                    matchtoput.APowerCellMissed = b3selectedmatch.PowerCellMissed[0];
+                    
                     matchtoput.A_InitiationLine = b3selectedmatch.A_InitiationLine;
                     matchtoput.DisabledSeconds = b3selectedmatch.DisabledSeconds;
                     matchtoput.EventCode = b3selectedmatch.EventCode;
@@ -565,22 +577,30 @@ namespace LightMasterMVVM.ViewModels
                     matchtoput.TeamNumber = b3selectedmatch.TeamNumber;
                     matchtoput.T_ControlPanelPosition = b3selectedmatch.T_ControlPanelPosition;
                     matchtoput.T_ControlPanelRotation = b3selectedmatch.T_ControlPanelRotation;
-                    foreach (var value in b3selectedmatch.PowerCellInner.Skip(1))
+                    if(b3selectedmatch.PowerCellMissed != null)
                     {
-                        matchtoput.TPowerCellInner += value;
+                        matchtoput.APowerCellInner = b3selectedmatch.PowerCellInner[0];
+                        matchtoput.APowerCellOuter = b3selectedmatch.PowerCellOuter[0];
+                        matchtoput.APowerCellLower = b3selectedmatch.PowerCellLower[0];
+                        matchtoput.APowerCellMissed = b3selectedmatch.PowerCellMissed[0];
+                        foreach (var value in b3selectedmatch.PowerCellInner.Skip(1))
+                        {
+                            matchtoput.TPowerCellInner += value;
+                        }
+                        foreach (var value in b3selectedmatch.PowerCellOuter.Skip(1))
+                        {
+                            matchtoput.TPowerCellOuter += value;
+                        }
+                        foreach (var value in b3selectedmatch.PowerCellLower.Skip(1))
+                        {
+                            matchtoput.TPowerCellLower += value;
+                        }
+                        foreach (var value in b3selectedmatch.PowerCellMissed.Skip(1))
+                        {
+                            matchtoput.TPowerCellMissed += value;
+                        }
                     }
-                    foreach (var value in b3selectedmatch.PowerCellOuter.Skip(1))
-                    {
-                        matchtoput.TPowerCellOuter += value;
-                    }
-                    foreach (var value in b3selectedmatch.PowerCellLower.Skip(1))
-                    {
-                        matchtoput.TPowerCellLower += value;
-                    }
-                    foreach (var value in b3selectedmatch.PowerCellMissed.Skip(1))
-                    {
-                        matchtoput.TPowerCellMissed += value;
-                    }
+                    
                     MatchViewModel.Blue3CurrentMatch = matchtoput;
                 }
             }
