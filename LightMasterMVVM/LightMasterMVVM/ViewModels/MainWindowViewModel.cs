@@ -23,12 +23,12 @@ namespace LightMasterMVVM.ViewModels
     public class MatchViewModel : ViewModelBase
     {
         private string testText = "abc";
-        private TeamMatchView red1CurrentMatch = new TeamMatchView();
-        private TeamMatchView red2CurrentMatch = new TeamMatchView();
-        private TeamMatchView red3CurrentMatch = new TeamMatchView();
-        private TeamMatchView blue1CurrentMatch = new TeamMatchView();
-        private TeamMatchView blue2CurrentMatch = new TeamMatchView();
-        private TeamMatchView blue3CurrentMatch = new TeamMatchView();
+        private TeamMatchView red1CurrentMatch = new TeamMatchView() { ScoutName = "No One" };
+        private TeamMatchView red2CurrentMatch = new TeamMatchView() { ScoutName = "No One" };
+        private TeamMatchView red3CurrentMatch = new TeamMatchView() { ScoutName = "No One" };
+        private TeamMatchView blue1CurrentMatch = new TeamMatchView() { ScoutName = "No One" };
+        private TeamMatchView blue2CurrentMatch = new TeamMatchView() { ScoutName = "No One" };
+        private TeamMatchView blue3CurrentMatch = new TeamMatchView() { ScoutName = "No One" };
         private bool userControlVisible = true;
         public bool UserControlVisible
         {
@@ -164,7 +164,7 @@ namespace LightMasterMVVM.ViewModels
         }
         public MatchViewModel MatchViewModel
         {
-            get => matchViewModel;
+            get =>  matchViewModel;
             set => SetProperty(ref matchViewModel, value);
         }
 
@@ -187,7 +187,7 @@ namespace LightMasterMVVM.ViewModels
         }
         public void StartCheck()
         {
-            
+            Console.WriteLine(matchViewModel.Blue1CurrentMatch.ScoutName.ToString());
             var exitEvent = new ManualResetEvent(false);
             var url = new Uri("ws://localhost:8080");
 
@@ -610,6 +610,7 @@ namespace LightMasterMVVM.ViewModels
         {
             matchViewModel.UserControlVisible = false;
             tabletViewModel.UserControlVisible = true;
+            
         }
         public void NextMatch()
         {
