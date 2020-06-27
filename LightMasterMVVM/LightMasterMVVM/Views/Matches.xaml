@@ -4,15 +4,80 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LightMasterMVVM.Views.Matches">
-  
-  <Grid ColumnDefinitions="*" RowDefinitions="75,*,50" Width="1500">
+  <UserControl.Styles>
+    <Style Selector="CheckBox">
+      <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+      <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
+      <Setter Property="Padding" Value="4,0,0,0"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="HorizontalContentAlignment" Value="Left"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid ColumnDefinitions="Auto,*">
+            <Border Name="border"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Width="25"
+                    Height="25"
+                    VerticalAlignment="Center">
+              <Panel>
+                <Path Name="checkMark"
+                      Fill="{DynamicResource HighlightBrush}"
+                      Width="16"
+                      Height="14.5"
+                      Stretch="Uniform"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Data="M 1145.607177734375,430 C1145.607177734375,430 1141.449951171875,435.0772705078125 1141.449951171875,435.0772705078125 1141.449951171875,435.0772705078125 1139.232177734375,433.0999755859375 1139.232177734375,433.0999755859375 1139.232177734375,433.0999755859375 1138,434.5538330078125 1138,434.5538330078125 1138,434.5538330078125 1141.482177734375,438 1141.482177734375,438 1141.482177734375,438 1141.96875,437.9375 1141.96875,437.9375 1141.96875,437.9375 1147,431.34619140625 1147,431.34619140625 1147,431.34619140625 1145.607177734375,430 1145.607177734375,430 z"/>
+                <Rectangle Name="indeterminateMark"
+                           Fill="{DynamicResource HighlightBrush}"
+                           Width="15"
+                           Height="15"
+                           Stretch="Uniform"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+              </Panel>
+            </Border>
+            <ContentPresenter Name="PART_ContentPresenter"
+                              TextBlock.Foreground="{TemplateBinding Foreground}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              Content="{TemplateBinding Content}"
+                              Margin="{TemplateBinding Padding}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              IsVisible="{TemplateBinding Content, Converter={x:Static ObjectConverters.IsNotNull}}"
+                              Grid.Column="1"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+  </UserControl.Styles>
+  <Grid ColumnDefinitions="*" RowDefinitions="110,*,50" Width="1500">
     <Grid ColumnDefinitions="300,*,*" Grid.Row="0" Margin="0,0,18,0">
       <TextBlock Text="Matches" Grid.Column="0" Grid.Row="0" FontSize="40"/>
       <Border Grid.Column="1" Grid.Row="0" Background="LightPink" Margin="30,0" BorderBrush="Red" CornerRadius="4,4,0,0" Padding="10" BorderThickness="4,4,4,0">
-        <TextBlock HorizontalAlignment="Center" FontWeight="Bold" Foreground="DarkRed" Text="Red Entries" FontSize="40"/>
+        <StackPanel>
+          <TextBlock HorizontalAlignment="Center" FontWeight="Bold" Foreground="DarkRed" Text="Red Entries" FontSize="40"/>
+          <Grid ColumnDefinitions="*,*,*">
+            <TextBlock Text="{Binding Red1CurrentMatch.TeamNumber}" Foreground="DarkRed" FontSize="30" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding Red2CurrentMatch.TeamNumber}" Foreground="DarkRed" FontSize="30" FontWeight="Bold" Grid.Column="1" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding Red3CurrentMatch.TeamNumber}" Foreground="DarkRed" FontSize="30" FontWeight="Bold" Grid.Column="2" HorizontalAlignment="Center"/>
+          </Grid>
+        </StackPanel>
+        
       </Border>
       <Border Grid.Column="2" Grid.Row="0" Background="LightBlue" Margin="30,0,30,0" BorderBrush="Blue" CornerRadius="4,4,0,0" Padding="10" BorderThickness="4,4,4,0">
-        <TextBlock HorizontalAlignment="Center" FontWeight="Bold" Foreground="DarkBlue" Text="Blue Entries" FontSize="40"/>
+        <StackPanel>
+          <TextBlock HorizontalAlignment="Center" FontWeight="Bold" Foreground="DarkBlue" Text="Blue Entries" FontSize="40"/>
+          <Grid ColumnDefinitions="*,*,*">
+            <TextBlock Text="{Binding Blue1CurrentMatch.TeamNumber}" Foreground="DarkBlue" FontSize="30" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding Blue2CurrentMatch.TeamNumber}" Foreground="DarkBlue" FontSize="30" FontWeight="Bold" Grid.Column="1" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding Blue3CurrentMatch.TeamNumber}" Foreground="DarkBlue" FontSize="30" FontWeight="Bold" Grid.Column="2" HorizontalAlignment="Center"/>
+          </Grid>
+        </StackPanel>
       </Border>
     </Grid>
     <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" MaxHeight="600">
@@ -54,100 +119,100 @@
         <Border VerticalAlignment="Top" Grid.Column="2" Grid.Row="0" Background="LightBlue" Margin="30,0" BorderBrush="Blue" CornerRadius="0,0,0,0" Padding="10" BorderThickness="4,0,4,0">
           <Grid ColumnDefinitions="*,*,*">
             <StackPanel Grid.Column="0">
-              <TextBlock Margin="20,0,0,0" FontSize="30" Text="0001"/>
-              <TextBlock Margin="20,0,0,0" FontSize="25" Text="John Doe"/>
+              <TextBlock Margin="20,0,0,0" FontSize="30" Text="{Binding Blue1CurrentMatch.TeamNumber}"/>
+              <TextBlock Margin="20,0,0,0" FontSize="25" Text="{Binding Blue1CurrentMatch.ScoutName, StringFormat={}:{0}}}"/>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
+                  <CheckBox Margin="7.25" IsChecked="{Binding Blue1CurrentMatch.A_InitiationLine}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue1CurrentMatch.APowerCellMissed, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue1CurrentMatch.APowerCellLower, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue1CurrentMatch.APowerCellOuter, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue1CurrentMatch.APowerCellInner, StringFormat={}{0} PC }}"/>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBlock FontSize="30" Text="0"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue1CurrentMatch.NumCycles}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue1CurrentMatch.TPowerCellMissed, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue1CurrentMatch.TPowerCellLower, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue1CurrentMatch.TPowerCellOuter, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue1CurrentMatch.TPowerCellInner, StringFormat={}{0} PC }}"/>
+                  <CheckBox FontSize="30" Margin="7.25" IsChecked="{Binding Blue1CurrentMatch.T_ControlPanelRotation, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="7.25" IsChecked="{Binding Blue1CurrentMatch.T_ControlPanelPosition, Mode=TwoWay}"/>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Blue1CurrentMatch.E_Park, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Blue1CurrentMatch.E_ClimbSuccess, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Blue1CurrentMatch.E_Balanced, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Blue1CurrentMatch.E_ClimbAttempt, Mode=TwoWay}"/>
                 </StackPanel>
               </Border>
 
             </StackPanel>
             <StackPanel Grid.Column="1">
-              <TextBlock Margin="20,0,0,0" FontSize="30" Text="0001"/>
-              <TextBlock Margin="20,0,0,0" FontSize="25" Text="John Doe"/>
+              <TextBlock Margin="20,0,0,0" FontSize="30" Text="{Binding Blue2CurrentMatch.TeamNumber}"/>
+              <TextBlock Margin="20,0,0,0" FontSize="25" Text="{Binding Blue2CurrentMatch.ScoutName, StringFormat={}:{0}}}"/>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
+                  <CheckBox Margin="7.25" IsChecked="{Binding Blue2CurrentMatch.A_InitiationLine}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue2CurrentMatch.APowerCellMissed, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue2CurrentMatch.APowerCellLower, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue2CurrentMatch.APowerCellOuter, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue2CurrentMatch.APowerCellInner, StringFormat={}{0} PC }}"/>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBlock FontSize="30" Text="0"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue2CurrentMatch.NumCycles}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue2CurrentMatch.TPowerCellMissed, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue2CurrentMatch.TPowerCellLower, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue2CurrentMatch.TPowerCellOuter, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue2CurrentMatch.TPowerCellInner, StringFormat={}{0} PC }}"/>
+                  <CheckBox FontSize="30" Margin="7.25" IsChecked="{Binding Blue2CurrentMatch.T_ControlPanelRotation, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="7.25" IsChecked="{Binding Blue2CurrentMatch.T_ControlPanelPosition, Mode=TwoWay}"/>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Blue2CurrentMatch.E_Park, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Blue2CurrentMatch.E_ClimbSuccess, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Blue2CurrentMatch.E_Balanced, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Blue2CurrentMatch.E_ClimbAttempt, Mode=TwoWay}"/>
                 </StackPanel>
               </Border>
 
             </StackPanel>
             <StackPanel Grid.Column="2">
-              <TextBlock Margin="20,0,0,0" FontSize="30" Text="0001"/>
-              <TextBlock Margin="20,0,0,0" FontSize="25" Text="John Doe"/>
+              <TextBlock Margin="20,0,0,0" FontSize="30" Text="{Binding Blue3CurrentMatch.TeamNumber}"/>
+              <TextBlock Margin="20,0,0,0" FontSize="25" Text="{Binding Blue3CurrentMatch.ScoutName, StringFormat={}:{0}}}"/>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
+                  <CheckBox Margin="7.25" IsChecked="{Binding Blue3CurrentMatch.A_InitiationLine}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue3CurrentMatch.APowerCellMissed, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue3CurrentMatch.APowerCellLower, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue3CurrentMatch.APowerCellOuter, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue3CurrentMatch.APowerCellInner, StringFormat={}{0} PC }}"/>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBlock FontSize="30" Text="0"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue3CurrentMatch.NumCycles}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue3CurrentMatch.TPowerCellMissed, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue3CurrentMatch.TPowerCellLower, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue3CurrentMatch.TPowerCellOuter, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Blue3CurrentMatch.TPowerCellInner, StringFormat={}{0} PC }}"/>
+                  <CheckBox FontSize="30" Margin="7.25" IsChecked="{Binding Blue3CurrentMatch.T_ControlPanelRotation, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="7.25" IsChecked="{Binding Blue3CurrentMatch.T_ControlPanelPosition, Mode=TwoWay}"/>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Blue3CurrentMatch.E_Park, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Blue3CurrentMatch.E_ClimbSuccess, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Blue3CurrentMatch.E_Balanced, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Blue3CurrentMatch.E_ClimbAttempt, Mode=TwoWay}"/>
                 </StackPanel>
               </Border>
 
@@ -159,100 +224,100 @@
         <Border VerticalAlignment="Top" Grid.Column="1" Grid.Row="0" Background="LightPink" Margin="30,0" BorderBrush="Red" CornerRadius="0,0,0,0" Padding="10" BorderThickness="4,0,4,0">
           <Grid ColumnDefinitions="*,*,*">
             <StackPanel Grid.Column="0">
-              <TextBlock Margin="20,0,0,0" FontSize="30" Text="0001"/>
-              <TextBlock Margin="20,0,0,0" FontSize="25" Text="John Doe"/>
+              <TextBlock Margin="20,0,0,0" FontSize="30" Text="{Binding Red1CurrentMatch.TeamNumber}"/>
+              <TextBlock Margin="20,0,0,0" FontSize="25" Text="{Binding Red1CurrentMatch.ScoutName, StringFormat={}:{0}}}"/>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
+                  <CheckBox Margin="7.25" IsChecked="{Binding Red1CurrentMatch.A_InitiationLine}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red1CurrentMatch.APowerCellMissed, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red1CurrentMatch.APowerCellLower, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red1CurrentMatch.APowerCellOuter, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red1CurrentMatch.APowerCellInner, StringFormat={}{0} PC }}"/>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBlock FontSize="30" Text="0"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
+                  <TextBlock FontSize="30" Text="{Binding Red1CurrentMatch.NumCycles}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red1CurrentMatch.TPowerCellMissed, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red1CurrentMatch.TPowerCellLower, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red1CurrentMatch.TPowerCellOuter, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red1CurrentMatch.TPowerCellInner, StringFormat={}{0} PC }}"/>
+                  <CheckBox FontSize="30" Margin="7.25" IsChecked="{Binding Red1CurrentMatch.T_ControlPanelRotation, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="7.25" IsChecked="{Binding Red1CurrentMatch.T_ControlPanelPosition, Mode=TwoWay}"/>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Red1CurrentMatch.E_Park, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Red1CurrentMatch.E_ClimbSuccess, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Red1CurrentMatch.E_Balanced, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Red1CurrentMatch.E_ClimbAttempt, Mode=TwoWay}"/>
                 </StackPanel>
               </Border>
 
             </StackPanel>
             <StackPanel Grid.Column="1">
-              <TextBlock Margin="20,0,0,0" FontSize="30" Text="0001"/>
-              <TextBlock Margin="20,0,0,0" FontSize="25" Text="John Doe"/>
+              <TextBlock Margin="20,0,0,0" FontSize="30" Text="{Binding Red2CurrentMatch.TeamNumber}"/>
+              <TextBlock Margin="20,0,0,0" FontSize="25" Text="{Binding Red2CurrentMatch.ScoutName, StringFormat={}:{0}}}"/>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
+                  <CheckBox Margin="7.25" IsChecked="{Binding Red2CurrentMatch.A_InitiationLine}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red2CurrentMatch.APowerCellMissed, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red2CurrentMatch.APowerCellLower, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red2CurrentMatch.APowerCellOuter, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red2CurrentMatch.APowerCellInner, StringFormat={}{0} PC }}"/>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBlock FontSize="30" Text="0"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
+                  <TextBlock FontSize="30" Text="{Binding Red2CurrentMatch.NumCycles}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red2CurrentMatch.TPowerCellMissed, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red2CurrentMatch.TPowerCellLower, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red2CurrentMatch.TPowerCellOuter, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red2CurrentMatch.TPowerCellInner, StringFormat={}{0} PC }}"/>
+                  <CheckBox FontSize="30" Margin="7.25" IsChecked="{Binding Red2CurrentMatch.T_ControlPanelRotation, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="7.25" IsChecked="{Binding Red2CurrentMatch.T_ControlPanelPosition, Mode=TwoWay}"/>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Red2CurrentMatch.E_Park, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Red2CurrentMatch.E_ClimbSuccess, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Red2CurrentMatch.E_Balanced, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Red2CurrentMatch.E_ClimbAttempt, Mode=TwoWay}"/>
                 </StackPanel>
               </Border>
 
             </StackPanel>
             <StackPanel Grid.Column="2">
-              <TextBlock Margin="20,0,0,0" FontSize="30" Text="0001"/>
-              <TextBlock Margin="20,0,0,0" FontSize="25" Text="John Doe"/>
+              <TextBlock Margin="20,0,0,0" FontSize="30" Text="{Binding Red3CurrentMatch.TeamNumber}"/>
+              <TextBlock Margin="20,0,0,0" FontSize="25" Text="{Binding Red3CurrentMatch.ScoutName, StringFormat={}:{0}}}"/>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
+                  <CheckBox Margin="7.25" IsChecked="{Binding Red3CurrentMatch.A_InitiationLine}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red3CurrentMatch.APowerCellMissed, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red3CurrentMatch.APowerCellLower, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red3CurrentMatch.APowerCellOuter, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red3CurrentMatch.APowerCellInner, StringFormat={}{0} PC }}"/>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBlock FontSize="30" Text="0"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="0 PC"/>
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
+                  <TextBlock FontSize="30" Text="{Binding Red3CurrentMatch.NumCycles}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red3CurrentMatch.TPowerCellMissed, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red3CurrentMatch.TPowerCellLower, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red3CurrentMatch.TPowerCellOuter, StringFormat={}{0} PC }}"/>
+                  <TextBlock FontSize="30" Text="{Binding Red3CurrentMatch.TPowerCellInner, StringFormat={}{0} PC }}"/>
+                  <CheckBox FontSize="30" Margin="7.25" IsChecked="{Binding Red3CurrentMatch.T_ControlPanelRotation, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="7.25" IsChecked="{Binding Red3CurrentMatch.T_ControlPanelPosition, Mode=TwoWay}"/>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
-                  <TextBlock FontSize="30" Text="No"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Red3CurrentMatch.E_Park, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Red3CurrentMatch.E_ClimbSuccess, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Red3CurrentMatch.E_Balanced, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="8" IsChecked="{Binding Red3CurrentMatch.E_ClimbAttempt, Mode=TwoWay}"/>
                 </StackPanel>
               </Border>
 

@@ -6,6 +6,7 @@ using LightMasterMVVM.Models;
 using LightMasterMVVM.Views;
 using Newtonsoft.Json;
 using Npgsql;
+using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,12 +23,12 @@ namespace LightMasterMVVM.ViewModels
     public class MatchViewModel : ViewModelBase
     {
         private string testText = "abc";
-        private TeamMatch red1CurrentMatch = new TeamMatch();
-        private TeamMatch red2CurrentMatch = new TeamMatch();
-        private TeamMatch red3CurrentMatch = new TeamMatch();
-        private TeamMatch blue1CurrentMatch = new TeamMatch();
-        private TeamMatch blue2CurrentMatch = new TeamMatch();
-        private TeamMatch blue3CurrentMatch = new TeamMatch();
+        private TeamMatchView red1CurrentMatch = new TeamMatchView();
+        private TeamMatchView red2CurrentMatch = new TeamMatchView();
+        private TeamMatchView red3CurrentMatch = new TeamMatchView();
+        private TeamMatchView blue1CurrentMatch = new TeamMatchView();
+        private TeamMatchView blue2CurrentMatch = new TeamMatchView();
+        private TeamMatchView blue3CurrentMatch = new TeamMatchView();
         private bool userControlVisible = true;
         public bool UserControlVisible
         {
@@ -39,32 +40,32 @@ namespace LightMasterMVVM.ViewModels
             get => testText;
             set => SetProperty(ref testText, value);
         }
-        public TeamMatch Red1CurrentMatch
+        public TeamMatchView Red1CurrentMatch
         {
             get => red1CurrentMatch;
             set => SetProperty(ref red1CurrentMatch, value);
         }
-        public TeamMatch Red2CurrentMatch
+        public TeamMatchView Red2CurrentMatch
         {
             get => red2CurrentMatch;
             set => SetProperty(ref red2CurrentMatch, value);
         }
-        public TeamMatch Red3CurrentMatch
+        public TeamMatchView Red3CurrentMatch
         {
             get => red3CurrentMatch;
             set => SetProperty(ref red3CurrentMatch, value);
         }
-        public TeamMatch Blue1CurrentMatch
+        public TeamMatchView Blue1CurrentMatch
         {
             get => blue1CurrentMatch;
             set => SetProperty(ref blue1CurrentMatch, value);
         }
-        public TeamMatch Blue2CurrentMatch
+        public TeamMatchView Blue2CurrentMatch
         {
             get => blue2CurrentMatch;
             set => SetProperty(ref blue2CurrentMatch, value);
         }
-        public TeamMatch Blue3CurrentMatch
+        public TeamMatchView Blue3CurrentMatch
         {
             get => blue3CurrentMatch;
             set => SetProperty(ref blue3CurrentMatch, value);
@@ -316,7 +317,274 @@ namespace LightMasterMVVM.ViewModels
         public void SeeMatches()
         {
             tabletViewModel.UserControlVisible = false;
-            matchViewModel.UserControlVisible = true;   
+            matchViewModel.UserControlVisible = true;
+            using(var db = new ScoutingContext())
+            {
+                var r1selectedmatch = db.Matches.Where(x => x.TabletId == "R1" && x.EventCode == "test_env").FirstOrDefault();
+                if(r1selectedmatch == null)
+                {
+                    MatchViewModel.Red1CurrentMatch = new TeamMatchView();
+                }
+                else
+                {
+                    var matchtoput = new TeamMatchView();
+                    matchtoput.APowerCellInner = r1selectedmatch.PowerCellInner[0];
+                    matchtoput.APowerCellOuter = r1selectedmatch.PowerCellOuter[0];
+                    matchtoput.APowerCellLower = r1selectedmatch.PowerCellLower[0];
+                    matchtoput.APowerCellMissed = r1selectedmatch.PowerCellMissed[0];
+                    matchtoput.A_InitiationLine = r1selectedmatch.A_InitiationLine;
+                    matchtoput.DisabledSeconds = r1selectedmatch.DisabledSeconds;
+                    matchtoput.EventCode = r1selectedmatch.EventCode;
+                    matchtoput.E_Balanced = r1selectedmatch.E_Balanced;
+                    matchtoput.E_ClimbAttempt = r1selectedmatch.E_ClimbAttempt;
+                    matchtoput.E_ClimbSuccess = r1selectedmatch.E_ClimbSuccess;
+                    matchtoput.E_Park = r1selectedmatch.E_Park;
+                    matchtoput.MatchNumber = r1selectedmatch.MatchNumber;
+                    matchtoput.NumCycles = r1selectedmatch.NumCycles;
+                    matchtoput.ScoutName = r1selectedmatch.ScoutName;
+                    matchtoput.TeamNumber = r1selectedmatch.TeamNumber;
+                    matchtoput.T_ControlPanelPosition = r1selectedmatch.T_ControlPanelPosition;
+                    matchtoput.T_ControlPanelRotation = r1selectedmatch.T_ControlPanelRotation;
+                    foreach(var value in r1selectedmatch.PowerCellInner.Skip(1))
+                    {
+                        matchtoput.TPowerCellInner += value;
+                    }
+                    foreach (var value in r1selectedmatch.PowerCellOuter.Skip(1))
+                    {
+                        matchtoput.TPowerCellOuter += value;
+                    }
+                    foreach (var value in r1selectedmatch.PowerCellLower.Skip(1))
+                    {
+                        matchtoput.TPowerCellLower += value;
+                    }
+                    foreach (var value in r1selectedmatch.PowerCellMissed.Skip(1))
+                    {
+                        matchtoput.TPowerCellMissed += value;
+                    }
+                    MatchViewModel.Red1CurrentMatch = matchtoput;
+                }
+                //RED2
+                var r2selectedmatch = db.Matches.Where(x => x.TabletId == "R2" && x.EventCode == "test_env").FirstOrDefault();
+                if (r2selectedmatch == null)
+                {
+                    MatchViewModel.Red2CurrentMatch = new TeamMatchView();
+                }
+                else
+                {
+                    var matchtoput = new TeamMatchView();
+                    matchtoput.APowerCellInner = r2selectedmatch.PowerCellInner[0];
+                    matchtoput.APowerCellOuter = r2selectedmatch.PowerCellOuter[0];
+                    matchtoput.APowerCellLower = r2selectedmatch.PowerCellLower[0];
+                    matchtoput.APowerCellMissed = r2selectedmatch.PowerCellMissed[0];
+                    matchtoput.A_InitiationLine = r2selectedmatch.A_InitiationLine;
+                    matchtoput.DisabledSeconds = r2selectedmatch.DisabledSeconds;
+                    matchtoput.EventCode = r2selectedmatch.EventCode;
+                    matchtoput.E_Balanced = r2selectedmatch.E_Balanced;
+                    matchtoput.E_ClimbAttempt = r2selectedmatch.E_ClimbAttempt;
+                    matchtoput.E_ClimbSuccess = r2selectedmatch.E_ClimbSuccess;
+                    matchtoput.E_Park = r2selectedmatch.E_Park;
+                    matchtoput.MatchNumber = r2selectedmatch.MatchNumber;
+                    matchtoput.NumCycles = r2selectedmatch.NumCycles;
+                    matchtoput.ScoutName = r2selectedmatch.ScoutName;
+                    matchtoput.TeamNumber = r2selectedmatch.TeamNumber;
+                    matchtoput.T_ControlPanelPosition = r2selectedmatch.T_ControlPanelPosition;
+                    matchtoput.T_ControlPanelRotation = r2selectedmatch.T_ControlPanelRotation;
+                    foreach (var value in r2selectedmatch.PowerCellInner.Skip(1))
+                    {
+                        matchtoput.TPowerCellInner += value;
+                    }
+                    foreach (var value in r2selectedmatch.PowerCellOuter.Skip(1))
+                    {
+                        matchtoput.TPowerCellOuter += value;
+                    }
+                    foreach (var value in r2selectedmatch.PowerCellLower.Skip(1))
+                    {
+                        matchtoput.TPowerCellLower += value;
+                    }
+                    foreach (var value in r2selectedmatch.PowerCellMissed.Skip(1))
+                    {
+                        matchtoput.TPowerCellMissed += value;
+                    }
+                    MatchViewModel.Red2CurrentMatch = matchtoput;
+                }
+                //RED3
+                var r3selectedmatch = db.Matches.Where(x => x.TabletId == "R3" && x.EventCode == "test_env").FirstOrDefault();
+                if (r3selectedmatch == null)
+                {
+                    MatchViewModel.Red3CurrentMatch = new TeamMatchView();
+                }
+                else
+                {
+                    var matchtoput = new TeamMatchView();
+                    matchtoput.APowerCellInner = r3selectedmatch.PowerCellInner[0];
+                    matchtoput.APowerCellOuter = r3selectedmatch.PowerCellOuter[0];
+                    matchtoput.APowerCellLower = r3selectedmatch.PowerCellLower[0];
+                    matchtoput.APowerCellMissed = r3selectedmatch.PowerCellMissed[0];
+                    matchtoput.A_InitiationLine = r3selectedmatch.A_InitiationLine;
+                    matchtoput.DisabledSeconds = r3selectedmatch.DisabledSeconds;
+                    matchtoput.EventCode = r3selectedmatch.EventCode;
+                    matchtoput.E_Balanced = r3selectedmatch.E_Balanced;
+                    matchtoput.E_ClimbAttempt = r3selectedmatch.E_ClimbAttempt;
+                    matchtoput.E_ClimbSuccess = r3selectedmatch.E_ClimbSuccess;
+                    matchtoput.E_Park = r3selectedmatch.E_Park;
+                    matchtoput.MatchNumber = r3selectedmatch.MatchNumber;
+                    matchtoput.NumCycles = r3selectedmatch.NumCycles;
+                    matchtoput.ScoutName = r3selectedmatch.ScoutName;
+                    matchtoput.TeamNumber = r3selectedmatch.TeamNumber;
+                    matchtoput.T_ControlPanelPosition = r3selectedmatch.T_ControlPanelPosition;
+                    matchtoput.T_ControlPanelRotation = r3selectedmatch.T_ControlPanelRotation;
+                    foreach (var value in r3selectedmatch.PowerCellInner.Skip(1))
+                    {
+                        matchtoput.TPowerCellInner += value;
+                    }
+                    foreach (var value in r3selectedmatch.PowerCellOuter.Skip(1))
+                    {
+                        matchtoput.TPowerCellOuter += value;
+                    }
+                    foreach (var value in r3selectedmatch.PowerCellLower.Skip(1))
+                    {
+                        matchtoput.TPowerCellLower += value;
+                    }
+                    foreach (var value in r3selectedmatch.PowerCellMissed.Skip(1))
+                    {
+                        matchtoput.TPowerCellMissed += value;
+                    }
+                    MatchViewModel.Red3CurrentMatch = matchtoput;
+                }
+                //BLUE1
+                var b1selectedmatch = db.Matches.Where(x => x.TabletId == "B1" && x.EventCode == "test_env").FirstOrDefault();
+                if (b1selectedmatch == null)
+                {
+                    MatchViewModel.Blue1CurrentMatch = new TeamMatchView();
+                }
+                else
+                {
+                    var matchtoput = new TeamMatchView();
+                    matchtoput.APowerCellInner = b1selectedmatch.PowerCellInner[0];
+                    matchtoput.APowerCellOuter = b1selectedmatch.PowerCellOuter[0];
+                    matchtoput.APowerCellLower = b1selectedmatch.PowerCellLower[0];
+                    matchtoput.APowerCellMissed = b1selectedmatch.PowerCellMissed[0];
+                    matchtoput.A_InitiationLine = b1selectedmatch.A_InitiationLine;
+                    matchtoput.DisabledSeconds = b1selectedmatch.DisabledSeconds;
+                    matchtoput.EventCode = b1selectedmatch.EventCode;
+                    matchtoput.E_Balanced = b1selectedmatch.E_Balanced;
+                    matchtoput.E_ClimbAttempt = b1selectedmatch.E_ClimbAttempt;
+                    matchtoput.E_ClimbSuccess = b1selectedmatch.E_ClimbSuccess;
+                    matchtoput.E_Park = b1selectedmatch.E_Park;
+                    matchtoput.MatchNumber = b1selectedmatch.MatchNumber;
+                    matchtoput.NumCycles = b1selectedmatch.NumCycles;
+                    matchtoput.ScoutName = b1selectedmatch.ScoutName;
+                    matchtoput.TeamNumber = b1selectedmatch.TeamNumber;
+                    matchtoput.T_ControlPanelPosition = b1selectedmatch.T_ControlPanelPosition;
+                    matchtoput.T_ControlPanelRotation = b1selectedmatch.T_ControlPanelRotation;
+                    foreach (var value in b1selectedmatch.PowerCellInner.Skip(1))
+                    {
+                        matchtoput.TPowerCellInner += value;
+                    }
+                    foreach (var value in b1selectedmatch.PowerCellOuter.Skip(1))
+                    {
+                        matchtoput.TPowerCellOuter += value;
+                    }
+                    foreach (var value in b1selectedmatch.PowerCellLower.Skip(1))
+                    {
+                        matchtoput.TPowerCellLower += value;
+                    }
+                    foreach (var value in b1selectedmatch.PowerCellMissed.Skip(1))
+                    {
+                        matchtoput.TPowerCellMissed += value;
+                    }
+                    MatchViewModel.Blue1CurrentMatch = matchtoput;
+                }
+                //BLUE2
+                var b2selectedmatch = db.Matches.Where(x => x.TabletId == "B2" && x.EventCode == "test_env").FirstOrDefault();
+                if (b2selectedmatch == null)
+                {
+                    MatchViewModel.Blue2CurrentMatch = new TeamMatchView();
+                }
+                else
+                {
+                    var matchtoput = new TeamMatchView();
+                    matchtoput.APowerCellInner = b2selectedmatch.PowerCellInner[0];
+                    matchtoput.APowerCellOuter = b2selectedmatch.PowerCellOuter[0];
+                    matchtoput.APowerCellLower = b2selectedmatch.PowerCellLower[0];
+                    matchtoput.APowerCellMissed = b2selectedmatch.PowerCellMissed[0];
+                    matchtoput.A_InitiationLine = b2selectedmatch.A_InitiationLine;
+                    matchtoput.DisabledSeconds = b2selectedmatch.DisabledSeconds;
+                    matchtoput.EventCode = b2selectedmatch.EventCode;
+                    matchtoput.E_Balanced = b2selectedmatch.E_Balanced;
+                    matchtoput.E_ClimbAttempt = b2selectedmatch.E_ClimbAttempt;
+                    matchtoput.E_ClimbSuccess = b2selectedmatch.E_ClimbSuccess;
+                    matchtoput.E_Park = b2selectedmatch.E_Park;
+                    matchtoput.MatchNumber = b2selectedmatch.MatchNumber;
+                    matchtoput.NumCycles = b2selectedmatch.NumCycles;
+                    matchtoput.ScoutName = b2selectedmatch.ScoutName;
+                    matchtoput.TeamNumber = b2selectedmatch.TeamNumber;
+                    matchtoput.T_ControlPanelPosition = b2selectedmatch.T_ControlPanelPosition;
+                    matchtoput.T_ControlPanelRotation = b2selectedmatch.T_ControlPanelRotation;
+                    foreach (var value in b2selectedmatch.PowerCellInner.Skip(1))
+                    {
+                        matchtoput.TPowerCellInner += value;
+                    }
+                    foreach (var value in b2selectedmatch.PowerCellOuter.Skip(1))
+                    {
+                        matchtoput.TPowerCellOuter += value;
+                    }
+                    foreach (var value in b2selectedmatch.PowerCellLower.Skip(1))
+                    {
+                        matchtoput.TPowerCellLower += value;
+                    }
+                    foreach (var value in b2selectedmatch.PowerCellMissed.Skip(1))
+                    {
+                        matchtoput.TPowerCellMissed += value;
+                    }
+                    MatchViewModel.Blue2CurrentMatch = matchtoput;
+                }
+                //BLUE3
+                var b3selectedmatch = db.Matches.Where(x => x.TabletId == "B3" && x.EventCode == "test_env").FirstOrDefault();
+                if (b3selectedmatch == null)
+                {
+                    MatchViewModel.Blue3CurrentMatch = new TeamMatchView();
+                }
+                else
+                {
+                    var matchtoput = new TeamMatchView();
+                    matchtoput.APowerCellInner = b3selectedmatch.PowerCellInner[0];
+                    matchtoput.APowerCellOuter = b3selectedmatch.PowerCellOuter[0];
+                    matchtoput.APowerCellLower = b3selectedmatch.PowerCellLower[0];
+                    matchtoput.APowerCellMissed = b3selectedmatch.PowerCellMissed[0];
+                    matchtoput.A_InitiationLine = b3selectedmatch.A_InitiationLine;
+                    matchtoput.DisabledSeconds = b3selectedmatch.DisabledSeconds;
+                    matchtoput.EventCode = b3selectedmatch.EventCode;
+                    matchtoput.E_Balanced = b3selectedmatch.E_Balanced;
+                    matchtoput.E_ClimbAttempt = b3selectedmatch.E_ClimbAttempt;
+                    matchtoput.E_ClimbSuccess = b3selectedmatch.E_ClimbSuccess;
+                    matchtoput.E_Park = b3selectedmatch.E_Park;
+                    matchtoput.MatchNumber = b3selectedmatch.MatchNumber;
+                    matchtoput.NumCycles = b3selectedmatch.NumCycles;
+                    matchtoput.ScoutName = b3selectedmatch.ScoutName;
+                    matchtoput.TeamNumber = b3selectedmatch.TeamNumber;
+                    matchtoput.T_ControlPanelPosition = b3selectedmatch.T_ControlPanelPosition;
+                    matchtoput.T_ControlPanelRotation = b3selectedmatch.T_ControlPanelRotation;
+                    foreach (var value in b3selectedmatch.PowerCellInner.Skip(1))
+                    {
+                        matchtoput.TPowerCellInner += value;
+                    }
+                    foreach (var value in b3selectedmatch.PowerCellOuter.Skip(1))
+                    {
+                        matchtoput.TPowerCellOuter += value;
+                    }
+                    foreach (var value in b3selectedmatch.PowerCellLower.Skip(1))
+                    {
+                        matchtoput.TPowerCellLower += value;
+                    }
+                    foreach (var value in b3selectedmatch.PowerCellMissed.Skip(1))
+                    {
+                        matchtoput.TPowerCellMissed += value;
+                    }
+                    MatchViewModel.Blue3CurrentMatch = matchtoput;
+                }
+            }
+            
         }
         public void SeeTablets()
         {
