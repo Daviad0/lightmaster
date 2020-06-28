@@ -187,7 +187,7 @@ namespace LightMasterMVVM.ViewModels
         }
         public void StartCheck()
         {
-            Console.WriteLine(matchViewModel.Blue1CurrentMatch.ScoutName.ToString());
+            Console.WriteLine(matchViewModel.Blue1CurrentMatch.TeamNumber.ToString());
             var exitEvent = new ManualResetEvent(false);
             var url = new Uri("ws://localhost:8080");
 
