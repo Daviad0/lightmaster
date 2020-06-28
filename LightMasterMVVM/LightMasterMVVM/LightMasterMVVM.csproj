@@ -26,6 +26,8 @@
     <AvaloniaResource Remove="Assets\Red2Tablet.png" />
     <AvaloniaResource Remove="Assets\Red3Tablet.png" />
     <AvaloniaResource Remove="Assets\Rubik-Medium.ttf" />
+    <AvaloniaResource Remove="Assets\Rubik-Regular.ttf" />
+    <AvaloniaResource Remove="Assets\SourceSansPro-Bold.ttf" />
     <AvaloniaResource Remove="Assets\ui-bluetooth.png" />
     <AvaloniaResource Remove="Views\Matches.xaml" />
     <AvaloniaResource Remove="Views\Tablets.xaml" />
@@ -45,11 +47,19 @@
     <None Remove="Assets\Red2Tablet.png" />
     <None Remove="Assets\Red3Tablet.png" />
     <None Remove="Assets\Rubik-Medium.ttf" />
+    <None Remove="Assets\Rubik-Regular.ttf" />
+    <None Remove="Assets\SourceSansPro-Bold.ttf" />
     <None Remove="Assets\ui-bluetooth.png" />
     <None Remove="Views\MainWindow.xaml" />
     <None Remove="Views\Matches.xaml" />
     <None Remove="Views\Tablets.xaml" />
     <None Remove="Views\UserControl1.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Rubik-Regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\SourceSansPro-Bold.ttf" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\ui-bluetooth.png" />
