@@ -118,8 +118,25 @@ red2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   console.log(this._value);
   var hextocheck = this._value.toString('hex');
 
-  console.log('R2 - onWriteRequest: value = ' + this._value.toString('hex'));
-  sendtomaster("R2",hex2a(hextocheck));
+  if(hex2a(hextocheck).startsWith("MM:"))
+  {
+    console.log('R2 START IDENTIFIER!')
+    r2messagesleft = parseInt(hex2a(hextocheck).substring(3));
+    r2combinedstring = "";
+  }
+  else
+  {
+    console.log('R2 - onWriteRequest: value = ' + this._value.toString('hex'));
+    if(r2messagesleft > 0){
+      r2messagesleft--;
+      r2combinedstring = r2combinedstring + hex2a(hextocheck);
+      if(r2messagesleft == 0){
+        sendtomaster("R2",r2combinedstring);
+      }
+    }else{
+      sendtomaster("R2",hex2a(hextocheck));
+    }
+  }
 
   this._updateValueCallback(toByteArray("Hi There"));
 
@@ -130,8 +147,25 @@ red3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   console.log(this._value);
   var hextocheck = this._value.toString('hex');
 
-  console.log('R3 - onWriteRequest: value = ' + this._value.toString('hex'));
-  sendtomaster("R3",hex2a(hextocheck));
+  if(hex2a(hextocheck).startsWith("MM:"))
+  {
+    console.log('R3 START IDENTIFIER!')
+    r3messagesleft = parseInt(hex2a(hextocheck).substring(3));
+    r3combinedstring = "";
+  }
+  else
+  {
+    console.log('R3 - onWriteRequest: value = ' + this._value.toString('hex'));
+    if(r3messagesleft > 0){
+      r3messagesleft--;
+      r3combinedstring = r3combinedstring + hex2a(hextocheck);
+      if(r3messagesleft == 0){
+        sendtomaster("R3",r3combinedstring);
+      }
+    }else{
+      sendtomaster("R3",hex2a(hextocheck));
+    }
+  }
 
   this._updateValueCallback(toByteArray("Hi There"));
 
@@ -142,8 +176,25 @@ blue1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   console.log(this._value);
   var hextocheck = this._value.toString('hex');
 
-  console.log('B1 - onWriteRequest: value = ' + this._value.toString('hex'));
-  sendtomaster("B1",hex2a(hextocheck));
+  if(hex2a(hextocheck).startsWith("MM:"))
+  {
+    console.log('B1 START IDENTIFIER!')
+    b1messagesleft = parseInt(hex2a(hextocheck).substring(3));
+    b1combinedstring = "";
+  }
+  else
+  {
+    console.log('B1 - onWriteRequest: value = ' + this._value.toString('hex'));
+    if(b1messagesleft > 0){
+      b1messagesleft--;
+      b1combinedstring = b1combinedstring + hex2a(hextocheck);
+      if(b1messagesleft == 0){
+        sendtomaster("B1",b1combinedstring);
+      }
+    }else{
+      sendtomaster("B1",hex2a(hextocheck));
+    }
+  }
 
   this._updateValueCallback(toByteArray("Hi There"));
 
@@ -154,8 +205,25 @@ blue2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   console.log(this._value);
   var hextocheck = this._value.toString('hex');
 
-  console.log('B2 - onWriteRequest: value = ' + this._value.toString('hex'));
-  sendtomaster("B2",hex2a(hextocheck));
+  if(hex2a(hextocheck).startsWith("MM:"))
+  {
+    console.log('B2 START IDENTIFIER!')
+    b2messagesleft = parseInt(hex2a(hextocheck).substring(3));
+    b2combinedstring = "";
+  }
+  else
+  {
+    console.log('B2 - onWriteRequest: value = ' + this._value.toString('hex'));
+    if(b2messagesleft > 0){
+      b2messagesleft--;
+      b2combinedstring = b2combinedstring + hex2a(hextocheck);
+      if(b2messagesleft == 0){
+        sendtomaster("B2",b2combinedstring);
+      }
+    }else{
+      sendtomaster("B2",hex2a(hextocheck));
+    }
+  }
 
   this._updateValueCallback(toByteArray("Hi There"));
 
@@ -166,8 +234,25 @@ blue3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   console.log(this._value);
   var hextocheck = this._value.toString('hex');
 
-  console.log('B3 - onWriteRequest: value = ' + this._value.toString('hex'));
-  sendtomaster("B3",hex2a(hextocheck));
+  if(hex2a(hextocheck).startsWith("MM:"))
+  {
+    console.log('B3 START IDENTIFIER!')
+    b3messagesleft = parseInt(hex2a(hextocheck).substring(3));
+    b3combinedstring = "";
+  }
+  else
+  {
+    console.log('B3 - onWriteRequest: value = ' + this._value.toString('hex'));
+    if(b3messagesleft > 0){
+      b3messagesleft--;
+      b3combinedstring = b3combinedstring + hex2a(hextocheck);
+      if(b3messagesleft == 0){
+        sendtomaster("B3",b3combinedstring);
+      }
+    }else{
+      sendtomaster("B3",hex2a(hextocheck));
+    }
+  }
 
   this._updateValueCallback(toByteArray("Hi There"));
 
