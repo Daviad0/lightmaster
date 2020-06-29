@@ -14,6 +14,20 @@ var blue3s = require('./blue3');
 
 var sendback = "484920544845524521";
 
+var r1messagesleft = 0;
+var r2messagesleft = 0;
+var r3messagesleft = 0;
+var b1messagesleft = 0;
+var b2messagesleft = 0;
+var b3messagesleft = 0;
+
+var r1combinedstring = "";
+var r2combinedstring = "";
+var r3combinedstring = "";
+var b1combinedstring = "";
+var b2combinedstring = "";
+var b3combinedstring = "";
+
 console.log('Starting up Lighting Robotics Scouting Service');
 
 
@@ -73,8 +87,27 @@ red1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   console.log(this._value);
   var hextocheck = this._value.toString('hex');
 
-  console.log('R1 - onWriteRequest: value = ' + this._value.toString('hex'));
-  sendtomaster("R1",hex2a(hextocheck));
+  
+  if(hex2a(hextocheck).startsWith("MM:"))
+  {
+    console.log('R1 START IDENTIFIER!')
+    r1messagesleft = parseInt(hex2a(hextocheck).substring(3));
+    r1combinedstring = "";
+  }
+  else
+  {
+    console.log('R1 - onWriteRequest: value = ' + this._value.toString('hex'));
+    if(r1messagesleft > 0){
+      r1messagesleft--;
+      r1combinedstring = r1combinedstring + hex2a(hextocheck);
+      if(r1messagesleft == 0){
+        sendtomaster("R1",r1combinedstring);
+      }
+    }else{
+      sendtomaster("R1",hex2a(hextocheck));
+    }
+  }
+  
 
   this._updateValueCallback(toByteArray("Hi There"));
 
