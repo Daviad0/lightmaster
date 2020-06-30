@@ -58,7 +58,7 @@
   </UserControl.Styles>
   <Grid ColumnDefinitions="*" RowDefinitions="130,*,50" Width="1200">
     <Grid ColumnDefinitions="300,*,*" Grid.Row="0" Margin="0,0,18,0">
-      <TextBlock Text="Matches" Grid.Column="0" Grid.Row="0" FontSize="40"/>
+      <Button Content="Save" Grid.Column="0" Grid.Row="0" FontSize="40" Background="Green" Foreground="White" Command="{Binding SaveChanges}"/>
       <Border Grid.Column="1" Grid.Row="0" Background="LightPink" Margin="30,0" BorderBrush="Red" CornerRadius="4,4,0,0" Padding="10" BorderThickness="4,4,4,0">
         <StackPanel>
           <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" HorizontalAlignment="Center" FontWeight="Bold" Foreground="DarkRed" Text="Red Entries" FontSize="40"/>
