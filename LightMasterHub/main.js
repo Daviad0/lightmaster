@@ -4,6 +4,12 @@ var usb = require('usb');
 
 usb.on('attach', function(device) {
   console.log("new usb device meep >~<");
+  device.open();
+  device.startPoll(nTransfers=3, transferSize=50);
+});
+
+usb.on('data', function(data){
+  console.log(data);
 });
 
 usb.on('detach', function(device) {
