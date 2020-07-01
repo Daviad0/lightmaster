@@ -122,135 +122,135 @@
           <Grid ColumnDefinitions="*,*,*">
             <StackPanel Grid.Column="0">
               <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="20,0,0,0" FontSize="30" Text="{Binding Blue1CurrentMatch.TeamNumber}"/>
-              <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="10" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="20,0,0,0" Text="{Binding Blue1CurrentMatch.ScoutName, Mode=TwoWay}"/>
+              <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="10" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="20,0,0,0" Text="{Binding Blue1CurrentMatch.ScoutName, Mode=TwoWay}" IsEnabled="{Binding Blue1MatchEditable}"/>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <CheckBox Margin="6" IsChecked="{Binding Blue1CurrentMatch.A_InitiationLine}"/>
+                  <CheckBox Margin="6" IsChecked="{Binding Blue1CurrentMatch.A_InitiationLine}" IsEnabled="{Binding Blue1MatchEditable}"/>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue1CurrentMatch.APowerCellInner, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue1CurrentMatch.APowerCellInner, Mode=TwoWay}" IsEnabled="{Binding Blue1MatchEditable}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue1CurrentMatch.APowerCellOuter, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue1CurrentMatch.APowerCellOuter, Mode=TwoWay}" IsEnabled="{Binding Blue1MatchEditable}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue1CurrentMatch.APowerCellLower, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue1CurrentMatch.APowerCellLower, Mode=TwoWay}" IsEnabled="{Binding Blue1MatchEditable}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue1CurrentMatch.APowerCellMissed, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue1CurrentMatch.APowerCellMissed, Mode=TwoWay}" IsEnabled="{Binding Blue1MatchEditable}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="4" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue1CurrentMatch.NumCycles, Mode=TwoWay}"/>
+                  <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="4" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue1CurrentMatch.NumCycles, Mode=TwoWay}" IsEnabled="{Binding Blue1MatchEditable}"/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Blue1CurrentMatch.TPowerCellMissed, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Blue1CurrentMatch.TPowerCellLower, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Blue1CurrentMatch.TPowerCellOuter, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Blue1CurrentMatch.TPowerCellInner, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
-                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Blue1CurrentMatch.T_ControlPanelRotation, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Blue1CurrentMatch.T_ControlPanelPosition, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Blue1CurrentMatch.T_ControlPanelRotation, Mode=TwoWay}" IsEnabled="{Binding Blue1MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Blue1CurrentMatch.T_ControlPanelPosition, Mode=TwoWay}" IsEnabled="{Binding Blue1MatchEditable}"/>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue1CurrentMatch.E_Park, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue1CurrentMatch.E_ClimbSuccess, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue1CurrentMatch.E_Balanced, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue1CurrentMatch.E_ClimbAttempt, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue1CurrentMatch.E_Park, Mode=TwoWay}" IsEnabled="{Binding Blue1MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue1CurrentMatch.E_ClimbSuccess, Mode=TwoWay}" IsEnabled="{Binding Blue1MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue1CurrentMatch.E_Balanced, Mode=TwoWay}" IsEnabled="{Binding Blue1MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue1CurrentMatch.E_ClimbAttempt, Mode=TwoWay}" IsEnabled="{Binding Blue1MatchEditable}"/>
                 </StackPanel>
               </Border>
 
             </StackPanel>
             <StackPanel Grid.Column="1">
               <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="20,0,0,0" FontSize="30" Text="{Binding Blue2CurrentMatch.TeamNumber}"/>
-              <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="10" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="20,0,0,0" Text="{Binding Blue2CurrentMatch.ScoutName, Mode=TwoWay}"/>
+              <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="10" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="20,0,0,0" Text="{Binding Blue2CurrentMatch.ScoutName, Mode=TwoWay}" IsEnabled="{Binding Blue2MatchEditable}"/>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <CheckBox Margin="6" IsChecked="{Binding Blue2CurrentMatch.A_InitiationLine}"/>
+                  <CheckBox Margin="6" IsChecked="{Binding Blue2CurrentMatch.A_InitiationLine}" IsEnabled="{Binding Blue2MatchEditable}"/>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue2CurrentMatch.APowerCellInner, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue2CurrentMatch.APowerCellInner, Mode=TwoWay}" IsEnabled="{Binding Blue2MatchEditable}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue2CurrentMatch.APowerCellOuter, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue2CurrentMatch.APowerCellOuter, Mode=TwoWay}" IsEnabled="{Binding Blue2MatchEditable}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue2CurrentMatch.APowerCellLower, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue2CurrentMatch.APowerCellLower, Mode=TwoWay}" IsEnabled="{Binding Blue2MatchEditable}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue2CurrentMatch.APowerCellMissed, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue2CurrentMatch.APowerCellMissed, Mode=TwoWay}" IsEnabled="{Binding Blue2MatchEditable}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="4" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue2CurrentMatch.NumCycles, Mode=TwoWay}"/>
+                  <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="4" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue2CurrentMatch.NumCycles, Mode=TwoWay}" IsEnabled="{Binding Blue2MatchEditable}"/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Blue2CurrentMatch.TPowerCellMissed, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Blue2CurrentMatch.TPowerCellLower, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Blue2CurrentMatch.TPowerCellOuter, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Blue2CurrentMatch.TPowerCellInner, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
-                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Blue2CurrentMatch.T_ControlPanelRotation, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Blue2CurrentMatch.T_ControlPanelPosition, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Blue2CurrentMatch.T_ControlPanelRotation, Mode=TwoWay}" IsEnabled="{Binding Blue2MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Blue2CurrentMatch.T_ControlPanelPosition, Mode=TwoWay}" IsEnabled="{Binding Blue2MatchEditable}"/>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue2CurrentMatch.E_Park, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue2CurrentMatch.E_ClimbSuccess, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue2CurrentMatch.E_Balanced, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue2CurrentMatch.E_ClimbAttempt, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue2CurrentMatch.E_Park, Mode=TwoWay}" IsEnabled="{Binding Blue2MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue2CurrentMatch.E_ClimbSuccess, Mode=TwoWay}" IsEnabled="{Binding Blue2MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue2CurrentMatch.E_Balanced, Mode=TwoWay}" IsEnabled="{Binding Blue2MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue2CurrentMatch.E_ClimbAttempt, Mode=TwoWay}" IsEnabled="{Binding Blue2MatchEditable}"/>
                 </StackPanel>
               </Border>
 
             </StackPanel>
             <StackPanel Grid.Column="2">
               <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="20,0,0,0" FontSize="30" Text="{Binding Blue3CurrentMatch.TeamNumber}"/>
-              <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="10" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="20,0,0,0" Text="{Binding Blue3CurrentMatch.ScoutName, Mode=TwoWay}"/>
+              <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="10" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="20,0,0,0" Text="{Binding Blue3CurrentMatch.ScoutName, Mode=TwoWay}" IsEnabled="{Binding Blue3MatchEditable}"/>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <CheckBox Margin="6" IsChecked="{Binding Blue3CurrentMatch.A_InitiationLine}"/>
+                  <CheckBox Margin="6" IsChecked="{Binding Blue3CurrentMatch.A_InitiationLine}" IsEnabled="{Binding Blue3MatchEditable}"/>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue3CurrentMatch.APowerCellInner, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue3CurrentMatch.APowerCellInner, Mode=TwoWay}" IsEnabled="{Binding Blue3MatchEditable}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue3CurrentMatch.APowerCellOuter, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue3CurrentMatch.APowerCellOuter, Mode=TwoWay}" IsEnabled="{Binding Blue3MatchEditable}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue3CurrentMatch.APowerCellLower, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue3CurrentMatch.APowerCellLower, Mode=TwoWay}" IsEnabled="{Binding Blue3MatchEditable}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue3CurrentMatch.APowerCellMissed, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue3CurrentMatch.APowerCellMissed, Mode=TwoWay}" IsEnabled="{Binding Blue3MatchEditable}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="4" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue3CurrentMatch.NumCycles, Mode=TwoWay}"/>
+                  <TextBox Background="LightBlue" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="4" BorderBrush="Blue" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Blue3CurrentMatch.NumCycles, Mode=TwoWay}" IsEnabled="{Binding Blue3MatchEditable}"/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Blue3CurrentMatch.TPowerCellMissed, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Blue3CurrentMatch.TPowerCellLower, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Blue3CurrentMatch.TPowerCellOuter, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Blue3CurrentMatch.TPowerCellInner, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
-                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Blue3CurrentMatch.T_ControlPanelRotation, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Blue3CurrentMatch.T_ControlPanelPosition, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Blue3CurrentMatch.T_ControlPanelRotation, Mode=TwoWay}" IsEnabled="{Binding Blue3MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Blue3CurrentMatch.T_ControlPanelPosition, Mode=TwoWay}" IsEnabled="{Binding Blue3MatchEditable}"/>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue3CurrentMatch.E_Park, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue3CurrentMatch.E_ClimbSuccess, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue3CurrentMatch.E_Balanced, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue3CurrentMatch.E_ClimbAttempt, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue3CurrentMatch.E_Park, Mode=TwoWay}" IsEnabled="{Binding Blue3MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue3CurrentMatch.E_ClimbSuccess, Mode=TwoWay}" IsEnabled="{Binding Blue3MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue3CurrentMatch.E_Balanced, Mode=TwoWay}" IsEnabled="{Binding Blue3MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Blue3CurrentMatch.E_ClimbAttempt, Mode=TwoWay}" IsEnabled="{Binding Blue3MatchEditable}"/>
                 </StackPanel>
               </Border>
 
@@ -263,114 +263,114 @@
           <Grid ColumnDefinitions="*,*,*">
             <StackPanel Grid.Column="0">
               <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="20,0,0,0" FontSize="30" Text="{Binding Red1CurrentMatch.TeamNumber}"/>
-              <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="10" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="20,0,0,0" Text="{Binding Red1CurrentMatch.ScoutName, Mode=TwoWay}"/>
+              <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="10" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="20,0,0,0" Text="{Binding Red1CurrentMatch.ScoutName, Mode=TwoWay}" IsEnabled="{Binding Red1MatchEditable}"/>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <CheckBox Margin="6" IsChecked="{Binding Red1CurrentMatch.A_InitiationLine}"/>
+                  <CheckBox Margin="6" IsChecked="{Binding Red1CurrentMatch.A_InitiationLine}" IsEnabled="{Binding Red1MatchEditable}"/>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red1CurrentMatch.APowerCellInner, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red1CurrentMatch.APowerCellInner, Mode=TwoWay}" IsEnabled="{Binding Red1MatchEditable}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red1CurrentMatch.APowerCellOuter, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red1CurrentMatch.APowerCellOuter, Mode=TwoWay}" IsEnabled="{Binding Red1MatchEditable}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red1CurrentMatch.APowerCellLower, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red1CurrentMatch.APowerCellLower, Mode=TwoWay}" IsEnabled="{Binding Red1MatchEditable}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red1CurrentMatch.APowerCellMissed, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red1CurrentMatch.APowerCellMissed, Mode=TwoWay}" IsEnabled="{Binding Red1MatchEditable}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="4" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red1CurrentMatch.NumCycles, Mode=TwoWay}"/>
+                  <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="4" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red1CurrentMatch.NumCycles, Mode=TwoWay}" IsEnabled="{Binding Red1MatchEditable}"/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Red1CurrentMatch.TPowerCellMissed, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Red1CurrentMatch.TPowerCellLower, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Red1CurrentMatch.TPowerCellOuter, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Red1CurrentMatch.TPowerCellInner, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
-                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Red1CurrentMatch.T_ControlPanelRotation, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Red1CurrentMatch.T_ControlPanelPosition, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Red1CurrentMatch.T_ControlPanelRotation, Mode=TwoWay}" IsEnabled="{Binding Red1MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Red1CurrentMatch.T_ControlPanelPosition, Mode=TwoWay}" IsEnabled="{Binding Red1MatchEditable}"/>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red1CurrentMatch.E_Park, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red1CurrentMatch.E_ClimbSuccess, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red1CurrentMatch.E_Balanced, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red1CurrentMatch.E_ClimbAttempt, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red1CurrentMatch.E_Park, Mode=TwoWay}" IsEnabled="{Binding Red1MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red1CurrentMatch.E_ClimbSuccess, Mode=TwoWay}" IsEnabled="{Binding Red1MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red1CurrentMatch.E_Balanced, Mode=TwoWay}" IsEnabled="{Binding Red1MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red1CurrentMatch.E_ClimbAttempt, Mode=TwoWay}" IsEnabled="{Binding Red1MatchEditable}"/>
                 </StackPanel>
               </Border>
 
             </StackPanel>
             <StackPanel Grid.Column="1">
               <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="20,0,0,0" FontSize="30" Text="{Binding Red2CurrentMatch.TeamNumber}"/>
-              <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="10" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="20,0,0,0" Text="{Binding Red2CurrentMatch.ScoutName, Mode=TwoWay}"/>
+              <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="10" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="20,0,0,0" Text="{Binding Red2CurrentMatch.ScoutName, Mode=TwoWay}" IsEnabled="{Binding Red2MatchEditable}"/>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <CheckBox Margin="6" IsChecked="{Binding Red2CurrentMatch.A_InitiationLine}"/>
+                  <CheckBox Margin="6" IsChecked="{Binding Red2CurrentMatch.A_InitiationLine}" IsEnabled="{Binding Red2MatchEditable}"/>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red2CurrentMatch.APowerCellInner, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red2CurrentMatch.APowerCellInner, Mode=TwoWay}" IsEnabled="{Binding Red2MatchEditable}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red2CurrentMatch.APowerCellOuter, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red2CurrentMatch.APowerCellOuter, Mode=TwoWay}" IsEnabled="{Binding Red2MatchEditable}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red2CurrentMatch.APowerCellLower, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red2CurrentMatch.APowerCellLower, Mode=TwoWay}" IsEnabled="{Binding Red2MatchEditable}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red2CurrentMatch.APowerCellMissed, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red2CurrentMatch.APowerCellMissed, Mode=TwoWay}" IsEnabled="{Binding Red2MatchEditable}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="4" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red2CurrentMatch.NumCycles, Mode=TwoWay}"/>
+                  <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="4" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red2CurrentMatch.NumCycles, Mode=TwoWay}" IsEnabled="{Binding Red2MatchEditable}"/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Red2CurrentMatch.TPowerCellMissed, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Red2CurrentMatch.TPowerCellLower, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Red2CurrentMatch.TPowerCellOuter, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Red2CurrentMatch.TPowerCellInner, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
-                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Red2CurrentMatch.T_ControlPanelRotation, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Red2CurrentMatch.T_ControlPanelPosition, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Red2CurrentMatch.T_ControlPanelRotation, Mode=TwoWay}" IsEnabled="{Binding Red2MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Red2CurrentMatch.T_ControlPanelPosition, Mode=TwoWay}" IsEnabled="{Binding Red2MatchEditable}"/>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red2CurrentMatch.E_Park, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red2CurrentMatch.E_ClimbSuccess, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red2CurrentMatch.E_Balanced, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red2CurrentMatch.E_ClimbAttempt, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red2CurrentMatch.E_Park, Mode=TwoWay}" IsEnabled="{Binding Red2MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red2CurrentMatch.E_ClimbSuccess, Mode=TwoWay}" IsEnabled="{Binding Red2MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red2CurrentMatch.E_Balanced, Mode=TwoWay}" IsEnabled="{Binding Red2MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red2CurrentMatch.E_ClimbAttempt, Mode=TwoWay}" IsEnabled="{Binding Red2MatchEditable}"/>
                 </StackPanel>
               </Border>
 
             </StackPanel>
             <StackPanel Grid.Column="2">
               <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="20,0,0,0" FontSize="30" Text="{Binding Red3CurrentMatch.TeamNumber}"/>
-              <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="10" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="20,0,0,0" Text="{Binding Red3CurrentMatch.ScoutName, Mode=TwoWay}"/>
+              <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="80" Height="30" FontSize="17" MaxLength="10" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="20,0,0,0" Text="{Binding Red3CurrentMatch.ScoutName, Mode=TwoWay}" IsEnabled="{Binding Red3MatchEditable}"/>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <CheckBox Margin="6" IsChecked="{Binding Red3CurrentMatch.A_InitiationLine}"/>
+                  <CheckBox Margin="6" IsChecked="{Binding Red3CurrentMatch.A_InitiationLine}" IsEnabled="{Binding Red3MatchEditable}"/>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red3CurrentMatch.APowerCellInner, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" IsEnabled="{Binding Red3MatchEditable}" Text="{Binding Red3CurrentMatch.APowerCellInner, Mode=TwoWay}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red3CurrentMatch.APowerCellOuter, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" IsEnabled="{Binding Red3MatchEditable}" Text="{Binding Red3CurrentMatch.APowerCellOuter, Mode=TwoWay}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red3CurrentMatch.APowerCellLower, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" IsEnabled="{Binding Red3MatchEditable}" Text="{Binding Red3CurrentMatch.APowerCellLower, Mode=TwoWay}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                   <Grid ColumnDefinitions="*,*">
-                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red3CurrentMatch.APowerCellMissed, Mode=TwoWay}" Grid.Column="0"/>
+                    <TextBox Background="LightPink" HorizontalAlignment="Left" BorderThickness="0,0,0,1" Width="40" Height="30" FontSize="17" MaxLength="2" BorderBrush="Red" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" IsEnabled="{Binding Red3MatchEditable}" Text="{Binding Red3CurrentMatch.APowerCellMissed, Mode=TwoWay}" Grid.Column="0"/>
                     <TextBlock Text="PC" Grid.Column="1" FontSize="30" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
                   </Grid>
                 </StackPanel>
@@ -382,16 +382,16 @@
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Red3CurrentMatch.TPowerCellLower, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Red3CurrentMatch.TPowerCellOuter, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
                   <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="30" Text="{Binding Red3CurrentMatch.TPowerCellInner, StringFormat={}{0} PC }}" ToolTip.Tip="Editing arrays is not supported :("/>
-                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Red3CurrentMatch.T_ControlPanelRotation, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Red3CurrentMatch.T_ControlPanelPosition, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Red3CurrentMatch.T_ControlPanelRotation, Mode=TwoWay}" IsEnabled="{Binding Red3MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="6" IsChecked="{Binding Red3CurrentMatch.T_ControlPanelPosition, Mode=TwoWay}" IsEnabled="{Binding Red3MatchEditable}"/>
                 </StackPanel>
               </Border>
               <Border BorderBrush="Transparent" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
                 <StackPanel Margin="15,0,0,0">
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red3CurrentMatch.E_Park, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red3CurrentMatch.E_ClimbSuccess, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red3CurrentMatch.E_Balanced, Mode=TwoWay}"/>
-                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red3CurrentMatch.E_ClimbAttempt, Mode=TwoWay}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red3CurrentMatch.E_Park, Mode=TwoWay}" IsEnabled="{Binding Red3MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red3CurrentMatch.E_ClimbSuccess, Mode=TwoWay}" IsEnabled="{Binding Red3MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red3CurrentMatch.E_Balanced, Mode=TwoWay}" IsEnabled="{Binding Red3MatchEditable}"/>
+                  <CheckBox FontSize="30" Margin="5" IsChecked="{Binding Red3CurrentMatch.E_ClimbAttempt, Mode=TwoWay}" IsEnabled="{Binding Red3MatchEditable}"/>
                 </StackPanel>
               </Border>
 
@@ -403,10 +403,18 @@
     </ScrollViewer>
     <Grid ColumnDefinitions="300,*,*" Grid.Row="2" Margin="0,0,18,0">
       <Border Grid.Column="1" Grid.Row="0" Background="LightPink" Margin="30,0" BorderBrush="Red" CornerRadius="0,0,4,4" Padding="10" BorderThickness="4,0,4,4">
-
+        <Grid ColumnDefinitions="*,*,*">
+          <TextBlock Text="X" ToolTip.Tip="Data not found!" Grid.Column="0" IsVisible="{Binding Red1CurrentMatch}"/>
+          <TextBlock Text="X" ToolTip.Tip="Data not found!" Grid.Column="1" IsVisible="{Binding Red2CurrentMatch}"/>
+          <TextBlock Text="X" ToolTip.Tip="Data not found!" Grid.Column="2" IsVisible="{Binding Red3CurrentMatch}"/>
+        </Grid>
       </Border>
       <Border Grid.Column="2" Grid.Row="0" Background="LightBlue" Margin="30,0,30,0" BorderBrush="Blue" CornerRadius="0,0,4,4" Padding="10" BorderThickness="4,0,4,4">
-
+        <Grid ColumnDefinitions="*,*,*">
+          <TextBlock Text="X" ToolTip.Tip="Data not found!" Grid.Column="0" IsVisible="{Binding Blue1CurrentMatch}"/>
+          <TextBlock Text="X" ToolTip.Tip="Data not found!" Grid.Column="1" IsVisible="{Binding Blue2CurrentMatch}"/>
+          <TextBlock Text="X" ToolTip.Tip="Data not found!" Grid.Column="2" IsVisible="{Binding Blue3CurrentMatch}"/>
+        </Grid>
       </Border>
     </Grid>
     
