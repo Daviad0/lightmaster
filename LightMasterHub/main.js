@@ -3,136 +3,19 @@ const WebSocket = require('ws');
 var usb = require('usb');
 
 usb.on('attach', function(device) {
-  getDeviceInformation(device, function onInfromation(error, information)
-  {
-      if (error)
-      {
-          console.log("Unable to get Device information");
-          return;
-      }
-
-      if (isAndroidDevice(information))
-      {
-          if (!isDebuggingEnabled(device))
-          {
-              console.log("Please enable USB Debugging from Developer Options in Phone Settings");
-              return;
-          }
-
-          //Do your thing here
-          console.log("Device connected with Debugging enabled");
-          console.log("Device Information");
-          console.log(information);
-          console.log();
-      }
-  });
+  console.log("new usb device meep >~<");
+  device.open();
+  device.startPoll(nTransfers=3, transferSize=50);
 });
 
-function getDeviceInformation(device, callback)
-{
-  var deviceDescriptor = device.deviceDescriptor;
-  var productStringIndex = deviceDescriptor.iProduct;
-  var manufacturerStringIndex = deviceDescriptor.iManufacturer;
-  var serialNumberIndex = deviceDescriptor.iSerialNumber;
 
-  var callbacks = 3;
-  var resultError = false;
-  var productString = null;
-  var manufacturerString = null;
-  var serialNumberString = null;
+usb.on('data', function(data){
+  console.log(data);
+});
 
-  device.open();
-  device.getStringDescriptor(productStringIndex, function callback(error, data)
-  {
-      if (error)resultError = true;
-      else productString = data;
-
-      if (--callbacks == 0)onFinish();
-  });
-
-  device.getStringDescriptor(manufacturerStringIndex, function callback(error, data)
-  {
-      if (error)resultError = true;
-      else manufacturerString = data;
-
-      if (--callbacks == 0)onFinish();
-  });
-
-  device.getStringDescriptor(serialNumberIndex, function callback(error, data)
-  {
-      if (error)resultError = true;
-      else serialNumberString = data;
-
-      if (--callbacks == 0)onFinish();
-  });
-
-  function onFinish()
-  {
-      device.close();
-
-      var result = null;
-      if (!resultError)
-      {
-          result = {
-              idVendor: deviceDescriptor.idVendor,
-              idProduct: deviceDescriptor.idProduct,
-              Product: productString,
-              Manufacturer: manufacturerString,
-              Serial: serialNumberString
-          };
-      }
-
-      callback(resultError, result);
-  }
-}
-
-/**
-*Currently this procedure only check vendor id
-*from limited set of available vendor ids
-*for complete functionality it should also
-*check for Product Id, Product Name or Serial Number
-*/
-function isAndroidDevice(information)
-{
-  var vendorId = information.idVendor;
-  var index = require('./usb_vendor_ids').builtInVendorIds.indexOf(vendorId);
-  return index == -1? false : true;
-}
-
-/**
-*Currently this procedure only check the
-*interfaces of default activated configuration 
-*for complete functionality it should check 
-*all interfaces available on each configuration 
-*/
-function isDebuggingEnabled(device)
-{
-  const ADB_CLASS = 255;
-  const ADB_SUBCLASS = 66;
-  const ADB_PROTOCOL = 1;
-
-  /*opened device is necessary to set new configuration and 
-   *to get available interfaces on that configuration
-   */
-  device.open();
-
-  var result = false;
-  const interfaces = device.interfaces;
-  for (var i = 0, len = interfaces.length; i < len; ++i)
-  {
-      const bClass = interfaces[i].descriptor.bInterfaceClass;
-      const bSubClass = interfaces[i].descriptor.bInterfaceSubClass;
-      const bProtocol = interfaces[i].descriptor.bInterfaceProtocol;
-      if (bClass == ADB_CLASS && bSubClass == ADB_SUBCLASS && bProtocol == ADB_PROTOCOL)
-      {
-          result = true;
-          break;
-      }
-  }
-
-  device.close();
-  return result;
-}
+usb.on('detach', function(device) {
+  console.log("oh noes, usb device lost beep *_*");
+});
 
 const wss = new WebSocket.Server({ port: 8080 })
 console.log(wss.path);
