@@ -651,8 +651,8 @@ namespace LightMasterMVVM.ViewModels
                     }
                     else
                     {
-                        MatchViewModel.Red1MatchEditable = false;
-                        MatchViewModel.Red1MatchNotFilled = true;
+                        MatchViewModel.Red1MatchEditable = true;
+                        MatchViewModel.Red1MatchNotFilled = false;
                         MatchViewModel.originalR1 = r1selectedmatch;
                         var matchtoput = new TeamMatchView();
                         matchtoput.A_InitiationLine = r1selectedmatch.A_InitiationLine;

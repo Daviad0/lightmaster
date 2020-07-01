@@ -404,16 +404,16 @@
     <Grid ColumnDefinitions="300,*,*" Grid.Row="2" Margin="0,0,18,0">
       <Border Grid.Column="1" Grid.Row="0" Background="LightPink" Margin="30,0" BorderBrush="Red" CornerRadius="0,0,4,4" Padding="10" BorderThickness="4,0,4,4">
         <Grid ColumnDefinitions="*,*,*">
-          <TextBlock Text="X" ToolTip.Tip="Data not found!" Grid.Column="0" IsVisible="{Binding Red1CurrentMatch}"/>
-          <TextBlock Text="X" ToolTip.Tip="Data not found!" Grid.Column="1" IsVisible="{Binding Red2CurrentMatch}"/>
-          <TextBlock Text="X" ToolTip.Tip="Data not found!" Grid.Column="2" IsVisible="{Binding Red3CurrentMatch}"/>
+          <TextBlock Text="X" ToolTip.Tip="Data not found!" Grid.Column="0" IsVisible="{Binding Red1MatchNotFilled}"/>
+          <TextBlock Text="X" ToolTip.Tip="Data not found!" Grid.Column="1" IsVisible="{Binding Red2MatchNotFilled}"/>
+          <TextBlock Text="X" ToolTip.Tip="Data not found!" Grid.Column="2" IsVisible="{Binding Red3MatchNotFilled}"/>
         </Grid>
       </Border>
       <Border Grid.Column="2" Grid.Row="0" Background="LightBlue" Margin="30,0,30,0" BorderBrush="Blue" CornerRadius="0,0,4,4" Padding="10" BorderThickness="4,0,4,4">
         <Grid ColumnDefinitions="*,*,*">
-          <TextBlock Text="X" ToolTip.Tip="Data not found!" Grid.Column="0" IsVisible="{Binding Blue1CurrentMatch}"/>
-          <TextBlock Text="X" ToolTip.Tip="Data not found!" Grid.Column="1" IsVisible="{Binding Blue2CurrentMatch}"/>
-          <TextBlock Text="X" ToolTip.Tip="Data not found!" Grid.Column="2" IsVisible="{Binding Blue3CurrentMatch}"/>
+          <TextBlock Text="X" ToolTip.Tip="Data not found!" Grid.Column="0" IsVisible="{Binding Blue1MatchNotFilled}"/>
+          <TextBlock Text="X" ToolTip.Tip="Data not found!" Grid.Column="1" IsVisible="{Binding Blue2MatchNotFilled}"/>
+          <TextBlock Text="X" ToolTip.Tip="Data not found!" Grid.Column="2" IsVisible="{Binding Blue3MatchNotFilled}"/>
         </Grid>
       </Border>
     </Grid>
