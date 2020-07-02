@@ -115,4 +115,6 @@ C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Rele
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Release\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Release\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Release\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Release\netcoreapp3.1\OxyPlot.dll
+C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Release\netcoreapp3.1\OxyPlot.Avalonia.dll
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Release\netcoreapp3.1\LightMasterMVVM.csproj.CoreCompileInputs.cache

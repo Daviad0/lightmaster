@@ -1,25 +1,82 @@
-﻿using Avalonia.Media;
-using GalaSoft.MvvmLight.Messaging;
-using InTheHand.Net.Sockets;
+﻿using InTheHand.Net.Sockets;
 using LightMasterMVVM.DbAssets;
 using LightMasterMVVM.Models;
-using LightMasterMVVM.Views;
 using Newtonsoft.Json;
 using Npgsql;
-using ReactiveUI;
+using OxyPlot;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Text.RegularExpressions;
 using System.Threading;
+using OxyPlot.Axes;
+    using OxyPlot.Series;
 using Websocket.Client;
+using OxyPlot.Avalonia;
 
 namespace LightMasterMVVM.ViewModels
 {
+    public class GraphViewModel : ViewModelBase
+    {
+        private bool userControlVisible = true;
+        private PlotModel dataPoints = new PlotModel();
+        public PlotModel DataPoints
+        {
+            get => dataPoints;
+            set => SetProperty(ref dataPoints, value);
+        }
+        public bool UserControlVisible
+        {
+            get => userControlVisible;
+            set => SetProperty(ref userControlVisible, value);
+        }
+        public GraphViewModel()
+        {
+            DataPoints = new PlotModel();
+            DataPoints.LegendBorderThickness = 0;
+            DataPoints.LegendOrientation = LegendOrientation.Horizontal;
+            DataPoints.LegendPlacement = LegendPlacement.Outside;
+            DataPoints.LegendPosition = LegendPosition.BottomCenter;
+            DataPoints.Title = "Simple stacked model";
+            var categoryAxis1 = new OxyPlot.Axes.CategoryAxis();
+            categoryAxis1.MinorStep = 1;
+            categoryAxis1.Labels.Add("Category A");
+            categoryAxis1.Labels.Add("Category B");
+            categoryAxis1.Labels.Add("Category C");
+            categoryAxis1.Labels.Add("Category D");
+            DataPoints.Axes.Add(categoryAxis1);
+            var linearAxis1 = new OxyPlot.Axes.LinearAxis();
+            linearAxis1.AbsoluteMinimum = 0;
+            linearAxis1.MaximumPadding = 0.06;
+            linearAxis1.MinimumPadding = 0;
+            DataPoints.Axes.Add(linearAxis1);
+            var columnSeries1 = new OxyPlot.Series.ColumnSeries();
+            columnSeries1.IsStacked = true;
+            columnSeries1.StrokeThickness = 1;
+            columnSeries1.Title = "Series 1";
+            columnSeries1.Items.Add(new ColumnItem(25));
+            columnSeries1.Items.Add(new ColumnItem(137));
+            columnSeries1.Items.Add(new ColumnItem(18));
+            columnSeries1.Items.Add(new ColumnItem(40));
+            DataPoints.Series.Add(columnSeries1);
+            var columnSeries2 = new OxyPlot.Series.ColumnSeries();
+            columnSeries2.IsStacked = true;
+            columnSeries2.StrokeThickness = 1;
+            columnSeries2.Title = "Series 2";
+            columnSeries2.Items.Add(new ColumnItem(12));
+            columnSeries2.Items.Add(new ColumnItem(14));
+            columnSeries2.Items.Add(new ColumnItem(120));
+            columnSeries2.Items.Add(new ColumnItem(26));
+            DataPoints.Series.Add(columnSeries2);
+        }
+    }
+    public class Item : BarItem
+    {
+        public string Label { get; set; }
+        public double Value1 { get; set; }
+        public double Value2 { get; set; }
+        public double Value3 { get; set; }
+    }
     public class MatchViewModel : ViewModelBase
     {
         private string testText = "abc";
@@ -47,7 +104,7 @@ namespace LightMasterMVVM.ViewModels
         private TeamMatchView blue1CurrentMatch = new TeamMatchView() { ScoutName = "No One" };
         private TeamMatchView blue2CurrentMatch = new TeamMatchView() { ScoutName = "No One" };
         private TeamMatchView blue3CurrentMatch = new TeamMatchView() { ScoutName = "No One" };
-        private bool userControlVisible = true;
+        private bool userControlVisible = false;
         public bool UserControlVisible
         {
             get => userControlVisible;
@@ -383,11 +440,11 @@ namespace LightMasterMVVM.ViewModels
                     db.SaveChanges();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
-            
+
         }
     }
     public class TabletViewModel : ViewModelBase
@@ -463,18 +520,29 @@ namespace LightMasterMVVM.ViewModels
     {
         public MainWindowViewModel()
         {
-            
+
         }
-        public int currentMatchNum = 1;
+        private int currentMatchNum = 1;
         private string matchNumString = "Match 1";
+        private GraphViewModel graphViewModel = new GraphViewModel();
         private TabletViewModel tabletViewModel = new TabletViewModel();
         private MatchViewModel matchViewModel = new MatchViewModel();
         private string _text = "Initial text";
         private bool userControlVisible = false;
+        public int CurrentMatchNum
+        {
+            get => currentMatchNum;
+            set => SetProperty(ref currentMatchNum, value);
+        }
         public TabletViewModel TabletViewModel
         {
             get => tabletViewModel;
             set => SetProperty(ref tabletViewModel, value);
+        }
+        public GraphViewModel GraphViewModel
+        {
+            get => graphViewModel;
+            set => SetProperty(ref graphViewModel, value);
         }
         public string MatchNumString
         {
@@ -483,7 +551,7 @@ namespace LightMasterMVVM.ViewModels
         }
         public MatchViewModel MatchViewModel
         {
-            get =>  matchViewModel;
+            get => matchViewModel;
             set => SetProperty(ref matchViewModel, value);
         }
 
@@ -515,7 +583,8 @@ namespace LightMasterMVVM.ViewModels
             /*client.ReconnectionHappened.Subscribe(info =>
                 Log.Information($"Reconnection happened, type: {info.Type}"));*/
 
-            client.MessageReceived.Subscribe(msg => {
+            client.MessageReceived.Subscribe(msg =>
+            {
                 string rawdata = msg.Text;
                 int tabletindex = 0;
                 if (rawdata.StartsWith("R1"))
@@ -549,13 +618,13 @@ namespace LightMasterMVVM.ViewModels
                     TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightBlue";
                     TabletViewModel.BluetoothBorderColors[tabletindex] = "Blue";
                     var jsontodeserialize = rawdata.Substring(5);
-                    using(var db = new ScoutingContext())
+                    using (var db = new ScoutingContext())
                     {
                         var itemtouse = JsonConvert.DeserializeObject<TeamMatch>(jsontodeserialize);
                         try
                         {
                             var previousitem = db.Matches.Where(x => x.TabletId == itemtouse.TabletId && x.MatchNumber == itemtouse.MatchNumber && x.EventCode == itemtouse.EventCode).FirstOrDefault();
-                            if(previousitem == null)
+                            if (previousitem == null)
                             {
                                 itemtouse.MatchID = new Random().Next(1, 1000);
                                 db.Matches.Add(itemtouse);
@@ -565,15 +634,15 @@ namespace LightMasterMVVM.ViewModels
                                 itemtouse.MatchID = previousitem.MatchID;
                                 db.Entry(previousitem).CurrentValues.SetValues(itemtouse);
                             }
-                           
-                            
+
+
                         }
-                        catch(NpgsqlException ex)
+                        catch (NpgsqlException ex)
                         {
                             itemtouse.MatchID = new Random().Next(1, 1000);
                             db.Matches.Add(itemtouse);
                         }
-                        
+
                         db.SaveChanges();
                     }
                 }
@@ -581,12 +650,12 @@ namespace LightMasterMVVM.ViewModels
                 {
                     //B = Battery Level
                     var batterylevel = float.Parse(rawdata.Substring(5)) * 100;
-                    if(batterylevel > 80)
+                    if (batterylevel > 80)
                     {
                         TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightGreen";
                         TabletViewModel.BatteryBorderColors[tabletindex] = "Green";
                     }
-                    else if(batterylevel > 30 && batterylevel <= 80)
+                    else if (batterylevel > 30 && batterylevel <= 80)
                     {
                         TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightSalmon";
                         TabletViewModel.BatteryBorderColors[tabletindex] = "DarkOrange";
@@ -596,7 +665,7 @@ namespace LightMasterMVVM.ViewModels
                         TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightPink";
                         TabletViewModel.BatteryBorderColors[tabletindex] = "IndianRed";
                     }
-                    
+
                 }
                 else if (rawdata.Substring(3).StartsWith("D:"))
                 {
@@ -614,7 +683,8 @@ namespace LightMasterMVVM.ViewModels
 
                 Console.WriteLine(msg.Text);
             });
-            client.DisconnectionHappened.Subscribe(msg => {
+            client.DisconnectionHappened.Subscribe(msg =>
+            {
                 Console.WriteLine("Uh oh! I disconnected!");
             });
             client.Start();
@@ -625,7 +695,7 @@ namespace LightMasterMVVM.ViewModels
         {
             BluetoothClient client = new BluetoothClient();
             List<string> items = new List<string>();
-            BluetoothDeviceInfo[] devices = client.DiscoverDevices(255, true,true,true);
+            BluetoothDeviceInfo[] devices = client.DiscoverDevices(255, true, true, true);
             foreach (BluetoothDeviceInfo d in devices)
             {
                 items.Add(d.DeviceName);
@@ -633,7 +703,7 @@ namespace LightMasterMVVM.ViewModels
             }
             tabletViewModel.TestBTD = items;
         }
-        public void SeeMatches()
+        public void SeeMatches(int MatchNum)
         {
             tabletViewModel.UserControlVisible = false;
             matchViewModel.UserControlVisible = true;
@@ -641,7 +711,7 @@ namespace LightMasterMVVM.ViewModels
             {
                 using (var db = new ScoutingContext())
                 {
-                    var r1selectedmatch = db.Matches.Where(x => x.TabletId == "R1" && x.EventCode == "test_env").FirstOrDefault();
+                    var r1selectedmatch = db.Matches.Where(x => x.TabletId == "R1" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
                     if (r1selectedmatch == null)
                     {
                         MatchViewModel.Red1CurrentMatch = new TeamMatchView();
@@ -694,7 +764,7 @@ namespace LightMasterMVVM.ViewModels
                         MatchViewModel.Red1CurrentMatch = matchtoput;
                     }
                     //RED2
-                    var r2selectedmatch = db.Matches.Where(x => x.TabletId == "R2" && x.EventCode == "test_env").FirstOrDefault();
+                    var r2selectedmatch = db.Matches.Where(x => x.TabletId == "R2" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
                     if (r2selectedmatch == null)
                     {
                         MatchViewModel.Red2CurrentMatch = new TeamMatchView();
@@ -747,7 +817,7 @@ namespace LightMasterMVVM.ViewModels
                         MatchViewModel.Red2CurrentMatch = matchtoput;
                     }
                     //RED3
-                    var r3selectedmatch = db.Matches.Where(x => x.TabletId == "R3" && x.EventCode == "test_env").FirstOrDefault();
+                    var r3selectedmatch = db.Matches.Where(x => x.TabletId == "R3" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
                     if (r3selectedmatch == null)
                     {
                         MatchViewModel.Red3CurrentMatch = new TeamMatchView();
@@ -800,7 +870,7 @@ namespace LightMasterMVVM.ViewModels
                         MatchViewModel.Red3CurrentMatch = matchtoput;
                     }
                     //BLUE1
-                    var b1selectedmatch = db.Matches.Where(x => x.TabletId == "B1" && x.EventCode == "test_env").FirstOrDefault();
+                    var b1selectedmatch = db.Matches.Where(x => x.TabletId == "B1" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
                     if (b1selectedmatch == null)
                     {
                         MatchViewModel.Blue1CurrentMatch = new TeamMatchView();
@@ -853,7 +923,7 @@ namespace LightMasterMVVM.ViewModels
                         MatchViewModel.Blue1CurrentMatch = matchtoput;
                     }
                     //BLUE2
-                    var b2selectedmatch = db.Matches.Where(x => x.TabletId == "B2" && x.EventCode == "test_env").FirstOrDefault();
+                    var b2selectedmatch = db.Matches.Where(x => x.TabletId == "B2" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
                     if (b2selectedmatch == null)
                     {
                         MatchViewModel.Blue2CurrentMatch = new TeamMatchView();
@@ -906,7 +976,7 @@ namespace LightMasterMVVM.ViewModels
                         MatchViewModel.Blue2CurrentMatch = matchtoput;
                     }
                     //BLUE3
-                    var b3selectedmatch = db.Matches.Where(x => x.TabletId == "B3" && x.EventCode == "test_env").FirstOrDefault();
+                    var b3selectedmatch = db.Matches.Where(x => x.TabletId == "B3" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
                     if (b3selectedmatch == null)
                     {
                         MatchViewModel.Blue3CurrentMatch = new TeamMatchView();
@@ -962,7 +1032,7 @@ namespace LightMasterMVVM.ViewModels
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MatchViewModel.Red1MatchNotFilled = true;
                 MatchViewModel.Red2MatchNotFilled = true;
@@ -990,27 +1060,30 @@ namespace LightMasterMVVM.ViewModels
                 MatchViewModel.originalB3 = new TeamMatch();
                 Console.WriteLine(ex.ToString());
             }
-            
-            
+
+
         }
         public void SeeTablets()
         {
             matchViewModel.UserControlVisible = false;
             tabletViewModel.UserControlVisible = true;
-            
+
         }
         public void NextMatch()
         {
-            currentMatchNum++;
-            MatchNumString = "Match " + currentMatchNum.ToString();
+
+            CurrentMatchNum++;
+            MatchNumString = "Match " + CurrentMatchNum.ToString();
+            SeeMatches(CurrentMatchNum);
         }
         public void PrevMatch()
         {
-            if(currentMatchNum > 1)
+            if (CurrentMatchNum > 1)
             {
-                currentMatchNum--;
+                CurrentMatchNum--;
             }
-            MatchNumString = "Match " + currentMatchNum.ToString();
+            MatchNumString = "Match " + CurrentMatchNum.ToString();
+            SeeMatches(CurrentMatchNum);
         }
     }
 }

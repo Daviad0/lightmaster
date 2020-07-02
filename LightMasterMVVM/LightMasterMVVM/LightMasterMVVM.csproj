@@ -29,6 +29,7 @@
     <AvaloniaResource Remove="Assets\Rubik-Regular.ttf" />
     <AvaloniaResource Remove="Assets\SourceSansPro-Bold.ttf" />
     <AvaloniaResource Remove="Assets\ui-bluetooth.png" />
+    <AvaloniaResource Remove="Views\DataAnalysis.xaml" />
     <AvaloniaResource Remove="Views\Matches.xaml" />
     <AvaloniaResource Remove="Views\Tablets.xaml" />
     <AvaloniaResource Remove="Views\UserControl1.xaml" />
@@ -50,6 +51,7 @@
     <None Remove="Assets\Rubik-Regular.ttf" />
     <None Remove="Assets\SourceSansPro-Bold.ttf" />
     <None Remove="Assets\ui-bluetooth.png" />
+    <None Remove="Views\DataAnalysis.xaml" />
     <None Remove="Views\MainWindow.xaml" />
     <None Remove="Views\Matches.xaml" />
     <None Remove="Views\Tablets.xaml" />
@@ -105,6 +107,8 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Npgsql" Version="4.1.3.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
+    <PackageReference Include="OxyPlot.Avalonia-alpha-2020-04-15" Version="1.0.0" />
+    <PackageReference Include="OxyPlot.Core" Version="2.0.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
     <PackageReference Include="System.Windows.Forms" Version="4.0.0.0" />
     <PackageReference Include="Websocket.Client" Version="4.3.15" />
@@ -121,6 +125,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Matches.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\DataAnalysis.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>

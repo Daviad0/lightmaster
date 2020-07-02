@@ -877,6 +877,31 @@
           "lib/netstandard2.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {}
         }
       },
+      "OxyPlot.Avalonia-alpha-2020-04-15/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Avalonia": "0.9.3",
+          "OxyPlot.Core": "2.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/OxyPlot.Avalonia.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/OxyPlot.Avalonia.dll": {}
+        }
+      },
+      "OxyPlot.Core/2.0.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "lib/netstandard1.0/OxyPlot.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/OxyPlot.dll": {}
+        }
+      },
       "ReactiveUI/10.3.6": {
         "type": "package",
         "dependencies": {
@@ -4460,6 +4485,34 @@
         "npgsql.entityframeworkcore.postgresql.3.1.4.nupkg.sha512",
         "npgsql.entityframeworkcore.postgresql.nuspec",
         "postgresql.png"
+      ]
+    },
+    "OxyPlot.Avalonia-alpha-2020-04-15/1.0.0": {
+      "sha512": "sGGLNfDp6AxqZqyohoPWhBh2//v1U4Mv8yOmnaS/7CerVYShKLeMAIfE1Q8bih6I8UFuYih4o2nR6dvWl2PMFA==",
+      "type": "package",
+      "path": "oxyplot.avalonia-alpha-2020-04-15/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/OxyPlot.Avalonia.dll",
+        "oxyplot.avalonia-alpha-2020-04-15.1.0.0.nupkg.sha512",
+        "oxyplot.avalonia-alpha-2020-04-15.nuspec"
+      ]
+    },
+    "OxyPlot.Core/2.0.0": {
+      "sha512": "gAbLVa+DxMNk1qtfzDQVU+lZ7XKRCKqQu6oYRFB1f6wVqseHL2EMk5Nlmw2rqkYEGHhxUxsPdjjAgJtzKVDacA==",
+      "type": "package",
+      "path": "oxyplot.core/2.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "OxyPlot_128.png",
+        "lib/net45/OxyPlot.dll",
+        "lib/net45/OxyPlot.xml",
+        "lib/netstandard1.0/OxyPlot.dll",
+        "lib/netstandard1.0/OxyPlot.xml",
+        "oxyplot.core.2.0.0.nupkg.sha512",
+        "oxyplot.core.nuspec"
       ]
     },
     "ReactiveUI/10.3.6": {
@@ -9880,6 +9933,8 @@
       "Newtonsoft.Json >= 12.0.3",
       "Npgsql >= 4.1.3.1",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 3.1.4",
+      "OxyPlot.Avalonia-alpha-2020-04-15 >= 1.0.0",
+      "OxyPlot.Core >= 2.0.0",
       "System.Configuration.ConfigurationManager >= 4.7.0",
       "System.Windows.Forms >= 4.0.0",
       "Websocket.Client >= 4.3.15"
@@ -9966,6 +10021,14 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": {
             "target": "Package",
             "version": "[3.1.4, )"
+          },
+          "OxyPlot.Avalonia-alpha-2020-04-15": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          },
+          "OxyPlot.Core": {
+            "target": "Package",
+            "version": "[2.0.0, )"
           },
           "System.Configuration.ConfigurationManager": {
             "target": "Package",

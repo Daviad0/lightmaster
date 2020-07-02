@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "jnYBTofbhSw+yjQxmV+EN/hKa0ZpI5qnp5HfB9BcAtFcWrgGax0s/K5Mi4lPA07QGdqKXZpB1VsuEtOiiS39ag==",
+  "dgSpecHash": "wbT9Y78nvatH0JYFL+VCYd+T2310mGfUDzEM44Ih0oXrH9UufoNtqnfeibex6DeNbegQ1xkYdAdl/onKWAnIyQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\djree\\source\\repos\\lightmaster\\LightMasterMVVM\\LightMasterMVVM\\LightMasterMVVM.csproj",
   "expectedPackageFiles": [
@@ -60,6 +60,8 @@
     "C:\\Users\\djree\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\npgsql\\4.1.3.1\\npgsql.4.1.3.1.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\3.1.4\\npgsql.entityframeworkcore.postgresql.3.1.4.nupkg.sha512",
+    "C:\\Users\\djree\\.nuget\\packages\\oxyplot.avalonia-alpha-2020-04-15\\1.0.0\\oxyplot.avalonia-alpha-2020-04-15.1.0.0.nupkg.sha512",
+    "C:\\Users\\djree\\.nuget\\packages\\oxyplot.core\\2.0.0\\oxyplot.core.2.0.0.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\reactiveui\\10.3.6\\reactiveui.10.3.6.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",

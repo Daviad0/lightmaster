@@ -34,7 +34,7 @@
     </Grid.RowDefinitions>
     <Grid ColumnDefinitions="*,*,*" RowDefinitions="120" Grid.Row="0" Margin="70,10,70,30">
       <Grid Grid.Column="0" ColumnDefinitions="*" RowDefinitions="80">
-        <Button Command="{Binding SeeMatches}" Height="35" Grid.Row="0" Margin="30,0,30,60" CommandParameter="Hello world!" BorderBrush="DarkOrange" Foreground="DarkOrange" Background="White" BorderThickness="3">
+        <Button Command="{Binding SeeMatches}" CommandParameter="{Binding CurrentMatchNum}" Height="35" Grid.Row="0" Margin="30,0,30,60" BorderBrush="DarkOrange" Foreground="DarkOrange" Background="White" BorderThickness="3">
           <TextBlock FontWeight="Bold" Text="See Matches"/>
         </Button>
       </Grid>
@@ -63,6 +63,9 @@
       </Border>
       <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0">
         <screens:Matches x:Name="matches" DataContext="{Binding MatchViewModel}" IsVisible="{Binding UserControlVisible}"/>
+      </Border>
+      <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0">
+        <screens:DataAnalysis x:Name="graphs" DataContext="{Binding GraphViewModel}" IsVisible="{Binding UserControlVisible}"/>
       </Border>
       
     </Grid>
