@@ -19,7 +19,14 @@ namespace LightMasterMVVM.ViewModels
     public class GraphViewModel : ViewModelBase
     {
         private bool userControlVisible = true;
+        public PlotController customController { get; private set; }
+        private int graphHeight = 1200;
         private PlotModel dataPoints = new PlotModel();
+        public int GraphHeight
+        {
+            get => graphHeight;
+            set => SetProperty(ref graphHeight, value);
+        }
         public PlotModel DataPoints
         {
             get => dataPoints;
@@ -32,42 +39,83 @@ namespace LightMasterMVVM.ViewModels
         }
         public GraphViewModel()
         {
-            DataPoints = new PlotModel();
-            DataPoints.LegendBorderThickness = 0;
-            DataPoints.LegendOrientation = LegendOrientation.Horizontal;
-            DataPoints.LegendPlacement = LegendPlacement.Outside;
-            DataPoints.LegendPosition = LegendPosition.BottomCenter;
-            DataPoints.Title = "Simple stacked model";
-            var categoryAxis1 = new OxyPlot.Axes.CategoryAxis();
-            categoryAxis1.MinorStep = 1;
-            categoryAxis1.Labels.Add("Category A");
-            categoryAxis1.Labels.Add("Category B");
-            categoryAxis1.Labels.Add("Category C");
-            categoryAxis1.Labels.Add("Category D");
-            DataPoints.Axes.Add(categoryAxis1);
-            var linearAxis1 = new OxyPlot.Axes.LinearAxis();
-            linearAxis1.AbsoluteMinimum = 0;
-            linearAxis1.MaximumPadding = 0.06;
-            linearAxis1.MinimumPadding = 0;
-            DataPoints.Axes.Add(linearAxis1);
-            var columnSeries1 = new OxyPlot.Series.ColumnSeries();
-            columnSeries1.IsStacked = true;
-            columnSeries1.StrokeThickness = 1;
-            columnSeries1.Title = "Series 1";
-            columnSeries1.Items.Add(new ColumnItem(25));
-            columnSeries1.Items.Add(new ColumnItem(137));
-            columnSeries1.Items.Add(new ColumnItem(18));
-            columnSeries1.Items.Add(new ColumnItem(40));
-            DataPoints.Series.Add(columnSeries1);
-            var columnSeries2 = new OxyPlot.Series.ColumnSeries();
-            columnSeries2.IsStacked = true;
-            columnSeries2.StrokeThickness = 1;
-            columnSeries2.Title = "Series 2";
-            columnSeries2.Items.Add(new ColumnItem(12));
-            columnSeries2.Items.Add(new ColumnItem(14));
-            columnSeries2.Items.Add(new ColumnItem(120));
-            columnSeries2.Items.Add(new ColumnItem(26));
-            DataPoints.Series.Add(columnSeries2);
+            GraphHeight = 600;
+            customController = new PlotController();
+            customController.UnbindMouseDown(OxyMouseButton.Left);
+            customController.BindMouseEnter(PlotCommands.HoverSnapTrack);
+            DataPoints = new PlotModel
+            {
+                Title = "Average Power Cells",
+                LegendPlacement = LegendPlacement.Outside,
+                LegendPosition = LegendPosition.RightTop,
+                LegendOrientation = LegendOrientation.Vertical,
+                LegendBorderThickness = 0,
+                Subtitle = "4 teams, 1 graph"
+            };
+
+            var s1 = new OxyPlot.Series.BarSeries { Title = "Lower Power Cells", StrokeColor = OxyColors.Black, StrokeThickness = 1 };
+            s1.IsStacked = true;
+            s1.LabelPlacement = LabelPlacement.Inside;
+            s1.FillColor = OxyColors.LightYellow;
+            s1.LabelMargin = 5;
+            s1.TextColor = OxyColors.Black;
+            s1.LabelFormatString = "{0} PC";
+            s1.Items.Add(new BarItem { Value = 1 });
+            s1.Items.Add(new BarItem { Value = 2 });
+            s1.Items.Add(new BarItem { Value = 3 });
+            s1.Items.Add(new BarItem { Value = 4 });
+            s1.Items.Add(new BarItem { Value = 4 });
+            s1.Items.Add(new BarItem { Value = 4 });
+            s1.Items.Add(new BarItem { Value = 6 });
+            s1.Items.Add(new BarItem { Value = 8 });
+
+            var s2 = new OxyPlot.Series.BarSeries { Title = "Outer Power Cells", StrokeColor = OxyColors.Black, StrokeThickness = 1 };
+            s2.LabelPlacement = LabelPlacement.Inside;
+            s2.IsStacked = true;
+            s2.LabelMargin = 5;
+            s2.LabelFormatString = "{0} PC";
+            s2.TextColor = OxyColors.White;
+            s2.FillColor = OxyColors.LightSeaGreen;
+            s2.Items.Add(new BarItem { Value = 1 });
+            s2.Items.Add(new BarItem { Value = 2 });
+            s2.Items.Add(new BarItem { Value = 3 });
+            s2.Items.Add(new BarItem { Value = 4 });
+            s2.Items.Add(new BarItem { Value = 4 });
+            s2.Items.Add(new BarItem { Value = 4 });
+            s2.Items.Add(new BarItem { Value = 6 });
+            s2.Items.Add(new BarItem { Value = 8 });
+
+            var s3 = new OxyPlot.Series.BarSeries { Title = "Inner Power Cells", StrokeColor = OxyColors.Black, StrokeThickness = 1 };
+            s3.IsStacked = true;
+            s3.FillColor = OxyColors.LightBlue;
+            s3.LabelPlacement = LabelPlacement.Inside;
+            s3.LabelFormatString = "{0} PC";
+            s3.LabelMargin = 5;
+            s3.TextColor = OxyColors.Black;
+            s3.Items.Add(new BarItem { Value = 1 });
+            s3.Items.Add(new BarItem { Value = 2 });
+            s3.Items.Add(new BarItem { Value = 3 });
+            s3.Items.Add(new BarItem { Value = 4 });
+            s3.Items.Add(new BarItem { Value = 4 });
+            s3.Items.Add(new BarItem { Value = 4 });
+            s3.Items.Add(new BarItem { Value = 6 });
+            s3.Items.Add(new BarItem { Value = 8 });
+
+            var categoryAxis = new OxyPlot.Axes.CategoryAxis { Position = AxisPosition.Left };
+            categoryAxis.Labels.Add("862");
+            categoryAxis.Labels.Add("10176");
+            categoryAxis.Labels.Add("1023");
+            categoryAxis.Labels.Add("254");
+            categoryAxis.Labels.Add("254");
+            categoryAxis.Labels.Add("254");
+            categoryAxis.Labels.Add("254");
+            categoryAxis.Labels.Add("254");
+            var valueAxis = new OxyPlot.Axes.LinearAxis { Position = AxisPosition.Bottom, MinimumPadding = 0, MaximumPadding = 0.06, AbsoluteMinimum = 0 };
+            DataPoints.Series.Add(s1);
+            DataPoints.Series.Add(s2);
+            DataPoints.Series.Add(s3);
+            DataPoints.Axes.Add(categoryAxis);
+            DataPoints.Axes.Add(valueAxis);
         }
     }
     public class Item : BarItem
