@@ -8,7 +8,7 @@
   <StackPanel>
     <Button Content="Create New Graph" Command="{Binding CreateGraphOfData}"/>
     <ScrollViewer Height="600">
-      <oxy:PlotView Controller="{Binding customController}" IsMouseWheelEnabled="False" Height="{Binding GraphHeight}" Width="900"></oxy:PlotView>
+      <oxy:PlotView Controller="{Binding customController}" Model="{Binding DataPoints}"  IsMouseWheelEnabled="False" Height="{Binding GraphHeight}" Width="900"></oxy:PlotView>
     </ScrollViewer>
 
   </StackPanel>

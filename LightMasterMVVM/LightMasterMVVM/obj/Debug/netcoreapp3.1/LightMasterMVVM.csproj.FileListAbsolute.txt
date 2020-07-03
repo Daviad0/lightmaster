@@ -209,3 +209,5 @@ C:/Users/djree/source/repos/lightmaster/LightMasterMVVM/LightMasterMVVM/obj/Debu
 /Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/bin/Debug/netcoreapp3.1/System.Collections.Immutable.dll
 /Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/bin/Debug/netcoreapp3.1/System.Diagnostics.DiagnosticSource.dll
 /Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/bin/Debug/netcoreapp3.1/Newtonsoft.Json.dll
+/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/bin/Debug/netcoreapp3.1/OxyPlot.Avalonia.dll
+/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/bin/Debug/netcoreapp3.1/OxyPlot.dll

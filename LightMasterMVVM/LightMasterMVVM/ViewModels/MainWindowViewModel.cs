@@ -39,7 +39,7 @@ namespace LightMasterMVVM.ViewModels
         }
         public void CreateGraphOfData()
         {
-            customController = new PlotController();
+            /*customController = new PlotController();
             customController.UnbindMouseDown(OxyMouseButton.Left);
             customController.BindMouseEnter(PlotCommands.HoverSnapTrack);
             DataPoints = new PlotModel
@@ -87,11 +87,19 @@ namespace LightMasterMVVM.ViewModels
                     missedpc.Points.Add(new DataPoint(match.MatchNumber, individualmissedpc));
                 }
             }
+            DataPoints.Series.Add(lowerpc);
+            DataPoints.Series.Add(outerpc);
+            DataPoints.Series.Add(innerpc);
+            DataPoints.Series.Add(missedpc);
+            var valueAxis = new OxyPlot.Axes.LinearAxis { Position = AxisPosition.Bottom, MinimumPadding = 0, MaximumPadding = 0.06, AbsoluteMinimum = 0 };
+            var valueAxis2 = new OxyPlot.Axes.LinearAxis { Position = AxisPosition.Left, MinimumPadding = 0, MaximumPadding = 0.06, AbsoluteMinimum = 0 };
+            DataPoints.Axes.Add(valueAxis);
+            DataPoints.Axes.Add(valueAxis2);*/
         }
         public GraphViewModel()
         {
 
-            /*customController = new PlotController();
+            customController = new PlotController();
             customController.UnbindMouseDown(OxyMouseButton.Left);
             customController.BindMouseEnter(PlotCommands.HoverSnapTrack);
             DataPoints = new PlotModel
@@ -174,7 +182,7 @@ namespace LightMasterMVVM.ViewModels
             DataPoints.Series.Add(s2);
             DataPoints.Series.Add(s3);
             DataPoints.Axes.Add(categoryAxis);
-            DataPoints.Axes.Add(valueAxis);*/
+            DataPoints.Axes.Add(valueAxis);
         }
     }
     public class Item : BarItem
