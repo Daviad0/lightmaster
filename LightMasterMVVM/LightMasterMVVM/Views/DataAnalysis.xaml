@@ -6,9 +6,9 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LightMasterMVVM.Views.DataAnalysis">
   <StackPanel>
-    <TextBlock Text="Graph Below :)"/>
+    <Button Content="Create New Graph" Command="{Binding CreateGraphOfData}"/>
     <ScrollViewer Height="600">
-      <oxy:PlotView Controller="{Binding customController}" IsMouseWheelEnabled="False" Model="{Binding DataPoints}" Height="{Binding GraphHeight}" Width="900"></oxy:PlotView>
+      <oxy:PlotView Controller="{Binding customController}" IsMouseWheelEnabled="False" Height="{Binding GraphHeight}" Width="900"></oxy:PlotView>
     </ScrollViewer>
 
   </StackPanel>

@@ -20,7 +20,7 @@ namespace LightMasterMVVM.ViewModels
     {
         private bool userControlVisible = true;
         public PlotController customController { get; private set; }
-        private int graphHeight = 1200;
+        private int graphHeight = 650;
         private PlotModel dataPoints = new PlotModel();
         public int GraphHeight
         {
@@ -37,20 +37,70 @@ namespace LightMasterMVVM.ViewModels
             get => userControlVisible;
             set => SetProperty(ref userControlVisible, value);
         }
-        public GraphViewModel()
+        public void CreateGraphOfData()
         {
-            GraphHeight = 600;
             customController = new PlotController();
             customController.UnbindMouseDown(OxyMouseButton.Left);
             customController.BindMouseEnter(PlotCommands.HoverSnapTrack);
             DataPoints = new PlotModel
             {
-                Title = "Average Power Cells",
+                Title = "Total Power Cells",
                 LegendPlacement = LegendPlacement.Outside,
                 LegendPosition = LegendPosition.RightTop,
                 LegendOrientation = LegendOrientation.Vertical,
                 LegendBorderThickness = 0,
-                Subtitle = "4 teams, 1 graph"
+            };
+            var lowerpc = new OxyPlot.Series.LineSeries { Title = "Lower Power Cells" };
+            var outerpc = new OxyPlot.Series.LineSeries { Title = "Outer Power Cells" };
+            var innerpc = new OxyPlot.Series.LineSeries { Title = "Inner Power Cells" };
+            var missedpc = new OxyPlot.Series.LineSeries { Title = "Missed Power Cells" };
+            using (var db = new ScoutingContext())
+            {
+                var everymatchdata = db.Matches.Where(x => x.EventCode == "test_env" && x.TeamNumber == 862).ToList();
+                int i = 0;
+                foreach(var match in everymatchdata)
+                {
+                    i++;
+                    var individuallowerpc = 0;
+                    var individualouterpc = 0;
+                    var individualinnerpc = 0;
+                    var individualmissedpc = 0;
+                    foreach(var numpc in match.PowerCellLower)
+                    {
+                        individuallowerpc += numpc;
+                    }
+                    foreach (var numpc in match.PowerCellOuter)
+                    {
+                        individuallowerpc += numpc;
+                    }
+                    foreach (var numpc in match.PowerCellInner)
+                    {
+                        individuallowerpc += numpc;
+                    }
+                    foreach (var numpc in match.PowerCellMissed)
+                    {
+                        individuallowerpc += numpc;
+                    }
+                    lowerpc.Points.Add(new DataPoint(match.MatchNumber, individuallowerpc));
+                    outerpc.Points.Add(new DataPoint(match.MatchNumber, individualouterpc));
+                    innerpc.Points.Add(new DataPoint(match.MatchNumber, individualinnerpc));
+                    missedpc.Points.Add(new DataPoint(match.MatchNumber, individualmissedpc));
+                }
+            }
+        }
+        public GraphViewModel()
+        {
+
+            /*customController = new PlotController();
+            customController.UnbindMouseDown(OxyMouseButton.Left);
+            customController.BindMouseEnter(PlotCommands.HoverSnapTrack);
+            DataPoints = new PlotModel
+            {
+                Title = "Total Power Cells",
+                LegendPlacement = LegendPlacement.Outside,
+                LegendPosition = LegendPosition.RightTop,
+                LegendOrientation = LegendOrientation.Vertical,
+                LegendBorderThickness = 0,
             };
 
             var s1 = new OxyPlot.Series.BarSeries { Title = "Lower Power Cells", StrokeColor = OxyColors.Black, StrokeThickness = 1 };
@@ -68,6 +118,8 @@ namespace LightMasterMVVM.ViewModels
             s1.Items.Add(new BarItem { Value = 4 });
             s1.Items.Add(new BarItem { Value = 6 });
             s1.Items.Add(new BarItem { Value = 8 });
+            s1.Items.Add(new BarItem { Value = 8 });
+            s1.Items.Add(new BarItem { Value = 8 });
 
             var s2 = new OxyPlot.Series.BarSeries { Title = "Outer Power Cells", StrokeColor = OxyColors.Black, StrokeThickness = 1 };
             s2.LabelPlacement = LabelPlacement.Inside;
@@ -83,6 +135,8 @@ namespace LightMasterMVVM.ViewModels
             s2.Items.Add(new BarItem { Value = 4 });
             s2.Items.Add(new BarItem { Value = 4 });
             s2.Items.Add(new BarItem { Value = 6 });
+            s2.Items.Add(new BarItem { Value = 8 });
+            s2.Items.Add(new BarItem { Value = 8 });
             s2.Items.Add(new BarItem { Value = 8 });
 
             var s3 = new OxyPlot.Series.BarSeries { Title = "Inner Power Cells", StrokeColor = OxyColors.Black, StrokeThickness = 1 };
@@ -100,6 +154,8 @@ namespace LightMasterMVVM.ViewModels
             s3.Items.Add(new BarItem { Value = 4 });
             s3.Items.Add(new BarItem { Value = 6 });
             s3.Items.Add(new BarItem { Value = 8 });
+            s3.Items.Add(new BarItem { Value = 8 });
+            s3.Items.Add(new BarItem { Value = 8 });
 
             var categoryAxis = new OxyPlot.Axes.CategoryAxis { Position = AxisPosition.Left };
             categoryAxis.Labels.Add("862");
@@ -110,12 +166,15 @@ namespace LightMasterMVVM.ViewModels
             categoryAxis.Labels.Add("254");
             categoryAxis.Labels.Add("254");
             categoryAxis.Labels.Add("254");
+            categoryAxis.Labels.Add("254");
+            categoryAxis.Labels.Add("254");
+            GraphHeight = categoryAxis.Labels.Count * 50;
             var valueAxis = new OxyPlot.Axes.LinearAxis { Position = AxisPosition.Bottom, MinimumPadding = 0, MaximumPadding = 0.06, AbsoluteMinimum = 0 };
             DataPoints.Series.Add(s1);
             DataPoints.Series.Add(s2);
             DataPoints.Series.Add(s3);
             DataPoints.Axes.Add(categoryAxis);
-            DataPoints.Axes.Add(valueAxis);
+            DataPoints.Axes.Add(valueAxis);*/
         }
     }
     public class Item : BarItem
@@ -1108,13 +1167,14 @@ namespace LightMasterMVVM.ViewModels
                 MatchViewModel.originalB3 = new TeamMatch();
                 Console.WriteLine(ex.ToString());
             }
-
+            GraphViewModel.UserControlVisible = false;
 
         }
         public void SeeTablets()
         {
             matchViewModel.UserControlVisible = false;
             tabletViewModel.UserControlVisible = true;
+            GraphViewModel.UserControlVisible = false;
 
         }
         public void NextMatch()
