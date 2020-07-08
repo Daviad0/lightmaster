@@ -42,59 +42,41 @@ namespace LightMasterMVVM.ViewModels
             /*customController = new PlotController();
             customController.UnbindMouseDown(OxyMouseButton.Left);
             customController.BindMouseEnter(PlotCommands.HoverSnapTrack);
+            DataPoints = null;
             DataPoints = new PlotModel
             {
                 Title = "Total Power Cells",
                 LegendPlacement = LegendPlacement.Outside,
                 LegendPosition = LegendPosition.RightTop,
                 LegendOrientation = LegendOrientation.Vertical,
-                LegendBorderThickness = 0,
+                LegendBorderThickness = 0
             };
             var lowerpc = new OxyPlot.Series.LineSeries { Title = "Lower Power Cells" };
             var outerpc = new OxyPlot.Series.LineSeries { Title = "Outer Power Cells" };
             var innerpc = new OxyPlot.Series.LineSeries { Title = "Inner Power Cells" };
             var missedpc = new OxyPlot.Series.LineSeries { Title = "Missed Power Cells" };
-            using (var db = new ScoutingContext())
-            {
-                var everymatchdata = db.Matches.Where(x => x.EventCode == "test_env" && x.TeamNumber == 862).ToList();
-                int i = 0;
-                foreach(var match in everymatchdata)
-                {
-                    i++;
-                    var individuallowerpc = 0;
-                    var individualouterpc = 0;
-                    var individualinnerpc = 0;
-                    var individualmissedpc = 0;
-                    foreach(var numpc in match.PowerCellLower)
-                    {
-                        individuallowerpc += numpc;
-                    }
-                    foreach (var numpc in match.PowerCellOuter)
-                    {
-                        individuallowerpc += numpc;
-                    }
-                    foreach (var numpc in match.PowerCellInner)
-                    {
-                        individuallowerpc += numpc;
-                    }
-                    foreach (var numpc in match.PowerCellMissed)
-                    {
-                        individuallowerpc += numpc;
-                    }
-                    lowerpc.Points.Add(new DataPoint(match.MatchNumber, individuallowerpc));
-                    outerpc.Points.Add(new DataPoint(match.MatchNumber, individualouterpc));
-                    innerpc.Points.Add(new DataPoint(match.MatchNumber, individualinnerpc));
-                    missedpc.Points.Add(new DataPoint(match.MatchNumber, individualmissedpc));
-                }
-            }
+            lowerpc.Points.Add(new DataPoint(1, 100));
+            lowerpc.Points.Add(new DataPoint(2, 100));
+            lowerpc.Points.Add(new DataPoint(3, 100));
+            lowerpc.Points.Add(new DataPoint(4, 100));
+            outerpc.Points.Add(new DataPoint(1, 105));
+            outerpc.Points.Add(new DataPoint(2, 105));
+            outerpc.Points.Add(new DataPoint(3, 105));
+            outerpc.Points.Add(new DataPoint(4, 105));
+            innerpc.Points.Add(new DataPoint(1, 110));
+            innerpc.Points.Add(new DataPoint(2, 110));
+            innerpc.Points.Add(new DataPoint(3, 110));
+            innerpc.Points.Add(new DataPoint(4, 110));
+            missedpc.Points.Add(new DataPoint(1, 115));
+            missedpc.Points.Add(new DataPoint(2, 115));
+            missedpc.Points.Add(new DataPoint(3, 115));
+            missedpc.Points.Add(new DataPoint(4, 115));
             DataPoints.Series.Add(lowerpc);
             DataPoints.Series.Add(outerpc);
             DataPoints.Series.Add(innerpc);
             DataPoints.Series.Add(missedpc);
-            var valueAxis = new OxyPlot.Axes.LinearAxis { Position = AxisPosition.Bottom, MinimumPadding = 0, MaximumPadding = 0.06, AbsoluteMinimum = 0 };
-            var valueAxis2 = new OxyPlot.Axes.LinearAxis { Position = AxisPosition.Left, MinimumPadding = 0, MaximumPadding = 0.06, AbsoluteMinimum = 0 };
-            DataPoints.Axes.Add(valueAxis);
-            DataPoints.Axes.Add(valueAxis2);*/
+            DataPoints.Axes.Add(new OxyPlot.Axes.LinearAxis());
+            DataPoints.Axes.Add(new OxyPlot.Axes.LinearAxis());*/
         }
         public GraphViewModel()
         {
@@ -136,16 +118,16 @@ namespace LightMasterMVVM.ViewModels
             s2.LabelFormatString = "{0} PC";
             s2.TextColor = OxyColors.White;
             s2.FillColor = OxyColors.LightSeaGreen;
-            s2.Items.Add(new BarItem { Value = 1 });
+            s2.Items.Add(new BarItem { Value = 5 });
             s2.Items.Add(new BarItem { Value = 2 });
-            s2.Items.Add(new BarItem { Value = 3 });
             s2.Items.Add(new BarItem { Value = 4 });
-            s2.Items.Add(new BarItem { Value = 4 });
+            s2.Items.Add(new BarItem { Value = 5 });
+            s2.Items.Add(new BarItem { Value = 2 });
             s2.Items.Add(new BarItem { Value = 4 });
             s2.Items.Add(new BarItem { Value = 6 });
-            s2.Items.Add(new BarItem { Value = 8 });
-            s2.Items.Add(new BarItem { Value = 8 });
-            s2.Items.Add(new BarItem { Value = 8 });
+            s2.Items.Add(new BarItem { Value = 10 });
+            s2.Items.Add(new BarItem { Value = 2 });
+            s2.Items.Add(new BarItem { Value = 5 });
 
             var s3 = new OxyPlot.Series.BarSeries { Title = "Inner Power Cells", StrokeColor = OxyColors.Black, StrokeThickness = 1 };
             s3.IsStacked = true;
@@ -161,11 +143,11 @@ namespace LightMasterMVVM.ViewModels
             s3.Items.Add(new BarItem { Value = 4 });
             s3.Items.Add(new BarItem { Value = 4 });
             s3.Items.Add(new BarItem { Value = 6 });
-            s3.Items.Add(new BarItem { Value = 8 });
-            s3.Items.Add(new BarItem { Value = 8 });
-            s3.Items.Add(new BarItem { Value = 8 });
+            s3.Items.Add(new BarItem { Value = 6 });
+            s3.Items.Add(new BarItem { Value = 3 });
+            s3.Items.Add(new BarItem { Value = 10 });
 
-            var categoryAxis = new OxyPlot.Axes.CategoryAxis { Position = AxisPosition.Left };
+            var categoryAxis = new OxyPlot.Axes.CategoryAxis { Position = AxisPosition.Left, AxisTickToLabelDistance = 2 };
             categoryAxis.Labels.Add("862");
             categoryAxis.Labels.Add("10176");
             categoryAxis.Labels.Add("1023");
