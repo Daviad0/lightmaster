@@ -735,28 +735,32 @@ namespace LightMasterMVVM.ViewModels
                     var jsontodeserialize = rawdata.Substring(5);
                     using (var db = new ScoutingContext())
                     {
-                        var itemtouse = JsonConvert.DeserializeObject<TeamMatch>(jsontodeserialize);
-                        try
+                        var itemstouse = JsonConvert.DeserializeObject<List<TeamMatch>>(jsontodeserialize);
+                        foreach(var itemtouse in itemstouse)
                         {
-                            var previousitem = db.Matches.Where(x => x.TabletId == itemtouse.TabletId && x.MatchNumber == itemtouse.MatchNumber && x.EventCode == itemtouse.EventCode).FirstOrDefault();
-                            if (previousitem == null)
+                            try
+                            {
+                                var previousitem = db.Matches.Where(x => x.TabletId == itemtouse.TabletId && x.MatchNumber == itemtouse.MatchNumber && x.EventCode == itemtouse.EventCode).FirstOrDefault();
+                                if (previousitem == null)
+                                {
+                                    itemtouse.MatchID = new Random().Next(1, 1000);
+                                    db.Matches.Add(itemtouse);
+                                }
+                                else
+                                {
+                                    itemtouse.MatchID = previousitem.MatchID;
+                                    db.Entry(previousitem).CurrentValues.SetValues(itemtouse);
+                                }
+
+
+                            }
+                            catch (NpgsqlException ex)
                             {
                                 itemtouse.MatchID = new Random().Next(1, 1000);
                                 db.Matches.Add(itemtouse);
                             }
-                            else
-                            {
-                                itemtouse.MatchID = previousitem.MatchID;
-                                db.Entry(previousitem).CurrentValues.SetValues(itemtouse);
-                            }
-
-
                         }
-                        catch (NpgsqlException ex)
-                        {
-                            itemtouse.MatchID = new Random().Next(1, 1000);
-                            db.Matches.Add(itemtouse);
-                        }
+                        
 
                         db.SaveChanges();
                     }

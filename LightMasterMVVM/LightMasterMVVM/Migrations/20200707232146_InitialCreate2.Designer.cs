@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace LightMasterMVVM.Migrations
 {
     [DbContext(typeof(ScoutingContext))]
-    [Migration("20200625153057_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200707232146_InitialCreate2")]
+    partial class InitialCreate2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,6 +29,9 @@ namespace LightMasterMVVM.Migrations
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<bool>("A_InitiationLine")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("ClientSubmitted")
                         .HasColumnType("boolean");
 
                     b.Property<int>("DisabledSeconds")
@@ -78,6 +81,9 @@ namespace LightMasterMVVM.Migrations
 
                     b.Property<bool>("T_ControlPanelRotation")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("TabletId")
+                        .HasColumnType("text");
 
                     b.Property<string>("TeamName")
                         .HasColumnType("text");

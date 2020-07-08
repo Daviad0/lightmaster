@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace LightMasterMVVM.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialCreate2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,6 +15,7 @@ namespace LightMasterMVVM.Migrations
                     MatchID = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     TeamNumber = table.Column<int>(nullable: false),
+                    TabletId = table.Column<string>(nullable: true),
                     TeamName = table.Column<string>(nullable: true),
                     EventCode = table.Column<string>(nullable: true),
                     MatchNumber = table.Column<int>(nullable: false),
@@ -32,7 +33,8 @@ namespace LightMasterMVVM.Migrations
                     E_ClimbAttempt = table.Column<bool>(nullable: false),
                     E_ClimbSuccess = table.Column<bool>(nullable: false),
                     E_Balanced = table.Column<bool>(nullable: false),
-                    DisabledSeconds = table.Column<int>(nullable: false)
+                    DisabledSeconds = table.Column<int>(nullable: false),
+                    ClientSubmitted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

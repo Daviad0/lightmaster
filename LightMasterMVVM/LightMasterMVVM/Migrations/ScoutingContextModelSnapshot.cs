@@ -29,6 +29,9 @@ namespace LightMasterMVVM.Migrations
                     b.Property<bool>("A_InitiationLine")
                         .HasColumnType("boolean");
 
+                    b.Property<bool>("ClientSubmitted")
+                        .HasColumnType("boolean");
+
                     b.Property<int>("DisabledSeconds")
                         .HasColumnType("integer");
 
@@ -76,6 +79,9 @@ namespace LightMasterMVVM.Migrations
 
                     b.Property<bool>("T_ControlPanelRotation")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("TabletId")
+                        .HasColumnType("text");
 
                     b.Property<string>("TeamName")
                         .HasColumnType("text");

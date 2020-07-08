@@ -29,5 +29,6 @@ namespace LightMasterMVVM.Models
         public bool E_ClimbSuccess { get; set; }
         public bool E_Balanced { get; set; }
         public int DisabledSeconds { get; set; }
+        public bool ClientSubmitted { get; set; }
     }
 }
