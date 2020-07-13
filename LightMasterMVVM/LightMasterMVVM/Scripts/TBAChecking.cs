@@ -2,6 +2,7 @@
 using LightMasterMVVM.DbAssets;
 using LightMasterMVVM.Models;
 using Newtonsoft.Json;
+using SharpDX.WIC;
 using System;
 using System.Collections.Generic;
 using System.Drawing.Printing;
@@ -51,15 +52,537 @@ namespace LightMasterMVVM.Scripts
             listOfRed3Matches = db.Matches.Where(x => x.TabletId == "R3" && x.ClientSubmitted == true).ToList();
             foreach(var completedMatch in listOfOfficialMatches)
             {
-                TeamMatch r1completedMatch = listOfRed1Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.red.team_keys[0].Substring(3))).FirstOrDefault();
-                TeamMatch r2completedMatch = listOfRed2Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.red.team_keys[1].Substring(3))).FirstOrDefault();
-                TeamMatch r3completedMatch = listOfRed3Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.red.team_keys[2].Substring(3))).FirstOrDefault();
-                TeamMatch b1completedMatch = listOfBlue1Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.blue.team_keys[0].Substring(3))).FirstOrDefault();
-                TeamMatch b2completedMatch = listOfBlue2Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.blue.team_keys[1].Substring(3))).FirstOrDefault();
-                TeamMatch b3completedMatch = listOfBlue3Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.blue.team_keys[2].Substring(3))).FirstOrDefault();
-                if(r1completedMatch != null && r2completedMatch != null && r3completedMatch != null && b1completedMatch != null && b2completedMatch != null && b3completedMatch != null)
+                //TeamMatch r1completedMatch = listOfRed1Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.red.team_keys[0].Substring(3))).FirstOrDefault();
+                //TeamMatch r2completedMatch = listOfRed2Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.red.team_keys[1].Substring(3))).FirstOrDefault();
+                //TeamMatch r3completedMatch = listOfRed3Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.red.team_keys[2].Substring(3))).FirstOrDefault();
+                //TeamMatch b1completedMatch = listOfBlue1Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.blue.team_keys[0].Substring(3))).FirstOrDefault();
+                //TeamMatch b2completedMatch = listOfBlue2Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.blue.team_keys[1].Substring(3))).FirstOrDefault();
+                //TeamMatch b3completedMatch = listOfBlue3Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.blue.team_keys[2].Substring(3))).FirstOrDefault();
+                TeamMatch r1completedMatch = listOfRed1Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862).FirstOrDefault();
+                TeamMatch r2completedMatch = listOfRed2Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862).FirstOrDefault();
+                TeamMatch r3completedMatch = listOfRed3Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862).FirstOrDefault();
+                TeamMatch b1completedMatch = listOfBlue1Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862).FirstOrDefault();
+                TeamMatch b2completedMatch = listOfBlue2Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862).FirstOrDefault();
+                TeamMatch b3completedMatch = listOfBlue3Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862).FirstOrDefault();
+                if (r1completedMatch != null && r2completedMatch != null && r3completedMatch != null && b1completedMatch != null && b2completedMatch != null && b3completedMatch != null)
                 {
-                    //CHECKING CODE
+                    //RED 1
+                    int currentscore = 10;
+                    if(completedMatch.score_breakdown.red.initLineRobot1 == "None")
+                    {
+                        if (!r1completedMatch.A_InitiationLine)
+                        {
+                            currentscore--;
+                            r1completedMatch.A_InitiationLine = true;
+                        }
+                    }
+                    else
+                    {
+                        if (r1completedMatch.A_InitiationLine)
+                        {
+                            currentscore--;
+                            r1completedMatch.A_InitiationLine = false;
+                        }
+                    }
+                    if (completedMatch.score_breakdown.red.endgameRobot1 == "None")
+                    {
+                        if (r1completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            r1completedMatch.E_ClimbSuccess = false;
+                        }
+                        if (r1completedMatch.E_Park)
+                        {
+                            currentscore--;
+                            r1completedMatch.E_Park = false;
+                        }
+                        if (r1completedMatch.E_Balanced)
+                        {
+                            currentscore--;
+                            r1completedMatch.E_Balanced = false;
+                        }
+                    }
+                    else if (completedMatch.score_breakdown.red.endgameRobot1 == "Park")
+                    {
+                        if (r1completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            r1completedMatch.E_ClimbSuccess = false;
+                        }
+                        if (!r1completedMatch.E_Park)
+                        {
+                            currentscore--;
+                            r1completedMatch.E_Park = true;
+                        }
+                        if (r1completedMatch.E_Balanced)
+                        {
+                            currentscore--;
+                            r1completedMatch.E_Balanced = false;
+                        }
+                    }
+                    else if (completedMatch.score_breakdown.red.endgameRobot1 == "Hang")
+                    {
+                        if (!r1completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            r1completedMatch.E_ClimbSuccess = true;
+                        }
+                        if (r1completedMatch.E_Park)
+                        {
+                            currentscore--;
+                            r1completedMatch.E_Park = false;
+                        }
+                    }
+                    if (completedMatch.score_breakdown.red.endgameRungIsLevel == "IsLevel")
+                    {
+                        if(!r1completedMatch.E_Balanced && r1completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            r1completedMatch.E_Balanced = true;
+                        }
+                    }
+                    else
+                    {
+                        if (r1completedMatch.E_Balanced)
+                        {
+                            currentscore--;
+                            r1completedMatch.E_Balanced = false;
+                        }
+                    }
+                    r1completedMatch.APIAccuracy = currentscore;
+                    //RED 2
+                    currentscore = 10;
+                    if (completedMatch.score_breakdown.red.initLineRobot2 == "None")
+                    {
+                        if (!r2completedMatch.A_InitiationLine)
+                        {
+                            currentscore--;
+                            r2completedMatch.A_InitiationLine = true;
+                        }
+                    }
+                    else
+                    {
+                        if (r2completedMatch.A_InitiationLine)
+                        {
+                            currentscore--;
+                            r2completedMatch.A_InitiationLine = false;
+                        }
+                    }
+                    if (completedMatch.score_breakdown.red.endgameRobot2 == "None")
+                    {
+                        if (r2completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            r2completedMatch.E_ClimbSuccess = false;
+                        }
+                        if (r2completedMatch.E_Park)
+                        {
+                            currentscore--;
+                            r2completedMatch.E_Park = false;
+                        }
+                        if (r2completedMatch.E_Balanced)
+                        {
+                            currentscore--;
+                            r2completedMatch.E_Balanced = false;
+                        }
+                    }
+                    else if (completedMatch.score_breakdown.red.endgameRobot2 == "Park")
+                    {
+                        if (r2completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            r2completedMatch.E_ClimbSuccess = false;
+                        }
+                        if (!r2completedMatch.E_Park)
+                        {
+                            currentscore--;
+                            r2completedMatch.E_Park = true;
+                        }
+                        if (r2completedMatch.E_Balanced)
+                        {
+                            currentscore--;
+                            r2completedMatch.E_Balanced = false;
+                        }
+                    }
+                    else if (completedMatch.score_breakdown.red.endgameRobot2 == "Hang")
+                    {
+                        if (!r2completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            r2completedMatch.E_ClimbSuccess = true;
+                        }
+                        if (r2completedMatch.E_Park)
+                        {
+                            currentscore--;
+                            r2completedMatch.E_Park = false;
+                        }
+                    }
+                    if (completedMatch.score_breakdown.red.endgameRungIsLevel == "IsLevel")
+                    {
+                        if (!r2completedMatch.E_Balanced && r2completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            r2completedMatch.E_Balanced = true;
+                        }
+                    }
+                    else
+                    {
+                        if (r2completedMatch.E_Balanced)
+                        {
+                            currentscore--;
+                            r2completedMatch.E_Balanced = false;
+                        }
+                    }
+                    r2completedMatch.APIAccuracy = currentscore;
+                    //RED 3
+                    currentscore = 10;
+                    if (completedMatch.score_breakdown.red.initLineRobot3 == "None")
+                    {
+                        if (!r3completedMatch.A_InitiationLine)
+                        {
+                            currentscore--;
+                            r3completedMatch.A_InitiationLine = true;
+                        }
+                    }
+                    else
+                    {
+                        if (r3completedMatch.A_InitiationLine)
+                        {
+                            currentscore--;
+                            r3completedMatch.A_InitiationLine = false;
+                        }
+                    }
+                    if (completedMatch.score_breakdown.red.endgameRobot3 == "None")
+                    {
+                        if (r3completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            r3completedMatch.E_ClimbSuccess = false;
+                        }
+                        if (r3completedMatch.E_Park)
+                        {
+                            currentscore--;
+                            r3completedMatch.E_Park = false;
+                        }
+                        if (r3completedMatch.E_Balanced)
+                        {
+                            currentscore--;
+                            r3completedMatch.E_Balanced = false;
+                        }
+                    }
+                    else if (completedMatch.score_breakdown.red.endgameRobot3 == "Park")
+                    {
+                        if (r3completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            r3completedMatch.E_ClimbSuccess = false;
+                        }
+                        if (!r3completedMatch.E_Park)
+                        {
+                            currentscore--;
+                            r3completedMatch.E_Park = true;
+                        }
+                        if (r3completedMatch.E_Balanced)
+                        {
+                            currentscore--;
+                            r3completedMatch.E_Balanced = false;
+                        }
+                    }
+                    else if (completedMatch.score_breakdown.red.endgameRobot3 == "Hang")
+                    {
+                        if (!r3completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            r3completedMatch.E_ClimbSuccess = true;
+                        }
+                        if (r3completedMatch.E_Park)
+                        {
+                            currentscore--;
+                            r3completedMatch.E_Park = false;
+                        }
+                    }
+                    if (completedMatch.score_breakdown.red.endgameRungIsLevel == "IsLevel")
+                    {
+                        if (!r3completedMatch.E_Balanced && r3completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            r3completedMatch.E_Balanced = true;
+                        }
+                    }
+                    else
+                    {
+                        if (r3completedMatch.E_Balanced)
+                        {
+                            currentscore--;
+                            r3completedMatch.E_Balanced = false;
+                        }
+                    }
+                    r3completedMatch.APIAccuracy = currentscore;
+                    //BLUE 1
+                    currentscore = 10;
+                    if (completedMatch.score_breakdown.blue.initLineRobot1 == "None")
+                    {
+                        if (!b1completedMatch.A_InitiationLine)
+                        {
+                            currentscore--;
+                            b1completedMatch.A_InitiationLine = true;
+                        }
+                    }
+                    else
+                    {
+                        if (b1completedMatch.A_InitiationLine)
+                        {
+                            currentscore--;
+                            b1completedMatch.A_InitiationLine = false;
+                        }
+                    }
+                    if (completedMatch.score_breakdown.blue.endgameRobot1 == "None")
+                    {
+                        if (b1completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            b1completedMatch.E_ClimbSuccess = false;
+                        }
+                        if (b1completedMatch.E_Park)
+                        {
+                            currentscore--;
+                            b1completedMatch.E_Park = false;
+                        }
+                        if (b1completedMatch.E_Balanced)
+                        {
+                            currentscore--;
+                            b1completedMatch.E_Balanced = false;
+                        }
+                    }
+                    else if (completedMatch.score_breakdown.blue.endgameRobot1 == "Park")
+                    {
+                        if (b1completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            b1completedMatch.E_ClimbSuccess = false;
+                        }
+                        if (!b1completedMatch.E_Park)
+                        {
+                            currentscore--;
+                            b1completedMatch.E_Park = true;
+                        }
+                        if (b1completedMatch.E_Balanced)
+                        {
+                            currentscore--;
+                            b1completedMatch.E_Balanced = false;
+                        }
+                    }
+                    else if (completedMatch.score_breakdown.blue.endgameRobot1 == "Hang")
+                    {
+                        if (!b1completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            b1completedMatch.E_ClimbSuccess = true;
+                        }
+                        if (b1completedMatch.E_Park)
+                        {
+                            currentscore--;
+                            b1completedMatch.E_Park = false;
+                        }
+                    }
+                    if (completedMatch.score_breakdown.blue.endgameRungIsLevel == "IsLevel")
+                    {
+                        if (!b1completedMatch.E_Balanced && b1completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            b1completedMatch.E_Balanced = true;
+                        }
+                    }
+                    else
+                    {
+                        if (b1completedMatch.E_Balanced)
+                        {
+                            currentscore--;
+                            b1completedMatch.E_Balanced = false;
+                        }
+                    }
+                    b1completedMatch.APIAccuracy = currentscore;
+                    //BLUE 2
+                    currentscore = 10;
+                    if (completedMatch.score_breakdown.blue.initLineRobot3 == "None")
+                    {
+                        if (!b2completedMatch.A_InitiationLine)
+                        {
+                            currentscore--;
+                            b2completedMatch.A_InitiationLine = true;
+                        }
+                    }
+                    else
+                    {
+                        if (b2completedMatch.A_InitiationLine)
+                        {
+                            currentscore--;
+                            b2completedMatch.A_InitiationLine = false;
+                        }
+                    }
+                    if (completedMatch.score_breakdown.blue.endgameRobot3 == "None")
+                    {
+                        if (b2completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            b2completedMatch.E_ClimbSuccess = false;
+                        }
+                        if (b2completedMatch.E_Park)
+                        {
+                            currentscore--;
+                            b2completedMatch.E_Park = false;
+                        }
+                        if (b2completedMatch.E_Balanced)
+                        {
+                            currentscore--;
+                            b2completedMatch.E_Balanced = false;
+                        }
+                    }
+                    else if (completedMatch.score_breakdown.blue.endgameRobot3 == "Park")
+                    {
+                        if (b2completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            b2completedMatch.E_ClimbSuccess = false;
+                        }
+                        if (!b2completedMatch.E_Park)
+                        {
+                            currentscore--;
+                            b2completedMatch.E_Park = true;
+                        }
+                        if (b2completedMatch.E_Balanced)
+                        {
+                            currentscore--;
+                            b2completedMatch.E_Balanced = false;
+                        }
+                    }
+                    else if (completedMatch.score_breakdown.blue.endgameRobot3 == "Hang")
+                    {
+                        if (!b2completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            b2completedMatch.E_ClimbSuccess = true;
+                        }
+                        if (b2completedMatch.E_Park)
+                        {
+                            currentscore--;
+                            b2completedMatch.E_Park = false;
+                        }
+                    }
+                    if (completedMatch.score_breakdown.blue.endgameRungIsLevel == "IsLevel")
+                    {
+                        if (!b2completedMatch.E_Balanced && b2completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            b2completedMatch.E_Balanced = true;
+                        }
+                    }
+                    else
+                    {
+                        if (b2completedMatch.E_Balanced)
+                        {
+                            currentscore--;
+                            b2completedMatch.E_Balanced = false;
+                        }
+                    }
+                    b2completedMatch.APIAccuracy = currentscore;
+                    //BLUE 3
+                    currentscore = 10;
+                    if (completedMatch.score_breakdown.blue.initLineRobot3 == "None")
+                    {
+                        if (!b3completedMatch.A_InitiationLine)
+                        {
+                            currentscore--;
+                            b3completedMatch.A_InitiationLine = true;
+                        }
+                    }
+                    else
+                    {
+                        if (b3completedMatch.A_InitiationLine)
+                        {
+                            currentscore--;
+                            b3completedMatch.A_InitiationLine = false;
+                        }
+                    }
+                    if (completedMatch.score_breakdown.blue.endgameRobot3 == "None")
+                    {
+                        if (b3completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            b3completedMatch.E_ClimbSuccess = false;
+                        }
+                        if (b3completedMatch.E_Park)
+                        {
+                            currentscore--;
+                            b3completedMatch.E_Park = false;
+                        }
+                        if (b3completedMatch.E_Balanced)
+                        {
+                            currentscore--;
+                            b3completedMatch.E_Balanced = false;
+                        }
+                    }
+                    else if (completedMatch.score_breakdown.blue.endgameRobot3 == "Park")
+                    {
+                        if (b3completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            b3completedMatch.E_ClimbSuccess = false;
+                        }
+                        if (!b3completedMatch.E_Park)
+                        {
+                            currentscore--;
+                            b3completedMatch.E_Park = true;
+                        }
+                        if (b3completedMatch.E_Balanced)
+                        {
+                            currentscore--;
+                            b3completedMatch.E_Balanced = false;
+                        }
+                    }
+                    else if (completedMatch.score_breakdown.blue.endgameRobot3 == "Hang")
+                    {
+                        if (!b3completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            b3completedMatch.E_ClimbSuccess = true;
+                        }
+                        if (b3completedMatch.E_Park)
+                        {
+                            currentscore--;
+                            b3completedMatch.E_Park = false;
+                        }
+                    }
+                    if (completedMatch.score_breakdown.blue.endgameRungIsLevel == "IsLevel")
+                    {
+                        if (!b3completedMatch.E_Balanced && b3completedMatch.E_ClimbSuccess)
+                        {
+                            currentscore--;
+                            b3completedMatch.E_Balanced = true;
+                        }
+                    }
+                    else
+                    {
+                        if (b3completedMatch.E_Balanced)
+                        {
+                            currentscore--;
+                            b3completedMatch.E_Balanced = false;
+                        }
+                    }
+                    b3completedMatch.APIAccuracy = currentscore;
+                    r1completedMatch.APIChecked = true;
+                    r2completedMatch.APIChecked = true;
+                    r3completedMatch.APIChecked = true;
+                    b1completedMatch.APIChecked = true;
+                    b2completedMatch.APIChecked = true;
+                    b3completedMatch.APIChecked = true;
+                    db.Entry(db.Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.red.team_keys[0].Substring(3))).FirstOrDefault()).CurrentValues.SetValues(r1completedMatch);
+                    db.Entry(db.Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.red.team_keys[1].Substring(3))).FirstOrDefault()).CurrentValues.SetValues(r2completedMatch);
+                    db.Entry(db.Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.red.team_keys[2].Substring(3))).FirstOrDefault()).CurrentValues.SetValues(r3completedMatch);
+                    db.Entry(db.Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.blue.team_keys[0].Substring(3))).FirstOrDefault()).CurrentValues.SetValues(b1completedMatch);
+                    db.Entry(db.Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.blue.team_keys[1].Substring(3))).FirstOrDefault()).CurrentValues.SetValues(b2completedMatch);
+                    db.Entry(db.Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.blue.team_keys[2].Substring(3))).FirstOrDefault()).CurrentValues.SetValues(b3completedMatch);
+                    db.SaveChanges();
                 }
             }
             
