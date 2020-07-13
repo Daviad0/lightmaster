@@ -44,8 +44,8 @@
         </Button>
       </Grid>
       <Grid Grid.Column="2" ColumnDefinitions="*,10" RowDefinitions="80">
-        <Button Command="{Binding StartCheck}" Classes="menu" Height="35" Grid.Row="0" Margin="30,0,30,10" VerticalAlignment="Top">
-          <TextBlock FontWeight="Bold" Text="Start BT Check"/>
+        <Button Command="{Binding TheBlueAlliance}" Classes="menu" Height="35" Grid.Row="0" Margin="30,0,30,10" VerticalAlignment="Top">
+          <TextBlock FontWeight="Bold" Text="TBA"/>
         </Button>
         <Border Background="DarkOrange" Height="5" Grid.Row="1" Margin="30,2,30,0">
           

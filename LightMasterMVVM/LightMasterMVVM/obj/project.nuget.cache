@@ -1,10 +1,6 @@
 {
   "version": 2,
-<<<<<<< Updated upstream
-  "dgSpecHash": "eVj17FAF3TJm9Cx2ROX72V9qolXkhB5Wu7sYNS/5GNN4wfXNVeSvhJfAvjZpFuStS8uNHQmIFmt8sNqijVe05Q==",
-=======
   "dgSpecHash": "wbT9Y78nvatH0JYFL+VCYd+T2310mGfUDzEM44Ih0oXrH9UufoNtqnfeibex6DeNbegQ1xkYdAdl/onKWAnIyQ==",
->>>>>>> Stashed changes
   "success": true,
   "projectFilePath": "C:\\Users\\djree\\source\\repos\\lightmaster\\LightMasterMVVM\\LightMasterMVVM\\LightMasterMVVM.csproj",
   "expectedPackageFiles": [

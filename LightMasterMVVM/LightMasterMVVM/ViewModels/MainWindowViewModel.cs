@@ -13,6 +13,7 @@ using OxyPlot.Axes;
     using OxyPlot.Series;
 using Websocket.Client;
 using OxyPlot.Avalonia;
+using LightMasterMVVM.Scripts;
 
 namespace LightMasterMVVM.ViewModels
 {
@@ -803,6 +804,11 @@ namespace LightMasterMVVM.ViewModels
                 Console.WriteLine(d.DeviceName);
             }
             tabletViewModel.TestBTD = items;
+        }
+        public void TheBlueAlliance()
+        {
+            var TBACheck = new TBAChecking();
+            TBACheck.CheckCurrentMatchesToDB();
         }
         public void SeeMatches(int MatchNum)
         {
