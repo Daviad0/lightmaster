@@ -297,17 +297,8 @@ namespace LightMasterMVVM.ViewModels
         {
             using(var db = new ScoutingContext())
             {
-                customController = new PlotController();
-                customController.UnbindMouseDown(OxyMouseButton.Left);
-                customController.BindMouseEnter(PlotCommands.HoverSnapTrack);
-                DataPoints = new PlotModel
-                {
-                    Title = "Average PC Count",
-                    LegendPlacement = LegendPlacement.Outside,
-                    LegendPosition = LegendPosition.RightTop,
-                    LegendOrientation = LegendOrientation.Vertical,
-                    LegendBorderThickness = 0,
-                };
+                DataPoints.Series.Clear();
+                DataPoints.Axes.Clear();
 
                 List<TeamMatch> dbMatches = db.Matches.Where(x => x.ClientSubmitted == true && x.EventCode == "test_env").ToList();
                 List<int> selectedTeamNumbers = new List<int>();
