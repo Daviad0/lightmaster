@@ -1055,7 +1055,7 @@ namespace LightMasterMVVM.ViewModels
         {
             var TBACheck = new TBAChecking();
             await TBACheck.CheckCurrentMatchesToDB();
-            GraphViewModel = new GraphViewModel();
+            GraphViewModel.SetGraphType();
         }
         public void SeeMatches(int MatchNum)
         {
