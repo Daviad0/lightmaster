@@ -32,7 +32,7 @@
         "runtime": {
           "lib/net/InTheHand.Net.Personal.dll": {
             "assemblyVersion": "3.5.605.0",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "3.5.605.0"
           }
         }
       },
@@ -733,15 +733,15 @@
         "runtime": {
           "lib/net45/GalaSoft.MvvmLight.Extras.dll": {
             "assemblyVersion": "5.4.1.0",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "5.4.1.0"
           },
           "lib/net45/GalaSoft.MvvmLight.Platform.dll": {
             "assemblyVersion": "5.4.1.0",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "5.4.1.0"
           },
           "lib/net45/GalaSoft.MvvmLight.dll": {
             "assemblyVersion": "5.4.1.0",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "5.4.1.0"
           },
           "lib/net45/System.Windows.Interactivity.dll": {
             "assemblyVersion": "4.5.0.0",
