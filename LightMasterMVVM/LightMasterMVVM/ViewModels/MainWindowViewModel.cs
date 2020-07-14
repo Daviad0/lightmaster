@@ -167,6 +167,10 @@ namespace LightMasterMVVM.ViewModels
             DataPoints.Axes.Add(categoryAxis);
             DataPoints.Axes.Add(valueAxis);
         }
+        public void SetGraphType()
+        {
+
+        }
     }
     public class Item : BarItem
     {
@@ -618,7 +622,7 @@ namespace LightMasterMVVM.ViewModels
     {
         public MainWindowViewModel()
         {
-
+            StartCheck();
         }
         private int currentMatchNum = 1;
         private string matchNumString = "Match 1";

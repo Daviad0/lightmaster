@@ -26,6 +26,12 @@ namespace LightMasterMVVM.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<int>("APIAccuracy")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("APIChecked")
+                        .HasColumnType("boolean");
+
                     b.Property<bool>("A_InitiationLine")
                         .HasColumnType("boolean");
 

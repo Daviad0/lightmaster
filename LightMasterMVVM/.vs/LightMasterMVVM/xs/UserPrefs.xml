@@ -1,19 +1,21 @@
 ﻿<Properties StartupConfiguration="{D1397E30-5D2E-478E-827D-3D8871C098CE}|Default">
   <MonoDevelop.Ide.ItemProperties.LightMasterMVVM PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="LightMasterMVVM/Models/TeamMatch.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="LightMasterMVVM/Scripts/TBAChecking.cs">
     <Files>
-      <File FileName="LightMasterMVVM/ViewModels/MainWindowViewModel.cs" Line="43" Column="67" />
+      <File FileName="LightMasterMVVM/ViewModels/MainWindowViewModel.cs" Line="721" Column="1" />
       <File FileName="LightMasterMVVM/Program.cs" />
       <File FileName="LightMasterMVVM/Views/DataAnalysis.xaml" />
-      <File FileName="LightMasterMVVM/Models/TeamMatch.cs" Line="29" Column="49" />
+      <File FileName="LightMasterMVVM/Models/TeamMatch.cs" />
+      <File FileName="LightMasterMVVM/Scripts/TBAChecking.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="LightMasterMVVM" expanded="True">
             <Node name="LightMasterMVVM" expanded="True">
-              <Node name="Models" expanded="True">
-                <Node name="TeamMatch.cs" selected="True" />
+              <Node name="Models" expanded="True" />
+              <Node name="Scripts" expanded="True">
+                <Node name="TBAChecking.cs" selected="True" />
               </Node>
               <Node name="ViewModels" expanded="True" />
               <Node name="Views" expanded="True">

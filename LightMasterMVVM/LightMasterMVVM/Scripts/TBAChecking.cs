@@ -21,7 +21,7 @@ namespace LightMasterMVVM.Scripts
         public async void CheckCurrentMatchesToDB()
         {
             HttpClient client = new HttpClient();
-
+            client.DefaultRequestHeaders.Add("X-TBA-Auth-Key", "kzyt55ci5iHn3X1T8BgXYu2yMXmAjdxV5OCXHVA16CRfX8C0Z6tfrwU4BajyleY3");
             // Call asynchronous network methods in a try/catch block to handle exceptions
             List<TBA_Match> listOfOfficialMatches = new List<TBA_Match>();
             List<TeamMatch> listOfRed1Matches = new List<TeamMatch>();
@@ -58,12 +58,12 @@ namespace LightMasterMVVM.Scripts
                 //TeamMatch b1completedMatch = listOfBlue1Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.blue.team_keys[0].Substring(3))).FirstOrDefault();
                 //TeamMatch b2completedMatch = listOfBlue2Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.blue.team_keys[1].Substring(3))).FirstOrDefault();
                 //TeamMatch b3completedMatch = listOfBlue3Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.blue.team_keys[2].Substring(3))).FirstOrDefault();
-                TeamMatch r1completedMatch = listOfRed1Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862).FirstOrDefault();
-                TeamMatch r2completedMatch = listOfRed2Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862).FirstOrDefault();
-                TeamMatch r3completedMatch = listOfRed3Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862).FirstOrDefault();
-                TeamMatch b1completedMatch = listOfBlue1Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862).FirstOrDefault();
-                TeamMatch b2completedMatch = listOfBlue2Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862).FirstOrDefault();
-                TeamMatch b3completedMatch = listOfBlue3Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862).FirstOrDefault();
+                TeamMatch r1completedMatch = listOfRed1Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862 && x.APIChecked == false).FirstOrDefault();
+                TeamMatch r2completedMatch = listOfRed2Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862 && x.APIChecked == false).FirstOrDefault();
+                TeamMatch r3completedMatch = listOfRed3Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862 && x.APIChecked == false).FirstOrDefault();
+                TeamMatch b1completedMatch = listOfBlue1Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862 && x.APIChecked == false).FirstOrDefault();
+                TeamMatch b2completedMatch = listOfBlue2Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862 && x.APIChecked == false).FirstOrDefault();
+                TeamMatch b3completedMatch = listOfBlue3Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862 && x.APIChecked == false).FirstOrDefault();
                 if (r1completedMatch != null && r2completedMatch != null && r3completedMatch != null && b1completedMatch != null && b2completedMatch != null && b3completedMatch != null)
                 {
                     //RED 1
@@ -576,12 +576,18 @@ namespace LightMasterMVVM.Scripts
                     b1completedMatch.APIChecked = true;
                     b2completedMatch.APIChecked = true;
                     b3completedMatch.APIChecked = true;
-                    db.Entry(db.Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.red.team_keys[0].Substring(3))).FirstOrDefault()).CurrentValues.SetValues(r1completedMatch);
-                    db.Entry(db.Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.red.team_keys[1].Substring(3))).FirstOrDefault()).CurrentValues.SetValues(r2completedMatch);
-                    db.Entry(db.Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.red.team_keys[2].Substring(3))).FirstOrDefault()).CurrentValues.SetValues(r3completedMatch);
-                    db.Entry(db.Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.blue.team_keys[0].Substring(3))).FirstOrDefault()).CurrentValues.SetValues(b1completedMatch);
-                    db.Entry(db.Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.blue.team_keys[1].Substring(3))).FirstOrDefault()).CurrentValues.SetValues(b2completedMatch);
-                    db.Entry(db.Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.blue.team_keys[2].Substring(3))).FirstOrDefault()).CurrentValues.SetValues(b3completedMatch);
+                    //db.Entry(db.Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862).FirstOrDefault()).CurrentValues.SetValues(r1completedMatch);
+                    //db.Entry(db.Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862).FirstOrDefault()).CurrentValues.SetValues(r2completedMatch);
+                    //db.Entry(db.Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862).FirstOrDefault()).CurrentValues.SetValues(r3completedMatch);
+                    //db.Entry(db.Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862).FirstOrDefault()).CurrentValues.SetValues(b1completedMatch);
+                    //db.Entry(db.Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862).FirstOrDefault()).CurrentValues.SetValues(b2completedMatch);
+                    //db.Entry(db.Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862).FirstOrDefault()).CurrentValues.SetValues(b3completedMatch);
+                    db.Matches.Update(r1completedMatch);
+                    db.Matches.Update(r2completedMatch);
+                    db.Matches.Update(r3completedMatch);
+                    db.Matches.Update(b1completedMatch);
+                    db.Matches.Update(b2completedMatch);
+                    db.Matches.Update(b3completedMatch);
                     db.SaveChanges();
                 }
             }
