@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LightMasterMVVM.Scripts
 {
@@ -18,7 +19,7 @@ namespace LightMasterMVVM.Scripts
         public ScoutingContext db = new ScoutingContext();
         public string CompetitionKey = "2020mijac";
         public string APILink = "https://thebluealliance.com/api/v3/event/";
-        public async void CheckCurrentMatchesToDB()
+        public async Task CheckCurrentMatchesToDB()
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Add("X-TBA-Auth-Key", "kzyt55ci5iHn3X1T8BgXYu2yMXmAjdxV5OCXHVA16CRfX8C0Z6tfrwU4BajyleY3");

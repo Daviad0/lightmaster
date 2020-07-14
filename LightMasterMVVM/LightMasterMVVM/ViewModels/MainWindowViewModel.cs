@@ -14,6 +14,8 @@ using OxyPlot.Axes;
 using Websocket.Client;
 using OxyPlot.Avalonia;
 using LightMasterMVVM.Scripts;
+using LightMasterMVVM.Views;
+using System.Text.RegularExpressions;
 
 namespace LightMasterMVVM.ViewModels
 {
@@ -169,7 +171,130 @@ namespace LightMasterMVVM.ViewModels
         }
         public void SetGraphType()
         {
+            using(var db = new ScoutingContext())
+            {
+                customController = new PlotController();
+                customController.UnbindMouseDown(OxyMouseButton.Left);
+                customController.BindMouseEnter(PlotCommands.HoverSnapTrack);
+                DataPoints = new PlotModel
+                {
+                    Title = "Average PC Count",
+                    LegendPlacement = LegendPlacement.Outside,
+                    LegendPosition = LegendPosition.RightTop,
+                    LegendOrientation = LegendOrientation.Vertical,
+                    LegendBorderThickness = 0,
+                };
 
+                List<TeamMatch> dbMatches = db.Matches.Where(x => x.ClientSubmitted == true && x.EventCode == "test_env").ToList();
+                List<int> selectedTeamNumbers = new List<int>();
+                List<AveragePCCountModel> averagePCCountModels = new List<AveragePCCountModel>();
+
+                foreach(var entry in dbMatches)
+                {
+                    AveragePCCountModel modelToAdd = new AveragePCCountModel();
+                    if (!selectedTeamNumbers.Contains(entry.TeamNumber))
+                    {
+                        modelToAdd.TeamNumber = entry.TeamNumber;
+                        selectedTeamNumbers.Add(entry.TeamNumber);
+                        var inner = 0;
+                        var outer = 0;
+                        var lower = 0;
+                        var total = 0;
+                        foreach(var toadd in entry.PowerCellInner)
+                        {
+                            inner += toadd;
+                            total += toadd;
+                        }
+                        foreach (var toadd in entry.PowerCellOuter)
+                        {
+                            outer += toadd;
+                            total += toadd;
+                        }
+                        foreach (var toadd in entry.PowerCellLower)
+                        {
+                            lower += toadd;
+                            total += toadd;
+                        }
+                        modelToAdd.AvgInnerPC = inner;
+                        modelToAdd.AvgOuterPC = outer;
+                        modelToAdd.AvgTotalPC = total;
+                        modelToAdd.AvgLowerPC = lower;
+                        modelToAdd.Matches++;
+                        averagePCCountModels.Add(modelToAdd);
+                    }
+                    else
+                    {
+                        modelToAdd = averagePCCountModels.Where(x => x.TeamNumber == entry.TeamNumber).FirstOrDefault();
+                        modelToAdd.TeamNumber = entry.TeamNumber;
+                        var inner = modelToAdd.AvgInnerPC * modelToAdd.Matches;
+                        var outer = modelToAdd.AvgOuterPC * modelToAdd.Matches;
+                        var lower = modelToAdd.AvgLowerPC * modelToAdd.Matches;
+                        var total = modelToAdd.AvgTotalPC * modelToAdd.Matches;
+                        foreach (var toadd in entry.PowerCellInner)
+                        {
+                            inner += toadd;
+                            total += toadd;
+                        }
+                        foreach (var toadd in entry.PowerCellOuter)
+                        {
+                            outer += toadd;
+                            total += toadd;
+                        }
+                        foreach (var toadd in entry.PowerCellLower)
+                        {
+                            lower += toadd;
+                            total += toadd;
+                        }
+                        modelToAdd.Matches++;
+                        modelToAdd.AvgInnerPC = inner / modelToAdd.Matches;
+                        modelToAdd.AvgOuterPC = outer / modelToAdd.Matches;
+                        modelToAdd.AvgTotalPC = total / modelToAdd.Matches;
+                        modelToAdd.AvgLowerPC = lower / modelToAdd.Matches;
+                        averagePCCountModels.Remove(averagePCCountModels.Where(x => x.TeamNumber == entry.TeamNumber).FirstOrDefault());
+                        averagePCCountModels.Add(modelToAdd);
+                    }
+                    
+                }
+
+                var s1 = new OxyPlot.Series.BarSeries { Title = "Lower Power Cells", StrokeColor = OxyColors.Black, StrokeThickness = 1 };
+                var s2 = new OxyPlot.Series.BarSeries { Title = "Outer Power Cells", StrokeColor = OxyColors.Black, StrokeThickness = 1 };
+                var s3 = new OxyPlot.Series.BarSeries { Title = "Inner Power Cells", StrokeColor = OxyColors.Black, StrokeThickness = 1 };
+                var categoryAxis = new OxyPlot.Axes.CategoryAxis { Position = AxisPosition.Left, AxisTickToLabelDistance = 2 };
+                s1.IsStacked = true;
+                s1.LabelPlacement = LabelPlacement.Inside;
+                s1.FillColor = OxyColors.LightYellow;
+                s1.LabelMargin = 5;
+                s1.TextColor = OxyColors.Black;
+                s1.LabelFormatString = "{0} PC";
+                s2.LabelPlacement = LabelPlacement.Inside;
+                s2.IsStacked = true;
+                s2.LabelMargin = 5;
+                s2.LabelFormatString = "{0} PC";
+                s2.TextColor = OxyColors.White;
+                s2.FillColor = OxyColors.LightSeaGreen;
+                s3.IsStacked = true;
+                s3.FillColor = OxyColors.LightBlue;
+                s3.LabelPlacement = LabelPlacement.Inside;
+                s3.LabelFormatString = "{0} PC";
+                s3.LabelMargin = 5;
+                s3.TextColor = OxyColors.Black;
+                
+                foreach(var team in averagePCCountModels.OrderByDescending(x => x.AvgTotalPC).ThenByDescending(x => x.AvgInnerPC).ThenByDescending(x => x.AvgOuterPC).ThenByDescending(x => x.AvgOuterPC))
+                {
+                    categoryAxis.Labels.Add(team.TeamNumber.ToString());
+                    s1.Items.Add(new BarItem { Value = team.AvgLowerPC });
+                    s2.Items.Add(new BarItem { Value = team.AvgOuterPC });
+                    s3.Items.Add(new BarItem { Value = team.AvgInnerPC });
+                }
+                GraphHeight = categoryAxis.Labels.Count * 50;
+                var valueAxis = new OxyPlot.Axes.LinearAxis { Position = AxisPosition.Bottom, MinimumPadding = 0, MaximumPadding = 0.06, AbsoluteMinimum = 0 };
+                DataPoints.Series.Add(s1);
+                DataPoints.Series.Add(s2);
+                DataPoints.Series.Add(s3);
+                DataPoints.Axes.Add(categoryAxis);
+                DataPoints.Axes.Add(valueAxis);
+            }
+            
         }
     }
     public class Item : BarItem
@@ -809,10 +934,11 @@ namespace LightMasterMVVM.ViewModels
             }
             tabletViewModel.TestBTD = items;
         }
-        public void TheBlueAlliance()
+        public async void TheBlueAlliance()
         {
             var TBACheck = new TBAChecking();
-            TBACheck.CheckCurrentMatchesToDB();
+            await TBACheck.CheckCurrentMatchesToDB();
+            graphViewModel.SetGraphType();
         }
         public void SeeMatches(int MatchNum)
         {
