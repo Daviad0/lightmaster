@@ -13,6 +13,13 @@ var blue1s = require('./blue1');
 var blue2s = require('./blue2');
 var blue3s = require('./blue3');
 
+var red1sc = new red1s()
+var red2sc = new red2s()
+var red3sc = new red3s()
+var blue1sc = new blue1s()
+var blue2sc = new blue2s()
+var blue3sc = new blue3s()
+
 var sendback = "484920544845524521";
 
 var r1messagesleft = 0;
@@ -35,40 +42,40 @@ console.log('Starting up Lighting Robotics Scouting Service');
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
     try{
-      red1s._updateValueCallback(message);
+      red1sc._updateValueCallback(message);
     }
     catch(error){
-
+      console.log("R1 Callback Failure")
     }
     try{
-      red2s._updateValueCallback(message);
+      red2sc._updateValueCallback(message);
     }
     catch(error){
-
+      console.log("R2 Callback Failure")
     }
     try{
-      red3s._updateValueCallback(message);
+      red3sc._updateValueCallback(message);
     }
     catch(error){
-
+      console.log("R3 Callback Failure")
     }
     try{
-      blue1s._updateValueCallback(message);
+      blue1sc._updateValueCallback(message);
     }
     catch(error){
-
+      console.log("B1 Callback Failure")
     }
     try{
-      blue2s._updateValueCallback(message);
+      blue2sc._updateValueCallback(message);
     }
     catch(error){
-
+      console.log("B2 Callback Failure")
     }
     try{
-      blue3s._updateValueCallback(message);
+      blue3sc._updateValueCallback(message);
     }
     catch(error){
-
+      console.log("B3 Callback Failure")
     }
   
   });
@@ -107,12 +114,12 @@ bleno.on('advertisingStart', function(error) {
       new BlenoPrimaryService({
         uuid: '6ad0f836b49011eab3de0242ac130000',
         characteristics: [
-          new red1s(),
-          new red2s(),
-          new red3s(),
-          new blue1s(),
-          new blue2s(),
-          new blue3s()
+          red1sc,
+          red2sc,
+          red3sc,
+          blue1sc,
+          blue2sc,
+          blue3sc
         ]
       })
     ]);
@@ -144,8 +151,7 @@ red1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
     }
   }
   
-
-  this._updateValueCallback(toByteArray("Hi There"));
+  red1sc._updateValueCallback = this._updateValueCallback;
 
   callback(this.RESULT_SUCCESS);
 };
@@ -174,7 +180,7 @@ red2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
     }
   }
 
-  this._updateValueCallback(toByteArray("Hi There"));
+  red2sc._updateValueCallback = this._updateValueCallback;
 
   callback(this.RESULT_SUCCESS);
 };
@@ -203,7 +209,7 @@ red3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
     }
   }
 
-  this._updateValueCallback(toByteArray("Hi There"));
+  red3sc._updateValueCallback = this._updateValueCallback;
 
   callback(this.RESULT_SUCCESS);
 };
@@ -232,7 +238,7 @@ blue1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
     }
   }
 
-  this._updateValueCallback(toByteArray("Hi There"));
+  blue1sc._updateValueCallback = this._updateValueCallback;
 
   callback(this.RESULT_SUCCESS);
 };
@@ -261,7 +267,7 @@ blue2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
     }
   }
 
-  this._updateValueCallback(toByteArray("Hi There"));
+  blue2sc._updateValueCallback = this._updateValueCallback;
 
   callback(this.RESULT_SUCCESS);
 };
@@ -290,7 +296,7 @@ blue3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
     }
   }
 
-  this._updateValueCallback(toByteArray("Hi There"));
+  blue3sc._updateValueCallback = this._updateValueCallback;
 
   callback(this.RESULT_SUCCESS);
 };
