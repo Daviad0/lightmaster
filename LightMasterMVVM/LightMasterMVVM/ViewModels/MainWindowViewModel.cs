@@ -1040,6 +1040,22 @@ namespace LightMasterMVVM.ViewModels
                         new TeamMatch() { TeamNumber = 4005, MatchNumber = 6, TabletId = rawdata.Take(2).ToString() },
                     };
                     byte[] bytesToSend = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(listOfMatchesToSend));
+                    if (bytesToSend.Length > 480)
+                    {
+                        int numberofmessages = (int)Math.Ceiling((float)bytesToSend.Length / (float)480);
+                        var startidentifier = "MM:" + numberofmessages.ToString();
+                        var startbytesarray = Encoding.ASCII.GetBytes(startidentifier);
+                        client.Send(bytesToSend);
+                        for (int i = numberofmessages; i > 0; i--)
+                        {
+                            var bytesarray = bytesToSend.Skip((numberofmessages - i) * 480).Take(480).ToArray();
+                            client.Send(bytesToSend);
+                        }
+                    }
+                    else
+                    {
+                        client.Send(bytesToSend);
+                    }
                     client.Send(bytesToSend);
                     TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightSalmon";
                     TabletViewModel.BluetoothBorderColors[tabletindex] = "DarkOrange";
