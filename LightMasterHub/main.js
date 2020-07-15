@@ -34,7 +34,42 @@ console.log('Starting up Lighting Robotics Scouting Service');
 
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
-    console.log('received: %s', message);
+    try{
+      red1s._updateValueCallback(message);
+    }
+    catch(error){
+
+    }
+    try{
+      red2s._updateValueCallback(message);
+    }
+    catch(error){
+
+    }
+    try{
+      red3s._updateValueCallback(message);
+    }
+    catch(error){
+
+    }
+    try{
+      blue1s._updateValueCallback(message);
+    }
+    catch(error){
+
+    }
+    try{
+      blue2s._updateValueCallback(message);
+    }
+    catch(error){
+
+    }
+    try{
+      blue3s._updateValueCallback(message);
+    }
+    catch(error){
+
+    }
   
   });
   console.log('Received connection');

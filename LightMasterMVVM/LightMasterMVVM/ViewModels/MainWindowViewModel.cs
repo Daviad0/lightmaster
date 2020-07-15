@@ -16,6 +16,7 @@ using OxyPlot.Avalonia;
 using LightMasterMVVM.Scripts;
 using LightMasterMVVM.Views;
 using System.Text.RegularExpressions;
+using System.Text;
 
 namespace LightMasterMVVM.ViewModels
 {
@@ -1024,6 +1025,22 @@ namespace LightMasterMVVM.ViewModels
                 else if (rawdata.Substring(3).StartsWith("E:"))
                 {
                     //E = Immedient Communication
+                    TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightSalmon";
+                    TabletViewModel.BluetoothBorderColors[tabletindex] = "DarkOrange";
+                }
+                else if (rawdata.Substring(3).StartsWith("RD:"))
+                {
+                    var listOfMatchesToSend = new List<TeamMatch>()
+                    {
+                        new TeamMatch() { TeamNumber = 862, MatchNumber = 1, TabletId = rawdata.Take(2).ToString() },
+                        new TeamMatch() { TeamNumber = 1023, MatchNumber = 2, TabletId = rawdata.Take(2).ToString() },
+                        new TeamMatch() { TeamNumber = 2014, MatchNumber = 3, TabletId = rawdata.Take(2).ToString() },
+                        new TeamMatch() { TeamNumber = 2020, MatchNumber = 4, TabletId = rawdata.Take(2).ToString() },
+                        new TeamMatch() { TeamNumber = 3145, MatchNumber = 5, TabletId = rawdata.Take(2).ToString() },
+                        new TeamMatch() { TeamNumber = 4005, MatchNumber = 6, TabletId = rawdata.Take(2).ToString() },
+                    };
+                    byte[] bytesToSend = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(listOfMatchesToSend));
+                    client.Send(bytesToSend);
                     TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightSalmon";
                     TabletViewModel.BluetoothBorderColors[tabletindex] = "DarkOrange";
                 }
