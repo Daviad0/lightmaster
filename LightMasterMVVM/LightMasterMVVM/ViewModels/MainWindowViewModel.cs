@@ -178,22 +178,25 @@ namespace LightMasterMVVM.ViewModels
                 s1.LabelPlacement = LabelPlacement.Inside;
                 s1.FillColor = OxyColors.LightYellow;
                 s1.LabelMargin = 5;
+                s1.BaseValue = 1;
                 s1.TextColor = OxyColors.Black;
                 s1.LabelFormatString = "{0} PC";
                 s2.LabelPlacement = LabelPlacement.Inside;
                 s2.IsStacked = true;
                 s2.LabelMargin = 5;
+                s2.BaseValue = 1;
                 s2.LabelFormatString = "{0} PC";
                 s2.TextColor = OxyColors.White;
                 s2.FillColor = OxyColors.LightSeaGreen;
                 s3.IsStacked = true;
+                s3.BaseValue = 1;
                 s3.FillColor = OxyColors.LightBlue;
                 s3.LabelPlacement = LabelPlacement.Inside;
                 s3.LabelFormatString = "{0} PC";
                 s3.LabelMargin = 5;
                 s3.TextColor = OxyColors.Black;
                 var i = 0;
-                foreach (var team in averagePCCountModels.OrderByDescending(x => x.AvgTotalPC).ThenByDescending(x => x.AvgInnerPC).ThenByDescending(x => x.AvgOuterPC).ThenByDescending(x => x.AvgOuterPC))
+                foreach (var team in averagePCCountModels.OrderBy(x => x.AvgTotalPC).ThenBy(x => x.AvgInnerPC).ThenBy(x => x.AvgOuterPC).ThenBy(x => x.AvgOuterPC))
                 {
 
                     s1.Items.Add(new BarItem { Value = team.AvgLowerPC });
