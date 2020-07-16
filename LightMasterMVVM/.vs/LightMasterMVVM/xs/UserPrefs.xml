@@ -2,11 +2,8 @@
   <MonoDevelop.Ide.ItemProperties.LightMasterMVVM PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="LightMasterMVVM/ViewModels/MainWindowViewModel.cs">
     <Files>
-      <File FileName="LightMasterMVVM/ViewModels/MainWindowViewModel.cs" Line="1045" Column="5" />
-      <File FileName="LightMasterMVVM/Program.cs" />
-      <File FileName="LightMasterMVVM/Views/DataAnalysis.xaml" />
-      <File FileName="LightMasterMVVM/Models/TeamMatch.cs" />
-      <File FileName="LightMasterMVVM/Scripts/TBAChecking.cs" />
+      <File FileName="LightMasterMVVM/ViewModels/MainWindowViewModel.cs" Line="932" Column="1" />
+      <File FileName="LightMasterMVVM/Program.cs" Line="14" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -18,9 +15,6 @@
               <Node name="ViewModels" expanded="True">
                 <Node name="MainWindowViewModel.cs" selected="True" />
               </Node>
-              <Node name="Views" expanded="True">
-                <Node name="Matches.xaml" expanded="True" />
-              </Node>
             </Node>
           </Node>
         </State>
@@ -30,7 +24,10 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/ViewModels/MainWindowViewModel.cs" relfile="LightMasterMVVM/ViewModels/MainWindowViewModel.cs" line="1032" column="1" />
+      <Breakpoint file="/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/ViewModels/MainWindowViewModel.cs" relfile="LightMasterMVVM/ViewModels/MainWindowViewModel.cs" line="932" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>

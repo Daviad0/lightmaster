@@ -1032,12 +1032,12 @@ namespace LightMasterMVVM.ViewModels
                 {
                     var listOfMatchesToSend = new List<TeamMatch>()
                     {
-                        new TeamMatch() { TeamNumber = 862, MatchNumber = 1, TabletId = rawdata.Take(2).ToString() },
-                        new TeamMatch() { TeamNumber = 1023, MatchNumber = 2, TabletId = rawdata.Take(2).ToString() },
-                        new TeamMatch() { TeamNumber = 2014, MatchNumber = 3, TabletId = rawdata.Take(2).ToString() },
-                        new TeamMatch() { TeamNumber = 2020, MatchNumber = 4, TabletId = rawdata.Take(2).ToString() },
-                        new TeamMatch() { TeamNumber = 3145, MatchNumber = 5, TabletId = rawdata.Take(2).ToString() },
-                        new TeamMatch() { TeamNumber = 4005, MatchNumber = 6, TabletId = rawdata.Take(2).ToString() },
+                        new TeamMatch() { TeamNumber = 862, MatchNumber = 1, TabletId = rawdata.Substring(0,2).ToString() },
+                        new TeamMatch() { TeamNumber = 1023, MatchNumber = 2, TabletId = rawdata.Substring(0,2).ToString() },
+                        new TeamMatch() { TeamNumber = 2014, MatchNumber = 3, TabletId = rawdata.Substring(0,2).ToString() },
+                        new TeamMatch() { TeamNumber = 2020, MatchNumber = 4, TabletId = rawdata.Substring(0,2).ToString() },
+                        new TeamMatch() { TeamNumber = 3145, MatchNumber = 5, TabletId = rawdata.Substring(0,2).ToString() },
+                        new TeamMatch() { TeamNumber = 4005, MatchNumber = 6, TabletId = rawdata.Substring(0,2).ToString() },
                     };
                     byte[] bytesToSend = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(listOfMatchesToSend));
                     if (bytesToSend.Length > 480)
@@ -1045,18 +1045,17 @@ namespace LightMasterMVVM.ViewModels
                         int numberofmessages = (int)Math.Ceiling((float)bytesToSend.Length / (float)480);
                         var startidentifier = "MM:" + numberofmessages.ToString();
                         var startbytesarray = Encoding.ASCII.GetBytes(startidentifier);
-                        client.Send(bytesToSend);
+                        client.Send(startbytesarray);
                         for (int i = numberofmessages; i > 0; i--)
                         {
                             var bytesarray = bytesToSend.Skip((numberofmessages - i) * 480).Take(480).ToArray();
-                            client.Send(bytesToSend);
+                            client.Send(bytesarray);
                         }
                     }
                     else
                     {
                         client.Send(bytesToSend);
                     }
-                    client.Send(bytesToSend);
                     TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightSalmon";
                     TabletViewModel.BluetoothBorderColors[tabletindex] = "DarkOrange";
                 }
