@@ -9,9 +9,7 @@
         x:Class="LightMasterMVVM.Views.MainWindow"
         Title="LightMasterMVVM">
 
-    <Window.DataContext>
-        <vm:MainWindowViewModel/>
-    </Window.DataContext>
+    
   <Window.Styles>
     <Style Selector="Button.menu">
       <Setter Property="Button.Background" Value="DarkOrange"/>
