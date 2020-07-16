@@ -22,6 +22,8 @@ var b3sample = new blue3s();
 
 var sendback = "484920544845524521";
 
+var sendingQueue = [];
+
 var r1messagesleft = 0;
 var r2messagesleft = 0;
 var r3messagesleft = 0;
