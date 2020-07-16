@@ -1037,9 +1037,10 @@ namespace LightMasterMVVM.ViewModels
                         new TeamMatch() { TeamNumber = 2014, MatchNumber = 3, TabletId = rawdata.Substring(0,2).ToString() },
                         new TeamMatch() { TeamNumber = 2020, MatchNumber = 4, TabletId = rawdata.Substring(0,2).ToString() },
                         new TeamMatch() { TeamNumber = 3145, MatchNumber = 5, TabletId = rawdata.Substring(0,2).ToString() },
-                        new TeamMatch() { TeamNumber = 4005, MatchNumber = 6, TabletId = rawdata.Substring(0,2).ToString() },
+                        new TeamMatch() { TeamNumber = 4005, MatchNumber = 6, TabletId = rawdata.Substring(0,2).ToString() }
                     };
-                    byte[] bytesToSend = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(listOfMatchesToSend));
+                    client.Send(JsonConvert.SerializeObject(listOfMatchesToSend));
+                    /*byte[] bytesToSend = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(listOfMatchesToSend));
                     if (bytesToSend.Length > 480)
                     {
                         int numberofmessages = (int)Math.Ceiling((float)bytesToSend.Length / (float)480);
@@ -1055,7 +1056,7 @@ namespace LightMasterMVVM.ViewModels
                     else
                     {
                         client.Send(bytesToSend);
-                    }
+                    }*/
                     TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightSalmon";
                     TabletViewModel.BluetoothBorderColors[tabletindex] = "DarkOrange";
                 }

@@ -41,38 +41,46 @@ console.log('Starting up Lighting Robotics Scouting Service');
 
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
+    var bufferarraytouse = toByteArrayCallback(message);
     try{
-      r1sample._updateValueCallback(message);
+      
+      r1sample._updateValueCallback(toByteArray("MM:" + bufferarraytouse.length));
+      bufferarraytouse.forEach(thisbuffer => r1sample._updateValueCallback(thisbuffer));
     }
     catch(error){
       console.log("R1 Callback Failure")
     }
     try{
-      r2sample._updateValueCallback(message);
+      r2sample._updateValueCallback(toByteArray("MM:" + bufferarraytouse.length));
+      bufferarraytouse.forEach(thisbuffer => r2sample._updateValueCallback(thisbuffer));
     }
     catch(error){
       console.log("R2 Callback Failure")
     }
     try{
-      r3sample._updateValueCallback(message);
+      r3sample._updateValueCallback(toByteArray("MM:" + bufferarraytouse.length));
+      bufferarraytouse.forEach(thisbuffer => r3sample._updateValueCallback(thisbuffer));
     }
     catch(error){
       console.log("R3 Callback Failure")
     }
     try{
-      b1sample._updateValueCallback(message);
+      b1sample._updateValueCallback(toByteArray("MM:" + bufferarraytouse.length));
+      bufferarraytouse.forEach(thisbuffer => b1sample._updateValueCallback(thisbuffer));
     }
     catch(error){
       console.log("B1 Callback Failure")
     }
     try{
-      b2sample._updateValueCallback(message);
+      b2sample._updateValueCallback(toByteArray("MM:" + bufferarraytouse.length));
+      bufferarraytouse.forEach(thisbuffer => b2sample._updateValueCallback(thisbuffer));
     }
     catch(error){
       console.log("B2 Callback Failure")
     }
     try{
-      b3sample._updateValueCallback(message);
+      b3sample._updateValueCallback(toByteArray("MM:" + bufferarraytouse.length));
+      bufferarraytouse.forEach(thisbuffer => b3sample._updateValueCallback(thisbuffer));
     }
     catch(error){
       console.log("B3 Callback Failure")
@@ -315,6 +323,22 @@ function sendtomaster(colornum, data){
       client.send(colornum + ":" + data);
     }
   });
+}
+
+function toByteArrayCallback(string){
+  var bufferarray = [];
+  if(string.length > 480){
+    for (var i = 0; i < Math.ceil(string.length/480); i++){
+      var thisstringtoconvert = string.substring(i*480, ((i+1)*480)-1);
+      console.log('Taking string position from ' + i*480 + ' to ' + ((i+1)*480)-1);
+      var thisbuffertopush = Buffer.from(thisstringtoconvert, "utf-8");
+      bufferarray.push(thisbuffertopush);
+    }
+  }else{
+    var onlybuffer = Buffer.from(string, "utf-8");
+    bufferarray.push(onlybuffer);
+  }
+  return bufferarray;
 }
 
 function toByteArray(string){
