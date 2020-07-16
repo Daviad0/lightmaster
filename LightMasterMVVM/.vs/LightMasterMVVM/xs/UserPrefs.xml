@@ -1,20 +1,20 @@
 ﻿<Properties StartupConfiguration="{D1397E30-5D2E-478E-827D-3D8871C098CE}|Default">
   <MonoDevelop.Ide.ItemProperties.LightMasterMVVM PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="LightMasterMVVM/Views/MainWindow.xaml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="LightMasterMVVM/ViewModels/MainWindowViewModel.cs">
     <Files>
-      <File FileName="LightMasterMVVM/ViewModels/MainWindowViewModel.cs" Line="926" Column="1" />
-      <File FileName="LightMasterMVVM/Views/MainWindow.xaml" Line="20" Column="45" />
-      <File FileName="LightMasterMVVM/Views/DataAnalysis.xaml" Line="1" Column="1" />
+      <File FileName="LightMasterMVVM/ViewModels/MainWindowViewModel.cs" Line="1042" Column="22" />
+      <File FileName="LightMasterMVVM/Views/MainWindow.xaml" />
+      <File FileName="LightMasterMVVM/Views/DataAnalysis.xaml" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="LightMasterMVVM" expanded="True">
             <Node name="LightMasterMVVM" expanded="True">
-              <Node name="ViewModels" expanded="True" />
-              <Node name="Views" expanded="True">
-                <Node name="MainWindow.xaml" selected="True" />
+              <Node name="ViewModels" expanded="True">
+                <Node name="MainWindowViewModel.cs" selected="True" />
               </Node>
+              <Node name="Views" expanded="True" />
             </Node>
           </Node>
         </State>
@@ -24,10 +24,7 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/ViewModels/MainWindowViewModel.cs" relfile="LightMasterMVVM/ViewModels/MainWindowViewModel.cs" line="1049" column="1" />
-      <Breakpoint file="/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/ViewModels/MainWindowViewModel.cs" relfile="LightMasterMVVM/ViewModels/MainWindowViewModel.cs" line="926" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>
