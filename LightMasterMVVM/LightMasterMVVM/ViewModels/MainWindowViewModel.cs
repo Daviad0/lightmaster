@@ -1058,7 +1058,7 @@ namespace LightMasterMVVM.ViewModels
                             client.Send(startidentifier);
                             for (int i = numberofmessages; i > 0; i--)
                             {
-                                var simplestring = rawdata.Substring(0, 2).ToString() + ":" + modelstring.Skip((numberofmessages - i) * 480).Take(480).ToArray();
+                                var simplestring = rawdata.Substring(0, 2).ToString() + ":" + new string(modelstring.Skip((numberofmessages - i) * 480).Take(480).ToArray());
                                 client.Send(simplestring);
                             }
                         }

@@ -47,10 +47,11 @@ function BufferQueue(tabletid, buffer) {
 
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
-    console.log(message.substring(0,1) + ":" + toByteArray(message.substring(3)));
-    sendingQueue.push(new BufferQueue(message.substring(0,1), toByteArray(message.substring(3))));
+    console.log(typeof message.substring(3));
+    console.log(message.substring(0,2) + ":" + toByteArray(message.substring(3)));
+    sendingQueue.push(new BufferQueue(message.substring(0,2), toByteArray(message.substring(3))));
     //var bufferarraytouse = toByteArrayCallback(message);
-    
+
 
   });
   console.log('Received connection');
@@ -309,6 +310,7 @@ function toByteArrayCallback(string){
 
 function toByteArray(string){
   var buffer = Buffer.from(string, "utf-8");
+  console.log("wuuw:" + buffer)
   return buffer;
 }
 setInterval(() => {
@@ -369,5 +371,5 @@ setInterval(() => {
     }
     sendingQueue.splice(0, 1);
   }
-  
+
 }, 500);
