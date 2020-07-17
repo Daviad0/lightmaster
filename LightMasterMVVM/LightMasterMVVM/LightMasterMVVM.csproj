@@ -32,6 +32,7 @@
     <AvaloniaResource Remove="Views\DataAnalysis.xaml" />
     <AvaloniaResource Remove="Views\Matches.xaml" />
     <AvaloniaResource Remove="Views\Tablets.xaml" />
+    <AvaloniaResource Remove="Views\TheBlueAlliance.xaml" />
     <AvaloniaResource Remove="Views\UserControl1.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +56,7 @@
     <None Remove="Views\MainWindow.xaml" />
     <None Remove="Views\Matches.xaml" />
     <None Remove="Views\Tablets.xaml" />
+    <None Remove="Views\TheBlueAlliance.xaml" />
     <None Remove="Views\UserControl1.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +95,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Assets\optionselected.png" />
     <EmbeddedResource Include="Views\MainWindow.xaml" />
+    <EmbeddedResource Include="Views\TheBlueAlliance.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="32feet.NET" Version="3.5.0" />

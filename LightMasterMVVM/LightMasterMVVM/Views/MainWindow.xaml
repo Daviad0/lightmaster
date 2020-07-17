@@ -12,15 +12,25 @@
     
   <Window.Styles>
     <Style Selector="Button.menu">
-      <Setter Property="Button.Background" Value="DarkOrange"/>
-      <Setter Property="Button.BorderBrush" Value="DarkOrange"/>
-      <Setter Property="Button.BorderThickness" Value="0"/>
-      <Setter Property="Button.Foreground" Value="White"/>
+      <Setter Property="Background" Value="#eeeeee"/>
+      <Setter Property="BorderBrush" Value="Gray"/>
+      <Setter Property="BorderThickness" Value="5"/>
+      <Setter Property="Foreground" Value="Gray"/>
     </Style>
     <Style Selector="Button.menu:pointerover">
-      <Setter Property="Button.Background" Value="#cc7000"/>
-      <Setter Property="Button.BorderBrush" Value="#cc7000"/>
-      <Setter Property="Button.Foreground" Value="White"/>
+      <Setter Property="Background" Value="LightGray"/>
+      <Setter Property="BorderBrush" Value="Gray"/>
+      <Setter Property="Foreground" Value="White"/>
+    </Style>
+    <Style Selector="Button.menu:focus">
+      <Setter Property="Background" Value="LightGray"/>
+      <Setter Property="BorderBrush" Value="Gray"/>
+      <Setter Property="Foreground" Value="Black"/>
+    </Style>
+    <Style Selector="Button.menu:pressed">
+      <Setter Property="Background" Value="LightGray"/>
+      <Setter Property="BorderBrush" Value="Gray"/>
+      <Setter Property="Foreground" Value="Black"/>
     </Style>
   </Window.Styles>
   <Grid>
@@ -30,24 +40,26 @@
       <RowDefinition Height="*"/>
       <RowDefinition Height="100"/>
     </Grid.RowDefinitions>
-    <Grid ColumnDefinitions="*,*,*" RowDefinitions="120" Grid.Row="0" Margin="70,10,70,30">
+    <Grid ColumnDefinitions="70,70,70,70" RowDefinitions="120" Grid.Row="0" Margin="30,10,30,30" >
       <Grid Grid.Column="0" ColumnDefinitions="*" RowDefinitions="80">
-        <Button Command="{Binding SeeMatches}" CommandParameter="{Binding CurrentMatchNum}" Height="35" Grid.Row="0" Margin="30,0,30,60" BorderBrush="DarkOrange" Foreground="DarkOrange" Background="White" BorderThickness="3">
-          <TextBlock FontWeight="Bold" Text="See Matches"/>
+        <Button Command="{Binding SeeMatches}" Classes="menu" CommandParameter="{Binding CurrentMatchNum}" Height="35" Width="60" Grid.Row="0" Margin="30,0,30,60">
+          <TextBlock FontWeight="Bold" Text="M"/>
         </Button>
       </Grid>
       <Grid Grid.Column="1" ColumnDefinitions="*" RowDefinitions="80">
-        <Button BorderBrush="DarkOrange" Command="{Binding SeeTablets}" Grid.Row="0" Margin="30,0,30,60" Height="35" Background="DarkOrange" Foreground="White">
-          <TextBlock FontWeight="Bold" Text="See Tablets"/>
+        <Button Classes="menu" Command="{Binding SeeTablets}" Grid.Row="0" Margin="30,0,30,60" Width="60" Height="35">
+          <TextBlock FontWeight="Bold" Text="T"/>
         </Button>
       </Grid>
       <Grid Grid.Column="2" ColumnDefinitions="*,10" RowDefinitions="80">
-        <Button Command="{Binding TheBlueAlliance}" Classes="menu" Height="35" Grid.Row="0" Margin="30,0,30,10" VerticalAlignment="Top">
-          <TextBlock FontWeight="Bold" Text="TBA"/>
+        <Button Command="{Binding SeeTBA}" Classes="menu" Height="35" Grid.Row="0" Width="60" Margin="30,0,30,10" VerticalAlignment="Top">
+          <TextBlock FontWeight="Bold" Text="B"/>
         </Button>
-        <Border Background="DarkOrange" Height="5" Grid.Row="1" Margin="30,2,30,0">
-          
-        </Border>
+      </Grid>
+      <Grid Grid.Column="3" ColumnDefinitions="*,10" RowDefinitions="80">
+        <Button Command="{Binding SeeGraph}" Classes="menu" Height="35" Grid.Row="0" Width="60" Margin="30,0,30,10" VerticalAlignment="Top">
+          <TextBlock FontWeight="Bold" Text="G"/>
+        </Button>
       </Grid>
 
 
@@ -64,6 +76,9 @@
       </Border>
       <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0">
         <screens:DataAnalysis x:Name="graphs" DataContext="{Binding GraphViewModel}" IsVisible="{Binding UserControlVisible}"/>
+      </Border>
+      <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">
+        <screens:TheBlueAlliance x:Name="tba" DataContext="{Binding TBAViewModel}" IsVisible="{Binding UserControlVisible}"/>
       </Border>
       
     </Grid>

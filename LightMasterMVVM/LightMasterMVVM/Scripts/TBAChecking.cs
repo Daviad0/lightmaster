@@ -19,7 +19,7 @@ namespace LightMasterMVVM.Scripts
         public ScoutingContext db = new ScoutingContext();
         public string CompetitionKey = "2020mijac";
         public string APILink = "https://thebluealliance.com/api/v3/event/";
-        public async Task CheckCurrentMatchesToDB()
+        public async Task CheckCurrentMatchesToDB(int minmatchtocheck, int maxmatchtocheck)
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Add("X-TBA-Auth-Key", "kzyt55ci5iHn3X1T8BgXYu2yMXmAjdxV5OCXHVA16CRfX8C0Z6tfrwU4BajyleY3");
@@ -38,19 +38,27 @@ namespace LightMasterMVVM.Scripts
                 string responseBody = await response.Content.ReadAsStringAsync();
                 List<TBA_Match> listOfFoundMatches = JsonConvert.DeserializeObject<List<TBA_Match>>(responseBody);
                 //Check to make sure that the matches have been completed and are qualifiers (the default way to check should be using the BLUE alliance)
-                listOfOfficialMatches = listOfFoundMatches.Where(x => x.comp_level == "qm" && x.alliances.blue.score > -1).ToList();
+                listOfOfficialMatches = listOfFoundMatches.Where(x => x.comp_level == "qm" && x.alliances.blue.score > -1 && x.match_number <= maxmatchtocheck && x.match_number >= minmatchtocheck).ToList();
             }
             catch (HttpRequestException e)
             {
                 Console.WriteLine("\nException Caught!");
                 Console.WriteLine("Message :{0} ", e.Message);
             }
-            listOfBlue1Matches = db.Matches.Where(x => x.TabletId == "B1" && x.ClientSubmitted == true).ToList();
-            listOfBlue2Matches = db.Matches.Where(x => x.TabletId == "B2" && x.ClientSubmitted == true).ToList();
-            listOfBlue3Matches = db.Matches.Where(x => x.TabletId == "B3" && x.ClientSubmitted == true).ToList();
-            listOfRed1Matches = db.Matches.Where(x => x.TabletId == "R1" && x.ClientSubmitted == true).ToList();
-            listOfRed2Matches = db.Matches.Where(x => x.TabletId == "R2" && x.ClientSubmitted == true).ToList();
-            listOfRed3Matches = db.Matches.Where(x => x.TabletId == "R3" && x.ClientSubmitted == true).ToList();
+            try
+            {
+                listOfBlue1Matches = db.Matches.Where(x => x.TabletId == "B1" && x.ClientSubmitted == true).ToList();
+                listOfBlue2Matches = db.Matches.Where(x => x.TabletId == "B2" && x.ClientSubmitted == true).ToList();
+                listOfBlue3Matches = db.Matches.Where(x => x.TabletId == "B3" && x.ClientSubmitted == true).ToList();
+                listOfRed1Matches = db.Matches.Where(x => x.TabletId == "R1" && x.ClientSubmitted == true).ToList();
+                listOfRed2Matches = db.Matches.Where(x => x.TabletId == "R2" && x.ClientSubmitted == true).ToList();
+                listOfRed3Matches = db.Matches.Where(x => x.TabletId == "R3" && x.ClientSubmitted == true).ToList();
+            }
+            catch(Exception ex)
+            {
+
+            }
+            
             foreach(var completedMatch in listOfOfficialMatches)
             {
                 //TeamMatch r1completedMatch = listOfRed1Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.red.team_keys[0].Substring(3))).FirstOrDefault();

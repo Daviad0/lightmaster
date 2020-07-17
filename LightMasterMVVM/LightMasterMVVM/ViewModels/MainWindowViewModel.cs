@@ -18,12 +18,41 @@ using LightMasterMVVM.Views;
 using System.Text.RegularExpressions;
 using System.Text;
 using System.Threading.Tasks;
+using GalaSoft.MvvmLight.Messaging;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace LightMasterMVVM.ViewModels
 {
-    public class GraphViewModel : ViewModelBase
+    public class TBAViewModel : ViewModelBase
     {
         private bool userControlVisible = true;
+        public bool UserControlVisible
+        {
+            get => userControlVisible;
+            set => SetProperty(ref userControlVisible, value);
+        }
+        private int minMatch = 0;
+        private int maxMatch = 0;
+        public int MinMatch
+        {
+            get => minMatch;
+            set => SetProperty(ref minMatch, value);
+        }
+        public int MaxMatch
+        {
+            get => minMatch;
+            set => SetProperty(ref minMatch, value);
+        }
+        public async void TheBlueAlliance()
+        {
+            var TBACheck = new TBAChecking();
+            await TBACheck.CheckCurrentMatchesToDB(MinMatch, MaxMatch);
+        }
+
+    }
+    public class GraphViewModel : ViewModelBase
+    {
+        private bool userControlVisible = false;
         public PlotController customController { get; private set; }
         private int graphHeight = 650;
         private PlotModel dataPoints = new PlotModel();
@@ -99,7 +128,15 @@ namespace LightMasterMVVM.ViewModels
                     LegendBorderThickness = 0,
                 };
 
-                List<TeamMatch> dbMatches = db.Matches.Where(x => x.ClientSubmitted == true && x.EventCode == "test_env").ToList();
+                List<TeamMatch> dbMatches = new List<TeamMatch>();
+                try
+                {
+                    dbMatches = db.Matches.Where(x => x.ClientSubmitted == true && x.EventCode == "test_env").ToList();
+                }
+                catch(Exception ex)
+                {
+                    dbMatches = new List<TeamMatch>();
+                }
                 List<int> selectedTeamNumbers = new List<int>();
                 List<AveragePCCountModel> averagePCCountModels = new List<AveragePCCountModel>();
 
@@ -428,6 +465,7 @@ namespace LightMasterMVVM.ViewModels
     }
     public class MatchViewModel : ViewModelBase
     {
+        
         private string testText = "abc";
         private bool red1MatchNotFilled = false;
         private bool red2MatchNotFilled = false;
@@ -807,6 +845,7 @@ namespace LightMasterMVVM.ViewModels
         private ObservableCollection<string> cableBackgroundColors = new ObservableCollection<string>(new string[6] { "LightGray", "LightGray", "LightGray", "LightGray", "LightGray", "LightGray" }.ToList());
         private ObservableCollection<string> batteryBackgroundColors = new ObservableCollection<string>(new string[6] { "LightGray", "LightGray", "LightGray", "LightGray", "LightGray", "LightGray" }.ToList());
         private ObservableCollection<string> batteryAmounts = new ObservableCollection<string>(new string[6] { "Device Not Initialized", "Device Not Initialized", "Device Not Initialized", "Device Not Initialized", "Device Not Initialized", "Device Not Initialized" }.ToList());
+        private ObservableCollection<string> lastPings = new ObservableCollection<string>(new string[6] { "Device Not Initialized", "Device Not Initialized", "Device Not Initialized", "Device Not Initialized", "Device Not Initialized", "Device Not Initialized" }.ToList());
         public string Text
         {
             get => _text;
@@ -858,6 +897,11 @@ namespace LightMasterMVVM.ViewModels
             get => batteryAmounts;
             set => SetProperty(ref batteryAmounts, value);
         }
+        public ObservableCollection<string> LastPings
+        {
+            get => lastPings;
+            set => SetProperty(ref lastPings, value);
+        }
         public void SetTest()
         {
             bluetoothBackgroundColors[0] = "Red";
@@ -878,6 +922,7 @@ namespace LightMasterMVVM.ViewModels
         private TabletViewModel tabletViewModel = new TabletViewModel();
         private MatchViewModel matchViewModel = new MatchViewModel();
         private string _text = "Initial text";
+        private TBAViewModel tbaViewModel = new TBAViewModel();
         private bool userControlVisible = false;
         public WebsocketClient client = new WebsocketClient(new Uri("ws://localhost:8080"));
         public int testInt = 0;
@@ -890,6 +935,11 @@ namespace LightMasterMVVM.ViewModels
         {
             get => tabletViewModel;
             set => SetProperty(ref tabletViewModel, value);
+        }
+        public TBAViewModel TBAViewModel
+        {
+            get => tbaViewModel;
+            set => SetProperty(ref tbaViewModel, value);
         }
         public GraphViewModel GraphViewModel
         {
@@ -966,7 +1016,7 @@ namespace LightMasterMVVM.ViewModels
                     {
                         tabletindex = 2;
                     }
-
+                    TabletViewModel.LastPings[tabletindex] = "Last ping at: " + DateTime.Now.ToShortTimeString();
                     if (rawdata.Substring(3).StartsWith("S:"))
                     {
                         //S = Score
@@ -1024,6 +1074,7 @@ namespace LightMasterMVVM.ViewModels
                             TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightPink";
                             TabletViewModel.BatteryBorderColors[tabletindex] = "IndianRed";
                         }
+                        TabletViewModel.BatteryAmounts[tabletindex] = Math.Round(batterylevel).ToString();
 
                     }
                     else if (rawdata.Substring(3).StartsWith("D:"))
@@ -1095,12 +1146,7 @@ namespace LightMasterMVVM.ViewModels
             }
             tabletViewModel.TestBTD = items;
         }
-        public async void TheBlueAlliance()
-        {
-            var TBACheck = new TBAChecking();
-            await TBACheck.CheckCurrentMatchesToDB();
-            GraphViewModel = new GraphViewModel();
-        }
+        
         public void SeeMatches(int MatchNum)
         {
             tabletViewModel.UserControlVisible = false;
@@ -1465,7 +1511,26 @@ namespace LightMasterMVVM.ViewModels
         {
             matchViewModel.UserControlVisible = false;
             tabletViewModel.UserControlVisible = true;
+            TBAViewModel.UserControlVisible = false;
             GraphViewModel.UserControlVisible = false;
+
+            
+        }
+        public void SeeTBA()
+        {
+            matchViewModel.UserControlVisible = false;
+            tabletViewModel.UserControlVisible = false;
+            GraphViewModel.UserControlVisible = false;
+            TBAViewModel.UserControlVisible = true;
+
+        }
+        public void SeeGraph()
+        {
+            matchViewModel.UserControlVisible = false;
+            tabletViewModel.UserControlVisible = false;
+            GraphViewModel = new GraphViewModel();
+            GraphViewModel.UserControlVisible = true;
+            TBAViewModel.UserControlVisible = false;
 
         }
         public void NextMatch()

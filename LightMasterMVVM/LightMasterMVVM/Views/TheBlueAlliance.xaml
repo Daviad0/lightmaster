@@ -1,0 +1,27 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:LightMasterMVVM.ViewModels"
+             xmlns:f="clr-namespace:LightMasterMVVM.Assets"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:cmd ="http://www.galasoft.ch/mvvmlight"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="LightMasterMVVM.Views.TheBlueAlliance">
+  <Grid RowDefinitions="100,100,50" HorizontalAlignment="Center">
+    <TextBlock Text="TBA CHECKING" FontWeight="Bold" FontSize="60" Grid.Row="0"/>
+    <Grid ColumnDefinitions="120,50,120" Grid.Row="1" HorizontalAlignment="Center">
+      <Grid RowDefinitions="30,30" Grid.Column="0" Margin="15,0" HorizontalAlignment="Center">
+        <TextBlock Text="Starting Match" Grid.Row="0"/>
+        <TextBox Text="{Binding MinMatch, Mode=TwoWay}" Grid.Row="1"/>
+      </Grid>
+      <TextBlock Text="-" FontSize="60" FontWeight="Bold" Grid.Column="1" HorizontalAlignment="Center"/>
+      <Grid RowDefinitions="30,30" Grid.Column="2" Margin="15,0" HorizontalAlignment="Center">
+        <TextBlock Text="Ending Match" Grid.Row="0"/>
+        <TextBox Text="{Binding MaxMatch, Mode=TwoWay}" Grid.Row="1"/>
+      </Grid>
+    </Grid>
+    <Button Command="{Binding TheBlueAlliance}" Content="Start Checking" Background="Blue" Foreground="White" Grid.Row="2"/>
+  </Grid>
+</UserControl>
