@@ -1051,21 +1051,20 @@ namespace LightMasterMVVM.ViewModels
                         };
                         string modelstring = JsonConvert.SerializeObject(listOfMatchesToSend);
                         byte[] bytesToSend = Encoding.ASCII.GetBytes(modelstring);
-                        if (bytesToSend.Length > 480)
+                        if (modelstring.Length > 480)
                         {
-                            int numberofmessages = (int)Math.Ceiling((float)bytesToSend.Length / (float)480);
-                            var startidentifier = "MM:" + numberofmessages.ToString();
-                            var startbytesarray = Encoding.ASCII.GetBytes(startidentifier);
-                            client.Send(startbytesarray);
+                            int numberofmessages = (int)Math.Ceiling((float)modelstring.Length / (float)480);
+                            var startidentifier = rawdata.Substring(0,2).ToString() + ":MM:" + numberofmessages.ToString();
+                            client.Send(startidentifier);
                             for (int i = numberofmessages; i > 0; i--)
                             {
-                                var bytesarray = bytesToSend.Skip((numberofmessages - i) * 480).Take(480).ToArray();
-                                client.Send(bytesarray);
+                                var simplestring = rawdata.Substring(0, 2).ToString() + ":" + modelstring.Skip((numberofmessages - i) * 480).Take(480).ToArray();
+                                client.Send(simplestring);
                             }
                         }
                         else
                         {
-                            client.Send(bytesToSend);
+                            client.Send(modelstring);
                         }
                         TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightSalmon";
                         TabletViewModel.BluetoothBorderColors[tabletindex] = "DarkOrange";

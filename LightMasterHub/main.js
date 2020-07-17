@@ -40,11 +40,16 @@ var b3combinedstring = "";
 
 console.log('Starting up Lighting Robotics Scouting Service');
 
+function BufferQueue(tabletid, buffer) {
+  this.tabletid = tabletid;
+  this.buffer = buffer;
+}
 
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
-    sendingQueue.push(message);
-    var bufferarraytouse = toByteArrayCallback(message);
+    console.log(message.substring(0,1) + ":" + toByteArray(message.substring(3)));
+    sendingQueue.push(new BufferQueue(message.substring(0,1), toByteArray(message.substring(3))));
+    //var bufferarraytouse = toByteArrayCallback(message);
     
 
   });
@@ -308,49 +313,61 @@ function toByteArray(string){
 }
 setInterval(() => {
   if(sendingQueue.length > 0){
-    try{
-      r1sample._updateValueCallback(sendingQueue[0]);
-      //bufferarraytouse.forEach(thisbuffer => r1sample._updateValueCallback(thisbuffer));
+    if(sendingQueue[0].tabletid == "R1"){
+      try{
+        r1sample._updateValueCallback(sendingQueue[0].buffer);
+        //bufferarraytouse.forEach(thisbuffer => r1sample._updateValueCallback(thisbuffer));
+      }
+      catch(error){
+        console.log("R1 Callback Failure")
+      }
     }
-    catch(error){
-      console.log("R1 Callback Failure")
+    else if(sendingQueue[0].tabletid == "R2"){
+      try{
+        r2sample._updateValueCallback(sendingQueue[0].buffer);
+        //bufferarraytouse.forEach(thisbuffer => r1sample._updateValueCallback(thisbuffer));
+      }
+      catch(error){
+        console.log("R2 Callback Failure")
+      }
     }
-    try{
-      r2sample._updateValueCallback(sendingQueue[0]);
-      //bufferarraytouse.forEach(thisbuffer => r2sample._updateValueCallback(thisbuffer));
+    else if(sendingQueue[0].tabletid == "R3"){
+      try{
+        r3sample._updateValueCallback(sendingQueue[0].buffer);
+        //bufferarraytouse.forEach(thisbuffer => r1sample._updateValueCallback(thisbuffer));
+      }
+      catch(error){
+        console.log("R3 Callback Failure")
+      }
     }
-    catch(error){
-      console.log("R2 Callback Failure")
+    else if(sendingQueue[0].tabletid == "B1"){
+      try{
+        b1sample._updateValueCallback(sendingQueue[0].buffer);
+        //bufferarraytouse.forEach(thisbuffer => r1sample._updateValueCallback(thisbuffer));
+      }
+      catch(error){
+        console.log("B1 Callback Failure")
+      }
     }
-    try{
-      r3sample._updateValueCallback(sendingQueue[0]);
-      //bufferarraytouse.forEach(thisbuffer => r3sample._updateValueCallback(thisbuffer));
+    else if(sendingQueue[0].tabletid == "B2"){
+      try{
+        b2sample._updateValueCallback(sendingQueue[0].buffer);
+        //bufferarraytouse.forEach(thisbuffer => r1sample._updateValueCallback(thisbuffer));
+      }
+      catch(error){
+        console.log("B2 Callback Failure")
+      }
     }
-    catch(error){
-      console.log("R3 Callback Failure")
-    }
-    try{
-      b1sample._updateValueCallback(sendingQueue[0]);
-      //bufferarraytouse.forEach(thisbuffer => b1sample._updateValueCallback(thisbuffer));
-    }
-    catch(error){
-      console.log("B1 Callback Failure")
-    }
-    try{
-      b2sample._updateValueCallback(sendingQueue[0]);
-      //bufferarraytouse.forEach(thisbuffer => b2sample._updateValueCallback(thisbuffer));
-    }
-    catch(error){
-      console.log("B2 Callback Failure")
-    }
-    try{
-      b3sample._updateValueCallback(sendingQueue[0]);
-      //bufferarraytouse.forEach(thisbuffer => b3sample._updateValueCallback(thisbuffer));
-    }
-    catch(error){
-      console.log("B3 Callback Failure")
+    else if(sendingQueue[0].tabletid == "B3"){
+      try{
+        b3sample._updateValueCallback(sendingQueue[0].buffer);
+        //bufferarraytouse.forEach(thisbuffer => r1sample._updateValueCallback(thisbuffer));
+      }
+      catch(error){
+        console.log("B3 Callback Failure")
+      }
     }
     sendingQueue.splice(0, 1);
   }
   
-}, 1000);
+}, 500);
