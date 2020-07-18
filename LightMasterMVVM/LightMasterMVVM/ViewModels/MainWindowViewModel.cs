@@ -20,9 +20,32 @@ using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.EntityFrameworkCore.Internal;
+using Avalonia.Threading;
 
 namespace LightMasterMVVM.ViewModels
 {
+    public class NotificationViewModel : ViewModelBase
+    {
+        private ObservableCollection<NotificationItem> notifications = new ObservableCollection<NotificationItem>()
+        {
+            new NotificationItem(){ BackgroundColor = "#2a7afa", NotificationText = "HI THERE", NotificationTitle = "Test", NotificationId = 1, NotificationActive = true },
+            new NotificationItem(){ BackgroundColor = "#2a7afa", NotificationText = "HI THERE2", NotificationTitle = "Test", NotificationId = 2, NotificationActive = true },
+            new NotificationItem(){ BackgroundColor = "#2a7afa", NotificationText = "HI THERE3", NotificationTitle = "Test", NotificationId = 3, NotificationActive = true }
+        };
+        public ObservableCollection<NotificationItem> Notifications
+        {
+            get => notifications;
+            set => SetProperty(ref notifications, value);
+        }
+        public async void CancelNotification(int id)
+        {
+            Notifications.Remove(Notifications.Where(x => x.NotificationId == id).FirstOrDefault());
+        }
+        public void SetTest()
+        {
+            Console.WriteLine("REST");
+        }
+    }
     public class TBAViewModel : ViewModelBase
     {
         private bool userControlVisible = true;
@@ -920,6 +943,7 @@ namespace LightMasterMVVM.ViewModels
         private string matchNumString = "Match 1";
         private GraphViewModel graphViewModel = new GraphViewModel();
         private TabletViewModel tabletViewModel = new TabletViewModel();
+        private NotificationViewModel notificationViewModel = new NotificationViewModel();
         private MatchViewModel matchViewModel = new MatchViewModel();
         private string _text = "Initial text";
         private TBAViewModel tbaViewModel = new TBAViewModel();
@@ -935,6 +959,11 @@ namespace LightMasterMVVM.ViewModels
         {
             get => tabletViewModel;
             set => SetProperty(ref tabletViewModel, value);
+        }
+        public NotificationViewModel NotificationViewModel
+        {
+            get => notificationViewModel;
+            set => SetProperty(ref notificationViewModel, value);
         }
         public TBAViewModel TBAViewModel
         {
@@ -1020,6 +1049,7 @@ namespace LightMasterMVVM.ViewModels
                     if (rawdata.Substring(3).StartsWith("S:"))
                     {
                         //S = Score
+                        NotificationViewModel.Notifications.Add(new NotificationItem() { BackgroundColor = "Green", NotificationActive = true, NotificationId = new Random().Next(1, 5000), NotificationText = rawdata.Take(2).ToString() + " New Score", NotificationTitle = "New Score" });
                         TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightBlue";
                         TabletViewModel.BluetoothBorderColors[tabletindex] = "Blue";
                         var jsontodeserialize = rawdata.Substring(5);
@@ -1091,6 +1121,7 @@ namespace LightMasterMVVM.ViewModels
                     }
                     else if (rawdata.Substring(3).StartsWith("RD:"))
                     {
+                        NotificationViewModel.Notifications.Add(new NotificationItem() { BackgroundColor = "Yellow", NotificationActive = true, NotificationId = new Random().Next(1, 5000), NotificationText = rawdata.Take(2).ToString() + " Request Data", NotificationTitle = "Data" });
                         var listOfMatchesToSend = new List<TeamMatch>()
                         {
                             new TeamMatch() { TeamNumber = 862, MatchNumber = 1, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },

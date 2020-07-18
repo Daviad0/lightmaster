@@ -1,0 +1,39 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:LightMasterMVVM.ViewModels"
+             xmlns:viewModels="clr-namespace:LightMasterMVVM.ViewModels;assembly=LightMasterMVVM"
+             xmlns:screens="clr-namespace:LightMasterMVVM.Views"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="LightMasterMVVM.Views.NotifyUser">
+  <StackPanel>
+    <ItemsControl Items="{Binding Notifications}">
+      <ItemsControl.ItemTemplate>
+        <DataTemplate>
+          <Border Margin="10" Padding="40,20,40,20" CornerRadius="5" Background="{Binding BackgroundColor}" IsVisible="{Binding NotificationActive}" Opacity="{Binding Opacity}">
+            <Grid ColumnDefinitions="*" RowDefinitions="*">
+              <StackPanel Grid.Row="0" Grid.Column="1">
+                <TextBlock Text="{Binding NotificationTitle}" Foreground="White" FontWeight="Bold" FontSize="20"/>
+                <TextBlock Text="{Binding NotificationText}" Foreground="White" FontSize="15"/>
+              </StackPanel>
+              <Button Margin="90,0,0,0" IsEnabled="True" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl},
+                             Path=DataContext.CancelNotification}" CommandParameter="{Binding NotificationId}">
+                <Button.Template>
+                  <ControlTemplate TargetType="{x:Type Button}">
+                    <TextBlock Text="X" Grid.Row="0" Grid.Column="0" Foreground="White" FontWeight="Bold" FontSize="30"/>
+                  </ControlTemplate>
+                </Button.Template>
+              </Button>
+
+
+            </Grid>
+
+          </Border>
+
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+  </StackPanel>
+
+</UserControl>
