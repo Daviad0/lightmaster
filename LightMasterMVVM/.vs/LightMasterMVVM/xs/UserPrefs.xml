@@ -2,7 +2,7 @@
   <MonoDevelop.Ide.ItemProperties.LightMasterMVVM PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="LightMasterMVVM/ViewModels/MainWindowViewModel.cs">
     <Files>
-      <File FileName="LightMasterMVVM/ViewModels/MainWindowViewModel.cs" Line="1042" Column="22" />
+      <File FileName="LightMasterMVVM/ViewModels/MainWindowViewModel.cs" Line="1114" Column="30" />
       <File FileName="LightMasterMVVM/Views/MainWindow.xaml" />
       <File FileName="LightMasterMVVM/Views/DataAnalysis.xaml" />
     </Files>

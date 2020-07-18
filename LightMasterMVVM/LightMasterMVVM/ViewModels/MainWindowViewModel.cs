@@ -1151,6 +1151,7 @@ namespace LightMasterMVVM.ViewModels
         {
             tabletViewModel.UserControlVisible = false;
             matchViewModel.UserControlVisible = true;
+            TBAViewModel.UserControlVisible = false;
             try
             {
                 using (var db = new ScoutingContext())

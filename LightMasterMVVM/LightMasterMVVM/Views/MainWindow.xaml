@@ -18,19 +18,19 @@
       <Setter Property="Foreground" Value="Gray"/>
     </Style>
     <Style Selector="Button.menu:pointerover">
-      <Setter Property="Background" Value="LightGray"/>
+      <Setter Property="Background" Value="Gray"/>
       <Setter Property="BorderBrush" Value="Gray"/>
       <Setter Property="Foreground" Value="White"/>
     </Style>
     <Style Selector="Button.menu:focus">
-      <Setter Property="Background" Value="LightGray"/>
+      <Setter Property="Background" Value="Gray"/>
       <Setter Property="BorderBrush" Value="Gray"/>
       <Setter Property="Foreground" Value="Black"/>
     </Style>
     <Style Selector="Button.menu:pressed">
-      <Setter Property="Background" Value="LightGray"/>
+      <Setter Property="Background" Value="Gray"/>
       <Setter Property="BorderBrush" Value="Gray"/>
-      <Setter Property="Foreground" Value="Black"/>
+      <Setter Property="Foreground" Value="White"/>
     </Style>
   </Window.Styles>
   <Grid>
@@ -40,25 +40,25 @@
       <RowDefinition Height="*"/>
       <RowDefinition Height="100"/>
     </Grid.RowDefinitions>
-    <Grid ColumnDefinitions="70,70,70,70" RowDefinitions="120" Grid.Row="0" Margin="30,10,30,30" >
+    <Grid ColumnDefinitions="120,120,120,120" RowDefinitions="120" Grid.Row="0" Margin="30,10,30,30" >
       <Grid Grid.Column="0" ColumnDefinitions="*" RowDefinitions="80">
-        <Button Command="{Binding SeeMatches}" Classes="menu" CommandParameter="{Binding CurrentMatchNum}" Height="35" Width="60" Grid.Row="0" Margin="30,0,30,60">
-          <TextBlock FontWeight="Bold" Text="M"/>
+        <Button Command="{Binding SeeMatches}" Classes="menu" CommandParameter="{Binding CurrentMatchNum}" Height="35" Width="110" Grid.Row="0" Margin="30,0,30,60">
+          <TextBlock FontWeight="Bold" Text="Matches"/>
         </Button>
       </Grid>
       <Grid Grid.Column="1" ColumnDefinitions="*" RowDefinitions="80">
-        <Button Classes="menu" Command="{Binding SeeTablets}" Grid.Row="0" Margin="30,0,30,60" Width="60" Height="35">
-          <TextBlock FontWeight="Bold" Text="T"/>
+        <Button Classes="menu" Command="{Binding SeeTablets}" Grid.Row="0" Margin="30,0,30,60" Width="110" Height="35">
+          <TextBlock FontWeight="Bold" Text="Tablets"/>
         </Button>
       </Grid>
       <Grid Grid.Column="2" ColumnDefinitions="*,10" RowDefinitions="80">
-        <Button Command="{Binding SeeTBA}" Classes="menu" Height="35" Grid.Row="0" Width="60" Margin="30,0,30,10" VerticalAlignment="Top">
-          <TextBlock FontWeight="Bold" Text="B"/>
+        <Button Command="{Binding SeeTBA}" Classes="menu" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
+          <TextBlock FontWeight="Bold" Text="TBA Check"/>
         </Button>
       </Grid>
       <Grid Grid.Column="3" ColumnDefinitions="*,10" RowDefinitions="80">
-        <Button Command="{Binding SeeGraph}" Classes="menu" Height="35" Grid.Row="0" Width="60" Margin="30,0,30,10" VerticalAlignment="Top">
-          <TextBlock FontWeight="Bold" Text="G"/>
+        <Button Command="{Binding SeeGraph}" Classes="menu" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
+          <TextBlock FontWeight="Bold" Text="Visualize"/>
         </Button>
       </Grid>
 
