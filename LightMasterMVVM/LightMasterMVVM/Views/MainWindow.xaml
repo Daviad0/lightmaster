@@ -39,7 +39,7 @@
       <RowDefinition Height="50"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
-    <Grid ColumnDefinitions="120,120,120,120" RowDefinitions="120" Grid.Row="0" Margin="30,10,30,30" >
+    <Grid ColumnDefinitions="120,120,120,120,120" RowDefinitions="120" Grid.Row="0" Margin="30,10,30,30" >
       <Grid Grid.Column="0" ColumnDefinitions="*" RowDefinitions="80">
         <Button Command="{Binding SeeMatches}" Classes="menu" CommandParameter="{Binding CurrentMatchNum}" Height="35" Width="110" Grid.Row="0" Margin="30,0,30,60">
           <TextBlock FontWeight="Bold" Text="Matches"/>
@@ -58,6 +58,11 @@
       <Grid Grid.Column="3" ColumnDefinitions="*,10" RowDefinitions="80">
         <Button Command="{Binding SeeGraph}" Classes="menu" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
           <TextBlock FontWeight="Bold" Text="Visualize"/>
+        </Button>
+      </Grid>
+      <Grid Grid.Column="4" ColumnDefinitions="*,10" RowDefinitions="80">
+        <Button Command="{Binding TryUSB}" Classes="menu" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
+          <TextBlock FontWeight="Bold" Text="USBTest"/>
         </Button>
       </Grid>
 

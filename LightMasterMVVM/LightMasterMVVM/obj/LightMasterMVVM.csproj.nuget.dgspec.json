@@ -100,6 +100,10 @@
             "Websocket.Client": {
               "target": "Package",
               "version": "[4.3.15, )"
+            },
+            "imobiledevice-net": {
+              "target": "Package",
+              "version": "[1.3.4, )"
             }
           },
           "imports": [

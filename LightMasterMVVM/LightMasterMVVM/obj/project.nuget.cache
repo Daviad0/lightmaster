@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wbT9Y78nvatH0JYFL+VCYd+T2310mGfUDzEM44Ih0oXrH9UufoNtqnfeibex6DeNbegQ1xkYdAdl/onKWAnIyQ==",
+  "dgSpecHash": "Gd8o80Nb+A/WURwbU9kGi+znP4yFSReolmbMNjvLGzIHeyRW1uYA9ZdOUfAJff2FbFu2wxUgNg7r48RXE2Y1GQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\djree\\source\\repos\\lightmaster\\LightMasterMVVM\\LightMasterMVVM\\LightMasterMVVM.csproj",
   "expectedPackageFiles": [
@@ -17,6 +17,7 @@
     "C:\\Users\\djree\\.nuget\\packages\\avalonia.win32\\0.9.10\\avalonia.win32.0.9.10.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\avalonia.x11\\0.9.10\\avalonia.x11.0.9.10.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\dynamicdata\\6.13.9\\dynamicdata.6.13.9.nupkg.sha512",
+    "C:\\Users\\djree\\.nuget\\packages\\imobiledevice-net\\1.3.4\\imobiledevice-net.1.3.4.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\jetbrains.annotations\\10.3.0\\jetbrains.annotations.10.3.0.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\libuv\\1.9.1\\libuv.1.9.1.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",

@@ -230,7 +230,6 @@ C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debu
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debug\netcoreapp3.1\System.Reactive.dll
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debug\netcoreapp3.1\System.Reactive.xml
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Debug\netcoreapp3.1\LightMasterMVVM.csprojAssemblyReference.cache
-C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Debug\netcoreapp3.1\LightMasterMVVM.csproj.CoreCompileInputs.cache
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Debug\netcoreapp3.1\LightMasterMVVM.AssemblyInfoInputs.cache
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Debug\netcoreapp3.1\LightMasterMVVM.AssemblyInfo.cs
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Debug\netcoreapp3.1\LightMasterMVVM.csproj.CopyComplete

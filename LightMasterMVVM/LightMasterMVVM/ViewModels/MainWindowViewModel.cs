@@ -21,6 +21,10 @@ using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.EntityFrameworkCore.Internal;
 using Avalonia.Threading;
+using System.Runtime.CompilerServices;
+using iMobileDevice.iDevice;
+using iMobileDevice;
+using iMobileDevice.Lockdown;
 
 namespace LightMasterMVVM.ViewModels
 {
@@ -1576,6 +1580,32 @@ namespace LightMasterMVVM.ViewModels
             GraphViewModel.UserControlVisible = true;
             TBAViewModel.UserControlVisible = false;
 
+        }
+        public void TryUSB()
+        {
+            ReadOnlyCollection<string> udids;
+            int count = 0;
+
+            var idevice = LibiMobileDevice.Instance.iDevice;
+            var lockdown = LibiMobileDevice.Instance.Lockdown;
+            var ret = idevice.idevice_get_device_list(out udids, ref count);
+
+            if(!(ret == iDeviceError.NoDevice))
+            {
+                foreach(var udid in udids)
+                {
+                    iDeviceHandle deviceHandle;
+                    idevice.idevice_new(out deviceHandle, udid);
+
+                    LockdownClientHandle lockdownHandle;
+                    lockdown.lockdownd_client_new_with_handshake(deviceHandle, out lockdownHandle, "LightScout").ThrowOnError();
+
+                    string deviceName;
+                    lockdown.lockdownd_get_device_name(lockdownHandle, out deviceName).ThrowOnError();
+
+                    Console.WriteLine(deviceName);
+                }
+            }
         }
         public void NextMatch()
         {
