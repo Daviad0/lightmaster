@@ -1,4 +1,5 @@
-﻿using LightMasterMVVM.ViewModels;
+﻿using Avalonia.Styling;
+using LightMasterMVVM.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +20,7 @@ namespace LightMasterMVVM.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        public DateTime timeAdded { get; set; }
         public string BackgroundColor
         {
             get
@@ -35,6 +37,8 @@ namespace LightMasterMVVM.Models
                 }
             }
         }
+        
+    
         public int NotificationId
         {
             get

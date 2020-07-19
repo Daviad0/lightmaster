@@ -28,9 +28,9 @@ namespace LightMasterMVVM.ViewModels
     {
         private ObservableCollection<NotificationItem> notifications = new ObservableCollection<NotificationItem>()
         {
-            new NotificationItem(){ BackgroundColor = "#2a7afa", NotificationText = "HI THERE", NotificationTitle = "Test", NotificationId = 1, NotificationActive = true },
-            new NotificationItem(){ BackgroundColor = "#2a7afa", NotificationText = "HI THERE2", NotificationTitle = "Test", NotificationId = 2, NotificationActive = true },
-            new NotificationItem(){ BackgroundColor = "#2a7afa", NotificationText = "HI THERE3", NotificationTitle = "Test", NotificationId = 3, NotificationActive = true }
+            new NotificationItem(){ BackgroundColor = "#2a7afa", NotificationText = "HI THERE1", NotificationTitle = "Test", NotificationId = 1, NotificationActive = true, timeAdded = DateTime.Now },
+            new NotificationItem(){ BackgroundColor = "#2a7afa", NotificationText = "HI THERE2", NotificationTitle = "Test", NotificationId = 2, NotificationActive = true, timeAdded = DateTime.Now },
+            new NotificationItem(){ BackgroundColor = "#2a7afa", NotificationText = "HI THERE3", NotificationTitle = "Test", NotificationId = 3, NotificationActive = true, timeAdded = DateTime.Now }
         };
         public ObservableCollection<NotificationItem> Notifications
         {
@@ -44,6 +44,18 @@ namespace LightMasterMVVM.ViewModels
         public void SetTest()
         {
             Console.WriteLine("REST");
+        }
+        public async void AddNotification(string title, string message, string color)
+        {
+            List<NotificationItem> oldNotifications = Notifications.ToList();
+            if(oldNotifications.Count == 4)
+            {
+                oldNotifications = oldNotifications.OrderBy(x => x.timeAdded).ToList();
+                oldNotifications.Remove(oldNotifications.First());
+            }
+            oldNotifications.Add(new NotificationItem() { BackgroundColor = color, NotificationActive = true, NotificationId = new Random().Next(1, 5000), NotificationText = message, NotificationTitle = title, timeAdded = DateTime.Now });
+            ObservableCollection<NotificationItem> newNotifications = new ObservableCollection<NotificationItem>(oldNotifications);
+            Notifications = newNotifications;
         }
     }
     public class TBAViewModel : ViewModelBase
@@ -1049,7 +1061,7 @@ namespace LightMasterMVVM.ViewModels
                     if (rawdata.Substring(3).StartsWith("S:"))
                     {
                         //S = Score
-                        NotificationViewModel.Notifications.Add(new NotificationItem() { BackgroundColor = "Green", NotificationActive = true, NotificationId = new Random().Next(1, 5000), NotificationText = rawdata.Take(2).ToString() + " New Score", NotificationTitle = "New Score" });
+                        NotificationViewModel.AddNotification("Scored", rawdata.Substring(0, 2).ToString() + " send scores", "Blue");
                         TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightBlue";
                         TabletViewModel.BluetoothBorderColors[tabletindex] = "Blue";
                         var jsontodeserialize = rawdata.Substring(5);
@@ -1121,7 +1133,7 @@ namespace LightMasterMVVM.ViewModels
                     }
                     else if (rawdata.Substring(3).StartsWith("RD:"))
                     {
-                        NotificationViewModel.Notifications.Add(new NotificationItem() { BackgroundColor = "Yellow", NotificationActive = true, NotificationId = new Random().Next(1, 5000), NotificationText = rawdata.Take(2).ToString() + " Request Data", NotificationTitle = "Data" });
+                        NotificationViewModel.AddNotification("Data Request", rawdata.Substring(0, 2).ToString() + " requested data", "Blue");
                         var listOfMatchesToSend = new List<TeamMatch>()
                         {
                             new TeamMatch() { TeamNumber = 862, MatchNumber = 1, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },

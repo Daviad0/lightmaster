@@ -7,21 +7,35 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LightMasterMVVM.Views.NotifyUser">
+  <UserControl.Styles>
+    <Style Selector="Border.fadingAnimation">
+      <Style.Animations>
+        <Animation Duration="0:0:1">
+          <KeyFrame Cue="0%">
+            <Setter Property="Opacity" Value="0.0"/>
+          </KeyFrame>
+          <KeyFrame Cue="100%">
+            <Setter Property="Opacity" Value="1.0"/>
+          </KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+  </UserControl.Styles>
   <StackPanel>
     <ItemsControl Items="{Binding Notifications}">
       <ItemsControl.ItemTemplate>
         <DataTemplate>
-          <Border Margin="10" Padding="40,20,40,20" CornerRadius="5" Background="{Binding BackgroundColor}" IsVisible="{Binding NotificationActive}" Opacity="{Binding Opacity}">
+          <Border Width="350" Margin="10" Padding="40,20,40,20" CornerRadius="5" Background="{Binding BackgroundColor}" IsVisible="{Binding NotificationActive}" Opacity="0.95">
             <Grid ColumnDefinitions="*" RowDefinitions="*">
-              <StackPanel Grid.Row="0" Grid.Column="1">
-                <TextBlock Text="{Binding NotificationTitle}" Foreground="White" FontWeight="Bold" FontSize="20"/>
-                <TextBlock Text="{Binding NotificationText}" Foreground="White" FontSize="15"/>
+              <StackPanel Grid.Row="0" Grid.Column="1" Margin="0,0,90,0">
+                <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding NotificationTitle}" Foreground="White" FontWeight="Bold" FontSize="20"/>
+                <TextBlock TextWrapping="Wrap" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding NotificationText}" Foreground="White" FontSize="15"/>
               </StackPanel>
-              <Button Margin="90,0,0,0" IsEnabled="True" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl},
+              <Button IsEnabled="True" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl},
                              Path=DataContext.CancelNotification}" CommandParameter="{Binding NotificationId}">
                 <Button.Template>
                   <ControlTemplate TargetType="{x:Type Button}">
-                    <TextBlock Text="X" Grid.Row="0" Grid.Column="0" Foreground="White" FontWeight="Bold" FontSize="30"/>
+                    <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="X" Grid.Row="0" Grid.Column="0" Foreground="White" FontWeight="Bold" FontSize="30"/>
                   </ControlTemplate>
                 </Button.Template>
               </Button>
