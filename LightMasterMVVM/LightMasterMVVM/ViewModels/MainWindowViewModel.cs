@@ -1666,8 +1666,8 @@ namespace LightMasterMVVM.ViewModels
 
                     }
                     
-                    uint bytesSent = 0;
-                    deviceApi.idevice_connection_send(connection, Encoding.ASCII.GetBytes("Hijjjj"), (uint)Encoding.ASCII.GetBytes("Hijjjj").Length, ref bytesSent);
+                    //uint bytesSent = 0;
+                    //deviceApi.idevice_connection_send(connection, Encoding.ASCII.GetBytes("Hijjjj"), (uint)Encoding.ASCII.GetBytes("Hijjjj").Length, ref bytesSent);
                 }
             });
         }
