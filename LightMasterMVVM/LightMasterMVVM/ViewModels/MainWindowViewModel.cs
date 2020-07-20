@@ -1617,7 +1617,7 @@ namespace LightMasterMVVM.ViewModels
         }
         private void ReceiveDataFromDevice(iDeviceConnectionHandle connection, IiDeviceApi deviceApi)
         {
-            byte[] inbytes = new byte[200];
+            byte[] inbytes = new byte[5000];
             Task.Run(() =>
             {
                 while (true)
@@ -1626,6 +1626,46 @@ namespace LightMasterMVVM.ViewModels
                     deviceApi.idevice_connection_receive(connection, inbytes, (uint)inbytes.Length, ref receivedBytes);
                     if (receivedBytes <= 0) continue;
                     Console.WriteLine("Num of received bytes = " + receivedBytes.ToString());
+                    List<TeamMatch> usbReceivedMatches = new List<TeamMatch>();
+                    try
+                    {
+                        usbReceivedMatches = JsonConvert.DeserializeObject<List<TeamMatch>>(Encoding.ASCII.GetString(inbytes));
+                        using (var db = new ScoutingContext())
+                        {
+                            foreach (var itemtouse in usbReceivedMatches)
+                            {
+                                try
+                                {
+                                    var previousitem = db.Matches.Where(x => x.TabletId == itemtouse.TabletId && x.MatchNumber == itemtouse.MatchNumber && x.EventCode == itemtouse.EventCode).FirstOrDefault();
+                                    if (previousitem == null)
+                                    {
+                                        itemtouse.MatchID = new Random().Next(1, 1000);
+                                        db.Matches.Add(itemtouse);
+                                    }
+                                    else
+                                    {
+                                        itemtouse.MatchID = previousitem.MatchID;
+                                        db.Entry(previousitem).CurrentValues.SetValues(itemtouse);
+                                    }
+
+
+                                }
+                                catch (NpgsqlException ex)
+                                {
+                                    itemtouse.MatchID = new Random().Next(1, 1000);
+                                    db.Matches.Add(itemtouse);
+                                }
+                            }
+
+
+                            db.SaveChanges();
+                        }
+                    }
+                    catch
+                    {
+
+                    }
+                    
                     uint bytesSent = 0;
                     deviceApi.idevice_connection_send(connection, Encoding.ASCII.GetBytes("Hijjjj"), (uint)Encoding.ASCII.GetBytes("Hijjjj").Length, ref bytesSent);
                 }
