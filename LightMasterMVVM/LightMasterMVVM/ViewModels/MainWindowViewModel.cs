@@ -1604,7 +1604,11 @@ namespace LightMasterMVVM.ViewModels
                     lockdown.lockdownd_get_device_name(lockdownHandle, out deviceName).ThrowOnError();
 
                     var error = idevice.idevice_connect(deviceHandle, 862, out iDeviceConnectionHandle connection);
-                    if (error != iDeviceError.Success) return;
+
+                    
+
+                    
+
                     ReceiveDataFromDevice(connection, idevice);
 
                     Console.WriteLine(deviceName);
@@ -1622,6 +1626,8 @@ namespace LightMasterMVVM.ViewModels
                     deviceApi.idevice_connection_receive(connection, inbytes, (uint)inbytes.Length, ref receivedBytes);
                     if (receivedBytes <= 0) continue;
                     Console.WriteLine("Num of received bytes = " + receivedBytes.ToString());
+                    uint bytesSent = 0;
+                    deviceApi.idevice_connection_send(connection, Encoding.ASCII.GetBytes("Hijjjj"), (uint)Encoding.ASCII.GetBytes("Hijjjj").Length, ref bytesSent);
                 }
             });
         }
