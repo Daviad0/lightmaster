@@ -29,7 +29,7 @@
             <Grid ColumnDefinitions="*" RowDefinitions="*">
               <StackPanel Grid.Row="0" Grid.Column="1" Margin="0,0,90,0">
                 <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding NotificationTitle}" Foreground="White" FontWeight="Bold" FontSize="20"/>
-                <TextBlock TextWrapping="Wrap" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding NotificationText}" Foreground="White" FontSize="15"/>
+                <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" TextWrapping="Wrap" Text="{Binding NotificationText}" Foreground="White" FontSize="15"/>
               </StackPanel>
               <Button IsEnabled="True" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl},
                              Path=DataContext.CancelNotification}" CommandParameter="{Binding NotificationId}">
