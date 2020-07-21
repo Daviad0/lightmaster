@@ -1036,140 +1036,8 @@ namespace LightMasterMVVM.ViewModels
                 client.MessageReceived.Subscribe(msg =>
                 {
                     string rawdata = msg.Text;
-                    int tabletindex = 0;
-                    if (rawdata.StartsWith("R1"))
-                    {
-                        tabletindex = 3;
-                    }
-                    else if (rawdata.StartsWith("R2"))
-                    {
-                        tabletindex = 4;
-                    }
-                    else if (rawdata.StartsWith("R3"))
-                    {
-                        tabletindex = 5;
-                    }
-                    else if (rawdata.StartsWith("B1"))
-                    {
-                        tabletindex = 0;
-                    }
-                    else if (rawdata.StartsWith("B2"))
-                    {
-                        tabletindex = 1;
-                    }
-                    else if (rawdata.StartsWith("B3"))
-                    {
-                        tabletindex = 2;
-                    }
-                    TabletViewModel.LastPings[tabletindex] = "Last ping at: " + DateTime.Now.ToShortTimeString();
-                    if (rawdata.Substring(3).StartsWith("S:"))
-                    {
-                        //S = Score
-                        NotificationViewModel.AddNotification("Scored", rawdata.Substring(0, 2).ToString() + " send scores", "Blue");
-                        TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightBlue";
-                        TabletViewModel.BluetoothBorderColors[tabletindex] = "Blue";
-                        var jsontodeserialize = rawdata.Substring(5);
-                        using (var db = new ScoutingContext())
-                        {
-                            var itemstouse = JsonConvert.DeserializeObject<List<TeamMatch>>(jsontodeserialize);
-                            foreach (var itemtouse in itemstouse)
-                            {
-                                try
-                                {
-                                    var previousitem = db.Matches.Where(x => x.TabletId == itemtouse.TabletId && x.MatchNumber == itemtouse.MatchNumber && x.EventCode == itemtouse.EventCode).FirstOrDefault();
-                                    if (previousitem == null)
-                                    {
-                                        itemtouse.MatchID = new Random().Next(1, 1000);
-                                        db.Matches.Add(itemtouse);
-                                    }
-                                    else
-                                    {
-                                        itemtouse.MatchID = previousitem.MatchID;
-                                        db.Entry(previousitem).CurrentValues.SetValues(itemtouse);
-                                    }
-
-
-                                }
-                                catch (NpgsqlException ex)
-                                {
-                                    itemtouse.MatchID = new Random().Next(1, 1000);
-                                    db.Matches.Add(itemtouse);
-                                }
-                            }
-
-
-                            db.SaveChanges();
-                        }
-                    }
-                    else if (rawdata.Substring(3).StartsWith("B:"))
-                    {
-                        //B = Battery Level
-                        var batterylevel = float.Parse(rawdata.Substring(5)) * 100;
-                        if (batterylevel > 80)
-                        {
-                            TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightGreen";
-                            TabletViewModel.BatteryBorderColors[tabletindex] = "Green";
-                        }
-                        else if (batterylevel > 30 && batterylevel <= 80)
-                        {
-                            TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightSalmon";
-                            TabletViewModel.BatteryBorderColors[tabletindex] = "DarkOrange";
-                        }
-                        else
-                        {
-                            TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightPink";
-                            TabletViewModel.BatteryBorderColors[tabletindex] = "IndianRed";
-                        }
-                        TabletViewModel.BatteryAmounts[tabletindex] = Math.Round(batterylevel).ToString();
-
-                    }
-                    else if (rawdata.Substring(3).StartsWith("D:"))
-                    {
-                        //D = Successful Disconnection
-                        TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightGray";
-                        TabletViewModel.BluetoothBorderColors[tabletindex] = "Gray";
-                    }
-                    else if (rawdata.Substring(3).StartsWith("E:"))
-                    {
-                        //E = Immedient Communication
-                        TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightSalmon";
-                        TabletViewModel.BluetoothBorderColors[tabletindex] = "DarkOrange";
-                    }
-                    else if (rawdata.Substring(3).StartsWith("RD:"))
-                    {
-                        NotificationViewModel.AddNotification("Data Request", rawdata.Substring(0, 2).ToString() + " requested data", "Blue");
-                        var listOfMatchesToSend = new List<TeamMatch>()
-                        {
-                            new TeamMatch() { TeamNumber = 862, MatchNumber = 1, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
-                            new TeamMatch() { TeamNumber = 1023, MatchNumber = 2, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
-                            new TeamMatch() { TeamNumber = 2014, MatchNumber = 3, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
-                            new TeamMatch() { TeamNumber = 2020, MatchNumber = 4, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
-                            new TeamMatch() { TeamNumber = 3145, MatchNumber = 5, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
-                            new TeamMatch() { TeamNumber = 4005, MatchNumber = 6, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" }
-                        };
-                        string modelstring = JsonConvert.SerializeObject(listOfMatchesToSend);
-                        byte[] bytesToSend = Encoding.ASCII.GetBytes(modelstring);
-                        if (modelstring.Length > 480)
-                        {
-                            int numberofmessages = (int)Math.Ceiling((float)modelstring.Length / (float)480);
-                            var startidentifier = rawdata.Substring(0,2).ToString() + ":MM:" + numberofmessages.ToString();
-                            client.Send(startidentifier);
-                            for (int i = numberofmessages; i > 0; i--)
-                            {
-                                var simplestring = rawdata.Substring(0, 2).ToString() + ":" + new string(modelstring.Skip((numberofmessages - i) * 480).Take(480).ToArray());
-                                client.Send(simplestring);
-                            }
-                        }
-                        else
-                        {
-                            client.Send(modelstring);
-                        }
-                        TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightSalmon";
-                        TabletViewModel.BluetoothBorderColors[tabletindex] = "DarkOrange";
-                    }
-
-
-                    Console.WriteLine(msg.Text);
+                    UseGivenData(rawdata);
+                    
                 });
                 client.DisconnectionHappened.Subscribe(msg =>
                 {
@@ -1180,6 +1048,143 @@ namespace LightMasterMVVM.ViewModels
             
 
             //Task.Run(() => client.Send("{ message }"));
+        }
+        public void UseGivenData(string rawdata)
+        {
+            int tabletindex = 0;
+            if (rawdata.StartsWith("R1"))
+            {
+                tabletindex = 3;
+            }
+            else if (rawdata.StartsWith("R2"))
+            {
+                tabletindex = 4;
+            }
+            else if (rawdata.StartsWith("R3"))
+            {
+                tabletindex = 5;
+            }
+            else if (rawdata.StartsWith("B1"))
+            {
+                tabletindex = 0;
+            }
+            else if (rawdata.StartsWith("B2"))
+            {
+                tabletindex = 1;
+            }
+            else if (rawdata.StartsWith("B3"))
+            {
+                tabletindex = 2;
+            }
+            TabletViewModel.LastPings[tabletindex] = "Last ping at: " + DateTime.Now.ToShortTimeString();
+            if (rawdata.Substring(3).StartsWith("S:"))
+            {
+                //S = Score
+                NotificationViewModel.AddNotification("Scored", rawdata.Substring(0, 2).ToString() + " send scores", "Blue");
+                TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightBlue";
+                TabletViewModel.BluetoothBorderColors[tabletindex] = "Blue";
+                var jsontodeserialize = rawdata.Substring(5);
+                using (var db = new ScoutingContext())
+                {
+                    var itemstouse = JsonConvert.DeserializeObject<List<TeamMatch>>(jsontodeserialize);
+                    foreach (var itemtouse in itemstouse)
+                    {
+                        try
+                        {
+                            var previousitem = db.Matches.Where(x => x.TabletId == itemtouse.TabletId && x.MatchNumber == itemtouse.MatchNumber && x.EventCode == itemtouse.EventCode).FirstOrDefault();
+                            if (previousitem == null)
+                            {
+                                itemtouse.MatchID = new Random().Next(1, 1000);
+                                db.Matches.Add(itemtouse);
+                            }
+                            else
+                            {
+                                itemtouse.MatchID = previousitem.MatchID;
+                                db.Entry(previousitem).CurrentValues.SetValues(itemtouse);
+                            }
+
+
+                        }
+                        catch (NpgsqlException ex)
+                        {
+                            itemtouse.MatchID = new Random().Next(1, 1000);
+                            db.Matches.Add(itemtouse);
+                        }
+                    }
+
+
+                    db.SaveChanges();
+                }
+            }
+            else if (rawdata.Substring(3).StartsWith("B:"))
+            {
+                //B = Battery Level
+                var batterylevel = float.Parse(rawdata.Substring(5)) * 100;
+                if (batterylevel > 80)
+                {
+                    TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightGreen";
+                    TabletViewModel.BatteryBorderColors[tabletindex] = "Green";
+                }
+                else if (batterylevel > 30 && batterylevel <= 80)
+                {
+                    TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightSalmon";
+                    TabletViewModel.BatteryBorderColors[tabletindex] = "DarkOrange";
+                }
+                else
+                {
+                    TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightPink";
+                    TabletViewModel.BatteryBorderColors[tabletindex] = "IndianRed";
+                }
+                TabletViewModel.BatteryAmounts[tabletindex] = Math.Round(batterylevel).ToString();
+
+            }
+            else if (rawdata.Substring(3).StartsWith("D:"))
+            {
+                //D = Successful Disconnection
+                TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightGray";
+                TabletViewModel.BluetoothBorderColors[tabletindex] = "Gray";
+            }
+            else if (rawdata.Substring(3).StartsWith("E:"))
+            {
+                //E = Immedient Communication
+                TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightSalmon";
+                TabletViewModel.BluetoothBorderColors[tabletindex] = "DarkOrange";
+            }
+            else if (rawdata.Substring(3).StartsWith("RD:"))
+            {
+                NotificationViewModel.AddNotification("Data Request", rawdata.Substring(0, 2).ToString() + " requested data", "Blue");
+                var listOfMatchesToSend = new List<TeamMatch>()
+                        {
+                            new TeamMatch() { TeamNumber = 862, MatchNumber = 1, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
+                            new TeamMatch() { TeamNumber = 1023, MatchNumber = 2, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
+                            new TeamMatch() { TeamNumber = 2014, MatchNumber = 3, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
+                            new TeamMatch() { TeamNumber = 2020, MatchNumber = 4, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
+                            new TeamMatch() { TeamNumber = 3145, MatchNumber = 5, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
+                            new TeamMatch() { TeamNumber = 4005, MatchNumber = 6, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" }
+                        };
+                string modelstring = JsonConvert.SerializeObject(listOfMatchesToSend);
+                byte[] bytesToSend = Encoding.ASCII.GetBytes(modelstring);
+                if (modelstring.Length > 480)
+                {
+                    int numberofmessages = (int)Math.Ceiling((float)modelstring.Length / (float)480);
+                    var startidentifier = rawdata.Substring(0, 2).ToString() + ":MM:" + numberofmessages.ToString();
+                    client.Send(startidentifier);
+                    for (int i = numberofmessages; i > 0; i--)
+                    {
+                        var simplestring = rawdata.Substring(0, 2).ToString() + ":" + new string(modelstring.Skip((numberofmessages - i) * 480).Take(480).ToArray());
+                        client.Send(simplestring);
+                    }
+                }
+                else
+                {
+                    client.Send(modelstring);
+                }
+                TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightSalmon";
+                TabletViewModel.BluetoothBorderColors[tabletindex] = "DarkOrange";
+            }
+
+
+            Console.WriteLine(msg.Text);
         }
         public void GetBluetoothDevices()
         {
@@ -1617,7 +1622,7 @@ namespace LightMasterMVVM.ViewModels
         }
         private void ReceiveDataFromDevice(iDeviceConnectionHandle connection, IiDeviceApi deviceApi)
         {
-            byte[] inbytes = new byte[5000];
+            byte[] inbytes = new byte[20000];
             Task.Run(() =>
             {
                 while (true)
@@ -1625,46 +1630,9 @@ namespace LightMasterMVVM.ViewModels
                     uint receivedBytes = 0;
                     deviceApi.idevice_connection_receive(connection, inbytes, (uint)inbytes.Length, ref receivedBytes);
                     if (receivedBytes <= 0) continue;
+                    inbytes = new byte[20000];
                     Console.WriteLine("Num of received bytes = " + receivedBytes.ToString());
-                    List<TeamMatch> usbReceivedMatches = new List<TeamMatch>();
-                    try
-                    {
-                        usbReceivedMatches = JsonConvert.DeserializeObject<List<TeamMatch>>(Encoding.ASCII.GetString(inbytes));
-                        using (var db = new ScoutingContext())
-                        {
-                            foreach (var itemtouse in usbReceivedMatches)
-                            {
-                                try
-                                {
-                                    var previousitem = db.Matches.Where(x => x.TabletId == itemtouse.TabletId && x.MatchNumber == itemtouse.MatchNumber && x.EventCode == itemtouse.EventCode).FirstOrDefault();
-                                    if (previousitem == null)
-                                    {
-                                        itemtouse.MatchID = new Random().Next(1, 1000);
-                                        db.Matches.Add(itemtouse);
-                                    }
-                                    else
-                                    {
-                                        itemtouse.MatchID = previousitem.MatchID;
-                                        db.Entry(previousitem).CurrentValues.SetValues(itemtouse);
-                                    }
-
-
-                                }
-                                catch (NpgsqlException ex)
-                                {
-                                    itemtouse.MatchID = new Random().Next(1, 1000);
-                                    db.Matches.Add(itemtouse);
-                                }
-                            }
-
-
-                            db.SaveChanges();
-                        }
-                    }
-                    catch
-                    {
-
-                    }
+                    UseGivenData(Encoding.ASCII.GetString(inbytes));
                     
                     //uint bytesSent = 0;
                     //deviceApi.idevice_connection_send(connection, Encoding.ASCII.GetBytes("Hijjjj"), (uint)Encoding.ASCII.GetBytes("Hijjjj").Length, ref bytesSent);
