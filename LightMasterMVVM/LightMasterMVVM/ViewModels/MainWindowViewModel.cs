@@ -1099,8 +1099,12 @@ namespace LightMasterMVVM.ViewModels
                             }
                             else
                             {
-                                itemtouse.MatchID = previousitem.MatchID;
-                                db.Entry(previousitem).CurrentValues.SetValues(itemtouse);
+                                if(previousitem.ClientLastSubmitted != itemtouse.ClientLastSubmitted)
+                                {
+                                    itemtouse.MatchID = previousitem.MatchID;
+                                    db.Entry(previousitem).CurrentValues.SetValues(itemtouse);
+                                }
+                                
                             }
 
 
@@ -1184,7 +1188,7 @@ namespace LightMasterMVVM.ViewModels
             }
 
 
-            Console.WriteLine(msg.Text);
+            //Console.WriteLine(msg.Text);
         }
         public void GetBluetoothDevices()
         {
