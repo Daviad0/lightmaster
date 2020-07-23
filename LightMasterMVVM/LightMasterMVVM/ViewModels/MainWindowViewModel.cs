@@ -518,6 +518,7 @@ namespace LightMasterMVVM.ViewModels
         private bool blue1MatchEditable = false;
         private bool blue2MatchEditable = false;
         private bool blue3MatchEditable = false;
+        private ObservableCollection<LogEntry> logEntries = new ObservableCollection<LogEntry>();
         public TeamMatch originalR1 = new TeamMatch();
         public TeamMatch originalR2 = new TeamMatch();
         public TeamMatch originalR3 = new TeamMatch();
@@ -535,6 +536,11 @@ namespace LightMasterMVVM.ViewModels
         {
             get => userControlVisible;
             set => SetProperty(ref userControlVisible, value);
+        }
+        public ObservableCollection<LogEntry> CurrentLogEntries
+        {
+            get => logEntries;
+            set => SetProperty(ref logEntries, value);
         }
         public string TestText
         {
@@ -630,6 +636,87 @@ namespace LightMasterMVVM.ViewModels
         {
             get => blue3MatchEditable;
             set => SetProperty(ref blue3MatchEditable, value);
+        }
+        public void GetLogsForCurrentEntry(string identifier)
+        {
+            TeamMatch selectedForLogs = new TeamMatch();
+            switch (identifier)
+            {
+                case "R1":
+                    selectedForLogs = originalR1;
+                    break;
+                case "R2":
+                    selectedForLogs = originalR2;
+                    break;
+                case "R3":
+                    selectedForLogs = originalR3;
+                    break;
+                case "B1":
+                    selectedForLogs = originalB1;
+                    break;
+                case "B2":
+                    selectedForLogs = originalB2;
+                    break;
+                case "B3":
+                    selectedForLogs = originalB3;
+                    break;
+            }
+            List<string> logsToParse = selectedForLogs.TapLogs.ToList();
+            List<LogEntry> entriesToDisplay = new List<LogEntry>();
+            foreach(var logToParse in logsToParse)
+            {
+                
+                int actionTimestamp = int.Parse(logToParse.Split(":")[0]);
+                int minutes = (int)Math.Floor((double)actionTimestamp / (double)60);
+                int seconds = actionTimestamp % 60;
+                string secondsview = "";
+                if(seconds < 10)
+                {
+                    secondsview = "0" + seconds.ToString();
+                }
+                else
+                {
+                    secondsview = seconds.ToString();
+                }
+                LogEntry newLogEntry = new LogEntry();
+                newLogEntry.TimeFormatted = minutes.ToString() + ":" + secondsview;
+                int actionIdentifier = int.Parse(logToParse.Split(":")[1]);
+                switch (actionIdentifier)
+                {
+                    case 1:
+                        newLogEntry.Description = "Scouting Entry Started";
+                        break;
+                    case 2:
+                        newLogEntry.Description = "Scouting Entry Finished";
+                        break;
+                    case 1001:
+                        newLogEntry.Description = "Page Changed to 'Ready for Match'";
+                        break;
+                    case 1002:
+                        newLogEntry.Description = "Page Changed to 'Autonomous'";
+                        break;
+                    case 1003:
+                        newLogEntry.Description = "Page Changed to 'Tele-Op'";
+                        break;
+                    case 1004:
+                        newLogEntry.Description = "Page Changed to 'Endgame'";
+                        break;
+                    case 1005:
+                        newLogEntry.Description = "Page Changed to 'Confirm Form'";
+                        break;
+                    case 9000:
+                        newLogEntry.Description = "Robot Marked as DISABLED";
+                        break;
+                    case 9001:
+                        newLogEntry.Description = "Robot Marked as NOT DISABLED";
+                        break;
+                    default:
+                        newLogEntry.Description = "Unknown Log";
+                        break;
+                }
+                entriesToDisplay.Add(newLogEntry);
+            }
+
         }
         public void SaveChanges()
         {
@@ -1635,7 +1722,7 @@ namespace LightMasterMVVM.ViewModels
                     uint receivedBytes = 0;
                     deviceApi.idevice_connection_receive(connection, inbytes, (uint)inbytes.Length, ref receivedBytes);
                     if (receivedBytes <= 0) continue;
-                    byte[] finalInBytes = inbytes.Take((int)receivedBytes).ToArray()
+                    byte[] finalInBytes = inbytes.Take((int)receivedBytes).ToArray();
                     Console.WriteLine("Num of received bytes = " + receivedBytes.ToString());
                     UseGivenData(Encoding.ASCII.GetString(finalInBytes));
                     

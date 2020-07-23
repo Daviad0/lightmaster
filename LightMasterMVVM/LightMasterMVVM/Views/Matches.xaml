@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:screens="clr-namespace:LightMasterMVVM.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LightMasterMVVM.Views.Matches">
   <UserControl.Styles>
@@ -56,7 +57,7 @@
       </Setter>
     </Style>
   </UserControl.Styles>
-  <Grid ColumnDefinitions="*" RowDefinitions="130,*,50" Width="1200">
+  <Grid ColumnDefinitions="*" RowDefinitions="130,*,100,120" Width="1200">
     <Grid ColumnDefinitions="300,*,*" Grid.Row="0" Margin="0,0,18,0">
       <Button Content="Save" Grid.Column="0" Grid.Row="0" FontSize="40" Background="Green" Foreground="White" Command="{Binding SaveChanges}"/>
       <Border Grid.Column="1" Grid.Row="0" Background="LightPink" Margin="30,0" BorderBrush="Red" CornerRadius="4,4,0,0" Padding="10" BorderThickness="4,4,4,0">
@@ -402,31 +403,51 @@
     <Grid ColumnDefinitions="300,*,*" Grid.Row="2" Margin="0,0,18,0">
       <Border Grid.Column="1" Grid.Row="0" Background="LightPink" Margin="30,0" BorderBrush="Red" CornerRadius="0,0,4,4" Padding="10" BorderThickness="4,0,4,4">
         <Grid ColumnDefinitions="*,*,*">
-          <Border Grid.Column="0" ToolTip.Tip="Data not found!" BorderBrush="DarkRed" Background="DarkRed" BorderThickness="2" Height="30" Width="30" CornerRadius="30" IsVisible="{Binding Red1MatchNotFilled}">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="LightPink" Text="X" FontWeight="Black" FontSize="20" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
-          </Border>
-          <Border Grid.Column="1" ToolTip.Tip="Data not found!" BorderBrush="DarkRed" Background="DarkRed" BorderThickness="2" Height="30" Width="30" CornerRadius="30" IsVisible="{Binding Red2MatchNotFilled}">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="LightPink" Text="X" FontWeight="Black" FontSize="20" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
-          </Border>
-          <Border Grid.Column="2" ToolTip.Tip="Data not found!" BorderBrush="DarkRed" Background="DarkRed" BorderThickness="2" Height="30" Width="30" CornerRadius="30" IsVisible="{Binding Red3MatchNotFilled}">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="LightPink" Text="X" FontWeight="Black" FontSize="20" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
-          </Border>
+          <Grid Grid.Column="0" RowDefinitions="*,*">
+            <Border Grid.Row="0" ToolTip.Tip="Data not found!" BorderBrush="DarkRed" Background="DarkRed" BorderThickness="2" Height="30" Width="30" CornerRadius="30" IsVisible="{Binding Red1MatchNotFilled}">
+              <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="LightPink" Text="X" FontWeight="Black" FontSize="20" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
+            </Border>
+            <Button Grid.Row="1" Content="Logs" Background="Red" BorderBrush="Transparent" FontSize="20" Foreground="White" Command="{Binding GetLogsForCurrentEntry}" CommandParameter="R1"/>
+          </Grid>
+          <Grid Grid.Column="1" RowDefinitions="*,*">
+            <Border Grid.Row="0" ToolTip.Tip="Data not found!" BorderBrush="DarkRed" Background="DarkRed" BorderThickness="2" Height="30" Width="30" CornerRadius="30" IsVisible="{Binding Red2MatchNotFilled}">
+              <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="LightPink" Text="X" FontWeight="Black" FontSize="20" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
+            </Border>
+            <Button Grid.Row="1" Content="Logs" Background="Red" BorderBrush="Transparent" FontSize="20" Foreground="White" Command="{Binding GetLogsForCurrentEntry}" CommandParameter="R2"/>
+          </Grid>
+          <Grid Grid.Column="2" RowDefinitions="*,*">
+            <Border Grid.Row="0" ToolTip.Tip="Data not found!" BorderBrush="DarkRed" Background="DarkRed" BorderThickness="2" Height="30" Width="30" CornerRadius="30" IsVisible="{Binding Red3MatchNotFilled}">
+              <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="LightPink" Text="X" FontWeight="Black" FontSize="20" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
+            </Border>
+            <Button Grid.Row="1" Content="Logs" Background="Red" BorderBrush="Transparent" FontSize="20" Foreground="White" Command="{Binding GetLogsForCurrentEntry}" CommandParameter="R3"/>
+          </Grid>
         </Grid>
       </Border>
       <Border Grid.Column="2" Grid.Row="0" Background="LightBlue" Margin="30,0,30,0" BorderBrush="Blue" CornerRadius="0,0,4,4" Padding="10" BorderThickness="4,0,4,4">
         <Grid ColumnDefinitions="*,*,*">
-          <Border Grid.Column="0" ToolTip.Tip="Data not found!" BorderBrush="DarkBlue" Background="DarkBlue" BorderThickness="2" Height="30" Width="30" CornerRadius="30" IsVisible="{Binding Blue1MatchNotFilled}">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="LightBlue" Text="X" FontWeight="Black" FontSize="20" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
-          </Border>
-          <Border Grid.Column="1" ToolTip.Tip="Data not found!" BorderBrush="DarkBlue" Background="DarkBlue" BorderThickness="2" Height="30" Width="30" CornerRadius="30" IsVisible="{Binding Blue2MatchNotFilled}">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="LightBlue" Text="X" FontWeight="Black" FontSize="20" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
-          </Border>
-          <Border Grid.Column="2" ToolTip.Tip="Data not found!" BorderBrush="DarkBlue" Background="DarkBlue" BorderThickness="2" Height="30" Width="30" CornerRadius="30" IsVisible="{Binding Blue3MatchNotFilled}">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="LightBlue" Text="X" FontWeight="Black" FontSize="20" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
-          </Border>
+          <Grid Grid.Column="0" RowDefinitions="*,*">
+            <Border Grid.Row="0" ToolTip.Tip="Data not found!" BorderBrush="DarkBlue" Background="DarkBlue" BorderThickness="2" Height="30" Width="30" CornerRadius="30" IsVisible="{Binding Blue1MatchNotFilled}">
+              <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="LightBlue" Text="X" FontWeight="Black" FontSize="20" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
+            </Border>
+            <Button Grid.Row="1" Content="Logs" Background="Blue" BorderBrush="Transparent" FontSize="20" Foreground="White" Command="{Binding GetLogsForCurrentEntry}" CommandParameter="B1"/>
+          </Grid>
+          <Grid Grid.Column="1" RowDefinitions="*,*">
+            <Border Grid.Row="0" ToolTip.Tip="Data not found!" BorderBrush="DarkBlue" Background="DarkBlue" BorderThickness="2" Height="30" Width="30" CornerRadius="30" IsVisible="{Binding Blue2MatchNotFilled}">
+              <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="LightBlue" Text="X" FontWeight="Black" FontSize="20" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
+            </Border>
+            <Button Grid.Row="1" Content="Logs" Background="Blue" BorderBrush="Transparent" FontSize="20" Foreground="White" Command="{Binding GetLogsForCurrentEntry}" CommandParameter="B2"/>
+          </Grid>
+          <Grid Grid.Column="2" RowDefinitions="*,*">
+            <Border Grid.Row="0" ToolTip.Tip="Data not found!" BorderBrush="DarkBlue" Background="DarkBlue" BorderThickness="2" Height="30" Width="30" CornerRadius="30" IsVisible="{Binding Blue3MatchNotFilled}">
+              <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="LightBlue" Text="X" FontWeight="Black" FontSize="20" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
+            </Border>
+            <Button Grid.Row="1" Content="Logs" Background="Blue" BorderBrush="Transparent" FontSize="20" Foreground="White" Command="{Binding GetLogsForCurrentEntry}" CommandParameter="B3"/>
+          </Grid>
         </Grid>
       </Border>
     </Grid>
-    
+    <ScrollViewer Grid.Row="3" Height="120">
+      <screens:TabletLogs/>
+    </ScrollViewer>
   </Grid>
 </UserControl>

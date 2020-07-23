@@ -32,6 +32,7 @@
     <AvaloniaResource Remove="Views\DataAnalysis.xaml" />
     <AvaloniaResource Remove="Views\Matches.xaml" />
     <AvaloniaResource Remove="Views\NotifyUser.xaml" />
+    <AvaloniaResource Remove="Views\TabletLogs.xaml" />
     <AvaloniaResource Remove="Views\Tablets.xaml" />
     <AvaloniaResource Remove="Views\TheBlueAlliance.xaml" />
     <AvaloniaResource Remove="Views\UserControl1.xaml" />
@@ -57,6 +58,7 @@
     <None Remove="Views\MainWindow.xaml" />
     <None Remove="Views\Matches.xaml" />
     <None Remove="Views\NotifyUser.xaml" />
+    <None Remove="Views\TabletLogs.xaml" />
     <None Remove="Views\Tablets.xaml" />
     <None Remove="Views\TheBlueAlliance.xaml" />
     <None Remove="Views\UserControl1.xaml" />
@@ -98,6 +100,9 @@
     <EmbeddedResource Include="Assets\optionselected.png" />
     <EmbeddedResource Include="Views\MainWindow.xaml" />
     <EmbeddedResource Include="Views\NotifyUser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TabletLogs.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\TheBlueAlliance.xaml">
