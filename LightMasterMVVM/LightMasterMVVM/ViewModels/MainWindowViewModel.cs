@@ -1631,12 +1631,13 @@ namespace LightMasterMVVM.ViewModels
             {
                 while (true)
                 {
+                    inbytes = new byte[20000];
                     uint receivedBytes = 0;
                     deviceApi.idevice_connection_receive(connection, inbytes, (uint)inbytes.Length, ref receivedBytes);
                     if (receivedBytes <= 0) continue;
-                    inbytes = new byte[20000];
+                    byte[] finalInBytes = inbytes.Take((int)receivedBytes).ToArray()
                     Console.WriteLine("Num of received bytes = " + receivedBytes.ToString());
-                    UseGivenData(Encoding.ASCII.GetString(inbytes));
+                    UseGivenData(Encoding.ASCII.GetString(finalInBytes));
                     
                     //uint bytesSent = 0;
                     //deviceApi.idevice_connection_send(connection, Encoding.ASCII.GetBytes("Hijjjj"), (uint)Encoding.ASCII.GetBytes("Hijjjj").Length, ref bytesSent);
