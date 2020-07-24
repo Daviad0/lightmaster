@@ -716,6 +716,7 @@ namespace LightMasterMVVM.ViewModels
                 }
                 entriesToDisplay.Add(newLogEntry);
             }
+            CurrentLogEntries = new ObservableCollection<LogEntry>(entriesToDisplay);
 
         }
         public void SaveChanges()
