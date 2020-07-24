@@ -689,6 +689,16 @@ namespace LightMasterMVVM.ViewModels
                     case 2:
                         newLogEntry.Description = "Scouting Entry Finished";
                         break;
+                    case 9:
+                        //TBI
+                        newLogEntry.Description = "Scouting Entry Populated from DB, Already Completed";
+                        break;
+                    case 10:
+                        newLogEntry.Description = "Ignore Time Notice";
+                        break;
+                    case 100:
+                        newLogEntry.Description = "Scout Name Changed to " + logToParse.Split(":")[2];
+                        break;
                     case 1001:
                         newLogEntry.Description = "Page Changed to 'Ready for Match'";
                         break;
@@ -703,6 +713,51 @@ namespace LightMasterMVVM.ViewModels
                         break;
                     case 1005:
                         newLogEntry.Description = "Page Changed to 'Confirm Form'";
+                        break;
+                    case 2000:
+                        newLogEntry.Description = "Initiation Line Marked as ACHIEVED";
+                        break;
+                    case 2001:
+                        newLogEntry.Description = "Initiation Line Marked as NOT ACHIEVED";
+                        break;
+                    case 3000:
+                        newLogEntry.Description = "Created New Tele-Op Cycle";
+                        break;
+                    case 3010:
+                        newLogEntry.Description = "Control Panel Rotation Marked as ACHIEVED";
+                        break;
+                    case 3011:
+                        newLogEntry.Description = "Control Panel Rotation Marked as NOT ACHIEVED";
+                        break;
+                    case 3020:
+                        newLogEntry.Description = "Control Panel Position Marked as ACHIEVED";
+                        break;
+                    case 3021:
+                        newLogEntry.Description = "Control Panel Position Marked as NOT ACHIEVED";
+                        break;
+                    case 4000:
+                        newLogEntry.Description = "Endgame Parking Marked as PARKED";
+                        break;
+                    case 4001:
+                        newLogEntry.Description = "Endgame Parking Marked as NOT PARKED";
+                        break;
+                    case 4010:
+                        newLogEntry.Description = "Endgame Attempted Marked as ATTEMPTED";
+                        break;
+                    case 4011:
+                        newLogEntry.Description = "Endgame Attempted Marked as NOT ATTEMPTED";
+                        break;
+                    case 4020:
+                        newLogEntry.Description = "Endgame Successful Marked as SUCCESSFUL";
+                        break;
+                    case 4021:
+                        newLogEntry.Description = "Endgame Successful Marked as NOT SUCCESSFUL";
+                        break;
+                    case 4030:
+                        newLogEntry.Description = "Endgame Balanced Marked as CONTRIBUTED";
+                        break;
+                    case 4031:
+                        newLogEntry.Description = "Endgame Balanced Marked as NOT CONTRIBUTED";
                         break;
                     case 9000:
                         newLogEntry.Description = "Robot Marked as DISABLED";
