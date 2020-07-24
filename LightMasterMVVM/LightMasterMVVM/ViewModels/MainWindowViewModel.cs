@@ -704,6 +704,7 @@ namespace LightMasterMVVM.ViewModels
                             break;
                         case 100:
                             newLogEntry.Description = "Scout Name Changed to " + logToParse.Split(":")[2];
+                            newLogEntry.Background = "Purple";
                             break;
                         case 1001:
                             newLogEntry.Description = "Page Changed to 'Ready for Match'";
