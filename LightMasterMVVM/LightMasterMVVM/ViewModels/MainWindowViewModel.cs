@@ -661,117 +661,151 @@ namespace LightMasterMVVM.ViewModels
                     selectedForLogs = originalB3;
                     break;
             }
-            List<string> logsToParse = selectedForLogs.TapLogs.ToList();
-            List<LogEntry> entriesToDisplay = new List<LogEntry>();
-            foreach(var logToParse in logsToParse)
+            try
             {
-                
-                int actionTimestamp = int.Parse(logToParse.Split(":")[0]);
-                int minutes = (int)Math.Floor((double)actionTimestamp / (double)60);
-                int seconds = actionTimestamp % 60;
-                string secondsview = "";
-                if(seconds < 10)
+                List<string> logsToParse = selectedForLogs.TapLogs.ToList();
+                List<LogEntry> entriesToDisplay = new List<LogEntry>();
+                foreach (var logToParse in logsToParse)
                 {
-                    secondsview = "0" + seconds.ToString();
+
+                    int actionTimestamp = int.Parse(logToParse.Split(":")[0]);
+                    int minutes = (int)Math.Floor((double)actionTimestamp / (double)60);
+                    int seconds = actionTimestamp % 60;
+                    string secondsview = "";
+                    if (seconds < 10)
+                    {
+                        secondsview = "0" + seconds.ToString();
+                    }
+                    else
+                    {
+                        secondsview = seconds.ToString();
+                    }
+                    LogEntry newLogEntry = new LogEntry();
+                    newLogEntry.TimeFormatted = minutes.ToString() + ":" + secondsview;
+                    int actionIdentifier = int.Parse(logToParse.Split(":")[1]);
+                    switch (actionIdentifier)
+                    {
+                        case 1:
+                            newLogEntry.Description = "Scouting Entry Started";
+                            newLogEntry.Background = "Aqua";
+                            break;
+                        case 2:
+                            newLogEntry.Description = "Scouting Entry Finished";
+                            newLogEntry.Background = "Aqua";
+                            break;
+                        case 9:
+                            //TBI
+                            newLogEntry.Description = "Scouting Entry Populated from DB, Already Completed";
+                            newLogEntry.Background = "Pink";
+                            break;
+                        case 10:
+                            newLogEntry.Description = "Ignore Time Notice";
+                            newLogEntry.Background = "Pink";
+                            break;
+                        case 100:
+                            newLogEntry.Description = "Scout Name Changed to " + logToParse.Split(":")[2];
+                            break;
+                        case 1001:
+                            newLogEntry.Description = "Page Changed to 'Ready for Match'";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 1002:
+                            newLogEntry.Description = "Page Changed to 'Autonomous'";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 1003:
+                            newLogEntry.Description = "Page Changed to 'Tele-Op'";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 1004:
+                            newLogEntry.Description = "Page Changed to 'Endgame'";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 1005:
+                            newLogEntry.Description = "Page Changed to 'Confirm Form'";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 2000:
+                            newLogEntry.Description = "Initiation Line Marked as ACHIEVED";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 2001:
+                            newLogEntry.Description = "Initiation Line Marked as NOT ACHIEVED";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 3000:
+                            newLogEntry.Description = "Created New Tele-Op Cycle";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 3010:
+                            newLogEntry.Description = "Control Panel Rotation Marked as ACHIEVED";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 3011:
+                            newLogEntry.Description = "Control Panel Rotation Marked as NOT ACHIEVED";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 3020:
+                            newLogEntry.Description = "Control Panel Position Marked as ACHIEVED";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 3021:
+                            newLogEntry.Description = "Control Panel Position Marked as NOT ACHIEVED";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 4000:
+                            newLogEntry.Description = "Endgame Parking Marked as PARKED";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 4001:
+                            newLogEntry.Description = "Endgame Parking Marked as NOT PARKED";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 4010:
+                            newLogEntry.Description = "Endgame Attempted Marked as ATTEMPTED";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 4011:
+                            newLogEntry.Description = "Endgame Attempted Marked as NOT ATTEMPTED";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 4020:
+                            newLogEntry.Description = "Endgame Successful Marked as SUCCESSFUL";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 4021:
+                            newLogEntry.Description = "Endgame Successful Marked as NOT SUCCESSFUL";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 4030:
+                            newLogEntry.Description = "Endgame Balanced Marked as CONTRIBUTED";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 4031:
+                            newLogEntry.Description = "Endgame Balanced Marked as NOT CONTRIBUTED";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 9000:
+                            newLogEntry.Description = "Robot Marked as DISABLED";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 9001:
+                            newLogEntry.Description = "Robot Marked as NOT DISABLED";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        default:
+                            newLogEntry.Description = "Unknown Log";
+                            newLogEntry.Background = "Black";
+                            break;
+                    }
+                    entriesToDisplay.Add(newLogEntry);
                 }
-                else
-                {
-                    secondsview = seconds.ToString();
-                }
-                LogEntry newLogEntry = new LogEntry();
-                newLogEntry.TimeFormatted = minutes.ToString() + ":" + secondsview;
-                int actionIdentifier = int.Parse(logToParse.Split(":")[1]);
-                switch (actionIdentifier)
-                {
-                    case 1:
-                        newLogEntry.Description = "Scouting Entry Started";
-                        break;
-                    case 2:
-                        newLogEntry.Description = "Scouting Entry Finished";
-                        break;
-                    case 9:
-                        //TBI
-                        newLogEntry.Description = "Scouting Entry Populated from DB, Already Completed";
-                        break;
-                    case 10:
-                        newLogEntry.Description = "Ignore Time Notice";
-                        break;
-                    case 100:
-                        newLogEntry.Description = "Scout Name Changed to " + logToParse.Split(":")[2];
-                        break;
-                    case 1001:
-                        newLogEntry.Description = "Page Changed to 'Ready for Match'";
-                        break;
-                    case 1002:
-                        newLogEntry.Description = "Page Changed to 'Autonomous'";
-                        break;
-                    case 1003:
-                        newLogEntry.Description = "Page Changed to 'Tele-Op'";
-                        break;
-                    case 1004:
-                        newLogEntry.Description = "Page Changed to 'Endgame'";
-                        break;
-                    case 1005:
-                        newLogEntry.Description = "Page Changed to 'Confirm Form'";
-                        break;
-                    case 2000:
-                        newLogEntry.Description = "Initiation Line Marked as ACHIEVED";
-                        break;
-                    case 2001:
-                        newLogEntry.Description = "Initiation Line Marked as NOT ACHIEVED";
-                        break;
-                    case 3000:
-                        newLogEntry.Description = "Created New Tele-Op Cycle";
-                        break;
-                    case 3010:
-                        newLogEntry.Description = "Control Panel Rotation Marked as ACHIEVED";
-                        break;
-                    case 3011:
-                        newLogEntry.Description = "Control Panel Rotation Marked as NOT ACHIEVED";
-                        break;
-                    case 3020:
-                        newLogEntry.Description = "Control Panel Position Marked as ACHIEVED";
-                        break;
-                    case 3021:
-                        newLogEntry.Description = "Control Panel Position Marked as NOT ACHIEVED";
-                        break;
-                    case 4000:
-                        newLogEntry.Description = "Endgame Parking Marked as PARKED";
-                        break;
-                    case 4001:
-                        newLogEntry.Description = "Endgame Parking Marked as NOT PARKED";
-                        break;
-                    case 4010:
-                        newLogEntry.Description = "Endgame Attempted Marked as ATTEMPTED";
-                        break;
-                    case 4011:
-                        newLogEntry.Description = "Endgame Attempted Marked as NOT ATTEMPTED";
-                        break;
-                    case 4020:
-                        newLogEntry.Description = "Endgame Successful Marked as SUCCESSFUL";
-                        break;
-                    case 4021:
-                        newLogEntry.Description = "Endgame Successful Marked as NOT SUCCESSFUL";
-                        break;
-                    case 4030:
-                        newLogEntry.Description = "Endgame Balanced Marked as CONTRIBUTED";
-                        break;
-                    case 4031:
-                        newLogEntry.Description = "Endgame Balanced Marked as NOT CONTRIBUTED";
-                        break;
-                    case 9000:
-                        newLogEntry.Description = "Robot Marked as DISABLED";
-                        break;
-                    case 9001:
-                        newLogEntry.Description = "Robot Marked as NOT DISABLED";
-                        break;
-                    default:
-                        newLogEntry.Description = "Unknown Log";
-                        break;
-                }
-                entriesToDisplay.Add(newLogEntry);
+                CurrentLogEntries = new ObservableCollection<LogEntry>(entriesToDisplay);
+            }catch(Exception e)
+            {
+
             }
-            CurrentLogEntries = new ObservableCollection<LogEntry>(entriesToDisplay);
+            
 
         }
         public void SaveChanges()

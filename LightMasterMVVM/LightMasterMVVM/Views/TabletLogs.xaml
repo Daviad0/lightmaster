@@ -8,8 +8,13 @@
     <ItemsControl.ItemTemplate>
       <DataTemplate>
         <Grid ColumnDefinitions="90,*">
-          <TextBlock Text="{Binding TimeFormatted}" Grid.Column="0"/>
-          <TextBlock Text="{Binding Description}" Grid.Column="1"/>
+          <Border Background="{Binding Background}" Grid.Column="0" Padding="5" CornerRadius="4">
+            <TextBlock Text="{Binding TimeFormatted}" Foreground="White" FontWeight="Bold"/>
+          </Border>
+          <Border BorderBrush="{Binding Background}" BorderThickness="0,0,0,2">
+            <TextBlock Text="{Binding Description}" Grid.Column="1"/>
+          </Border>
+          
         </Grid>
       </DataTemplate>
     </ItemsControl.ItemTemplate>

@@ -10,6 +10,7 @@ namespace LightMasterMVVM.Models
     {
         private string _TimeFormatted;
         private string _Description;
+        private string _Background;
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
@@ -27,6 +28,22 @@ namespace LightMasterMVVM.Models
                 if (value != this._TimeFormatted)
                 {
                     this._TimeFormatted = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public string Background
+        {
+            get
+            {
+                return this._Background;
+            }
+
+            set
+            {
+                if (value != this._Background)
+                {
+                    this._Background = value;
                     NotifyPropertyChanged();
                 }
             }
