@@ -93,6 +93,10 @@
               "target": "Package",
               "version": "[4.7.0, )"
             },
+            "System.IO.Ports": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
             "System.Windows.Forms": {
               "target": "Package",
               "version": "[4.0.0, )"

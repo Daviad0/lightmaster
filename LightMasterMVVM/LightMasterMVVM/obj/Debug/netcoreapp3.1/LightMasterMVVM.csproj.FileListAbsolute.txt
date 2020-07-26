@@ -236,7 +236,6 @@ C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Debu
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Debug\netcoreapp3.1\LightMasterMVVM.dll
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Debug\netcoreapp3.1\LightMasterMVVM.pdb
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Debug\netcoreapp3.1\LightMasterMVVM.genruntimeconfig.cache
-C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Debug\netcoreapp3.1\LightMasterMVVM.csproj.CoreCompileInputs.cache
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debug\netcoreapp3.1\iMobileDevice-net.dll
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debug\netcoreapp3.1\runtimes\osx-x64\native\idevice_id
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debug\netcoreapp3.1\runtimes\osx-x64\native\idevicebackup
