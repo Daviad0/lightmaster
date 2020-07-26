@@ -126,6 +126,7 @@
     <PackageReference Include="OxyPlot.Avalonia-alpha-2020-04-15" Version="1.0.0" />
     <PackageReference Include="OxyPlot.Core" Version="2.0.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+    <PackageReference Include="System.IO.Ports" Version="4.7.0" />
     <PackageReference Include="System.Windows.Forms" Version="4.0.0.0" />
     <PackageReference Include="Websocket.Client" Version="4.3.15" />
   </ItemGroup>

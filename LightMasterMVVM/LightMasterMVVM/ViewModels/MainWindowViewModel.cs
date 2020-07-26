@@ -25,6 +25,7 @@ using System.Runtime.CompilerServices;
 using iMobileDevice.iDevice;
 using iMobileDevice;
 using iMobileDevice.Lockdown;
+using System.IO.Ports;
 
 namespace LightMasterMVVM.ViewModels
 {
@@ -1801,6 +1802,16 @@ namespace LightMasterMVVM.ViewModels
                     Console.WriteLine(deviceName);
                 }
             }
+
+            string[] ports = SerialPort.GetPortNames();
+            Console.WriteLine("The following serial ports were found:");
+            // Display each port name to the console.             
+            foreach (string port in ports)
+            {
+                Console.WriteLine(port);
+            }
+            Console.ReadLine();
+        
         }
         private void ReceiveDataFromDevice(iDeviceConnectionHandle connection, IiDeviceApi deviceApi)
         {
