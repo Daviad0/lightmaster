@@ -62,7 +62,7 @@ bleno.on('stateChange', function(state) {
   console.log('on -> stateChange: ' + state);
 
   if (state === 'poweredOn') {
-    bleno.startAdvertising('Lightning Robotics Scouting Service', ['6ad0f836b49011eab3de0242ac130000', '6ad0f836b49011eab3de0242ac130010']);
+    bleno.startAdvertising('LRSS', ['6ad0f836b49011eab3de0242ac130000', '6ad0f836b49011eab3de0242ac130010']);
   } else {
     bleno.stopAdvertising();
   }
