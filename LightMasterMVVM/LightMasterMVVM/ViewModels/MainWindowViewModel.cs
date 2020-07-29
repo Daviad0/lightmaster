@@ -26,6 +26,9 @@ using iMobileDevice.iDevice;
 using iMobileDevice;
 using iMobileDevice.Lockdown;
 using System.IO.Ports;
+using System.Net.Sockets;
+using System.Net;
+using System.Diagnostics;
 
 namespace LightMasterMVVM.ViewModels
 {
@@ -1803,15 +1806,119 @@ namespace LightMasterMVVM.ViewModels
                 }
             }
 
-            string[] ports = SerialPort.GetPortNames();
+
+
+            /*string[] ports = SerialPort.GetPortNames();
+            
+            var _SerialPort = new SerialPort();
+            
             Console.WriteLine("The following serial ports were found:");
             // Display each port name to the console.             
             foreach (string port in ports)
             {
                 Console.WriteLine(port);
-            }
-            Console.ReadLine();
-        
+                if (port.StartsWith("/dev/tty.usbmodem"))
+                {
+                    _SerialPort.PortName = port;
+                    _SerialPort.BaudRate = 115200;
+                    _SerialPort.Parity = Parity.None;
+                    _SerialPort.DataBits = 8;
+                    _SerialPort.StopBits = StopBits.One;
+                    _SerialPort.Handshake = Handshake.None;
+
+                    _SerialPort.Open();
+
+                    _SerialPort.DataReceived += (s, a) =>
+                    {
+                        Console.WriteLine(((SerialPort)s).ReadExisting());
+            
+                    };
+                    _SerialPort.Write(Encoding.ASCII.GetBytes("HI"), 0, Encoding.ASCII.GetBytes("HI").Length);
+                }
+            }*/
+
+            /*Process usbTest = new Process();
+            usbTest.StartInfo.FileName = "bash";
+            string command = "adb devices";
+            usbTest.StartInfo.Arguments = "-c \"" + command + "\"";
+            usbTest.StartInfo.UseShellExecute = false;
+            usbTest.StartInfo.RedirectStandardOutput = true;
+            usbTest.StartInfo.CreateNoWindow = true;
+            usbTest.Start();
+            var theoutput = usbTest.StandardOutput.ReadToEnd().ToString();
+
+            foreach(var devicefound in theoutput.Split("\n").Skip(1))
+            {
+                if(devicefound.Length > 15)
+                {
+                    Console.WriteLine(devicefound.Substring(0, 16));
+                }
+                
+            }*/
+
+            Process startTCPforwarding = new Process();
+            startTCPforwarding.StartInfo.FileName = "bash";
+            string command = "adb reverse tcp:6000 tcp:6000";
+            startTCPforwarding.StartInfo.Arguments = "-c \"" + command + "\"";
+            startTCPforwarding.StartInfo.UseShellExecute = false;
+            startTCPforwarding.StartInfo.RedirectStandardOutput = true;
+            startTCPforwarding.StartInfo.CreateNoWindow = true;
+            startTCPforwarding.Start();
+            var theoutput = startTCPforwarding.StandardOutput.ReadToEnd().ToString();
+
+            var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            socket.Bind(new IPEndPoint(IPAddress.Loopback, 6000));
+            byte[] testreceive = new byte[5000];
+            /*socket.BeginReceive(testreceive, 0, testreceive.Length, SocketFlags.None, (ar) =>
+            {
+                testreceive = new byte[5000];
+                int numbytessent = 0;
+                foreach(var singlebyte in testreceive)
+                {
+                    if(singlebyte != 0)
+                    {
+                        numbytessent++;
+                    }
+                }
+                var convertedstring = Encoding.ASCII.GetString(testreceive, 0, numbytessent);
+                Console.WriteLine(convertedstring);
+
+            }, socket);*/
+            //MAKE A TASK.RUN SYSTEM
+            int nummessagesreceived = 0;
+            socket.Listen(100);
+            socket.BeginAccept((ar) =>
+            {
+                var connectionAttempt = (Socket)ar.AsyncState;
+                var connectedSocket = connectionAttempt.EndAccept(ar);
+                Task.Run(() =>
+                {
+                    while (true)
+                    {
+                        startTCPforwarding.Start();
+                        byte[] givenBytes = new byte[5000];
+                        int numbytessent = connectedSocket.Receive(givenBytes);
+                        if (numbytessent <= 0) continue;
+                        nummessagesreceived++;
+                        byte[] finalBytes = givenBytes.Take(numbytessent).ToArray();
+                        var stringmessage = Encoding.ASCII.GetString(finalBytes);
+                        connectedSocket.Send(Encoding.ASCII.GetBytes("Got the message!"));
+                        UseGivenData(stringmessage);
+                        if (nummessagesreceived >= 2)
+                        {
+                            connectedSocket.Disconnect(false);
+                            break;
+                        }
+
+
+
+                    }
+                });
+
+            }, socket);
+            
+            Console.WriteLine("Test");
+
         }
         private void ReceiveDataFromDevice(iDeviceConnectionHandle connection, IiDeviceApi deviceApi)
         {
