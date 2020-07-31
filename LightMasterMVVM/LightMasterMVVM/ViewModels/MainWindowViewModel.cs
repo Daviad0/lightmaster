@@ -1262,7 +1262,7 @@ namespace LightMasterMVVM.ViewModels
             if (rawdata.Substring(3).StartsWith("S:"))
             {
                 //S = Score
-                NotificationViewModel.AddNotification("Scored", rawdata.Substring(0, 2).ToString() + " send scores", "Blue");
+                NotificationViewModel.AddNotification("Scored", rawdata.Substring(0, 2).ToString() + " sent scores", "Green");
                 TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightBlue";
                 TabletViewModel.BluetoothBorderColors[tabletindex] = "Blue";
                 var jsontodeserialize = rawdata.Substring(5);
@@ -1863,6 +1863,10 @@ namespace LightMasterMVVM.ViewModels
             startTCPforwarding.StartInfo.UseShellExecute = false;
             startTCPforwarding.StartInfo.RedirectStandardOutput = true;
             startTCPforwarding.StartInfo.CreateNoWindow = true;
+            startTCPforwarding.ErrorDataReceived += (s,ea) =>
+            {
+                Console.WriteLine("There is no connected USB device that is valid!");
+            };
             startTCPforwarding.Start();
             var theoutput = startTCPforwarding.StandardOutput.ReadToEnd().ToString();
 
@@ -1887,28 +1891,43 @@ namespace LightMasterMVVM.ViewModels
             //MAKE A TASK.RUN SYSTEM
             int nummessagesreceived = 0;
             socket.Listen(100);
+            Task.Run(() =>
+            {
+                while (true)
+                {
+                    startTCPforwarding.Start();
+                }
+            });
             socket.BeginAccept((ar) =>
             {
                 var connectionAttempt = (Socket)ar.AsyncState;
                 var connectedSocket = connectionAttempt.EndAccept(ar);
                 Task.Run(() =>
                 {
+                    
                     while (true)
                     {
-                        startTCPforwarding.Start();
-                        byte[] givenBytes = new byte[5000];
-                        int numbytessent = connectedSocket.Receive(givenBytes);
-                        if (numbytessent <= 0) continue;
-                        nummessagesreceived++;
-                        byte[] finalBytes = givenBytes.Take(numbytessent).ToArray();
-                        var stringmessage = Encoding.ASCII.GetString(finalBytes);
-                        connectedSocket.Send(Encoding.ASCII.GetBytes("Got the message!"));
-                        UseGivenData(stringmessage);
-                        if (nummessagesreceived >= 2)
+                        
+                        try
                         {
-                            connectedSocket.Disconnect(false);
-                            break;
+                            byte[] givenBytes = new byte[90000];
+                            int numbytessent = connectedSocket.Receive(givenBytes);
+                            if (numbytessent <= 0) continue;
+                            nummessagesreceived++;
+                            byte[] finalBytes = givenBytes.Take(numbytessent).ToArray();
+                            var stringmessage = Encoding.ASCII.GetString(finalBytes);
+                            connectedSocket.Send(Encoding.ASCII.GetBytes("Got the message!"));
+                            UseGivenData(stringmessage);
+                            if (nummessagesreceived >= 2)
+                            {
+                                break;
+                            }
                         }
+                        catch(Exception ex)
+                        {
+
+                        }
+                        
 
 
 
@@ -1922,12 +1941,12 @@ namespace LightMasterMVVM.ViewModels
         }
         private void ReceiveDataFromDevice(iDeviceConnectionHandle connection, IiDeviceApi deviceApi)
         {
-            byte[] inbytes = new byte[20000];
+            byte[] inbytes = new byte[90000];
             Task.Run(() =>
             {
                 while (true)
                 {
-                    inbytes = new byte[20000];
+                    inbytes = new byte[90000];
                     uint receivedBytes = 0;
                     deviceApi.idevice_connection_receive(connection, inbytes, (uint)inbytes.Length, ref receivedBytes);
                     if (receivedBytes <= 0) continue;
