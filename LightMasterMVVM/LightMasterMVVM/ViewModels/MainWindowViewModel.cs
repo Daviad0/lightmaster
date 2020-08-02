@@ -1384,7 +1384,19 @@ namespace LightMasterMVVM.ViewModels
             }
             tabletViewModel.TestBTD = items;
         }
-        
+        public void ProcessTest()
+        {
+            Process startTCPforwarding = new Process();
+            startTCPforwarding.StartInfo.FileName = "bash";
+            string command = "ls";
+            startTCPforwarding.StartInfo.Arguments = "-c \"" + command + "\"";
+            startTCPforwarding.StartInfo.UseShellExecute = false;
+            startTCPforwarding.StartInfo.RedirectStandardOutput = true;
+            startTCPforwarding.StartInfo.CreateNoWindow = true;
+            startTCPforwarding.Start();
+            var theoutput = startTCPforwarding.StandardOutput.ReadToEnd().ToString();
+            Console.WriteLine(theoutput);
+        }
         public void SeeMatches(int MatchNum)
         {
             tabletViewModel.UserControlVisible = false;
