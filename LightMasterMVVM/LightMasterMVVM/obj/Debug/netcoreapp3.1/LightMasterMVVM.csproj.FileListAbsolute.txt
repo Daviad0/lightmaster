@@ -415,3 +415,12 @@ C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debu
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\vcruntime140.dll
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\zip.dll
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\zlib1.dll
+C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debug\netcoreapp3.1\System.IO.Ports.dll
+C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debug\netcoreapp3.1\runtimes\linux-arm\native\System.IO.Ports.Native.so
+C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debug\netcoreapp3.1\runtimes\linux-arm64\native\System.IO.Ports.Native.so
+C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\System.IO.Ports.Native.so
+C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debug\netcoreapp3.1\runtimes\osx-x64\native\System.IO.Ports.Native.dylib
+C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debug\netcoreapp3.1\runtimes\linux\lib\netstandard2.0\System.IO.Ports.dll
+C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debug\netcoreapp3.1\runtimes\osx\lib\netstandard2.0\System.IO.Ports.dll
+C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.IO.Ports.dll
+C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Debug\netcoreapp3.1\LightMasterMVVM.csproj.CoreCompileInputs.cache

@@ -30,6 +30,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace LightMasterMVVM.ViewModels
 {
@@ -1389,42 +1390,59 @@ namespace LightMasterMVVM.ViewModels
         {
             Process startTCPforwarding = new Process();
             startTCPforwarding.StartInfo.WorkingDirectory = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "lightmaster"), "LightMasterHub");
-            startTCPforwarding.StartInfo.FileName = "bash";
+            if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                startTCPforwarding.StartInfo.FileName = "cmd.exe";
+            }
+            else if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                startTCPforwarding.StartInfo.FileName = "bash";
+            }
+            
             string command = "npm start";
             startTCPforwarding.StartInfo.Arguments = "-c \"" + command + "\"";
             startTCPforwarding.StartInfo.UseShellExecute = false;
             startTCPforwarding.StartInfo.RedirectStandardOutput = true;
             startTCPforwarding.StartInfo.CreateNoWindow = true;
-            startTCPforwarding.Start();
-            startTCPforwarding.ErrorDataReceived += (s, e) =>
+            try
+            {
+                startTCPforwarding.Start();
+                startTCPforwarding.ErrorDataReceived += (s, e) =>
+                {
+                    NotificationViewModel.AddNotification("Unavailable", "Bluetooth Service Not Available!", "Red");
+                };
+                var exitEvent = new ManualResetEvent(false);
+                var url = new Uri("ws://localhost:9959");
+                client.Url = new Uri("ws://localhost:9959");
+                client.ReconnectTimeout = null;
+                client.ErrorReconnectTimeout = TimeSpan.FromSeconds(5);
+                client.Start();
+                /*client.ReconnectionHappened.Subscribe(info =>
+                    Log.Information($"Reconnection happened, type: {info.Type}"));*/
+                int nummessagesreceived = 0;
+                client.MessageReceived.Subscribe(msg =>
+                {
+                    if (nummessagesreceived == 0)
+                    {
+                        NotificationViewModel.AddNotification("Ready", "Bluetooth Service Ready!", "DeepPink");
+                    }
+                    string rawdata = msg.Text;
+                    UseGivenData(rawdata);
+                    nummessagesreceived++;
+                });
+                client.DisconnectionHappened.Subscribe(msg =>
+                {
+                    Console.WriteLine("Uh oh! I disconnected!");
+                    nummessagesreceived = 0;
+                    NotificationViewModel.AddNotification("Not Ready", "Bluetooth Service Not Ready!", "Red");
+                });
+            }
+            catch(Exception ex)
             {
                 NotificationViewModel.AddNotification("Unavailable", "Bluetooth Service Not Available!", "Red");
-            };
-            var exitEvent = new ManualResetEvent(false);
-            var url = new Uri("ws://localhost:9959");
-            client.Url = new Uri("ws://localhost:9959");
-            client.ReconnectTimeout = null;
-            client.ErrorReconnectTimeout = TimeSpan.FromSeconds(5);
-            client.Start();
-            /*client.ReconnectionHappened.Subscribe(info =>
-                Log.Information($"Reconnection happened, type: {info.Type}"));*/
-            int nummessagesreceived = 0;
-            client.MessageReceived.Subscribe(msg =>
-            {
-                if(nummessagesreceived == 0)
-                {
-                    NotificationViewModel.AddNotification("Ready", "Bluetooth Service Ready!", "DeepPink");
-                }
-                string rawdata = msg.Text;
-                UseGivenData(rawdata);
-                nummessagesreceived++;
-            });
-            client.DisconnectionHappened.Subscribe(msg =>
-            {
-                Console.WriteLine("Uh oh! I disconnected!");
-                nummessagesreceived = 0;
-                NotificationViewModel.AddNotification("Not Ready", "Bluetooth Service Not Ready!", "Red");
-            });
+            }
+            
+           
         }
 
 
