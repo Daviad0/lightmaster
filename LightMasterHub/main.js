@@ -2,7 +2,7 @@ var bleno = require('bleno-mac');
 const WebSocket = require('ws');
 var usb = require('usb');
 
-const wss = new WebSocket.Server({ port: 8080 })
+const wss = new WebSocket.Server({ port: 9959 })
 console.log(wss.path);
 var BlenoPrimaryService = bleno.PrimaryService;
 
