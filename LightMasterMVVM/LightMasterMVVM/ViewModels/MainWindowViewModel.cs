@@ -1220,7 +1220,8 @@ namespace LightMasterMVVM.ViewModels
                 client.MessageReceived.Subscribe(msg =>
                 {
                     string rawdata = msg.Text;
-                    UseGivenData(rawdata);
+                    string datawithoutid = rawdata.Substring(0, 3) + rawdata.Substring(8);
+                    UseGivenData(datawithoutid, int.Parse(rawdata.Substring(4,4)), true);
                     
                 });
                 client.DisconnectionHappened.Subscribe(msg =>
@@ -1233,7 +1234,7 @@ namespace LightMasterMVVM.ViewModels
 
             //Task.Run(() => client.Send("{ message }"));
         }
-        public void UseGivenData(string rawdata)
+        public void UseGivenData(string rawdata, int deviceid, bool bluetooth)
         {
             int tabletindex = 0;
             if (rawdata.StartsWith("R1"))
@@ -1359,7 +1360,7 @@ namespace LightMasterMVVM.ViewModels
                     client.Send(startidentifier);
                     for (int i = numberofmessages; i > 0; i--)
                     {
-                        var simplestring = rawdata.Substring(0, 2).ToString() + ":" + new string(modelstring.Skip((numberofmessages - i) * 480).Take(480).ToArray());
+                        var simplestring = rawdata.Substring(0, 2).ToString() + ":" + deviceid.ToString() + ":" + new string(modelstring.Skip((numberofmessages - i) * 480).Take(480).ToArray());
                         client.Send(simplestring);
                     }
                 }
@@ -1427,7 +1428,8 @@ namespace LightMasterMVVM.ViewModels
                         NotificationViewModel.AddNotification("Ready", "Bluetooth Service Ready!", "DeepPink");
                     }
                     string rawdata = msg.Text;
-                    UseGivenData(rawdata);
+                    string datawithoutid = rawdata.Substring(0, 3) + rawdata.Substring(8);
+                    UseGivenData(datawithoutid, int.Parse(rawdata.Substring(4, 4)), true);
                     nummessagesreceived++;
                 });
                 client.DisconnectionHappened.Subscribe(msg =>
@@ -1950,54 +1952,7 @@ namespace LightMasterMVVM.ViewModels
 
             }, socket);*/
             //MAKE A TASK.RUN SYSTEM
-            int nummessagesreceived = 0;
-            socket.Listen(100);
-            Task.Run(() =>
-            {
-                while (true)
-                {
-                    startTCPforwarding.Start();
-                }
-            });
-            socket.BeginAccept((ar) =>
-            {
-                var connectionAttempt = (Socket)ar.AsyncState;
-                var connectedSocket = connectionAttempt.EndAccept(ar);
-                Task.Run(() =>
-                {
-                    
-                    while (true)
-                    {
-                        
-                        try
-                        {
-                            byte[] givenBytes = new byte[90000];
-                            int numbytessent = connectedSocket.Receive(givenBytes);
-                            if (numbytessent <= 0) continue;
-                            nummessagesreceived++;
-                            byte[] finalBytes = givenBytes.Take(numbytessent).ToArray();
-                            var stringmessage = Encoding.ASCII.GetString(finalBytes);
-                            connectedSocket.Send(Encoding.ASCII.GetBytes("Got the message!"));
-                            UseGivenData(stringmessage);
-                            if (nummessagesreceived >= 2)
-                            {
-                                break;
-                            }
-                        }
-                        catch(Exception ex)
-                        {
-
-                        }
-                        
-
-
-
-                    }
-                });
-
-            }, socket);
             
-            Console.WriteLine("Test");
 
         }
         private void ReceiveDataFromDevice(iDeviceConnectionHandle connection, IiDeviceApi deviceApi)
@@ -2007,14 +1962,24 @@ namespace LightMasterMVVM.ViewModels
             {
                 while (true)
                 {
-                    inbytes = new byte[90000];
-                    uint receivedBytes = 0;
-                    deviceApi.idevice_connection_receive(connection, inbytes, (uint)inbytes.Length, ref receivedBytes);
-                    if (receivedBytes <= 0) continue;
-                    byte[] finalInBytes = inbytes.Take((int)receivedBytes).ToArray();
-                    Console.WriteLine("Num of received bytes = " + receivedBytes.ToString());
-                    UseGivenData(Encoding.ASCII.GetString(finalInBytes));
+                    try
+                    {
+                        inbytes = new byte[90000];
+                        uint receivedBytes = 0;
+                        deviceApi.idevice_connection_receive(connection, inbytes, (uint)inbytes.Length, ref receivedBytes);
+                        if (receivedBytes <= 0) continue;
+                        byte[] finalInBytes = inbytes.Take((int)receivedBytes).ToArray();
+                        string rawdata = Encoding.ASCII.GetString(finalInBytes);
+                        Console.WriteLine("Num of received bytes = " + receivedBytes.ToString());
+                        string datawithoutid = rawdata.Substring(0, 3) + rawdata.Substring(8);
+                        UseGivenData(datawithoutid, int.Parse(rawdata.Substring(4, 4)), false);
+                    }
+                    catch (Exception ex)
+                    {
+                        break;
+                    }
                     
+
                     //uint bytesSent = 0;
                     //deviceApi.idevice_connection_send(connection, Encoding.ASCII.GetBytes("Hijjjj"), (uint)Encoding.ASCII.GetBytes("Hijjjj").Length, ref bytesSent);
                 }

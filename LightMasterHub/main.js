@@ -12,6 +12,7 @@ var red3s = require('./red3');
 var blue1s = require('./blue1');
 var blue2s = require('./blue2');
 var blue3s = require('./blue3');
+var queue = require('./queue');
 
 var r1sample = new red1s();
 var r2sample = new red2s();
@@ -23,6 +24,7 @@ var b3sample = new blue3s();
 var sendback = "484920544845524521";
 
 var sendingQueue = [];
+var currentlyActive = [];
 
 var r1messagesleft = 0;
 var r2messagesleft = 0;
@@ -40,16 +42,21 @@ var b3combinedstring = "";
 
 console.log('Starting up Lighting Robotics Scouting Service');
 
-function BufferQueue(tabletid, buffer) {
-  this.tabletid = tabletid;
+function BufferQueue(TabletIdentifier, buffer) {
+  this.TabletIdentifier = TabletIdentifier;
   this.buffer = buffer;
+}
+
+function TabletIdentifier(tabletid, serverid) {
+  this.tabletid = tabletid;
+  this.serverid = serverid;
 }
 
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
     console.log(message.substring(3));
     console.log(message.substring(0,2) + ":" + toByteArray(message.substring(3)));
-    sendingQueue.push(new BufferQueue(message.substring(0,2), toByteArray(message.substring(3))));
+    sendingQueue.push(new BufferQueue(new TabletIdentifier(message.substring(0,2), "0000"), toByteArray(message.substring(3))));
     //var bufferarraytouse = toByteArrayCallback(message);
 
 
@@ -100,11 +107,13 @@ bleno.on('advertisingStart', function(error) {
     ]);
   }
 });
+
 red1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
   this._value = data;
   console.log(this._value);
   var hextocheck = this._value.toString('hex');
-
+  var charopen = true;
+  currentlyActive.push(new TabletIdentifier(hex2a(hextocheck).substring(6), hex2a(hextocheck).substring(0,5)))
 
   if(hex2a(hextocheck).startsWith("MM:"))
   {
@@ -134,7 +143,7 @@ red2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   this._value = data;
   console.log(this._value);
   var hextocheck = this._value.toString('hex');
-
+  currentlyActive.push(new TabletIdentifier(hex2a(hextocheck).substring(6), hex2a(hextocheck).substring(0,5)))
   if(hex2a(hextocheck).startsWith("MM:"))
   {
     console.log('R2 START IDENTIFIER!')
@@ -163,7 +172,7 @@ red3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   this._value = data;
   console.log(this._value);
   var hextocheck = this._value.toString('hex');
-
+  currentlyActive.push(new TabletIdentifier(hex2a(hextocheck).substring(6), hex2a(hextocheck).substring(0,5)))
   if(hex2a(hextocheck).startsWith("MM:"))
   {
     console.log('R3 START IDENTIFIER!')
@@ -192,7 +201,7 @@ blue1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   this._value = data;
   console.log(this._value);
   var hextocheck = this._value.toString('hex');
-
+  currentlyActive.push(new TabletIdentifier(hex2a(hextocheck).substring(6), hex2a(hextocheck).substring(0,5)))
   if(hex2a(hextocheck).startsWith("MM:"))
   {
     console.log('B1 START IDENTIFIER!')
@@ -221,7 +230,7 @@ blue2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   this._value = data;
   console.log(this._value);
   var hextocheck = this._value.toString('hex');
-
+  currentlyActive.push(new TabletIdentifier(hex2a(hextocheck).substring(6), hex2a(hextocheck).substring(0,5)))
   if(hex2a(hextocheck).startsWith("MM:"))
   {
     console.log('B2 START IDENTIFIER!')
@@ -250,7 +259,7 @@ blue3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   this._value = data;
   console.log(this._value);
   var hextocheck = this._value.toString('hex');
-
+  currentlyActive.push(new TabletIdentifier(hex2a(hextocheck).substring(6), hex2a(hextocheck).substring(0,5)))
   if(hex2a(hextocheck).startsWith("MM:"))
   {
     console.log('B3 START IDENTIFIER!')
@@ -314,7 +323,7 @@ function toByteArray(string){
 }
 setInterval(() => {
   if(sendingQueue.length > 0){
-    if(sendingQueue[0].tabletid == "R1"){
+    if(sendingQueue[0].TabletIdentifier.tabletid == "R1"){
       try{
         r1sample._updateValueCallback(sendingQueue[0].buffer);
         //bufferarraytouse.forEach(thisbuffer => r1sample._updateValueCallback(thisbuffer));
@@ -323,7 +332,7 @@ setInterval(() => {
         console.log("R1 Callback Failure")
       }
     }
-    else if(sendingQueue[0].tabletid == "R2"){
+    else if(sendingQueue[0].TabletIdentifier.tabletid == "R2"){
       try{
         r2sample._updateValueCallback(sendingQueue[0].buffer);
         //bufferarraytouse.forEach(thisbuffer => r1sample._updateValueCallback(thisbuffer));
@@ -332,7 +341,7 @@ setInterval(() => {
         console.log("R2 Callback Failure")
       }
     }
-    else if(sendingQueue[0].tabletid == "R3"){
+    else if(sendingQueue[0].TabletIdentifier.tabletid == "R3"){
       try{
         r3sample._updateValueCallback(sendingQueue[0].buffer);
         //bufferarraytouse.forEach(thisbuffer => r1sample._updateValueCallback(thisbuffer));
@@ -341,7 +350,7 @@ setInterval(() => {
         console.log("R3 Callback Failure")
       }
     }
-    else if(sendingQueue[0].tabletid == "B1"){
+    else if(sendingQueue[0].TabletIdentifier.tabletid == "B1"){
       try{
         b1sample._updateValueCallback(sendingQueue[0].buffer);
         //bufferarraytouse.forEach(thisbuffer => r1sample._updateValueCallback(thisbuffer));
@@ -350,7 +359,7 @@ setInterval(() => {
         console.log("B1 Callback Failure")
       }
     }
-    else if(sendingQueue[0].tabletid == "B2"){
+    else if(sendingQueue[0].TabletIdentifier.tabletid == "B2"){
       try{
         b2sample._updateValueCallback(sendingQueue[0].buffer);
         //bufferarraytouse.forEach(thisbuffer => r1sample._updateValueCallback(thisbuffer));
@@ -359,7 +368,7 @@ setInterval(() => {
         console.log("B2 Callback Failure")
       }
     }
-    else if(sendingQueue[0].tabletid == "B3"){
+    else if(sendingQueue[0].TabletIdentifier.tabletid == "B3"){
       try{
         b3sample._updateValueCallback(sendingQueue[0].buffer);
         //bufferarraytouse.forEach(thisbuffer => r1sample._updateValueCallback(thisbuffer));
