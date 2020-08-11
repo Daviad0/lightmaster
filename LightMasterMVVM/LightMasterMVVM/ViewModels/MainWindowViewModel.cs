@@ -1480,9 +1480,14 @@ namespace LightMasterMVVM.ViewModels
                     {
                         NotificationViewModel.AddNotification("Ready", "Bluetooth Service Ready!", "DeepPink");
                     }
-                    string rawdata = msg.Text;
-                    string datawithoutid = rawdata.Substring(0, 3) + rawdata.Substring(8);
-                    UseGivenData(datawithoutid, int.Parse(rawdata.Substring(4, 4)), true);
+                    else {
+                        string rawdata = msg.Text;
+                        string datawithoutid = rawdata.Substring(0, 6) + rawdata.Substring(11);
+                        string unconvertednumber = rawdata.Substring(6, 4);
+                        UseGivenData(datawithoutid, int.Parse(unconvertednumber), true);
+                    }
+
+                    
                     nummessagesreceived++;
                 });
                 client.DisconnectionHappened.Subscribe(msg =>
@@ -1897,22 +1902,29 @@ namespace LightMasterMVVM.ViewModels
             var lockdown = LibiMobileDevice.Instance.Lockdown;
             idevice.idevice_event_subscribe((ref iDeviceEvent deviceEvent, IntPtr b) =>
             {
-                iDeviceHandle deviceHandle;
-                idevice.idevice_new(out deviceHandle, deviceEvent.udidString);
+                try
+                {
+                    iDeviceHandle deviceHandle;
+                    idevice.idevice_new(out deviceHandle, deviceEvent.udidString);
 
-                LockdownClientHandle lockdownHandle;
-                lockdown.lockdownd_client_new_with_handshake(deviceHandle, out lockdownHandle, "LightScout").ThrowOnError();
+                    LockdownClientHandle lockdownHandle;
+                    lockdown.lockdownd_client_new_with_handshake(deviceHandle, out lockdownHandle, "LightScout").ThrowOnError();
 
-                string deviceName;
-                lockdown.lockdownd_get_device_name(lockdownHandle, out deviceName).ThrowOnError();
+                    string deviceName;
+                    lockdown.lockdownd_get_device_name(lockdownHandle, out deviceName).ThrowOnError();
 
-                var error = idevice.idevice_connect(deviceHandle, 862, out iDeviceConnectionHandle connection);
-
-
+                    var error = idevice.idevice_connect(deviceHandle, 862, out iDeviceConnectionHandle connection);
 
 
 
-                ReceiveDataFromDevice(connection, idevice);
+
+
+                    ReceiveDataFromDevice(connection, idevice);
+                }catch(Exception ex) {
+
+                }
+
+                
             }
             , new IntPtr(862));
 
@@ -2016,12 +2028,18 @@ namespace LightMasterMVVM.ViewModels
                         if (receivedBytes <= 0) continue;
                         byte[] finalInBytes = inbytes.Take((int)receivedBytes).ToArray();
                         string rawdata = Encoding.ASCII.GetString(finalInBytes);
-                        Console.WriteLine("Num of received bytes = " + receivedBytes.ToString());
-                        string datawithoutid = rawdata.Substring(0, 3) + rawdata.Substring(8);
-                        UseGivenData(datawithoutid, int.Parse(rawdata.Substring(4, 4)), false);
+                        string[] datapackets = rawdata.Split("~");
+                        foreach(var packet in datapackets)
+                        {
+                            Console.WriteLine(rawdata);
+                            UseGivenData(packet, 8861, false);
+                        }
+                        
                     }
                     catch (Exception ex)
                     {
+                        connection.Close();
+                        connection.Dispose();
                         break;
                     }
                     
