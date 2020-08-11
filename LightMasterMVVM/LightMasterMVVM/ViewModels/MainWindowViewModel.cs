@@ -31,6 +31,7 @@ using System.Net;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using SharpDX.Direct2D1;
 
 namespace LightMasterMVVM.ViewModels
 {
@@ -188,10 +189,10 @@ namespace LightMasterMVVM.ViewModels
                 foreach (var entry in dbMatches)
                 {
                     AveragePCCountModel modelToAdd = new AveragePCCountModel();
-                    if (!selectedTeamNumbers.Contains(entry.TeamNumber))
+                    if (!selectedTeamNumbers.Contains(entry.TrackedTeam.team_number))
                     {
-                        modelToAdd.TeamNumber = entry.TeamNumber;
-                        selectedTeamNumbers.Add(entry.TeamNumber);
+                        modelToAdd.TeamNumber = entry.TrackedTeam.team_number;
+                        selectedTeamNumbers.Add(entry.TrackedTeam.team_number);
                         var inner = 0;
                         var outer = 0;
                         var lower = 0;
@@ -220,8 +221,8 @@ namespace LightMasterMVVM.ViewModels
                     }
                     else
                     {
-                        modelToAdd = averagePCCountModels.Where(x => x.TeamNumber == entry.TeamNumber).FirstOrDefault();
-                        modelToAdd.TeamNumber = entry.TeamNumber;
+                        modelToAdd = averagePCCountModels.Where(x => x.TeamNumber == entry.TrackedTeam.team_number).FirstOrDefault();
+                        modelToAdd.TeamNumber = entry.TrackedTeam.team_number;
                         var inner = modelToAdd.AvgInnerPC * modelToAdd.Matches;
                         var outer = modelToAdd.AvgOuterPC * modelToAdd.Matches;
                         var lower = modelToAdd.AvgLowerPC * modelToAdd.Matches;
@@ -246,7 +247,7 @@ namespace LightMasterMVVM.ViewModels
                         modelToAdd.AvgOuterPC = (int)Math.Ceiling((float)outer / (float)modelToAdd.Matches);
                         modelToAdd.AvgTotalPC = (int)Math.Ceiling((float)total / (float)modelToAdd.Matches);
                         modelToAdd.AvgLowerPC = (int)Math.Ceiling((float)lower / (float)modelToAdd.Matches);
-                        averagePCCountModels.Remove(averagePCCountModels.Where(x => x.TeamNumber == entry.TeamNumber).FirstOrDefault());
+                        averagePCCountModels.Remove(averagePCCountModels.Where(x => x.TeamNumber == entry.TrackedTeam.team_number).FirstOrDefault());
                         averagePCCountModels.Add(modelToAdd);
                     }
 
@@ -394,10 +395,10 @@ namespace LightMasterMVVM.ViewModels
                 foreach(var entry in dbMatches)
                 {
                     AveragePCCountModel modelToAdd = new AveragePCCountModel();
-                    if (!selectedTeamNumbers.Contains(entry.TeamNumber))
+                    if (!selectedTeamNumbers.Contains(entry.TrackedTeam.team_number))
                     {
-                        modelToAdd.TeamNumber = entry.TeamNumber;
-                        selectedTeamNumbers.Add(entry.TeamNumber);
+                        modelToAdd.TeamNumber = entry.TrackedTeam.team_number;
+                        selectedTeamNumbers.Add(entry.TrackedTeam.team_number);
                         var inner = 0;
                         var outer = 0;
                         var lower = 0;
@@ -426,8 +427,8 @@ namespace LightMasterMVVM.ViewModels
                     }
                     else
                     {
-                        modelToAdd = averagePCCountModels.Where(x => x.TeamNumber == entry.TeamNumber).FirstOrDefault();
-                        modelToAdd.TeamNumber = entry.TeamNumber;
+                        modelToAdd = averagePCCountModels.Where(x => x.TeamNumber == entry.TrackedTeam.team_number).FirstOrDefault();
+                        modelToAdd.TeamNumber = entry.TrackedTeam.team_number;
                         var inner = modelToAdd.AvgInnerPC * modelToAdd.Matches;
                         var outer = modelToAdd.AvgOuterPC * modelToAdd.Matches;
                         var lower = modelToAdd.AvgLowerPC * modelToAdd.Matches;
@@ -452,7 +453,7 @@ namespace LightMasterMVVM.ViewModels
                         modelToAdd.AvgOuterPC = (int)Math.Ceiling((float)outer / (float)modelToAdd.Matches);
                         modelToAdd.AvgTotalPC = (int)Math.Ceiling((float)total / (float)modelToAdd.Matches);
                         modelToAdd.AvgLowerPC = (int)Math.Ceiling((float)lower / (float)modelToAdd.Matches);
-                        averagePCCountModels.Remove(averagePCCountModels.Where(x => x.TeamNumber == entry.TeamNumber).FirstOrDefault());
+                        averagePCCountModels.Remove(averagePCCountModels.Where(x => x.TeamNumber == entry.TrackedTeam.team_number).FirstOrDefault());
                         averagePCCountModels.Add(modelToAdd);
                     }
                     
@@ -851,7 +852,6 @@ namespace LightMasterMVVM.ViewModels
                     newRed1Match.PowerCellMissed[0] = Red1CurrentMatch.APowerCellMissed;
                     newRed1Match.RobotPosition = originalR1.RobotPosition;
                     newRed1Match.TabletId = originalR1.TabletId;
-                    newRed1Match.TeamNumber = Red1CurrentMatch.TeamNumber;
                     newRed1Match.TeamName = originalR1.TeamName;
                     newRed1Match.T_ControlPanelPosition = Red1CurrentMatch.T_ControlPanelPosition;
                     newRed1Match.T_ControlPanelRotation = Red1CurrentMatch.T_ControlPanelRotation;
@@ -884,7 +884,6 @@ namespace LightMasterMVVM.ViewModels
                     newRed2Match.PowerCellMissed[0] = Red2CurrentMatch.APowerCellMissed;
                     newRed2Match.RobotPosition = originalR2.RobotPosition;
                     newRed2Match.TabletId = originalR2.TabletId;
-                    newRed2Match.TeamNumber = Red2CurrentMatch.TeamNumber;
                     newRed2Match.TeamName = originalR2.TeamName;
                     newRed2Match.T_ControlPanelPosition = Red2CurrentMatch.T_ControlPanelPosition;
                     newRed2Match.T_ControlPanelRotation = Red2CurrentMatch.T_ControlPanelRotation;
@@ -917,7 +916,6 @@ namespace LightMasterMVVM.ViewModels
                     newRed3Match.PowerCellMissed[0] = Red3CurrentMatch.APowerCellMissed;
                     newRed3Match.RobotPosition = originalR3.RobotPosition;
                     newRed3Match.TabletId = originalR3.TabletId;
-                    newRed3Match.TeamNumber = Red3CurrentMatch.TeamNumber;
                     newRed3Match.TeamName = originalR3.TeamName;
                     newRed3Match.T_ControlPanelPosition = Red3CurrentMatch.T_ControlPanelPosition;
                     newRed3Match.T_ControlPanelRotation = Red3CurrentMatch.T_ControlPanelRotation;
@@ -950,7 +948,6 @@ namespace LightMasterMVVM.ViewModels
                     newBlue1Match.PowerCellMissed[0] = Blue1CurrentMatch.APowerCellMissed;
                     newBlue1Match.RobotPosition = originalB1.RobotPosition;
                     newBlue1Match.TabletId = originalB1.TabletId;
-                    newBlue1Match.TeamNumber = Blue1CurrentMatch.TeamNumber;
                     newBlue1Match.TeamName = originalB1.TeamName;
                     newBlue1Match.T_ControlPanelPosition = Blue1CurrentMatch.T_ControlPanelPosition;
                     newBlue1Match.T_ControlPanelRotation = Blue1CurrentMatch.T_ControlPanelRotation;
@@ -983,7 +980,6 @@ namespace LightMasterMVVM.ViewModels
                     newBlue2Match.PowerCellMissed[0] = Blue2CurrentMatch.APowerCellMissed;
                     newBlue2Match.RobotPosition = originalB2.RobotPosition;
                     newBlue2Match.TabletId = originalB2.TabletId;
-                    newBlue2Match.TeamNumber = Blue2CurrentMatch.TeamNumber;
                     newBlue2Match.TeamName = originalB2.TeamName;
                     newBlue2Match.T_ControlPanelPosition = Blue2CurrentMatch.T_ControlPanelPosition;
                     newBlue2Match.T_ControlPanelRotation = Blue2CurrentMatch.T_ControlPanelRotation;
@@ -1016,7 +1012,6 @@ namespace LightMasterMVVM.ViewModels
                     newBlue3Match.PowerCellMissed[0] = Blue3CurrentMatch.APowerCellMissed;
                     newBlue3Match.RobotPosition = originalB3.RobotPosition;
                     newBlue3Match.TabletId = originalB3.TabletId;
-                    newBlue3Match.TeamNumber = Blue3CurrentMatch.TeamNumber;
                     newBlue3Match.TeamName = originalB3.TeamName;
                     newBlue3Match.T_ControlPanelPosition = Blue3CurrentMatch.T_ControlPanelPosition;
                     newBlue3Match.T_ControlPanelRotation = Blue3CurrentMatch.T_ControlPanelRotation;
@@ -1271,7 +1266,7 @@ namespace LightMasterMVVM.ViewModels
                 var jsontodeserialize = rawdata.Substring(5);
                 using (var db = new ScoutingContext())
                 {
-                    var itemstouse = JsonConvert.DeserializeObject<List<TeamMatch>>(jsontodeserialize);
+                    var itemstouse = JsonConvert.DeserializeObject<List<IO_TeamMatch>>(jsontodeserialize);
                     foreach (var itemtouse in itemstouse)
                     {
                         try
@@ -1279,15 +1274,50 @@ namespace LightMasterMVVM.ViewModels
                             var previousitem = db.Matches.Where(x => x.TabletId == itemtouse.TabletId && x.MatchNumber == itemtouse.MatchNumber && x.EventCode == itemtouse.EventCode).FirstOrDefault();
                             if (previousitem == null)
                             {
-                                itemtouse.MatchID = new Random().Next(1, 1000);
-                                db.Matches.Add(itemtouse);
+                                TeamMatch newTeamMatch = new TeamMatch() { A_InitiationLine = itemtouse.A_InitiationLine, ClientLastSubmitted = itemtouse.ClientLastSubmitted, ClientSubmitted = true, DisabledSeconds = itemtouse.DisabledSeconds, IsQualifying = itemtouse.IsQualifying, EventCode = itemtouse.EventCode, E_Balanced = itemtouse.E_Balanced, E_ClimbAttempt = itemtouse.E_ClimbAttempt, E_ClimbSuccess = itemtouse.E_ClimbSuccess, E_Park = itemtouse.E_Park, MatchID = new Random().Next(1, 1000000), MatchNumber = itemtouse.MatchNumber, NumCycles = itemtouse.NumCycles, PowerCellInner = itemtouse.PowerCellInner, PowerCellLower = itemtouse.PowerCellLower, PowerCellMissed = itemtouse.PowerCellMissed, PowerCellOuter = itemtouse.PowerCellOuter, RobotPosition = itemtouse.RobotPosition, ScoutName = itemtouse.ScoutName, TabletId = itemtouse.TabletId, TapLogs = itemtouse.TapLogs, TeamName = itemtouse.TeamName, T_ControlPanelPosition = itemtouse.T_ControlPanelPosition, T_ControlPanelRotation = itemtouse.T_ControlPanelRotation };
+                                try
+                                {
+                                    if (db.FRCTeams.Find(itemtouse.TeamNumber, itemtouse.EventCode) != null)
+                                    {
+                                        newTeamMatch.TrackedTeam = db.FRCTeams.Find(itemtouse.TeamNumber, itemtouse.EventCode);
+                                    }
+                                    else
+                                    {
+                                        FRCTeamModel newTeamInDb = new FRCTeamModel() { event_key = itemtouse.EventCode, team_number = itemtouse.TeamNumber };
+                                        db.FRCTeams.Add(newTeamInDb);
+                                        db.SaveChanges();
+                                        newTeamMatch.TrackedTeam = newTeamInDb;
+                                    }
+                                }catch(Exception ex)
+                                {
+                                    FRCTeamModel newTeamInDb = new FRCTeamModel() { event_key = itemtouse.EventCode, team_number = itemtouse.TeamNumber };
+                                    db.FRCTeams.Add(newTeamInDb);
+                                    db.SaveChanges();
+                                    newTeamMatch.TrackedTeam = newTeamInDb;
+                                }
+                                
+                                itemtouse.MatchID = new Random().Next(1, 100000);
+                                db.Matches.Add(newTeamMatch);
                             }
                             else
                             {
                                 if(previousitem.ClientLastSubmitted != itemtouse.ClientLastSubmitted)
                                 {
-                                    itemtouse.MatchID = previousitem.MatchID;
-                                    db.Entry(previousitem).CurrentValues.SetValues(itemtouse);
+                                    TeamMatch newTeamMatch = new TeamMatch() { A_InitiationLine = itemtouse.A_InitiationLine, ClientLastSubmitted = itemtouse.ClientLastSubmitted, ClientSubmitted = true, DisabledSeconds = itemtouse.DisabledSeconds, IsQualifying = itemtouse.IsQualifying, EventCode = previousitem.EventCode, E_Balanced = itemtouse.E_Balanced, E_ClimbAttempt = itemtouse.E_ClimbAttempt, E_ClimbSuccess = itemtouse.E_ClimbSuccess, E_Park = itemtouse.E_Park, MatchID = previousitem.MatchID, MatchNumber = previousitem.MatchNumber, NumCycles = itemtouse.NumCycles, PowerCellInner = itemtouse.PowerCellInner, PowerCellLower = itemtouse.PowerCellLower, PowerCellMissed = itemtouse.PowerCellMissed, PowerCellOuter = itemtouse.PowerCellOuter, RobotPosition = itemtouse.RobotPosition, ScoutName = itemtouse.ScoutName, TabletId = itemtouse.TabletId, TapLogs = itemtouse.TapLogs, TeamName = itemtouse.TeamName, T_ControlPanelPosition = itemtouse.T_ControlPanelPosition, T_ControlPanelRotation = itemtouse.T_ControlPanelRotation };
+                                    try
+                                    {
+                                        newTeamMatch.TrackedTeam = previousitem.TrackedTeam;
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        FRCTeamModel newTeamInDb = new FRCTeamModel() { event_key = itemtouse.EventCode, team_number = itemtouse.TeamNumber };
+                                        db.FRCTeams.Add(newTeamInDb);
+                                        db.SaveChanges();
+                                        newTeamMatch.TrackedTeam = newTeamInDb;
+                                    }
+
+                                    itemtouse.MatchID = new Random().Next(1, 100000);
+                                    db.Matches.Add(newTeamMatch);
                                 }
                                 
                             }
@@ -1296,8 +1326,31 @@ namespace LightMasterMVVM.ViewModels
                         }
                         catch (NpgsqlException ex)
                         {
-                            itemtouse.MatchID = new Random().Next(1, 1000);
-                            db.Matches.Add(itemtouse);
+                            TeamMatch newTeamMatch = new TeamMatch() { A_InitiationLine = itemtouse.A_InitiationLine, ClientLastSubmitted = itemtouse.ClientLastSubmitted, ClientSubmitted = true, DisabledSeconds = itemtouse.DisabledSeconds, IsQualifying = itemtouse.IsQualifying, EventCode = itemtouse.EventCode, E_Balanced = itemtouse.E_Balanced, E_ClimbAttempt = itemtouse.E_ClimbAttempt, E_ClimbSuccess = itemtouse.E_ClimbSuccess, E_Park = itemtouse.E_Park, MatchID = new Random().Next(1, 1000000), MatchNumber = itemtouse.MatchNumber, NumCycles = itemtouse.NumCycles, PowerCellInner = itemtouse.PowerCellInner, PowerCellLower = itemtouse.PowerCellLower, PowerCellMissed = itemtouse.PowerCellMissed, PowerCellOuter = itemtouse.PowerCellOuter, RobotPosition = itemtouse.RobotPosition, ScoutName = itemtouse.ScoutName, TabletId = itemtouse.TabletId, TapLogs = itemtouse.TapLogs, TeamName = itemtouse.TeamName, T_ControlPanelPosition = itemtouse.T_ControlPanelPosition, T_ControlPanelRotation = itemtouse.T_ControlPanelRotation };
+                            try
+                            {
+                                if (db.FRCTeams.Find(itemtouse.TeamNumber, itemtouse.EventCode) != null)
+                                {
+                                    newTeamMatch.TrackedTeam = db.FRCTeams.Find(itemtouse.TeamNumber, itemtouse.EventCode);
+                                }
+                                else
+                                {
+                                    FRCTeamModel newTeamInDb = new FRCTeamModel() { event_key = itemtouse.EventCode, team_number = itemtouse.TeamNumber };
+                                    db.FRCTeams.Add(newTeamInDb);
+                                    db.SaveChanges();
+                                    newTeamMatch.TrackedTeam = newTeamInDb;
+                                }
+                            }
+                            catch (Exception smex)
+                            {
+                                FRCTeamModel newTeamInDb = new FRCTeamModel() { event_key = itemtouse.EventCode, team_number = itemtouse.TeamNumber };
+                                db.FRCTeams.Add(newTeamInDb);
+                                db.SaveChanges();
+                                newTeamMatch.TrackedTeam = newTeamInDb;
+                            }
+
+                            itemtouse.MatchID = new Random().Next(1, 100000);
+                            db.Matches.Add(newTeamMatch);
                         }
                     }
 
@@ -1342,14 +1395,14 @@ namespace LightMasterMVVM.ViewModels
             else if (rawdata.Substring(3).StartsWith("RD:"))
             {
                 NotificationViewModel.AddNotification("Data Request", rawdata.Substring(0, 2).ToString() + " requested data", "Blue");
-                var listOfMatchesToSend = new List<TeamMatch>()
+                var listOfMatchesToSend = new List<IO_TeamMatch>()
                         {
-                            new TeamMatch() { TeamNumber = 862, MatchNumber = 1, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
-                            new TeamMatch() { TeamNumber = 1023, MatchNumber = 2, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
-                            new TeamMatch() { TeamNumber = 2014, MatchNumber = 3, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
-                            new TeamMatch() { TeamNumber = 2020, MatchNumber = 4, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
-                            new TeamMatch() { TeamNumber = 3145, MatchNumber = 5, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
-                            new TeamMatch() { TeamNumber = 4005, MatchNumber = 6, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" }
+                            new IO_TeamMatch() { TeamNumber = 862, MatchNumber = 1, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
+                            new IO_TeamMatch() { TeamNumber = 1023, MatchNumber = 2, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
+                            new IO_TeamMatch() { TeamNumber = 2014, MatchNumber = 3, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
+                            new IO_TeamMatch() { TeamNumber = 2020, MatchNumber = 4, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
+                            new IO_TeamMatch() { TeamNumber = 3145, MatchNumber = 5, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
+                            new IO_TeamMatch() { TeamNumber = 4005, MatchNumber = 6, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" }
                         };
                 string modelstring = JsonConvert.SerializeObject(listOfMatchesToSend);
                 byte[] bytesToSend = Encoding.ASCII.GetBytes(modelstring);
@@ -1481,7 +1534,7 @@ namespace LightMasterMVVM.ViewModels
                         matchtoput.MatchNumber = r1selectedmatch.MatchNumber;
                         matchtoput.NumCycles = r1selectedmatch.NumCycles;
                         matchtoput.ScoutName = r1selectedmatch.ScoutName;
-                        matchtoput.TeamNumber = r1selectedmatch.TeamNumber;
+                        matchtoput.TeamNumber = r1selectedmatch.TrackedTeam.team_number;
                         matchtoput.T_ControlPanelPosition = r1selectedmatch.T_ControlPanelPosition;
                         matchtoput.T_ControlPanelRotation = r1selectedmatch.T_ControlPanelRotation;
                         if (r1selectedmatch.PowerCellMissed != null)
@@ -1534,7 +1587,7 @@ namespace LightMasterMVVM.ViewModels
                         matchtoput.MatchNumber = r2selectedmatch.MatchNumber;
                         matchtoput.NumCycles = r2selectedmatch.NumCycles;
                         matchtoput.ScoutName = r2selectedmatch.ScoutName;
-                        matchtoput.TeamNumber = r2selectedmatch.TeamNumber;
+                        matchtoput.TeamNumber = r2selectedmatch.TrackedTeam.team_number;
                         matchtoput.T_ControlPanelPosition = r2selectedmatch.T_ControlPanelPosition;
                         matchtoput.T_ControlPanelRotation = r2selectedmatch.T_ControlPanelRotation;
                         if (r2selectedmatch.PowerCellMissed != null)
@@ -1587,7 +1640,7 @@ namespace LightMasterMVVM.ViewModels
                         matchtoput.MatchNumber = r3selectedmatch.MatchNumber;
                         matchtoput.NumCycles = r3selectedmatch.NumCycles;
                         matchtoput.ScoutName = r3selectedmatch.ScoutName;
-                        matchtoput.TeamNumber = r3selectedmatch.TeamNumber;
+                        matchtoput.TeamNumber = r3selectedmatch.TrackedTeam.team_number;
                         matchtoput.T_ControlPanelPosition = r3selectedmatch.T_ControlPanelPosition;
                         matchtoput.T_ControlPanelRotation = r3selectedmatch.T_ControlPanelRotation;
                         if (r3selectedmatch.PowerCellMissed != null)
@@ -1640,7 +1693,7 @@ namespace LightMasterMVVM.ViewModels
                         matchtoput.MatchNumber = b1selectedmatch.MatchNumber;
                         matchtoput.NumCycles = b1selectedmatch.NumCycles;
                         matchtoput.ScoutName = b1selectedmatch.ScoutName;
-                        matchtoput.TeamNumber = b1selectedmatch.TeamNumber;
+                        matchtoput.TeamNumber = b1selectedmatch.TrackedTeam.team_number;
                         matchtoput.T_ControlPanelPosition = b1selectedmatch.T_ControlPanelPosition;
                         matchtoput.T_ControlPanelRotation = b1selectedmatch.T_ControlPanelRotation;
                         if (b1selectedmatch.PowerCellMissed != null)
@@ -1693,7 +1746,7 @@ namespace LightMasterMVVM.ViewModels
                         matchtoput.MatchNumber = b2selectedmatch.MatchNumber;
                         matchtoput.NumCycles = b2selectedmatch.NumCycles;
                         matchtoput.ScoutName = b2selectedmatch.ScoutName;
-                        matchtoput.TeamNumber = b2selectedmatch.TeamNumber;
+                        matchtoput.TeamNumber = b2selectedmatch.TrackedTeam.team_number;
                         matchtoput.T_ControlPanelPosition = b2selectedmatch.T_ControlPanelPosition;
                         matchtoput.T_ControlPanelRotation = b2selectedmatch.T_ControlPanelRotation;
                         if (b2selectedmatch.PowerCellMissed != null)
@@ -1747,7 +1800,7 @@ namespace LightMasterMVVM.ViewModels
                         matchtoput.MatchNumber = b3selectedmatch.MatchNumber;
                         matchtoput.NumCycles = b3selectedmatch.NumCycles;
                         matchtoput.ScoutName = b3selectedmatch.ScoutName;
-                        matchtoput.TeamNumber = b3selectedmatch.TeamNumber;
+                        matchtoput.TeamNumber = b3selectedmatch.TrackedTeam.team_number;
                         matchtoput.T_ControlPanelPosition = b3selectedmatch.T_ControlPanelPosition;
                         matchtoput.T_ControlPanelRotation = b3selectedmatch.T_ControlPanelRotation;
                         if (b3selectedmatch.PowerCellMissed != null)
@@ -1842,33 +1895,26 @@ namespace LightMasterMVVM.ViewModels
 
             var idevice = LibiMobileDevice.Instance.iDevice;
             var lockdown = LibiMobileDevice.Instance.Lockdown;
-            var ret = idevice.idevice_get_device_list(out udids, ref count);
-
-            if(!(ret == iDeviceError.NoDevice))
+            idevice.idevice_event_subscribe((ref iDeviceEvent deviceEvent, IntPtr b) =>
             {
-                foreach(var udid in udids)
-                {
-                    iDeviceHandle deviceHandle;
-                    idevice.idevice_new(out deviceHandle, udid);
+                iDeviceHandle deviceHandle;
+                idevice.idevice_new(out deviceHandle, deviceEvent.udidString);
 
-                    LockdownClientHandle lockdownHandle;
-                    lockdown.lockdownd_client_new_with_handshake(deviceHandle, out lockdownHandle, "LightScout").ThrowOnError();
+                LockdownClientHandle lockdownHandle;
+                lockdown.lockdownd_client_new_with_handshake(deviceHandle, out lockdownHandle, "LightScout").ThrowOnError();
 
-                    string deviceName;
-                    lockdown.lockdownd_get_device_name(lockdownHandle, out deviceName).ThrowOnError();
+                string deviceName;
+                lockdown.lockdownd_get_device_name(lockdownHandle, out deviceName).ThrowOnError();
 
-                    var error = idevice.idevice_connect(deviceHandle, 862, out iDeviceConnectionHandle connection);
+                var error = idevice.idevice_connect(deviceHandle, 862, out iDeviceConnectionHandle connection);
 
-                    
 
-                    
 
-                    ReceiveDataFromDevice(connection, idevice);
 
-                    Console.WriteLine(deviceName);
-                }
+
+                ReceiveDataFromDevice(connection, idevice);
             }
-
+            , new IntPtr(862));
 
 
             /*string[] ports = SerialPort.GetPortNames();

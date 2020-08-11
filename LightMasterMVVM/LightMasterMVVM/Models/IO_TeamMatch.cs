@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace LightMasterMVVM.Models
 {
-    public class TeamMatch
+    public class IO_TeamMatch
     {
-        [Key]
         public int MatchID { get; set; }
+        public int TeamNumber { get; set; }
         public string TabletId { get; set; }
         public bool IsQualifying { get; set; }
         public string TeamName { get; set; }
@@ -31,11 +30,6 @@ namespace LightMasterMVVM.Models
         public int DisabledSeconds { get; set; }
         public bool ClientSubmitted { get; set; }
         public DateTime ClientLastSubmitted { get; set; }
-        public bool APIChecked { get; set; }
-        public int APIAccuracy { get; set; }
         public string[] TapLogs { get; set; }
-
-
-        public virtual FRCTeamModel TrackedTeam { get; set; }
     }
 }
