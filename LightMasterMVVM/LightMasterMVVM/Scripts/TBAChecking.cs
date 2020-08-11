@@ -67,12 +67,12 @@ namespace LightMasterMVVM.Scripts
                 //TeamMatch b1completedMatch = listOfBlue1Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.blue.team_keys[0].Substring(3))).FirstOrDefault();
                 //TeamMatch b2completedMatch = listOfBlue2Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.blue.team_keys[1].Substring(3))).FirstOrDefault();
                 //TeamMatch b3completedMatch = listOfBlue3Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == int.Parse(completedMatch.alliances.blue.team_keys[2].Substring(3))).FirstOrDefault();
-                TeamMatch r1completedMatch = listOfRed1Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862 && x.APIChecked == false).FirstOrDefault();
-                TeamMatch r2completedMatch = listOfRed2Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862 && x.APIChecked == false).FirstOrDefault();
-                TeamMatch r3completedMatch = listOfRed3Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862 && x.APIChecked == false).FirstOrDefault();
-                TeamMatch b1completedMatch = listOfBlue1Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862 && x.APIChecked == false).FirstOrDefault();
-                TeamMatch b2completedMatch = listOfBlue2Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862 && x.APIChecked == false).FirstOrDefault();
-                TeamMatch b3completedMatch = listOfBlue3Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TeamNumber == 862 && x.APIChecked == false).FirstOrDefault();
+                TeamMatch r1completedMatch = listOfRed1Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TrackedTeam.team_number == 862 && x.APIChecked == false).FirstOrDefault();
+                TeamMatch r2completedMatch = listOfRed2Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TrackedTeam.team_number == 862 && x.APIChecked == false).FirstOrDefault();
+                TeamMatch r3completedMatch = listOfRed3Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TrackedTeam.team_number == 862 && x.APIChecked == false).FirstOrDefault();
+                TeamMatch b1completedMatch = listOfBlue1Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TrackedTeam.team_number == 862 && x.APIChecked == false).FirstOrDefault();
+                TeamMatch b2completedMatch = listOfBlue2Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TrackedTeam.team_number == 862 && x.APIChecked == false).FirstOrDefault();
+                TeamMatch b3completedMatch = listOfBlue3Matches.Where(x => x.MatchNumber == completedMatch.match_number && x.TrackedTeam.team_number == 862 && x.APIChecked == false).FirstOrDefault();
                 if (r1completedMatch != null && r2completedMatch != null && r3completedMatch != null && b1completedMatch != null && b2completedMatch != null && b3completedMatch != null)
                 {
                     //RED 1
