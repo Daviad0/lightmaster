@@ -1216,7 +1216,7 @@ namespace LightMasterMVVM.ViewModels
                 {
                     string rawdata = msg.Text;
                     string datawithoutid = rawdata.Substring(0, 3) + rawdata.Substring(8);
-                    UseGivenData(datawithoutid, int.Parse(rawdata.Substring(4,4)), true);
+                    //UseGivenData(datawithoutid, int.Parse(rawdata.Substring(4,4)), true);
                     
                 });
                 client.DisconnectionHappened.Subscribe(msg =>
@@ -1229,7 +1229,7 @@ namespace LightMasterMVVM.ViewModels
 
             //Task.Run(() => client.Send("{ message }"));
         }
-        public void UseGivenData(string rawdata, int deviceid, bool bluetooth)
+        public void UseGivenData(string rawdata, bool bluetooth)
         {
             int tabletindex = 0;
             if (rawdata.StartsWith("R1"))
@@ -1259,11 +1259,18 @@ namespace LightMasterMVVM.ViewModels
             TabletViewModel.LastPings[tabletindex] = "Last ping at: " + DateTime.Now.ToShortTimeString();
             if (rawdata.Substring(3).StartsWith("S:"))
             {
+                string datawithoutid = rawdata;
+                int deviceid = 1000;
+                if (bluetooth)
+                {
+                    datawithoutid = rawdata.Substring(0, 5) + rawdata.Substring(10);
+                    deviceid = int.Parse(rawdata.Substring(5, 4));
+                }
                 //S = Score
-                NotificationViewModel.AddNotification("Scored", rawdata.Substring(0, 2).ToString() + " sent scores", "Green");
+                NotificationViewModel.AddNotification("Scored", datawithoutid.Substring(0, 2).ToString() + " sent scores", "Green");
                 TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightBlue";
                 TabletViewModel.BluetoothBorderColors[tabletindex] = "Blue";
-                var jsontodeserialize = rawdata.Substring(5);
+                var jsontodeserialize = datawithoutid.Substring(5);
                 using (var db = new ScoutingContext())
                 {
                     var itemstouse = JsonConvert.DeserializeObject<List<IO_TeamMatch>>(jsontodeserialize);
@@ -1361,7 +1368,15 @@ namespace LightMasterMVVM.ViewModels
             else if (rawdata.Substring(3).StartsWith("B:"))
             {
                 //B = Battery Level
-                var batterylevel = float.Parse(rawdata.Substring(5)) * 100;
+                string datawithoutid = rawdata;
+                int deviceid = 1000;
+                if (bluetooth)
+                {
+                    datawithoutid = rawdata.Substring(0, 5) + rawdata.Substring(10);
+                    deviceid = int.Parse(rawdata.Substring(5, 4));
+                }
+
+                var batterylevel = float.Parse(datawithoutid.Substring(5)) * 100;
                 if (batterylevel > 80)
                 {
                     TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightGreen";
@@ -1394,6 +1409,14 @@ namespace LightMasterMVVM.ViewModels
             }
             else if (rawdata.Substring(3).StartsWith("RD:"))
             {
+                string datawithoutid = rawdata;
+                int deviceid = 1000;
+                if (bluetooth)
+                {
+                    datawithoutid = rawdata.Substring(0, 6) + rawdata.Substring(11);
+                    deviceid = int.Parse(rawdata.Substring(6, 4));
+                }
+                
                 NotificationViewModel.AddNotification("Data Request", rawdata.Substring(0, 2).ToString() + " requested data", "Blue");
                 var listOfMatchesToSend = new List<IO_TeamMatch>()
                         {
@@ -1484,7 +1507,7 @@ namespace LightMasterMVVM.ViewModels
                         string rawdata = msg.Text;
                         string datawithoutid = rawdata.Substring(0, 6) + rawdata.Substring(11);
                         string unconvertednumber = rawdata.Substring(6, 4);
-                        UseGivenData(datawithoutid, int.Parse(unconvertednumber), true);
+                        UseGivenData(rawdata, true);
                     }
 
                     
@@ -2032,7 +2055,7 @@ namespace LightMasterMVVM.ViewModels
                         foreach(var packet in datapackets)
                         {
                             Console.WriteLine(rawdata);
-                            UseGivenData(packet, 8861, false);
+                            UseGivenData(packet, false);
                         }
                         
                     }
