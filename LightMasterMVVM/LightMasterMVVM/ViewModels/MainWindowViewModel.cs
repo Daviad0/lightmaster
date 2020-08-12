@@ -1539,7 +1539,7 @@ namespace LightMasterMVVM.ViewModels
                 using (var db = new ScoutingContext())
                 {
                     var r1selectedmatch = db.Matches.Where(x => x.TabletId == "R1" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
-                    var r1TrackedTeam = db.FRCTeams.Find(r1selectedmatch.team_instance_id);
+                    
                     if (r1selectedmatch == null)
                     {
                         MatchViewModel.Red1CurrentMatch = new TeamMatchView();
@@ -1549,6 +1549,7 @@ namespace LightMasterMVVM.ViewModels
                     }
                     else
                     {
+                        var r1TrackedTeam = db.FRCTeams.Find(r1selectedmatch.team_instance_id);
                         MatchViewModel.Red1MatchEditable = true;
                         MatchViewModel.Red1MatchNotFilled = false;
                         MatchViewModel.originalR1 = r1selectedmatch;
@@ -1593,7 +1594,7 @@ namespace LightMasterMVVM.ViewModels
                     }
                     //RED2
                     var r2selectedmatch = db.Matches.Where(x => x.TabletId == "R2" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
-                    var r2TrackedTeam = db.FRCTeams.Find(r2selectedmatch.team_instance_id);
+                    
                     if (r2selectedmatch == null)
                     {
                         MatchViewModel.Red2CurrentMatch = new TeamMatchView();
@@ -1603,6 +1604,7 @@ namespace LightMasterMVVM.ViewModels
                     }
                     else
                     {
+                        var r2TrackedTeam = db.FRCTeams.Find(r2selectedmatch.team_instance_id);
                         MatchViewModel.Red2MatchEditable = true;
                         MatchViewModel.Red2MatchNotFilled = false;
                         MatchViewModel.originalR2 = r2selectedmatch;
@@ -1647,7 +1649,7 @@ namespace LightMasterMVVM.ViewModels
                     }
                     //RED3
                     var r3selectedmatch = db.Matches.Where(x => x.TabletId == "R3" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
-                    var r3TrackedTeam = db.FRCTeams.Find(r3selectedmatch.team_instance_id);
+                    
                     if (r3selectedmatch == null)
                     {
                         MatchViewModel.Red3CurrentMatch = new TeamMatchView();
@@ -1657,6 +1659,7 @@ namespace LightMasterMVVM.ViewModels
                     }
                     else
                     {
+                        var r3TrackedTeam = db.FRCTeams.Find(r3selectedmatch.team_instance_id);
                         MatchViewModel.Red3MatchNotFilled = false;
                         MatchViewModel.Red3MatchEditable = true;
                         MatchViewModel.originalR3 = r3selectedmatch;
@@ -1701,7 +1704,7 @@ namespace LightMasterMVVM.ViewModels
                     }
                     //BLUE1
                     var b1selectedmatch = db.Matches.Where(x => x.TabletId == "B1" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
-                    var b1TrackedTeam = db.FRCTeams.Find(b1selectedmatch.team_instance_id);
+                    
                     if (b1selectedmatch == null)
                     {
                         MatchViewModel.Blue1CurrentMatch = new TeamMatchView();
@@ -1711,6 +1714,7 @@ namespace LightMasterMVVM.ViewModels
                     }
                     else
                     {
+                        var b1TrackedTeam = db.FRCTeams.Find(b1selectedmatch.team_instance_id);
                         MatchViewModel.Blue1MatchNotFilled = false;
                         MatchViewModel.Blue1MatchEditable = true;
                         MatchViewModel.originalB1 = b1selectedmatch;
@@ -1755,7 +1759,7 @@ namespace LightMasterMVVM.ViewModels
                     }
                     //BLUE2
                     var b2selectedmatch = db.Matches.Where(x => x.TabletId == "B2" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
-                    var b2TrackedTeam = db.FRCTeams.Find(b2selectedmatch.team_instance_id);
+                    
                     if (b2selectedmatch == null)
                     {
                         MatchViewModel.Blue2CurrentMatch = new TeamMatchView();
@@ -1765,6 +1769,7 @@ namespace LightMasterMVVM.ViewModels
                     }
                     else
                     {
+                        var b2TrackedTeam = db.FRCTeams.Find(b2selectedmatch.team_instance_id);
                         MatchViewModel.Blue2MatchNotFilled = false;
                         MatchViewModel.Blue2MatchEditable = true;
                         MatchViewModel.originalB2 = b2selectedmatch;
@@ -1809,7 +1814,7 @@ namespace LightMasterMVVM.ViewModels
                     }
                     //BLUE3
                     var b3selectedmatch = db.Matches.Where(x => x.TabletId == "B3" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
-                    var b3TrackedTeam = db.FRCTeams.Find(b3selectedmatch.team_instance_id);
+                    
                     if (b3selectedmatch == null)
                     {
                         MatchViewModel.Blue3CurrentMatch = new TeamMatchView();
@@ -1819,6 +1824,7 @@ namespace LightMasterMVVM.ViewModels
                     }
                     else
                     {
+                        var b3TrackedTeam = db.FRCTeams.Find(b3selectedmatch.team_instance_id);
                         MatchViewModel.Blue3MatchEditable = true;
                         MatchViewModel.Blue3MatchNotFilled = false;
                         MatchViewModel.originalB3 = b3selectedmatch;
