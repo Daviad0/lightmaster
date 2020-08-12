@@ -14,9 +14,5 @@ namespace LightMasterMVVM.DbAssets
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseNpgsql("Server=localhost;Port=5432;Database=lightscoutx;User Id=strategy_member;Password=strategy");
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<FRCTeamModel>().HasKey(f => new { f.team_number, f.event_key });
-        }
     }
 }

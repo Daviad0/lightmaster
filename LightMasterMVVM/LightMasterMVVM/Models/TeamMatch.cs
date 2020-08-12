@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace LightMasterMVVM.Models
@@ -35,7 +36,8 @@ namespace LightMasterMVVM.Models
         public int APIAccuracy { get; set; }
         public string[] TapLogs { get; set; }
 
-
+        [ForeignKey("TrackedTeam")]
+        public int team_instance_id { get; set; }
         public virtual FRCTeamModel TrackedTeam { get; set; }
     }
 }

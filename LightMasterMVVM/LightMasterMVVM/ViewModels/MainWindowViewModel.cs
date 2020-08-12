@@ -1323,8 +1323,8 @@ namespace LightMasterMVVM.ViewModels
                                         newTeamMatch.TrackedTeam = newTeamInDb;
                                     }
 
-                                    itemtouse.MatchID = new Random().Next(1, 100000);
-                                    db.Matches.Add(newTeamMatch);
+                                    db.Matches.Update(newTeamMatch);
+                                    db.SaveChanges();
                                 }
                                 
                             }
@@ -1432,7 +1432,7 @@ namespace LightMasterMVVM.ViewModels
                 if (modelstring.Length > 480)
                 {
                     int numberofmessages = (int)Math.Ceiling((float)modelstring.Length / (float)480);
-                    var startidentifier = rawdata.Substring(0, 2).ToString() + ":MM:" + numberofmessages.ToString();
+                    var startidentifier = rawdata.Substring(0, 2).ToString() + ":MM:" + deviceid.ToString() + ":" + numberofmessages.ToString();
                     client.Send(startidentifier);
                     for (int i = numberofmessages; i > 0; i--)
                     {
@@ -1442,7 +1442,7 @@ namespace LightMasterMVVM.ViewModels
                 }
                 else
                 {
-                    client.Send(modelstring);
+                    client.Send(deviceid.ToString() + ":" + modelstring);
                 }
                 TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightSalmon";
                 TabletViewModel.BluetoothBorderColors[tabletindex] = "DarkOrange";
@@ -1505,8 +1505,6 @@ namespace LightMasterMVVM.ViewModels
                     }
                     else {
                         string rawdata = msg.Text;
-                        string datawithoutid = rawdata.Substring(0, 6) + rawdata.Substring(11);
-                        string unconvertednumber = rawdata.Substring(6, 4);
                         UseGivenData(rawdata, true);
                     }
 
