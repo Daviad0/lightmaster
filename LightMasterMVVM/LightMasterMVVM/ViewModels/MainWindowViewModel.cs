@@ -188,11 +188,12 @@ namespace LightMasterMVVM.ViewModels
 
                 foreach (var entry in dbMatches)
                 {
+                    var TrackedTeam = db.FRCTeams.Find(entry.team_instance_id);
                     AveragePCCountModel modelToAdd = new AveragePCCountModel();
-                    if (!selectedTeamNumbers.Contains(entry.TrackedTeam.team_number))
+                    if (!selectedTeamNumbers.Contains(TrackedTeam.team_number))
                     {
-                        modelToAdd.TeamNumber = entry.TrackedTeam.team_number;
-                        selectedTeamNumbers.Add(entry.TrackedTeam.team_number);
+                        modelToAdd.TeamNumber = TrackedTeam.team_number;
+                        selectedTeamNumbers.Add(TrackedTeam.team_number);
                         var inner = 0;
                         var outer = 0;
                         var lower = 0;
@@ -221,8 +222,8 @@ namespace LightMasterMVVM.ViewModels
                     }
                     else
                     {
-                        modelToAdd = averagePCCountModels.Where(x => x.TeamNumber == entry.TrackedTeam.team_number).FirstOrDefault();
-                        modelToAdd.TeamNumber = entry.TrackedTeam.team_number;
+                        modelToAdd = averagePCCountModels.Where(x => x.TeamNumber == TrackedTeam.team_number).FirstOrDefault();
+                        modelToAdd.TeamNumber = TrackedTeam.team_number;
                         var inner = modelToAdd.AvgInnerPC * modelToAdd.Matches;
                         var outer = modelToAdd.AvgOuterPC * modelToAdd.Matches;
                         var lower = modelToAdd.AvgLowerPC * modelToAdd.Matches;
@@ -247,7 +248,7 @@ namespace LightMasterMVVM.ViewModels
                         modelToAdd.AvgOuterPC = (int)Math.Ceiling((float)outer / (float)modelToAdd.Matches);
                         modelToAdd.AvgTotalPC = (int)Math.Ceiling((float)total / (float)modelToAdd.Matches);
                         modelToAdd.AvgLowerPC = (int)Math.Ceiling((float)lower / (float)modelToAdd.Matches);
-                        averagePCCountModels.Remove(averagePCCountModels.Where(x => x.TeamNumber == entry.TrackedTeam.team_number).FirstOrDefault());
+                        averagePCCountModels.Remove(averagePCCountModels.Where(x => x.TeamNumber == TrackedTeam.team_number).FirstOrDefault());
                         averagePCCountModels.Add(modelToAdd);
                     }
 
@@ -394,11 +395,12 @@ namespace LightMasterMVVM.ViewModels
 
                 foreach(var entry in dbMatches)
                 {
+                    var TrackedTeam = db.FRCTeams.Find(entry.team_instance_id);
                     AveragePCCountModel modelToAdd = new AveragePCCountModel();
-                    if (!selectedTeamNumbers.Contains(entry.TrackedTeam.team_number))
+                    if (!selectedTeamNumbers.Contains(TrackedTeam.team_number))
                     {
-                        modelToAdd.TeamNumber = entry.TrackedTeam.team_number;
-                        selectedTeamNumbers.Add(entry.TrackedTeam.team_number);
+                        modelToAdd.TeamNumber = TrackedTeam.team_number;
+                        selectedTeamNumbers.Add(TrackedTeam.team_number);
                         var inner = 0;
                         var outer = 0;
                         var lower = 0;
@@ -427,8 +429,8 @@ namespace LightMasterMVVM.ViewModels
                     }
                     else
                     {
-                        modelToAdd = averagePCCountModels.Where(x => x.TeamNumber == entry.TrackedTeam.team_number).FirstOrDefault();
-                        modelToAdd.TeamNumber = entry.TrackedTeam.team_number;
+                        modelToAdd = averagePCCountModels.Where(x => x.TeamNumber == TrackedTeam.team_number).FirstOrDefault();
+                        modelToAdd.TeamNumber = TrackedTeam.team_number;
                         var inner = modelToAdd.AvgInnerPC * modelToAdd.Matches;
                         var outer = modelToAdd.AvgOuterPC * modelToAdd.Matches;
                         var lower = modelToAdd.AvgLowerPC * modelToAdd.Matches;
@@ -453,7 +455,7 @@ namespace LightMasterMVVM.ViewModels
                         modelToAdd.AvgOuterPC = (int)Math.Ceiling((float)outer / (float)modelToAdd.Matches);
                         modelToAdd.AvgTotalPC = (int)Math.Ceiling((float)total / (float)modelToAdd.Matches);
                         modelToAdd.AvgLowerPC = (int)Math.Ceiling((float)lower / (float)modelToAdd.Matches);
-                        averagePCCountModels.Remove(averagePCCountModels.Where(x => x.TeamNumber == entry.TrackedTeam.team_number).FirstOrDefault());
+                        averagePCCountModels.Remove(averagePCCountModels.Where(x => x.TeamNumber == TrackedTeam.team_number).FirstOrDefault());
                         averagePCCountModels.Add(modelToAdd);
                     }
                     
@@ -1537,6 +1539,7 @@ namespace LightMasterMVVM.ViewModels
                 using (var db = new ScoutingContext())
                 {
                     var r1selectedmatch = db.Matches.Where(x => x.TabletId == "R1" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
+                    var r1TrackedTeam = db.FRCTeams.Find(r1selectedmatch.team_instance_id);
                     if (r1selectedmatch == null)
                     {
                         MatchViewModel.Red1CurrentMatch = new TeamMatchView();
@@ -1560,7 +1563,7 @@ namespace LightMasterMVVM.ViewModels
                         matchtoput.MatchNumber = r1selectedmatch.MatchNumber;
                         matchtoput.NumCycles = r1selectedmatch.NumCycles;
                         matchtoput.ScoutName = r1selectedmatch.ScoutName;
-                        matchtoput.TeamNumber = r1selectedmatch.TrackedTeam.team_number;
+                        matchtoput.TeamNumber = r1TrackedTeam.team_number;
                         matchtoput.T_ControlPanelPosition = r1selectedmatch.T_ControlPanelPosition;
                         matchtoput.T_ControlPanelRotation = r1selectedmatch.T_ControlPanelRotation;
                         if (r1selectedmatch.PowerCellMissed != null)
@@ -1590,6 +1593,7 @@ namespace LightMasterMVVM.ViewModels
                     }
                     //RED2
                     var r2selectedmatch = db.Matches.Where(x => x.TabletId == "R2" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
+                    var r2TrackedTeam = db.FRCTeams.Find(r2selectedmatch.team_instance_id);
                     if (r2selectedmatch == null)
                     {
                         MatchViewModel.Red2CurrentMatch = new TeamMatchView();
@@ -1613,7 +1617,7 @@ namespace LightMasterMVVM.ViewModels
                         matchtoput.MatchNumber = r2selectedmatch.MatchNumber;
                         matchtoput.NumCycles = r2selectedmatch.NumCycles;
                         matchtoput.ScoutName = r2selectedmatch.ScoutName;
-                        matchtoput.TeamNumber = r2selectedmatch.TrackedTeam.team_number;
+                        matchtoput.TeamNumber = r2TrackedTeam.team_number;
                         matchtoput.T_ControlPanelPosition = r2selectedmatch.T_ControlPanelPosition;
                         matchtoput.T_ControlPanelRotation = r2selectedmatch.T_ControlPanelRotation;
                         if (r2selectedmatch.PowerCellMissed != null)
@@ -1643,6 +1647,7 @@ namespace LightMasterMVVM.ViewModels
                     }
                     //RED3
                     var r3selectedmatch = db.Matches.Where(x => x.TabletId == "R3" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
+                    var r3TrackedTeam = db.FRCTeams.Find(r3selectedmatch.team_instance_id);
                     if (r3selectedmatch == null)
                     {
                         MatchViewModel.Red3CurrentMatch = new TeamMatchView();
@@ -1666,7 +1671,7 @@ namespace LightMasterMVVM.ViewModels
                         matchtoput.MatchNumber = r3selectedmatch.MatchNumber;
                         matchtoput.NumCycles = r3selectedmatch.NumCycles;
                         matchtoput.ScoutName = r3selectedmatch.ScoutName;
-                        matchtoput.TeamNumber = r3selectedmatch.TrackedTeam.team_number;
+                        matchtoput.TeamNumber = r3TrackedTeam.team_number;
                         matchtoput.T_ControlPanelPosition = r3selectedmatch.T_ControlPanelPosition;
                         matchtoput.T_ControlPanelRotation = r3selectedmatch.T_ControlPanelRotation;
                         if (r3selectedmatch.PowerCellMissed != null)
@@ -1696,6 +1701,7 @@ namespace LightMasterMVVM.ViewModels
                     }
                     //BLUE1
                     var b1selectedmatch = db.Matches.Where(x => x.TabletId == "B1" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
+                    var b1TrackedTeam = db.FRCTeams.Find(b1selectedmatch.team_instance_id);
                     if (b1selectedmatch == null)
                     {
                         MatchViewModel.Blue1CurrentMatch = new TeamMatchView();
@@ -1719,7 +1725,7 @@ namespace LightMasterMVVM.ViewModels
                         matchtoput.MatchNumber = b1selectedmatch.MatchNumber;
                         matchtoput.NumCycles = b1selectedmatch.NumCycles;
                         matchtoput.ScoutName = b1selectedmatch.ScoutName;
-                        matchtoput.TeamNumber = b1selectedmatch.TrackedTeam.team_number;
+                        matchtoput.TeamNumber = b1TrackedTeam.team_number;
                         matchtoput.T_ControlPanelPosition = b1selectedmatch.T_ControlPanelPosition;
                         matchtoput.T_ControlPanelRotation = b1selectedmatch.T_ControlPanelRotation;
                         if (b1selectedmatch.PowerCellMissed != null)
@@ -1749,6 +1755,7 @@ namespace LightMasterMVVM.ViewModels
                     }
                     //BLUE2
                     var b2selectedmatch = db.Matches.Where(x => x.TabletId == "B2" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
+                    var b2TrackedTeam = db.FRCTeams.Find(b2selectedmatch.team_instance_id);
                     if (b2selectedmatch == null)
                     {
                         MatchViewModel.Blue2CurrentMatch = new TeamMatchView();
@@ -1772,7 +1779,7 @@ namespace LightMasterMVVM.ViewModels
                         matchtoput.MatchNumber = b2selectedmatch.MatchNumber;
                         matchtoput.NumCycles = b2selectedmatch.NumCycles;
                         matchtoput.ScoutName = b2selectedmatch.ScoutName;
-                        matchtoput.TeamNumber = b2selectedmatch.TrackedTeam.team_number;
+                        matchtoput.TeamNumber = b2TrackedTeam.team_number;
                         matchtoput.T_ControlPanelPosition = b2selectedmatch.T_ControlPanelPosition;
                         matchtoput.T_ControlPanelRotation = b2selectedmatch.T_ControlPanelRotation;
                         if (b2selectedmatch.PowerCellMissed != null)
@@ -1802,6 +1809,7 @@ namespace LightMasterMVVM.ViewModels
                     }
                     //BLUE3
                     var b3selectedmatch = db.Matches.Where(x => x.TabletId == "B3" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
+                    var b3TrackedTeam = db.FRCTeams.Find(b3selectedmatch.team_instance_id);
                     if (b3selectedmatch == null)
                     {
                         MatchViewModel.Blue3CurrentMatch = new TeamMatchView();
@@ -1826,7 +1834,7 @@ namespace LightMasterMVVM.ViewModels
                         matchtoput.MatchNumber = b3selectedmatch.MatchNumber;
                         matchtoput.NumCycles = b3selectedmatch.NumCycles;
                         matchtoput.ScoutName = b3selectedmatch.ScoutName;
-                        matchtoput.TeamNumber = b3selectedmatch.TrackedTeam.team_number;
+                        matchtoput.TeamNumber = b3TrackedTeam.team_number;
                         matchtoput.T_ControlPanelPosition = b3selectedmatch.T_ControlPanelPosition;
                         matchtoput.T_ControlPanelRotation = b3selectedmatch.T_ControlPanelRotation;
                         if (b3selectedmatch.PowerCellMissed != null)
