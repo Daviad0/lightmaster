@@ -11,11 +11,11 @@
           <Border Background="#eeeeee" BorderBrush="LightGray" BorderThickness="1" Padding="10">
               <StackPanel>
                   <Grid ColumnDefinitions="60,200,100,*,100">
-                    <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red1CurrentMatch.TeamNumber}" Text="{Binding team_number}" Grid.Column="0"/>
-                    <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red1CurrentMatch.TeamNumber}" Text="{Binding match_progress}" Grid.Column="1"/>
-                    <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red1CurrentMatch.TeamNumber}" Text="{Binding rated_tier}" Grid.Column="2"/>
-                    <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red1CurrentMatch.TeamNumber}" Text="SHALALALALALAL MY OH MY DONT LET THE BOY BE SHY YOU GOTTA SING THE RIGHT WORDS" Grid.Column="3"/>
-                    <Button FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red1CurrentMatch.TeamNumber}" Content="See More Details..." Grid.Column="4" Margin="10,0"/>
+                    <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding team_number}" Grid.Column="0"/>
+                    <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding match_progress}" Grid.Column="1"/>
+                    <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding rated_tier}" Grid.Column="2"/>
+                    <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="SHALALALALALAL MY OH MY DONT LET THE BOY BE SHY YOU GOTTA SING THE RIGHT WORDS" Grid.Column="3"/>
+                    <Button FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Content="See More Details..." Grid.Column="4" Margin="10,0"/>
               
                   </Grid>
                 <Border BorderBrush="Transparent" Padding="3" IsVisible="{Binding has_matches}">
