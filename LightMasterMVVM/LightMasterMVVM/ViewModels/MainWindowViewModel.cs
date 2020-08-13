@@ -35,6 +35,34 @@ using SharpDX.Direct2D1;
 
 namespace LightMasterMVVM.ViewModels
 {
+    public class CompetitionTeamsViewModel : ViewModelBase
+    {
+        private bool userControlVisible = true;
+        public bool UserControlVisible
+        {
+            get => userControlVisible;
+            set => SetProperty(ref userControlVisible, value);
+        }
+        private ObservableCollection<CompTeamView> teams = new ObservableCollection<CompTeamView>();
+        public ObservableCollection<CompTeamView> Teams
+        {
+            get => teams;
+            set => SetProperty(ref teams, value);
+        }
+        public CompetitionTeamsViewModel()
+        {
+            using(var db = new ScoutingContext())
+            {
+                var listofteams = db.FRCTeams.Where(x => x.event_key == "test_env").ToList();
+                Teams.Clear();
+                Teams.Add(new CompTeamView() { team_number = 50051 });
+                foreach (var team in listofteams)
+                {
+                    Teams.Add(new CompTeamView() { team_number = team.team_number });
+                }
+            }
+        }
+    }
     public class NotificationViewModel : ViewModelBase
     {
         private ObservableCollection<NotificationItem> notifications = new ObservableCollection<NotificationItem>()
@@ -71,7 +99,7 @@ namespace LightMasterMVVM.ViewModels
     }
     public class TBAViewModel : ViewModelBase
     {
-        private bool userControlVisible = true;
+        private bool userControlVisible = false;
         public bool UserControlVisible
         {
             get => userControlVisible;
@@ -1139,6 +1167,7 @@ namespace LightMasterMVVM.ViewModels
         private int currentMatchNum = 1;
         private string matchNumString = "Match 1";
         private GraphViewModel graphViewModel = new GraphViewModel();
+        private CompetitionTeamsViewModel competitionTeamsViewModel = new CompetitionTeamsViewModel();
         private TabletViewModel tabletViewModel = new TabletViewModel();
         private NotificationViewModel notificationViewModel = new NotificationViewModel();
         private MatchViewModel matchViewModel = new MatchViewModel();
@@ -1156,6 +1185,11 @@ namespace LightMasterMVVM.ViewModels
         {
             get => tabletViewModel;
             set => SetProperty(ref tabletViewModel, value);
+        }
+        public CompetitionTeamsViewModel CompetitionTeamsViewModel
+        {
+            get => competitionTeamsViewModel;
+            set => SetProperty(ref competitionTeamsViewModel, value);
         }
         public NotificationViewModel NotificationViewModel
         {
@@ -1533,6 +1567,7 @@ namespace LightMasterMVVM.ViewModels
         {
             tabletViewModel.UserControlVisible = false;
             matchViewModel.UserControlVisible = true;
+            CompetitionTeamsViewModel.UserControlVisible = false;
             TBAViewModel.UserControlVisible = false;
             try
             {
@@ -1908,6 +1943,7 @@ namespace LightMasterMVVM.ViewModels
             tabletViewModel.UserControlVisible = true;
             TBAViewModel.UserControlVisible = false;
             GraphViewModel.UserControlVisible = false;
+            CompetitionTeamsViewModel.UserControlVisible = false;
 
             
         }
@@ -1917,6 +1953,7 @@ namespace LightMasterMVVM.ViewModels
             tabletViewModel.UserControlVisible = false;
             GraphViewModel.UserControlVisible = false;
             TBAViewModel.UserControlVisible = true;
+            CompetitionTeamsViewModel.UserControlVisible = false;
 
         }
         public void SeeGraph()
@@ -1926,7 +1963,16 @@ namespace LightMasterMVVM.ViewModels
             GraphViewModel = new GraphViewModel();
             GraphViewModel.UserControlVisible = true;
             TBAViewModel.UserControlVisible = false;
+            CompetitionTeamsViewModel.UserControlVisible = false;
 
+        }
+        public void SeeTeams()
+        {
+            matchViewModel.UserControlVisible = false;
+            tabletViewModel.UserControlVisible = false;
+            GraphViewModel.UserControlVisible = false;
+            TBAViewModel.UserControlVisible = false;
+            CompetitionTeamsViewModel.UserControlVisible = true;
         }
         public void TryUSB()
         {

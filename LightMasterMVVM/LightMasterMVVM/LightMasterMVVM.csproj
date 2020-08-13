@@ -29,13 +29,13 @@
     <AvaloniaResource Remove="Assets\Rubik-Regular.ttf" />
     <AvaloniaResource Remove="Assets\SourceSansPro-Bold.ttf" />
     <AvaloniaResource Remove="Assets\ui-bluetooth.png" />
+    <AvaloniaResource Remove="Views\CompetitionTeams.xaml" />
     <AvaloniaResource Remove="Views\DataAnalysis.xaml" />
     <AvaloniaResource Remove="Views\Matches.xaml" />
     <AvaloniaResource Remove="Views\NotifyUser.xaml" />
     <AvaloniaResource Remove="Views\TabletLogs.xaml" />
     <AvaloniaResource Remove="Views\Tablets.xaml" />
     <AvaloniaResource Remove="Views\TheBlueAlliance.xaml" />
-    <AvaloniaResource Remove="Views\UserControl1.xaml" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Assets\battery-full.png" />
@@ -54,6 +54,7 @@
     <None Remove="Assets\Rubik-Regular.ttf" />
     <None Remove="Assets\SourceSansPro-Bold.ttf" />
     <None Remove="Assets\ui-bluetooth.png" />
+    <None Remove="Views\CompetitionTeams.xaml" />
     <None Remove="Views\DataAnalysis.xaml" />
     <None Remove="Views\MainWindow.xaml" />
     <None Remove="Views\Matches.xaml" />
@@ -61,7 +62,6 @@
     <None Remove="Views\TabletLogs.xaml" />
     <None Remove="Views\Tablets.xaml" />
     <None Remove="Views\TheBlueAlliance.xaml" />
-    <None Remove="Views\UserControl1.xaml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\Rubik-Regular.ttf" />
@@ -98,6 +98,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\optionselected.png" />
+    <EmbeddedResource Include="Views\CompetitionTeams.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\MainWindow.xaml" />
     <EmbeddedResource Include="Views\NotifyUser.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -129,11 +132,6 @@
     <PackageReference Include="System.IO.Ports" Version="4.7.0" />
     <PackageReference Include="System.Windows.Forms" Version="4.0.0.0" />
     <PackageReference Include="Websocket.Client" Version="4.3.15" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\UserControl1.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Tablets.xaml">

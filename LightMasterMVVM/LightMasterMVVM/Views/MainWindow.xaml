@@ -39,7 +39,7 @@
       <RowDefinition Height="50"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
-    <Grid ColumnDefinitions="120,120,120,120,120" RowDefinitions="120" Grid.Row="0" Margin="30,10,30,30" >
+    <Grid ColumnDefinitions="120,120,120,120,120,120" RowDefinitions="120" Grid.Row="0" Margin="30,10,30,30" >
       <Grid Grid.Column="0" ColumnDefinitions="*" RowDefinitions="80">
         <Button Command="{Binding SeeMatches}" Classes="menu" CommandParameter="{Binding CurrentMatchNum}" Height="35" Width="110" Grid.Row="0" Margin="30,0,30,60">
           <TextBlock FontWeight="Bold" Text="Matches"/>
@@ -65,6 +65,11 @@
           <TextBlock FontWeight="Bold" Text="USBTest"/>
         </Button>
       </Grid>
+      <Grid Grid.Column="5" ColumnDefinitions="*,10" RowDefinitions="80">
+        <Button Command="{Binding SeeTeams}" Classes="menu" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
+          <TextBlock FontWeight="Bold" Text="Teams"/>
+        </Button>
+      </Grid>
 
 
 
@@ -83,6 +88,9 @@
       </Border>
       <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">
         <screens:TheBlueAlliance x:Name="tba" DataContext="{Binding TBAViewModel}" IsVisible="{Binding UserControlVisible}"/>
+      </Border>
+      <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">
+        <screens:CompetitionTeams x:Name="teams" DataContext="{Binding CompetitionTeamsViewModel}" IsVisible="{Binding UserControlVisible}"/>
       </Border>
       
     </Grid>

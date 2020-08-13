@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace LightMasterMVVM.Views
 {
-    public class UserControl1 : UserControl
+    public class CompetitionTeams : UserControl
     {
-        public UserControl1()
+        public CompetitionTeams()
         {
             this.InitializeComponent();
         }
