@@ -17,33 +17,51 @@
                       <Button Content="See More Details..." Grid.Column="3"/>
               
                   </Grid>
-                <Border Background="Aqua" BorderBrush="Gray" Padding="3">
-                  <Grid ColumnDefinitions="100,90,90,90,90">
-                    <TextBlock Text="Match #" Grid.Column="0"/>
-                    <TextBlock Text="AINN" Grid.Column="1"/>
-                    <TextBlock Text="AOUT" Grid.Column="2"/>
-                    <TextBlock Text="ALOW" Grid.Column="3"/>
-                    <TextBlock Text="AMIS" Grid.Column="4"/>
-                    <TextBlock Text="TINN" Grid.Column="5"/>
-                    <TextBlock Text="TOUT" Grid.Column="6"/>
-                    <TextBlock Text="TLOW" Grid.Column="7"/>
-                    <TextBlock Text="TMIS" Grid.Column="8"/>
+                <Border BorderBrush="Transparent" Padding="3" IsVisible="{Binding has_matches}">
+                  <Grid ColumnDefinitions="100,240,240">
+                    <Grid Grid.Column="0" Background="Aqua">
+                      <TextBlock Text="Match #"/>
+                    </Grid>
+                    <Grid Grid.Column="1" Background="Turquoise" ColumnDefinitions="90,90,90,90">
+                      <TextBlock Text="AINN" Grid.Column="0"/>
+                      <TextBlock Text="AOUT" Grid.Column="1"/>
+                      <TextBlock Text="ALOW" Grid.Column="2"/>
+                      <TextBlock Text="AMIS" Grid.Column="3"/>
+                    </Grid>
+                    <Grid Grid.Column="2" Background="DeepPink" ColumnDefinitions="90,90,90,90">
+                      <TextBlock Text="TINN" Grid.Column="0"/>
+                      <TextBlock Text="TOUT" Grid.Column="1"/>
+                      <TextBlock Text="TLOW" Grid.Column="2"/>
+                      <TextBlock Text="TMIS" Grid.Column="3"/>
+                    </Grid>
+                    
+                    
+                    
                   </Grid>
                 </Border>
                   <ItemsControl Items="{Binding team_matches}">
                       <ItemsControl.ItemTemplate>
                           <DataTemplate>
                               <Border Background="LightBlue" BorderBrush="Gray" Padding="3">
-                                  <Grid ColumnDefinitions="100,90,90,90,90">
-                                      <TextBlock Text="{Binding MatchNumber, StringFormat={}Match {0}}}" Grid.Column="0"/>
+                                <Grid ColumnDefinitions="100,240,240">
+                                      
+                                      
+                                    
+                                    <Grid Grid.Column="0" Background="LightBlue">
+                                      <TextBlock Text="{Binding MatchNumber, StringFormat={}Match {0}}}"/>
+                                    </Grid>
+                                    <Grid Grid.Column="1" Background="PaleTurquoise" ColumnDefinitions="90,90,90,90">
+                                      <TextBlock Text="{Binding APowerCellInner, StringFormat={}{0}PC}}" Grid.Column="0"/>
                                       <TextBlock Text="{Binding APowerCellInner, StringFormat={}{0}PC}}" Grid.Column="1"/>
                                       <TextBlock Text="{Binding APowerCellInner, StringFormat={}{0}PC}}" Grid.Column="2"/>
                                       <TextBlock Text="{Binding APowerCellInner, StringFormat={}{0}PC}}" Grid.Column="3"/>
-                                      <TextBlock Text="{Binding APowerCellInner, StringFormat={}{0}PC}}" Grid.Column="4"/>
-                                    <TextBlock Text="{Binding TPowerCellInner, StringFormat={}{0}PC}}" Grid.Column="5"/>
-                                    <TextBlock Text="{Binding TPowerCellInner, StringFormat={}{0}PC}}" Grid.Column="6"/>
-                                    <TextBlock Text="{Binding TPowerCellInner, StringFormat={}{0}PC}}" Grid.Column="7"/>
-                                    <TextBlock Text="{Binding TPowerCellInner, StringFormat={}{0}PC}}" Grid.Column="8"/>
+                                    </Grid>
+                                    <Grid Grid.Column="2" Background="LightPink" ColumnDefinitions="90,90,90,90">
+                                      <TextBlock Text="{Binding TPowerCellInner, StringFormat={}{0}PC}}" Grid.Column="0"/>
+                                      <TextBlock Text="{Binding TPowerCellInner, StringFormat={}{0}PC}}" Grid.Column="1"/>
+                                      <TextBlock Text="{Binding TPowerCellInner, StringFormat={}{0}PC}}" Grid.Column="2"/>
+                                      <TextBlock Text="{Binding TPowerCellInner, StringFormat={}{0}PC}}" Grid.Column="3"/>
+                                    </Grid>
                                   </Grid>
                               </Border>
                           </DataTemplate>

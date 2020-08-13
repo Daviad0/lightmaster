@@ -55,7 +55,6 @@ namespace LightMasterMVVM.ViewModels
             {
                 var listofteams = db.FRCTeams.Where(x => x.event_key == "test_env").ToList();
                 Teams.Clear();
-                Teams.Add(new CompTeamView() { team_number = 50051 });
                 foreach (var team in listofteams)
                 {
                     
@@ -63,6 +62,7 @@ namespace LightMasterMVVM.ViewModels
                     var listofcompletedmatches = new List<TeamMatchView>();
                     var listofincompletematches = new List<TeamMatchView>();
                     var listofviewablematches = new ObservableCollection<TeamMatchView>();
+                    bool hasmatches = false;
                     foreach(var match in listofmatchesunderteam.OrderBy(x => x.MatchNumber))
                     {
                         var matchview = new TeamMatchView();
@@ -108,9 +108,10 @@ namespace LightMasterMVVM.ViewModels
                             listofincompletematches.Add(matchview);
                         }
                         listofviewablematches.Add(matchview);
+                        hasmatches = true;
                     }
-
-                    Teams.Add(new CompTeamView() { team_number = team.team_number, match_progress = (listofcompletedmatches.ToArray().Length.ToString() + " of " + (listofincompletematches.ToArray().Length + listofcompletedmatches.ToArray().Length).ToString()), team_matches = listofviewablematches });
+                    
+                    Teams.Add(new CompTeamView() { team_number = team.team_number, match_progress = (listofcompletedmatches.ToArray().Length.ToString() + " of " + (listofincompletematches.ToArray().Length + listofcompletedmatches.ToArray().Length).ToString()), team_matches = listofviewablematches, has_matches = hasmatches });
                 }
             }
         }

@@ -65,5 +65,22 @@ namespace LightMasterMVVM.Models
                 }
             }
         }
+        private bool _has_matches;
+        public bool has_matches
+        {
+            get
+            {
+                return this._has_matches;
+            }
+
+            set
+            {
+                if (value != this._has_matches)
+                {
+                    this._has_matches = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
     }
 }
