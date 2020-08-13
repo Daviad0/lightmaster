@@ -58,7 +58,59 @@ namespace LightMasterMVVM.ViewModels
                 Teams.Add(new CompTeamView() { team_number = 50051 });
                 foreach (var team in listofteams)
                 {
-                    Teams.Add(new CompTeamView() { team_number = team.team_number });
+                    
+                    var listofmatchesunderteam = db.Matches.Where(x => x.team_instance_id == team.team_instance_id && x.EventCode == team.event_key).ToList();
+                    var listofcompletedmatches = new List<TeamMatchView>();
+                    var listofincompletematches = new List<TeamMatchView>();
+                    var listofviewablematches = new ObservableCollection<TeamMatchView>();
+                    foreach(var match in listofmatchesunderteam.OrderBy(x => x.MatchNumber))
+                    {
+                        var matchview = new TeamMatchView();
+                        matchview.A_InitiationLine = match.A_InitiationLine;
+                        matchview.DisabledSeconds = match.DisabledSeconds;
+                        matchview.EventCode = match.EventCode;
+                        matchview.E_Balanced = match.E_Balanced;
+                        matchview.E_ClimbAttempt = match.E_ClimbAttempt;
+                        matchview.E_ClimbSuccess = match.E_ClimbSuccess;
+                        matchview.E_Park = match.E_Park;
+                        matchview.MatchNumber = match.MatchNumber;
+                        matchview.NumCycles = match.NumCycles;
+                        matchview.ScoutName = match.ScoutName;
+                        matchview.TeamNumber = team.team_number;
+                        matchview.T_ControlPanelPosition = match.T_ControlPanelPosition;
+                        matchview.T_ControlPanelRotation = match.T_ControlPanelRotation;
+                        matchview.APowerCellInner = match.PowerCellInner[0];
+                        matchview.APowerCellOuter = match.PowerCellOuter[0];
+                        matchview.APowerCellLower = match.PowerCellLower[0];
+                        matchview.APowerCellMissed = match.PowerCellMissed[0];
+                        foreach(var pca in match.PowerCellInner.Skip(1))
+                        {
+                            matchview.TPowerCellInner += pca;
+                        }
+                        foreach (var pca in match.PowerCellOuter.Skip(1))
+                        {
+                            matchview.TPowerCellOuter += pca;
+                        }
+                        foreach (var pca in match.PowerCellLower.Skip(1))
+                        {
+                            matchview.TPowerCellLower += pca;
+                        }
+                        foreach (var pca in match.PowerCellMissed.Skip(1))
+                        {
+                            matchview.TPowerCellMissed += pca;
+                        }
+                        if (match.ClientSubmitted)
+                        {
+                            listofcompletedmatches.Add(matchview);
+                        }
+                        else
+                        {
+                            listofincompletematches.Add(matchview);
+                        }
+                        listofviewablematches.Add(matchview);
+                    }
+
+                    Teams.Add(new CompTeamView() { team_number = team.team_number, match_progress = (listofcompletedmatches.ToArray().Length.ToString() + " of " + (listofincompletematches.ToArray().Length + listofcompletedmatches.ToArray().Length).ToString()), team_matches = listofviewablematches });
                 }
             }
         }
