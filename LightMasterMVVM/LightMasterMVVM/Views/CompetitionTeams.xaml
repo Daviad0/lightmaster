@@ -10,29 +10,30 @@
         <DataTemplate>
           <Border Background="#eeeeee" BorderBrush="LightGray" BorderThickness="1" Padding="10">
               <StackPanel>
-                  <Grid ColumnDefinitions="60,200,*,200">
-                      <TextBlock Text="{Binding team_number}" Grid.Column="0"/>
-                      <TextBlock Text="{Binding match_progress}" Grid.Column="1"/>
-                      <TextBlock Text="SHALALALALALAL MY OH MY DONT LET THE BOY BE SHY YOU GOTTA SING THE RIGHT WORDS" Grid.Column="2"/>
-                      <Button Content="See More Details..." Grid.Column="3"/>
+                  <Grid ColumnDefinitions="60,200,100,*,100">
+                    <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red1CurrentMatch.TeamNumber}" Text="{Binding team_number}" Grid.Column="0"/>
+                    <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red1CurrentMatch.TeamNumber}" Text="{Binding match_progress}" Grid.Column="1"/>
+                    <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red1CurrentMatch.TeamNumber}" Text="{Binding rated_tier}" Grid.Column="2"/>
+                    <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red1CurrentMatch.TeamNumber}" Text="SHALALALALALAL MY OH MY DONT LET THE BOY BE SHY YOU GOTTA SING THE RIGHT WORDS" Grid.Column="3"/>
+                    <Button FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding Red1CurrentMatch.TeamNumber}" Content="See More Details..." Grid.Column="4" Margin="10,0"/>
               
                   </Grid>
                 <Border BorderBrush="Transparent" Padding="3" IsVisible="{Binding has_matches}">
                   <Grid ColumnDefinitions="100,240,240">
                     <Grid Grid.Column="0" Background="Aqua">
-                      <TextBlock Text="Match #"/>
+                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Match #"/>
                     </Grid>
                     <Grid Grid.Column="1" Background="Turquoise" ColumnDefinitions="90,90,90,90">
-                      <TextBlock Text="AINN" Grid.Column="0"/>
-                      <TextBlock Text="AOUT" Grid.Column="1"/>
-                      <TextBlock Text="ALOW" Grid.Column="2"/>
-                      <TextBlock Text="AMIS" Grid.Column="3"/>
+                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Inner" Grid.Column="0"/>
+                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Outer" Grid.Column="1"/>
+                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Lower" Grid.Column="2"/>
+                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Missed" Grid.Column="3"/>
                     </Grid>
                     <Grid Grid.Column="2" Background="DeepPink" ColumnDefinitions="90,90,90,90">
-                      <TextBlock Text="TINN" Grid.Column="0"/>
-                      <TextBlock Text="TOUT" Grid.Column="1"/>
-                      <TextBlock Text="TLOW" Grid.Column="2"/>
-                      <TextBlock Text="TMIS" Grid.Column="3"/>
+                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Inner" Grid.Column="0"/>
+                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Outer" Grid.Column="1"/>
+                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Lower" Grid.Column="2"/>
+                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Missed" Grid.Column="3"/>
                     </Grid>
                     
                     
@@ -48,19 +49,19 @@
                                       
                                     
                                     <Grid Grid.Column="0" Background="LightBlue">
-                                      <TextBlock Text="{Binding MatchNumber, StringFormat={}Match {0}}}"/>
+                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding MatchNumber, StringFormat={}Match {0}}}"/>
                                     </Grid>
                                     <Grid Grid.Column="1" Background="PaleTurquoise" ColumnDefinitions="90,90,90,90">
-                                      <TextBlock Text="{Binding APowerCellInner, StringFormat={}{0}PC}}" Grid.Column="0"/>
-                                      <TextBlock Text="{Binding APowerCellInner, StringFormat={}{0}PC}}" Grid.Column="1"/>
-                                      <TextBlock Text="{Binding APowerCellInner, StringFormat={}{0}PC}}" Grid.Column="2"/>
-                                      <TextBlock Text="{Binding APowerCellInner, StringFormat={}{0}PC}}" Grid.Column="3"/>
+                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding APowerCellInner, StringFormat={}{0}PC}}" Grid.Column="0"/>
+                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding APowerCellInner, StringFormat={}{0}PC}}" Grid.Column="1"/>
+                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding APowerCellInner, StringFormat={}{0}PC}}" Grid.Column="2"/>
+                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding APowerCellInner, StringFormat={}{0}PC}}" Grid.Column="3"/>
                                     </Grid>
                                     <Grid Grid.Column="2" Background="LightPink" ColumnDefinitions="90,90,90,90">
-                                      <TextBlock Text="{Binding TPowerCellInner, StringFormat={}{0}PC}}" Grid.Column="0"/>
-                                      <TextBlock Text="{Binding TPowerCellInner, StringFormat={}{0}PC}}" Grid.Column="1"/>
-                                      <TextBlock Text="{Binding TPowerCellInner, StringFormat={}{0}PC}}" Grid.Column="2"/>
-                                      <TextBlock Text="{Binding TPowerCellInner, StringFormat={}{0}PC}}" Grid.Column="3"/>
+                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TPowerCellInner, StringFormat={}{0}PC}}" Grid.Column="0"/>
+                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TPowerCellInner, StringFormat={}{0}PC}}" Grid.Column="1"/>
+                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TPowerCellInner, StringFormat={}{0}PC}}" Grid.Column="2"/>
+                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TPowerCellInner, StringFormat={}{0}PC}}" Grid.Column="3"/>
                                     </Grid>
                                   </Grid>
                               </Border>

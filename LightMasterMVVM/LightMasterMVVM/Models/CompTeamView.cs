@@ -82,5 +82,22 @@ namespace LightMasterMVVM.Models
                 }
             }
         }
+        private string _rated_tier;
+        public string rated_tier
+        {
+            get
+            {
+                return this._rated_tier;
+            }
+
+            set
+            {
+                if (value != this._rated_tier)
+                {
+                    this._rated_tier = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
     }
 }

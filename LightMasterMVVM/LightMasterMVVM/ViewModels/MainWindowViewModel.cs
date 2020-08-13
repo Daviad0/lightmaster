@@ -111,7 +111,7 @@ namespace LightMasterMVVM.ViewModels
                         hasmatches = true;
                     }
                     
-                    Teams.Add(new CompTeamView() { team_number = team.team_number, match_progress = (listofcompletedmatches.ToArray().Length.ToString() + " of " + (listofincompletematches.ToArray().Length + listofcompletedmatches.ToArray().Length).ToString()), team_matches = listofviewablematches, has_matches = hasmatches });
+                    Teams.Add(new CompTeamView() { team_number = team.team_number, match_progress = (listofcompletedmatches.ToArray().Length.ToString() + " of " + (listofincompletematches.ToArray().Length + listofcompletedmatches.ToArray().Length).ToString()), team_matches = listofviewablematches, has_matches = hasmatches, rated_tier = team.rated_tier });
                 }
             }
         }
