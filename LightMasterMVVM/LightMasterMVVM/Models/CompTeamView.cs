@@ -99,5 +99,158 @@ namespace LightMasterMVVM.Models
                 }
             }
         }
+        private int _a_pc_inner_avg;
+        public int a_pc_inner_avg
+        {
+            get
+            {
+                return this._a_pc_inner_avg;
+            }
+
+            set
+            {
+                if (value != this._a_pc_inner_avg)
+                {
+                    this._a_pc_inner_avg = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private int _a_pc_outer_avg;
+        public int a_pc_outer_avg
+        {
+            get
+            {
+                return this._a_pc_outer_avg;
+            }
+
+            set
+            {
+                if (value != this._a_pc_outer_avg)
+                {
+                    this._a_pc_outer_avg = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private int _a_pc_lower_avg;
+        public int a_pc_lower_avg
+        {
+            get
+            {
+                return this._a_pc_lower_avg;
+            }
+
+            set
+            {
+                if (value != this._a_pc_lower_avg)
+                {
+                    this._a_pc_lower_avg = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private int _a_pc_missed_avg;
+        public int a_pc_missed_avg
+        {
+            get
+            {
+                return this._a_pc_missed_avg;
+            }
+
+            set
+            {
+                if (value != this._a_pc_missed_avg)
+                {
+                    this._a_pc_missed_avg = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private int _t_pc_inner_avg;
+        public int t_pc_inner_avg
+        {
+            get
+            {
+                return this._t_pc_inner_avg;
+            }
+
+            set
+            {
+                if (value != this._t_pc_inner_avg)
+                {
+                    this._t_pc_inner_avg = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private int _t_pc_outer_avg;
+        public int t_pc_outer_avg
+        {
+            get
+            {
+                return this._t_pc_outer_avg;
+            }
+
+            set
+            {
+                if (value != this._t_pc_outer_avg)
+                {
+                    this._t_pc_outer_avg = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private int _t_pc_lower_avg;
+        public int t_pc_lower_avg
+        {
+            get
+            {
+                return this._t_pc_lower_avg;
+            }
+
+            set
+            {
+                if (value != this._t_pc_lower_avg)
+                {
+                    this._t_pc_lower_avg = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private int _t_pc_missed_avg;
+        public int t_pc_missed_avg
+        {
+            get
+            {
+                return this._t_pc_missed_avg;
+            }
+
+            set
+            {
+                if (value != this._t_pc_missed_avg)
+                {
+                    this._t_pc_missed_avg = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private int _t_num_cycles;
+        public int t_num_cycles
+        {
+            get
+            {
+                return this._t_num_cycles;
+            }
+
+            set
+            {
+                if (value != this._t_num_cycles)
+                {
+                    this._t_num_cycles = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
     }
 }

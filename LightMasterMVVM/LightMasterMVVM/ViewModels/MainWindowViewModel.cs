@@ -57,7 +57,7 @@ namespace LightMasterMVVM.ViewModels
                 Teams.Clear();
                 foreach (var team in listofteams)
                 {
-                    
+                    CompTeamView compTeamView = new CompTeamView() { team_number = team.team_number, rated_tier = team.rated_tier };
                     var listofmatchesunderteam = db.Matches.Where(x => x.team_instance_id == team.team_instance_id && x.EventCode == team.event_key).ToList();
                     var listofcompletedmatches = new List<TeamMatchView>();
                     var listofincompletematches = new List<TeamMatchView>();
@@ -83,20 +83,29 @@ namespace LightMasterMVVM.ViewModels
                         matchview.APowerCellOuter = match.PowerCellOuter[0];
                         matchview.APowerCellLower = match.PowerCellLower[0];
                         matchview.APowerCellMissed = match.PowerCellMissed[0];
+                        compTeamView.a_pc_inner_avg += match.PowerCellInner[0];
+                        compTeamView.a_pc_outer_avg += match.PowerCellInner[0];
+                        compTeamView.a_pc_lower_avg += match.PowerCellInner[0];
+                        compTeamView.a_pc_missed_avg += match.PowerCellInner[0];
+                        compTeamView.t_num_cycles += match.NumCycles;
                         foreach(var pca in match.PowerCellInner.Skip(1))
                         {
+                            compTeamView.t_pc_inner_avg += pca;
                             matchview.TPowerCellInner += pca;
                         }
                         foreach (var pca in match.PowerCellOuter.Skip(1))
                         {
+                            compTeamView.t_pc_outer_avg += pca;
                             matchview.TPowerCellOuter += pca;
                         }
                         foreach (var pca in match.PowerCellLower.Skip(1))
                         {
+                            compTeamView.t_pc_lower_avg += pca;
                             matchview.TPowerCellLower += pca;
                         }
                         foreach (var pca in match.PowerCellMissed.Skip(1))
                         {
+                            compTeamView.t_pc_missed_avg += pca;
                             matchview.TPowerCellMissed += pca;
                         }
                         if (match.ClientSubmitted)
@@ -110,8 +119,22 @@ namespace LightMasterMVVM.ViewModels
                         listofviewablematches.Add(matchview);
                         hasmatches = true;
                     }
-                    
-                    Teams.Add(new CompTeamView() { team_number = team.team_number, match_progress = (listofcompletedmatches.ToArray().Length.ToString() + " of " + (listofincompletematches.ToArray().Length + listofcompletedmatches.ToArray().Length).ToString()), team_matches = listofviewablematches, has_matches = hasmatches, rated_tier = team.rated_tier });
+                    if (hasmatches)
+                    {
+                        compTeamView.a_pc_inner_avg = compTeamView.a_pc_inner_avg / (listofcompletedmatches.ToArray().Length + listofincompletematches.ToArray().Length);
+                        compTeamView.a_pc_lower_avg = compTeamView.a_pc_lower_avg / (listofcompletedmatches.ToArray().Length + listofincompletematches.ToArray().Length);
+                        compTeamView.a_pc_missed_avg = compTeamView.a_pc_missed_avg / (listofcompletedmatches.ToArray().Length + listofincompletematches.ToArray().Length);
+                        compTeamView.a_pc_outer_avg = compTeamView.a_pc_outer_avg / (listofcompletedmatches.ToArray().Length + listofincompletematches.ToArray().Length);
+                        compTeamView.t_pc_inner_avg = compTeamView.t_pc_inner_avg / (listofcompletedmatches.ToArray().Length + listofincompletematches.ToArray().Length);
+                        compTeamView.t_pc_lower_avg = compTeamView.t_pc_lower_avg / (listofcompletedmatches.ToArray().Length + listofincompletematches.ToArray().Length);
+                        compTeamView.t_pc_missed_avg = compTeamView.t_pc_missed_avg / (listofcompletedmatches.ToArray().Length + listofincompletematches.ToArray().Length);
+                        compTeamView.t_pc_outer_avg = compTeamView.t_pc_outer_avg / (listofcompletedmatches.ToArray().Length + listofincompletematches.ToArray().Length);
+                        compTeamView.t_num_cycles = compTeamView.t_num_cycles / (listofcompletedmatches.ToArray().Length + listofincompletematches.ToArray().Length);
+                    }
+                    compTeamView.has_matches = hasmatches;
+                    compTeamView.team_matches = listofviewablematches;
+                    compTeamView.match_progress = (listofcompletedmatches.ToArray().Length.ToString() + " of " + (listofincompletematches.ToArray().Length + listofcompletedmatches.ToArray().Length).ToString());
+                    Teams.Add(compTeamView);
                 }
             }
         }
