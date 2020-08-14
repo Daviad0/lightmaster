@@ -17,6 +17,30 @@
       <Setter Property="BorderThickness" Value="5"/>
       <Setter Property="Foreground" Value="Gray"/>
     </Style>
+    <Style Selector="Border.show">
+      <Style.Animations>
+        <Animation Duration="0:0:.5">
+          <KeyFrame Cue="0%">
+            <Setter Property="Opacity" Value="0.0"/>
+          </KeyFrame>
+          <KeyFrame Cue="100%">
+            <Setter Property="Opacity" Value="1.0"/>
+          </KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+    <Style Selector="Border.hide">
+      <Style.Animations>
+        <Animation Duration="0:0:.5">
+          <KeyFrame Cue="0%">
+            <Setter Property="Opacity" Value="1.0"/>
+          </KeyFrame>
+          <KeyFrame Cue="100%">
+            <Setter Property="Opacity" Value="0.0"/>
+          </KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
     <Style Selector="Button.menu:pointerover">
       <Setter Property="Background" Value="Gray"/>
       <Setter Property="BorderBrush" Value="Gray"/>
@@ -41,32 +65,32 @@
     </Grid.RowDefinitions>
     <Grid ColumnDefinitions="120,120,120,120,120,120" RowDefinitions="120" Grid.Row="0" Margin="30,10,30,30" >
       <Grid Grid.Column="0" ColumnDefinitions="*" RowDefinitions="80">
-        <Button Command="{Binding SeeMatches}" Classes="menu" CommandParameter="{Binding CurrentMatchNum}" Height="35" Width="110" Grid.Row="0" Margin="30,0,30,60">
+        <Button x:Name="seeMatches" Name="seeMatches" Classes="menu" CommandParameter="{Binding CurrentMatchNum}" Height="35" Width="110" Grid.Row="0" Margin="30,0,30,60">
           <TextBlock FontWeight="Bold" Text="Matches"/>
         </Button>
       </Grid>
       <Grid Grid.Column="1" ColumnDefinitions="*" RowDefinitions="80">
-        <Button Classes="menu" Command="{Binding SeeTablets}" Grid.Row="0" Margin="30,0,30,60" Width="110" Height="35">
+        <Button Name="seeTablets" Classes="menu" Command="{Binding SeeTablets}" Grid.Row="0" Margin="30,0,30,60" Width="110" Height="35">
           <TextBlock FontWeight="Bold" Text="Tablets"/>
         </Button>
       </Grid>
       <Grid Grid.Column="2" ColumnDefinitions="*,10" RowDefinitions="80">
-        <Button Command="{Binding SeeTBA}" Classes="menu" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
+        <Button Name="seeTBA" Command="{Binding SeeTBA}" Classes="menu" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
           <TextBlock FontWeight="Bold" Text="TBA Check"/>
         </Button>
       </Grid>
       <Grid Grid.Column="3" ColumnDefinitions="*,10" RowDefinitions="80">
-        <Button Command="{Binding SeeGraph}" Classes="menu" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
+        <Button Name="seeGraph" Command="{Binding SeeGraph}" Classes="menu" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
           <TextBlock FontWeight="Bold" Text="Visualize"/>
         </Button>
       </Grid>
       <Grid Grid.Column="4" ColumnDefinitions="*,10" RowDefinitions="80">
-        <Button Command="{Binding TryUSB}" Classes="menu" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
+        <Button Name="tryUSB" Command="{Binding TryUSB}" Classes="menu" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
           <TextBlock FontWeight="Bold" Text="USBTest"/>
         </Button>
       </Grid>
       <Grid Grid.Column="5" ColumnDefinitions="*,10" RowDefinitions="80">
-        <Button Command="{Binding SeeTeams}" Classes="menu" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
+        <Button Name="seeTeams" Command="{Binding SeeTeams}" Classes="menu" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
           <TextBlock FontWeight="Bold" Text="Teams"/>
         </Button>
       </Grid>
@@ -77,39 +101,39 @@
 
     </Grid>
     <Grid Grid.Row="1" VerticalAlignment="Center">
-      <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0">
-        <screens:Tablets x:Name="tablets" DataContext="{Binding TabletViewModel}" IsVisible="{Binding UserControlVisible}"/>
+      <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0" Name="tablets" Opacity="1" IsVisible="True">
+        <screens:Tablets DataContext="{Binding TabletViewModel}"/>
       </Border>
-      <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0">
-        <screens:Matches x:Name="matches" DataContext="{Binding MatchViewModel}" IsVisible="{Binding UserControlVisible}"/>
+      <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0" Name="matches" Opacity="0" IsVisible="False">
+        <screens:Matches DataContext="{Binding MatchViewModel}"/>
       </Border>
-      <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0">
-        <screens:DataAnalysis x:Name="graphs" DataContext="{Binding GraphViewModel}" IsVisible="{Binding UserControlVisible}"/>
+      <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0" Name="graphs" Opacity="0" IsVisible="False">
+        <screens:DataAnalysis DataContext="{Binding GraphViewModel}"/>
       </Border>
-      <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">
-        <screens:TheBlueAlliance x:Name="tba" DataContext="{Binding TBAViewModel}" IsVisible="{Binding UserControlVisible}"/>
+      <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Name="tba" Opacity="0" IsVisible="False">
+        <screens:TheBlueAlliance DataContext="{Binding TBAViewModel}"/>
       </Border>
-      <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">
-        <screens:CompetitionTeams x:Name="teams" DataContext="{Binding CompetitionTeamsViewModel}" IsVisible="{Binding UserControlVisible}"/>
+      <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Name="teams" Opacity="0" IsVisible="False">
+        <screens:CompetitionTeams DataContext="{Binding CompetitionTeamsViewModel}"/>
       </Border>
       
     </Grid>
-    <Grid Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" ColumnDefinitions="100,50" Margin="0,15,0,5">
+    <Grid Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" ColumnDefinitions="75,50" Margin="0,15,0,5">
       <TextBlock Grid.Column="0" Text="{Binding MatchNumString}" FontWeight="ExtraBold" VerticalAlignment="Center" FontSize="17"/>
-      <Grid Grid.Column="1" RowDefinitions="20,20">
-        <Button Grid.Row="0" Command="{Binding NextMatch}">
+      <Grid Grid.Column="1" RowDefinitions="26,26">
+        <Button Grid.Row="0" Command="{Binding NextMatch}" Name="matchUp" VerticalAlignment="Bottom" Margin="0,0,0,2">
           <Button.Template>
             <ControlTemplate TargetType="{x:Type Button}">
-              <TextBlock Text="ABCD" x:Name="testUp" Name="TestUp"/>
+              <Image Source="resm:LightMasterMVVM.Assets.caret-up.png"/>
             </ControlTemplate>
           </Button.Template>
         </Button>
 
 
-        <Button Grid.Row="1" Command="{Binding PrevMatch}">
+        <Button Grid.Row="1" Command="{Binding PrevMatch}" Name="matchDown" VerticalAlignment="Top" Margin="0,2,0,0">
           <Button.Template>
             <ControlTemplate TargetType="{x:Type Button}">
-              <TextBlock Text="EFGH" x:Name="testDown" Name="TestDown"/>
+              <Image Source="resm:LightMasterMVVM.Assets.caret-down.png"/>
             </ControlTemplate>
           </Button.Template>
         </Button>

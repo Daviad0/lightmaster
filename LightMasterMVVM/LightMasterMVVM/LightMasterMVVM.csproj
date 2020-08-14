@@ -18,6 +18,8 @@
     <AvaloniaResource Remove="Assets\Blue2Tablet.png" />
     <AvaloniaResource Remove="Assets\Blue3Tablet.png" />
     <AvaloniaResource Remove="Assets\bluetoothlogo.png" />
+    <AvaloniaResource Remove="Assets\caret-down.png" />
+    <AvaloniaResource Remove="Assets\caret-up.png" />
     <AvaloniaResource Remove="Assets\icofont.ttf" />
     <AvaloniaResource Remove="Assets\optionselected.png" />
     <AvaloniaResource Remove="Assets\plugin.png" />
@@ -43,6 +45,8 @@
     <None Remove="Assets\Blue2Tablet.png" />
     <None Remove="Assets\Blue3Tablet.png" />
     <None Remove="Assets\bluetoothlogo.png" />
+    <None Remove="Assets\caret-down.png" />
+    <None Remove="Assets\caret-up.png" />
     <None Remove="Assets\icofont.ttf" />
     <None Remove="Assets\optionselected.png" />
     <None Remove="Assets\plugin.png" />
@@ -62,6 +66,10 @@
     <None Remove="Views\TabletLogs.xaml" />
     <None Remove="Views\Tablets.xaml" />
     <None Remove="Views\TheBlueAlliance.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\caret-down.png" />
+    <EmbeddedResource Include="Assets\caret-up.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\Rubik-Regular.ttf" />
