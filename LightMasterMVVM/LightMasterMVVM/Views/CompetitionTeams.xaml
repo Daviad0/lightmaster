@@ -45,7 +45,7 @@
                       <ItemsControl.ItemTemplate>
                           <DataTemplate>
                               <Border Background="#a6fff8" BorderBrush="Gray">
-                                <Grid ColumnDefinitions="100,240,240">
+                                <Grid ColumnDefinitions="100,240,300">
                                       
                                       
                                     
@@ -54,15 +54,15 @@
                                     </Grid>
                                     <Grid Grid.Column="1" Background="PaleTurquoise" ColumnDefinitions="60,60,60,60">
                                       <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding APowerCellInner, StringFormat={}{0}PC}}" Grid.Column="0" Margin="3"/>
-                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding APowerCellInner, StringFormat={}{0}PC}}" Grid.Column="1" Margin="3"/>
-                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding APowerCellInner, StringFormat={}{0}PC}}" Grid.Column="2" Margin="3"/>
-                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding APowerCellInner, StringFormat={}{0}PC}}" Grid.Column="3" Margin="3"/>
+                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding APowerCellOuter, StringFormat={}{0}PC}}" Grid.Column="1" Margin="3"/>
+                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding APowerCellLower, StringFormat={}{0}PC}}" Grid.Column="2" Margin="3"/>
+                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding APowerCellMissed, StringFormat={}{0}PC}}" Grid.Column="3" Margin="3"/>
                                     </Grid>
                                     <Grid Grid.Column="2" Background="LightPink" ColumnDefinitions="60,60,60,60,60">
                                       <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TPowerCellInner, StringFormat={}{0}PC}}" Grid.Column="0" Margin="3"/>
-                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TPowerCellInner, StringFormat={}{0}PC}}" Grid.Column="1" Margin="3"/>
-                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TPowerCellInner, StringFormat={}{0}PC}}" Grid.Column="2" Margin="3"/>
-                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TPowerCellInner, StringFormat={}{0}PC}}" Grid.Column="3" Margin="3"/>
+                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TPowerCellOuter, StringFormat={}{0}PC}}" Grid.Column="1" Margin="3"/>
+                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TPowerCellLower, StringFormat={}{0}PC}}" Grid.Column="2" Margin="3"/>
+                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TPowerCellMissed, StringFormat={}{0}PC}}" Grid.Column="3" Margin="3"/>
                                       <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding NumCycles}" Grid.Column="4" Margin="3"/>
                                     </Grid>
                                   </Grid>
@@ -71,21 +71,21 @@
                       </ItemsControl.ItemTemplate>
                   </ItemsControl>
                 <Border Background="LightYellow" BorderBrush="Transparent" IsVisible="{Binding has_matches}">
-                  <Grid ColumnDefinitions="100,240,240">
+                  <Grid ColumnDefinitions="100,240,300">
                     <Grid Grid.Column="0" Background="LightYellow">
                       <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Average" Margin="3"/>
                     </Grid>
                     <Grid Grid.Column="1" Background="LightYellow" ColumnDefinitions="60,60,60,60">
-                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding a_pc_inner_avg}" Grid.Column="0" Margin="3" />
-                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding a_pc_outer_avg}" Grid.Column="1" Margin="3"/>
-                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding a_pc_lower_avg}" Grid.Column="2" Margin="3"/>
-                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding a_pc_missed_avg}" Grid.Column="3" Margin="3"/>
+                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding a_pc_inner_avg, StringFormat={}{0}PC}}" Grid.Column="0" Margin="3" />
+                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding a_pc_outer_avg, StringFormat={}{0}PC}}" Grid.Column="1" Margin="3"/>
+                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding a_pc_lower_avg, StringFormat={}{0}PC}}" Grid.Column="2" Margin="3"/>
+                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding a_pc_missed_avg, StringFormat={}{0}PC}}" Grid.Column="3" Margin="3"/>
                     </Grid>
                     <Grid Grid.Column="2" Background="LightYellow" ColumnDefinitions="60,60,60,60,60">
-                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding t_pc_inner_avg}" Grid.Column="0" Margin="3"/>
-                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding t_pc_outer_avg}" Grid.Column="1" Margin="3"/>
-                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding t_pc_lower_avg}" Grid.Column="2" Margin="3"/>
-                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding t_pc_missed_avg}" Grid.Column="3" Margin="3"/>
+                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding t_pc_inner_avg, StringFormat={}{0}PC}}" Grid.Column="0" Margin="3"/>
+                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding t_pc_outer_avg, StringFormat={}{0}PC}}" Grid.Column="1" Margin="3"/>
+                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding t_pc_lower_avg, StringFormat={}{0}PC}}" Grid.Column="2" Margin="3"/>
+                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding t_pc_missed_avg, StringFormat={}{0}PC}}" Grid.Column="3" Margin="3"/>
                       <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding t_num_cycles}" Grid.Column="4" Margin="3"/>
                     </Grid>
 
