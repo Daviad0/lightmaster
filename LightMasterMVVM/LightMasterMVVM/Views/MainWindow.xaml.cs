@@ -26,6 +26,7 @@ using System.Reactive.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using Avalonia.Threading;
 using Websocket.Client;
 
 namespace LightMasterMVVM.Views
@@ -414,10 +415,6 @@ namespace LightMasterMVVM.Views
         }
         public async void ProcessTest()
         {
-            bluetooth_status.Classes.Add("show");
-            await Task.Delay(100);
-            bluetooth_status.Opacity = 1;
-            await Task.Delay(500);
             Process startTCPforwarding = new Process();
             startTCPforwarding.StartInfo.WorkingDirectory = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "lightmaster"), "LightMasterHub");
             if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -454,18 +451,17 @@ namespace LightMasterMVVM.Views
                 /*client.ReconnectionHappened.Subscribe(info =>
                     Log.Information($"Reconnection happened, type: {info.Type}"));*/
                 int nummessagesreceived = 0;
-                client.MessageReceived.Subscribe(async msg =>
+                
+                client.MessageReceived.Subscribe(msg =>
                 {
-                    checkForInternet();
+                    //checkForInternet();
                     if (nummessagesreceived == 0)
                     {
-                        if(bluetooth_status.Opacity != 1)
-                        {
+                        Dispatcher.UIThread.Post(async () => {
                             bluetooth_status.Classes.Add("show");
                             await Task.Delay(100);
                             bluetooth_status.Opacity = 1;
-                        }
-                        
+                        });
                         control.NotificationViewModel.AddNotification("Ready", "Bluetooth Service Ready!", "DeepPink");
                     }
                     else
@@ -481,9 +477,11 @@ namespace LightMasterMVVM.Views
                 {
                     Console.WriteLine("Uh oh! I disconnected!");
                     nummessagesreceived = 0;
-                    bluetooth_status.Classes.Add("hide");
-                    await Task.Delay(100);
-                    bluetooth_status.Opacity = 0;
+                    Dispatcher.UIThread.Post(async () => {
+                        bluetooth_status.Classes.Add("hide");
+                        await Task.Delay(100);
+                        bluetooth_status.Opacity = 0;
+                    });
                     control.NotificationViewModel.AddNotification("Not Ready", "Bluetooth Service Not Ready!", "Red");
                 });
             }
@@ -497,6 +495,12 @@ namespace LightMasterMVVM.Views
             }
             
 
+        }
+        public async Task killMe()
+        {
+            bluetooth_status.Classes.Add("show");
+            await Task.Delay(100);
+            bluetooth_status.Opacity = 1;
         }
         public async void checkForInternet()
         {
