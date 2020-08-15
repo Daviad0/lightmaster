@@ -17,6 +17,7 @@
     <AvaloniaResource Remove="Assets\Blue1Tablet.png" />
     <AvaloniaResource Remove="Assets\Blue2Tablet.png" />
     <AvaloniaResource Remove="Assets\Blue3Tablet.png" />
+    <AvaloniaResource Remove="Assets\bluetooth-white.png" />
     <AvaloniaResource Remove="Assets\bluetoothlogo.png" />
     <AvaloniaResource Remove="Assets\caret-down.png" />
     <AvaloniaResource Remove="Assets\caret-up.png" />
@@ -31,6 +32,8 @@
     <AvaloniaResource Remove="Assets\Rubik-Regular.ttf" />
     <AvaloniaResource Remove="Assets\SourceSansPro-Bold.ttf" />
     <AvaloniaResource Remove="Assets\ui-bluetooth.png" />
+    <AvaloniaResource Remove="Assets\usb-white.png" />
+    <AvaloniaResource Remove="Assets\wifi-white.png" />
     <AvaloniaResource Remove="Views\CompetitionTeams.xaml" />
     <AvaloniaResource Remove="Views\DataAnalysis.xaml" />
     <AvaloniaResource Remove="Views\Matches.xaml" />
@@ -44,6 +47,7 @@
     <None Remove="Assets\Blue1Tablet.png" />
     <None Remove="Assets\Blue2Tablet.png" />
     <None Remove="Assets\Blue3Tablet.png" />
+    <None Remove="Assets\bluetooth-white.png" />
     <None Remove="Assets\bluetoothlogo.png" />
     <None Remove="Assets\caret-down.png" />
     <None Remove="Assets\caret-up.png" />
@@ -58,6 +62,8 @@
     <None Remove="Assets\Rubik-Regular.ttf" />
     <None Remove="Assets\SourceSansPro-Bold.ttf" />
     <None Remove="Assets\ui-bluetooth.png" />
+    <None Remove="Assets\usb-white.png" />
+    <None Remove="Assets\wifi-white.png" />
     <None Remove="Views\CompetitionTeams.xaml" />
     <None Remove="Views\DataAnalysis.xaml" />
     <None Remove="Views\MainWindow.xaml" />
@@ -66,6 +72,11 @@
     <None Remove="Views\TabletLogs.xaml" />
     <None Remove="Views\Tablets.xaml" />
     <None Remove="Views\TheBlueAlliance.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\bluetooth-white.png" />
+    <EmbeddedResource Include="Assets\usb-white.png" />
+    <EmbeddedResource Include="Assets\wifi-white.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\caret-down.png" />

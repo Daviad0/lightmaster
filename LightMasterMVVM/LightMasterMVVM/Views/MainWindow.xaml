@@ -39,6 +39,7 @@
     </Style>
     <Style Selector="Button:pointerover.navbutton/template/ContentPresenter">
       <Setter Property = "BorderBrush" Value = "Black" />
+      
       <Setter Property = "Background" Value = "#2c2c2c" />
     </Style>
     <Style Selector="Button:pointerover.navbuttonselected/template/ContentPresenter">
@@ -101,32 +102,32 @@
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Text="LightSwitch" FontSize="20" Foreground="#4e4e4e"/>
       </Grid>
       <Grid Grid.Column="1" ColumnDefinitions="*" RowDefinitions="80">
-        <Button Classes="navbutton" x:Name="seeMatches" Name="seeMatches" CommandParameter="{Binding CurrentMatchNum}" Height="35" Width="110" Grid.Row="0" Margin="30,0,30,60">
+        <Button Classes="navbutton" x:Name="seeMatches" Name="seeMatches" Height="35" Width="110" Grid.Row="0" Margin="30,0,30,60">
           <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Text="Matches" Foreground="White"/>
         </Button>
       </Grid>
       <Grid Grid.Column="2" ColumnDefinitions="*" RowDefinitions="80">
-        <Button Classes="navbuttonselected" Name="seeTablets" Command="{Binding SeeTablets}" Grid.Row="0" Margin="30,0,30,60" Width="110" Height="35">
+        <Button Classes="navbuttonselected" Name="seeTablets" Grid.Row="0" Margin="30,0,30,60" Width="110" Height="35">
           <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Text="Tablets" Foreground="White"/>
         </Button>
       </Grid>
       <Grid Grid.Column="3" ColumnDefinitions="*,10" RowDefinitions="80">
-        <Button Classes="navbutton" Name="seeTBA" Command="{Binding SeeTBA}" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
+        <Button Classes="navbutton" Name="seeTBA" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
           <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Text="TBA Check" Foreground="White"/>
         </Button>
       </Grid>
       <Grid Grid.Column="4" ColumnDefinitions="*,10" RowDefinitions="80">
-        <Button Classes="navbutton" Name="seeGraph" Command="{Binding SeeGraph}" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
+        <Button Classes="navbutton" Name="seeGraph" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
           <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Text="Visualize" Foreground="White"/>
         </Button>
       </Grid>
       <Grid Grid.Column="5" ColumnDefinitions="*,10" RowDefinitions="80">
-        <Button Classes="navbutton" Name="tryUSB" Command="{Binding TryUSB}" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
+        <Button Classes="navbutton" Name="tryUSB" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
           <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Text="Test USB" Foreground="White"/>
         </Button>
       </Grid>
       <Grid Grid.Column="6" ColumnDefinitions="*,10" RowDefinitions="80">
-        <Button Classes="navbutton" Name="seeTeams" Command="{Binding SeeTeams}" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
+        <Button Classes="navbutton" Name="seeTeams" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
           <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Text="Teams" Foreground="White"/>
         </Button>
       </Grid>
@@ -137,14 +138,23 @@
 
     </Grid>
     <Grid Grid.Row="0" HorizontalAlignment="Right" Margin="30,10,30,30" ColumnDefinitions="52,52,52">
-      <Border Background="#1E1E1E" BorderBrush="Black" BorderThickness="2,0,0,2" Height="40" Width="40" CornerRadius="20" HorizontalAlignment="Center" Grid.Column="0">
-        <TextBlock Text="B" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+      <Border Background="#1E1E1E" BorderBrush="Black" BorderThickness="2,0,0,2" Height="40" Width="40" CornerRadius="20" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0">
+        <Image Source="resm:LightMasterMVVM.Assets.bluetooth-white.png" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="9"/>
       </Border>
-      <Border Background="#1E1E1E" BorderBrush="Black" BorderThickness="2,0,0,2" Height="40" Width="40" CornerRadius="20" HorizontalAlignment="Center" Grid.Column="1">
-        <TextBlock Text="U" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+      <Border Background="#1E1E1E" BorderBrush="Black" BorderThickness="2,0,0,2" Height="40" Width="40" CornerRadius="20" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1">
+        <Image Source="resm:LightMasterMVVM.Assets.usb-white.png" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8"/>
       </Border>
-      <Border Background="#1E1E1E" BorderBrush="Black" BorderThickness="2,0,0,2" Height="40" Width="40" CornerRadius="20" HorizontalAlignment="Center" Grid.Column="2">
-        <TextBlock Text="I" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+      <Border Background="#1E1E1E" BorderBrush="Black" BorderThickness="2,0,0,2" Height="40" Width="40" CornerRadius="20" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2">
+        <Image Source="resm:LightMasterMVVM.Assets.wifi-white.png" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="7"/>
+      </Border>
+      <Border Name="bluetoothActive" Opacity="0" Background="#2a7afa" BorderBrush="Black" BorderThickness="2,0,0,2" Height="40" Width="40" CornerRadius="20" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0">
+        <Image Source="resm:LightMasterMVVM.Assets.bluetooth-white.png" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="9"/>
+      </Border>
+      <Border Name="usbActive" Opacity="0" Background="#2a7afa" BorderBrush="Black" BorderThickness="2,0,0,2" Height="40" Width="40" CornerRadius="20" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1">
+        <Image Source="resm:LightMasterMVVM.Assets.usb-white.png" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8"/>
+      </Border>
+      <Border Name="internetActive" Opacity="0" Background="#2a7afa" BorderBrush="Black" BorderThickness="2,0,0,2" Height="40" Width="40" CornerRadius="20" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2">
+        <Image Source="resm:LightMasterMVVM.Assets.wifi-white.png" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="7"/>
       </Border>
     </Grid>
     <Grid Grid.Row="1" VerticalAlignment="Center">
