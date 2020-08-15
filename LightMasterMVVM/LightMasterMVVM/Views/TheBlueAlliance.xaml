@@ -9,19 +9,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LightMasterMVVM.Views.TheBlueAlliance">
-  <Grid RowDefinitions="100,100,50" HorizontalAlignment="Center">
-    <TextBlock Text="TBA CHECKING" FontWeight="Bold" FontSize="60" Grid.Row="0"/>
-    <Grid ColumnDefinitions="120,50,120" Grid.Row="1" HorizontalAlignment="Center">
-      <Grid RowDefinitions="30,30" Grid.Column="0" Margin="15,0" HorizontalAlignment="Center">
-        <TextBlock Text="Starting Match" Grid.Row="0"/>
-        <TextBox Text="{Binding MinMatch, Mode=TwoWay}" Grid.Row="1"/>
+  <UserControl.Styles>
+    <Style Selector="Button.confirmbutton">
+      <Setter Property="Background" Value="White"/>
+      <Setter Property="Foreground" Value="#1E1E1E"/>
+    </Style>
+    <Style Selector="Button.confirmbutton/template/ContentPresenter">
+      <Setter Property = "CornerRadius" Value = "6" />
+    </Style>
+  </UserControl.Styles>
+  <Border BorderBrush="Black" BorderThickness="5,0,0,5" CornerRadius="6" Background="#1E1E1E" Padding="60">
+    <Grid RowDefinitions="100,100,50" HorizontalAlignment="Center">
+      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" Text="Check with TBA" FontWeight="Bold" FontSize="60" Grid.Row="0"/>
+      <Grid ColumnDefinitions="120,50,120" Grid.Row="1" HorizontalAlignment="Center">
+        <Grid RowDefinitions="30,30" Grid.Column="0" Margin="15,0" HorizontalAlignment="Center">
+          <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" Text="Starting Match" Grid.Row="0"/>
+          <TextBox Foreground="White" Background="#2c2c2c" BorderBrush="Transparent" BorderThickness="0" Text="{Binding MinMatch, Mode=TwoWay}" Grid.Row="1"/>
+        </Grid>
+        <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="to" FontSize="30" FontWeight="Bold" Grid.Column="1" Margin="0,20,0,0" HorizontalAlignment="Center"/>
+        <Grid RowDefinitions="30,30" Grid.Column="2" Margin="15,0" HorizontalAlignment="Center">
+          <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" Text="Ending Match" Grid.Row="0"/>
+          <TextBox Foreground="White" Background="#2c2c2c" BorderBrush="Transparent" BorderThickness="0" Text="{Binding MaxMatch, Mode=TwoWay}" Grid.Row="1"/>
+        </Grid>
       </Grid>
-      <TextBlock Text="-" FontSize="60" FontWeight="Bold" Grid.Column="1" HorizontalAlignment="Center"/>
-      <Grid RowDefinitions="30,30" Grid.Column="2" Margin="15,0" HorizontalAlignment="Center">
-        <TextBlock Text="Ending Match" Grid.Row="0"/>
-        <TextBox Text="{Binding MaxMatch, Mode=TwoWay}" Grid.Row="1"/>
-      </Grid>
+      <Button FontWeight="Bold" Classes="confirmbutton" Command="{Binding TheBlueAlliance}" Content="Start Checking" Grid.Row="2"/>
     </Grid>
-    <Button Command="{Binding TheBlueAlliance}" Content="Start Checking" Background="Blue" Foreground="White" Grid.Row="2"/>
-  </Grid>
+  </Border>
+  
 </UserControl>

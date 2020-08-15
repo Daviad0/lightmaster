@@ -2059,38 +2059,71 @@ namespace LightMasterMVVM.ViewModels
         }
         public void TryUSB()
         {
-            ReadOnlyCollection<string> udids;
-            int count = 0;
-
-            var idevice = LibiMobileDevice.Instance.iDevice;
-            var lockdown = LibiMobileDevice.Instance.Lockdown;
-            idevice.idevice_event_subscribe((ref iDeviceEvent deviceEvent, IntPtr b) =>
+            try
             {
-                try
+                ReadOnlyCollection<string> udids;
+                int count = 0;
+
+                var idevice = LibiMobileDevice.Instance.iDevice;
+                var lockdown = LibiMobileDevice.Instance.Lockdown;
+                idevice.idevice_event_subscribe((ref iDeviceEvent deviceEvent, IntPtr b) =>
                 {
-                    iDeviceHandle deviceHandle;
-                    idevice.idevice_new(out deviceHandle, deviceEvent.udidString);
+                    try
+                    {
+                        iDeviceHandle deviceHandle;
+                        idevice.idevice_new(out deviceHandle, deviceEvent.udidString);
 
-                    LockdownClientHandle lockdownHandle;
-                    lockdown.lockdownd_client_new_with_handshake(deviceHandle, out lockdownHandle, "LightScout").ThrowOnError();
+                        LockdownClientHandle lockdownHandle;
+                        lockdown.lockdownd_client_new_with_handshake(deviceHandle, out lockdownHandle, "LightScout").ThrowOnError();
 
-                    string deviceName;
-                    lockdown.lockdownd_get_device_name(lockdownHandle, out deviceName).ThrowOnError();
+                        string deviceName;
+                        lockdown.lockdownd_get_device_name(lockdownHandle, out deviceName).ThrowOnError();
 
-                    var error = idevice.idevice_connect(deviceHandle, 862, out iDeviceConnectionHandle connection);
-
-
+                        var error = idevice.idevice_connect(deviceHandle, 862, out iDeviceConnectionHandle connection);
 
 
 
-                    ReceiveDataFromDevice(connection, idevice);
-                }catch(Exception ex) {
+
+
+                        ReceiveDataFromDevice(connection, idevice);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+
 
                 }
-
-                
+                , new IntPtr(862));
             }
-            , new IntPtr(862));
+            catch(Exception ex)
+            {
+                Console.WriteLine("iOS USB Fatal Failure");
+            }
+            try
+            {
+                Process startTCPforwarding = new Process();
+                startTCPforwarding.StartInfo.FileName = "bash";
+                string command = "adb reverse tcp:6000 tcp:6000";
+                startTCPforwarding.StartInfo.Arguments = "-c \"" + command + "\"";
+                startTCPforwarding.StartInfo.UseShellExecute = false;
+                startTCPforwarding.StartInfo.RedirectStandardOutput = true;
+                startTCPforwarding.StartInfo.CreateNoWindow = true;
+                startTCPforwarding.ErrorDataReceived += (s, ea) =>
+                {
+                    Console.WriteLine("There is no connected USB device that is valid!");
+                };
+                startTCPforwarding.Start();
+                var theoutput = startTCPforwarding.StandardOutput.ReadToEnd().ToString();
+
+                var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                socket.Bind(new IPEndPoint(IPAddress.Loopback, 6000));
+                byte[] testreceive = new byte[5000];
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Android USB Fatal Failure");
+            }
 
 
             /*string[] ports = SerialPort.GetPortNames();
@@ -2141,23 +2174,7 @@ namespace LightMasterMVVM.ViewModels
                 
             }*/
 
-            Process startTCPforwarding = new Process();
-            startTCPforwarding.StartInfo.FileName = "bash";
-            string command = "adb reverse tcp:6000 tcp:6000";
-            startTCPforwarding.StartInfo.Arguments = "-c \"" + command + "\"";
-            startTCPforwarding.StartInfo.UseShellExecute = false;
-            startTCPforwarding.StartInfo.RedirectStandardOutput = true;
-            startTCPforwarding.StartInfo.CreateNoWindow = true;
-            startTCPforwarding.ErrorDataReceived += (s,ea) =>
-            {
-                Console.WriteLine("There is no connected USB device that is valid!");
-            };
-            startTCPforwarding.Start();
-            var theoutput = startTCPforwarding.StandardOutput.ReadToEnd().ToString();
-
-            var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            socket.Bind(new IPEndPoint(IPAddress.Loopback, 6000));
-            byte[] testreceive = new byte[5000];
+            
             /*socket.BeginReceive(testreceive, 0, testreceive.Length, SocketFlags.None, (ar) =>
             {
                 testreceive = new byte[5000];
