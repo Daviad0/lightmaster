@@ -49,6 +49,7 @@ namespace LightMasterMVVM.Views
         private Border bluetooth_status = new Border();
         private Border usb_status = new Border();
         private Border internet_status = new Border();
+        private Border database_status = new Border();
         private Button match_up = new Button();
         private Button match_down = new Button();
         private Border matches = new Border();
@@ -85,6 +86,7 @@ namespace LightMasterMVVM.Views
             bluetooth_status = this.Find<Border>("bluetoothActive");
             usb_status = this.Find<Border>("usbActive");
             internet_status = this.Find<Border>("internetActive");
+            database_status = this.Find<Border>("databaseActive");
             matches = this.Find<Border>("matches");
             graph = this.Find<Border>("graphs");
             tablets = this.Find<Border>("tablets");
@@ -93,6 +95,8 @@ namespace LightMasterMVVM.Views
             DataContext = control;
             ProcessTest();
             checkForInternet();
+            
+            
 
         }
         public static bool CheckForInternetConnection()
@@ -415,6 +419,7 @@ namespace LightMasterMVVM.Views
         }
         public async void ProcessTest()
         {
+
             Process startTCPforwarding = new Process();
             startTCPforwarding.StartInfo.WorkingDirectory = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "lightmaster"), "LightMasterHub");
             if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -493,14 +498,24 @@ namespace LightMasterMVVM.Views
                 bluetooth_status.IsVisible = false;
                 control.NotificationViewModel.AddNotification("Unavailable", "Bluetooth Service Not Available!", "Red");
             }
-            
+            try
+            {
+                database_status.Classes.Add("show");
+                await Task.Delay(100);
+                database_status.Opacity = 1;
+                await Task.Delay(500);
+                using (var db = new ScoutingContext())
+                {
+                    var listoftest = db.Matches.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                database_status.Classes.Add("hide");
+                await Task.Delay(100);
+                database_status.Opacity = 0;
+            }
 
-        }
-        public async Task killMe()
-        {
-            bluetooth_status.Classes.Add("show");
-            await Task.Delay(100);
-            bluetooth_status.Opacity = 1;
         }
         public async void checkForInternet()
         {
@@ -575,7 +590,7 @@ namespace LightMasterMVVM.Views
                             var previousitem = db.Matches.Where(x => x.TabletId == itemtouse.TabletId && x.MatchNumber == itemtouse.MatchNumber && x.EventCode == itemtouse.EventCode).FirstOrDefault();
                             if (previousitem == null)
                             {
-                                TeamMatch newTeamMatch = new TeamMatch() { A_InitiationLine = itemtouse.A_InitiationLine, ClientLastSubmitted = itemtouse.ClientLastSubmitted, ClientSubmitted = true, DisabledSeconds = itemtouse.DisabledSeconds, IsQualifying = itemtouse.IsQualifying, EventCode = itemtouse.EventCode, E_Balanced = itemtouse.E_Balanced, E_ClimbAttempt = itemtouse.E_ClimbAttempt, E_ClimbSuccess = itemtouse.E_ClimbSuccess, E_Park = itemtouse.E_Park, MatchID = new Random().Next(1, 1000000), MatchNumber = itemtouse.MatchNumber, NumCycles = itemtouse.NumCycles, PowerCellInner = itemtouse.PowerCellInner, PowerCellLower = itemtouse.PowerCellLower, PowerCellMissed = itemtouse.PowerCellMissed, PowerCellOuter = itemtouse.PowerCellOuter, RobotPosition = itemtouse.RobotPosition, ScoutName = itemtouse.ScoutName, TabletId = itemtouse.TabletId, TapLogs = itemtouse.TapLogs, TeamName = itemtouse.TeamName, T_ControlPanelPosition = itemtouse.T_ControlPanelPosition, T_ControlPanelRotation = itemtouse.T_ControlPanelRotation };
+                                TeamMatch newTeamMatch = new TeamMatch() { AlliancePartners = itemtouse.AlliancePartners, A_InitiationLine = itemtouse.A_InitiationLine, ClientLastSubmitted = itemtouse.ClientLastSubmitted, ClientSubmitted = true, DisabledSeconds = itemtouse.DisabledSeconds, IsQualifying = itemtouse.IsQualifying, EventCode = itemtouse.EventCode, E_Balanced = itemtouse.E_Balanced, E_ClimbAttempt = itemtouse.E_ClimbAttempt, E_ClimbSuccess = itemtouse.E_ClimbSuccess, E_Park = itemtouse.E_Park, MatchID = new Random().Next(1, 1000000), MatchNumber = itemtouse.MatchNumber, NumCycles = itemtouse.NumCycles, PowerCellInner = itemtouse.PowerCellInner, PowerCellLower = itemtouse.PowerCellLower, PowerCellMissed = itemtouse.PowerCellMissed, PowerCellOuter = itemtouse.PowerCellOuter, RobotPosition = itemtouse.RobotPosition, ScoutName = itemtouse.ScoutName, TabletId = itemtouse.TabletId, TapLogs = itemtouse.TapLogs, TeamName = itemtouse.TeamName, T_ControlPanelPosition = itemtouse.T_ControlPanelPosition, T_ControlPanelRotation = itemtouse.T_ControlPanelRotation };
                                 try
                                 {
                                     if (db.FRCTeams.Find(itemtouse.TeamNumber, itemtouse.EventCode) != null)
@@ -605,7 +620,7 @@ namespace LightMasterMVVM.Views
                             {
                                 if (previousitem.ClientLastSubmitted != itemtouse.ClientLastSubmitted)
                                 {
-                                    TeamMatch newTeamMatch = new TeamMatch() { A_InitiationLine = itemtouse.A_InitiationLine, ClientLastSubmitted = itemtouse.ClientLastSubmitted, ClientSubmitted = true, DisabledSeconds = itemtouse.DisabledSeconds, IsQualifying = itemtouse.IsQualifying, EventCode = previousitem.EventCode, E_Balanced = itemtouse.E_Balanced, E_ClimbAttempt = itemtouse.E_ClimbAttempt, E_ClimbSuccess = itemtouse.E_ClimbSuccess, E_Park = itemtouse.E_Park, MatchID = previousitem.MatchID, MatchNumber = previousitem.MatchNumber, NumCycles = itemtouse.NumCycles, PowerCellInner = itemtouse.PowerCellInner, PowerCellLower = itemtouse.PowerCellLower, PowerCellMissed = itemtouse.PowerCellMissed, PowerCellOuter = itemtouse.PowerCellOuter, RobotPosition = itemtouse.RobotPosition, ScoutName = itemtouse.ScoutName, TabletId = itemtouse.TabletId, TapLogs = itemtouse.TapLogs, TeamName = itemtouse.TeamName, T_ControlPanelPosition = itemtouse.T_ControlPanelPosition, T_ControlPanelRotation = itemtouse.T_ControlPanelRotation };
+                                    TeamMatch newTeamMatch = new TeamMatch() { AlliancePartners = itemtouse.AlliancePartners, A_InitiationLine = itemtouse.A_InitiationLine, ClientLastSubmitted = itemtouse.ClientLastSubmitted, ClientSubmitted = true, DisabledSeconds = itemtouse.DisabledSeconds, IsQualifying = itemtouse.IsQualifying, EventCode = previousitem.EventCode, E_Balanced = itemtouse.E_Balanced, E_ClimbAttempt = itemtouse.E_ClimbAttempt, E_ClimbSuccess = itemtouse.E_ClimbSuccess, E_Park = itemtouse.E_Park, MatchID = previousitem.MatchID, MatchNumber = previousitem.MatchNumber, NumCycles = itemtouse.NumCycles, PowerCellInner = itemtouse.PowerCellInner, PowerCellLower = itemtouse.PowerCellLower, PowerCellMissed = itemtouse.PowerCellMissed, PowerCellOuter = itemtouse.PowerCellOuter, RobotPosition = itemtouse.RobotPosition, ScoutName = itemtouse.ScoutName, TabletId = itemtouse.TabletId, TapLogs = itemtouse.TapLogs, TeamName = itemtouse.TeamName, T_ControlPanelPosition = itemtouse.T_ControlPanelPosition, T_ControlPanelRotation = itemtouse.T_ControlPanelRotation };
                                     try
                                     {
                                         newTeamMatch.TrackedTeam = previousitem.TrackedTeam;
@@ -628,7 +643,7 @@ namespace LightMasterMVVM.Views
                         }
                         catch (NpgsqlException ex)
                         {
-                            TeamMatch newTeamMatch = new TeamMatch() { A_InitiationLine = itemtouse.A_InitiationLine, ClientLastSubmitted = itemtouse.ClientLastSubmitted, ClientSubmitted = true, DisabledSeconds = itemtouse.DisabledSeconds, IsQualifying = itemtouse.IsQualifying, EventCode = itemtouse.EventCode, E_Balanced = itemtouse.E_Balanced, E_ClimbAttempt = itemtouse.E_ClimbAttempt, E_ClimbSuccess = itemtouse.E_ClimbSuccess, E_Park = itemtouse.E_Park, MatchID = new Random().Next(1, 1000000), MatchNumber = itemtouse.MatchNumber, NumCycles = itemtouse.NumCycles, PowerCellInner = itemtouse.PowerCellInner, PowerCellLower = itemtouse.PowerCellLower, PowerCellMissed = itemtouse.PowerCellMissed, PowerCellOuter = itemtouse.PowerCellOuter, RobotPosition = itemtouse.RobotPosition, ScoutName = itemtouse.ScoutName, TabletId = itemtouse.TabletId, TapLogs = itemtouse.TapLogs, TeamName = itemtouse.TeamName, T_ControlPanelPosition = itemtouse.T_ControlPanelPosition, T_ControlPanelRotation = itemtouse.T_ControlPanelRotation };
+                            TeamMatch newTeamMatch = new TeamMatch() { AlliancePartners = itemtouse.AlliancePartners, A_InitiationLine = itemtouse.A_InitiationLine, ClientLastSubmitted = itemtouse.ClientLastSubmitted, ClientSubmitted = true, DisabledSeconds = itemtouse.DisabledSeconds, IsQualifying = itemtouse.IsQualifying, EventCode = itemtouse.EventCode, E_Balanced = itemtouse.E_Balanced, E_ClimbAttempt = itemtouse.E_ClimbAttempt, E_ClimbSuccess = itemtouse.E_ClimbSuccess, E_Park = itemtouse.E_Park, MatchID = new Random().Next(1, 1000000), MatchNumber = itemtouse.MatchNumber, NumCycles = itemtouse.NumCycles, PowerCellInner = itemtouse.PowerCellInner, PowerCellLower = itemtouse.PowerCellLower, PowerCellMissed = itemtouse.PowerCellMissed, PowerCellOuter = itemtouse.PowerCellOuter, RobotPosition = itemtouse.RobotPosition, ScoutName = itemtouse.ScoutName, TabletId = itemtouse.TabletId, TapLogs = itemtouse.TapLogs, TeamName = itemtouse.TeamName, T_ControlPanelPosition = itemtouse.T_ControlPanelPosition, T_ControlPanelRotation = itemtouse.T_ControlPanelRotation };
                             try
                             {
                                 if (db.FRCTeams.Find(itemtouse.TeamNumber, itemtouse.EventCode) != null)
@@ -715,12 +730,12 @@ namespace LightMasterMVVM.Views
                 control.NotificationViewModel.AddNotification("Data Request", rawdata.Substring(0, 2).ToString() + " requested data", "Blue");
                 var listOfMatchesToSend = new List<IO_TeamMatch>()
                         {
-                            new IO_TeamMatch() { TeamNumber = 862, MatchNumber = 1, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
-                            new IO_TeamMatch() { TeamNumber = 1023, MatchNumber = 2, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
-                            new IO_TeamMatch() { TeamNumber = 2014, MatchNumber = 3, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
-                            new IO_TeamMatch() { TeamNumber = 2020, MatchNumber = 4, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
-                            new IO_TeamMatch() { TeamNumber = 3145, MatchNumber = 5, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" },
-                            new IO_TeamMatch() { TeamNumber = 4005, MatchNumber = 6, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env" }
+                            new IO_TeamMatch() { TeamNumber = 862, MatchNumber = 1, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env", AlliancePartners = new int[2]{ 5567,4456 } },
+                            new IO_TeamMatch() { TeamNumber = 1023, MatchNumber = 2, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env", AlliancePartners = new int[2]{ 5567,4456 } },
+                            new IO_TeamMatch() { TeamNumber = 2014, MatchNumber = 3, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env", AlliancePartners = new int[2]{ 5567,4456 } },
+                            new IO_TeamMatch() { TeamNumber = 2020, MatchNumber = 4, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env", AlliancePartners = new int[2]{ 5567,4456 } },
+                            new IO_TeamMatch() { TeamNumber = 3145, MatchNumber = 5, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env", AlliancePartners = new int[2]{ 5567,4456 } },
+                            new IO_TeamMatch() { TeamNumber = 4005, MatchNumber = 6, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = "test_env", AlliancePartners = new int[2]{ 5567,4456 } }
                         };
                 string modelstring = JsonConvert.SerializeObject(listOfMatchesToSend);
                 byte[] bytesToSend = Encoding.ASCII.GetBytes(modelstring);

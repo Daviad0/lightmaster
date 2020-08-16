@@ -6,6 +6,41 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LightMasterMVVM.Views.Matches">
   <UserControl.Styles>
+    <Style Selector="Button.navbutton2">
+      <Setter Property="Background" Value="#242424"/>
+      <Setter Property="BorderBrush" Value="Black"/>
+      <Setter Property="BorderThickness" Value="3,0,0,3"/>
+      <Setter Property="Padding" Value="5"/>
+    </Style>
+    <Style Selector="Button.navbuttonselected2">
+      <Setter Property="Background" Value="#2a7afa"/>
+      <Setter Property="BorderBrush" Value="Black"/>
+      <Setter Property="BorderThickness" Value="3,0,0,3"/>
+      <Setter Property="Padding" Value="5"/>
+    </Style>
+    <Style Selector="Button.navbutton2/template/ContentPresenter">
+      <Setter Property = "CornerRadius" Value = "6" />
+    </Style>
+    <Style Selector="Button:pointerover.navbutton2/template/ContentPresenter">
+      <Setter Property = "BorderBrush" Value = "Black" />
+
+      <Setter Property = "Background" Value = "#2c2c2c" />
+    </Style>
+    <Style Selector="Button:pointerover.navbuttonselected2/template/ContentPresenter">
+      <Setter Property = "BorderBrush" Value = "Black" />
+      <Setter Property = "Background" Value = "#2a7afa" />
+    </Style>
+    <Style Selector="Button:pressed.navbutton2/template/ContentPresenter">
+      <Setter Property = "BorderBrush" Value = "Black" />
+      <Setter Property = "Background" Value = "#141414" />
+    </Style>
+    <Style Selector="Button:pressed.navbuttonselected2/template/ContentPresenter">
+      <Setter Property = "BorderBrush" Value = "Black" />
+      <Setter Property = "Background" Value = "#2165d1" />
+    </Style>
+    <Style Selector="Button.navbuttonselected2/template/ContentPresenter">
+      <Setter Property = "CornerRadius" Value = "6" />
+    </Style>
     <Style Selector="CheckBox">
       <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
       <Setter Property="Background" Value="Transparent"/>
@@ -19,7 +54,7 @@
           <Grid ColumnDefinitions="Auto,*">
             <Border Name="border"
                     Background="{TemplateBinding Background}"
-                    BorderBrush="Black"
+                    BorderBrush="White"
                     BorderThickness="2"
                     Width="25"
                     Height="25"
@@ -27,7 +62,7 @@
                     CornerRadius="4">
               <Panel>
                 <Path Name="checkMark"
-                      Fill="Black"
+                      Fill="LightGreen"
                       Width="14"
                       Height="12.75"
                       Stretch="Uniform"
@@ -58,8 +93,8 @@
     </Style>
   </UserControl.Styles>
     <Grid ColumnDefinitions="*" RowDefinitions="130,*,100,120" Width="1200">
-      <Grid ColumnDefinitions="300,*,*" Grid.Row="0" Margin="0,0,18,0">
-        <Button Margin="10,20,10,20" Content="Save" Grid.Column="0" Grid.Row="0" FontSize="40" Background="LightGreen" Foreground="White" Command="{Binding SaveChanges}"/>
+      <Grid ColumnDefinitions="300,*,*" Grid.Row="0" Margin="0,0,0,0">
+        <Button Content="Save" Foreground="White" FontWeight="Bold" Margin="20,10,20,10" Grid.Column="0" Grid.Row="0" FontSize="40" Classes="navbuttonselected2" Command="{Binding SaveChanges}"/>
         <Border Grid.Column="1" Grid.Row="0" Background="#1E1E1E" Margin="30,0" BorderBrush="Black" CornerRadius="4,4,0,0" Padding="10" BorderThickness="4,0,0,0">
           <StackPanel>
             <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" HorizontalAlignment="Center" FontWeight="Bold" Foreground="LightPink" Text="Red Entries" FontSize="40"/>
@@ -83,11 +118,11 @@
           </StackPanel>
         </Border>
       </Grid>
-      <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" MaxHeight="400">
+      <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden" MaxHeight="400">
         <Grid ColumnDefinitions="300, *, *">
-          <StackPanel Grid.Column="0" Margin="0,10,0,0">
+          <StackPanel Grid.Column="0" Margin="10,10,10,0">
             <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" Margin="20,0,0,0" FontSize="25" Text="Scouted By:"/>
-            <Border BorderBrush="#8389fc" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
+            <Border BorderBrush="Black" BorderThickness="4,0,0,4" Background="#1E1E1E" CornerRadius="6,6,6,6" Margin="0,8" Padding="0,5">
               <StackPanel Margin="15,0,0,0">
                 <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" FontSize="30" Text="Initiation Line?"/>
                 <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" FontSize="30" Text="PC Missed"/>
@@ -96,7 +131,7 @@
                 <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" FontSize="30" Text="PC Inner"/>
               </StackPanel>
             </Border>
-            <Border BorderBrush="#d683fc" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
+            <Border BorderBrush="Black" BorderThickness="4,0,0,4" Background="#1E1E1E" CornerRadius="6,6,6,6" Margin="0,8" Padding="0,5">
               <StackPanel Margin="15,0,0,0">
                 <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" FontSize="30" Text="# of Cycles"/>
                 <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" FontSize="30" Text="PC Missed"/>
@@ -107,7 +142,7 @@
                 <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" FontSize="30" Text="Positioned CP?"/>
               </StackPanel>
             </Border>
-            <Border BorderBrush="#fc83e8" BorderThickness="5,0,0,0" CornerRadius="6,6,6,6" Margin="0,15">
+            <Border BorderBrush="Black" BorderThickness="4,0,0,4" Background="#1E1E1E" CornerRadius="6,6,6,6" Margin="0,8" Padding="0,5">
               <StackPanel Margin="15,0,0,0">
                 <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" FontSize="30" Text="Parked?"/>
                 <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" FontSize="30" Text="Climb?"/>
@@ -400,7 +435,7 @@
           </Border>
         </Grid>
       </ScrollViewer>
-      <Grid ColumnDefinitions="300,*,*" Grid.Row="2" Margin="0,0,18,0">
+      <Grid ColumnDefinitions="300,*,*" Grid.Row="2" Margin="0,0,0,0">
         <Border Grid.Column="1" Grid.Row="0" Background="#1E1E1E" Margin="30,0" BorderBrush="Black" CornerRadius="0,0,4,4" Padding="10" BorderThickness="4,0,0,4">
           <Grid ColumnDefinitions="*,*,*">
             <Grid Grid.Column="0" RowDefinitions="*,*">

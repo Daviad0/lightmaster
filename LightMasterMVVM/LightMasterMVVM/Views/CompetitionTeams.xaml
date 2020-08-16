@@ -10,18 +10,20 @@
         <DataTemplate>
           <Border Background="#eeeeee" BorderBrush="LightGray" BorderThickness="1" Padding="10">
               <StackPanel>
-                  <Grid ColumnDefinitions="60,200,100,*,100">
+                  <Grid ColumnDefinitions="60,200,100,100,*,100">
                     <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding team_number}" Grid.Column="0" VerticalAlignment="Center"/>
                     <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding match_progress}" Grid.Column="1" VerticalAlignment="Center"/>
                     <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding rated_tier}" Grid.Column="2" VerticalAlignment="Center"/>
-                    <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="SHALALALALALAL MY OH MY DONT LET THE BOY BE SHY YOU GOTTA SING THE RIGHT WORDS" Grid.Column="3" VerticalAlignment="Center"/>
-                    <Button FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Content="Details" Grid.Column="4" Margin="10,3"/>
+                    <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding avg_cycle_time}" Grid.Column="3" VerticalAlignment="Center"/>
+                    <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Notes for team ####" Grid.Column="4" VerticalAlignment="Center"/>
+                    <Button FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Content="Details" Grid.Column="5" Margin="10,3"/>
               
                   </Grid>
                 <Border Background="Aqua" BorderBrush="Transparent" IsVisible="{Binding has_matches}">
-                  <Grid ColumnDefinitions="100,240,300">
-                    <Grid Grid.Column="0" Background="Aqua">
-                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Match #" Margin="3"/>
+                  <Grid ColumnDefinitions="200,240,300">
+                    <Grid Grid.Column="0" Background="Aqua" ColumnDefinitions="100,100">
+                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Match #" Margin="3" Grid.Column="0"/>
+                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Partners" Margin="3" Grid.Column="1"/>
                     </Grid>
                     <Grid Grid.Column="1" Background="Turquoise" ColumnDefinitions="60,60,60,60">
                       <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Inner" Grid.Column="0" Margin="3" />
@@ -45,12 +47,13 @@
                       <ItemsControl.ItemTemplate>
                           <DataTemplate>
                               <Border Background="#a6fff8" BorderBrush="Gray">
-                                <Grid ColumnDefinitions="100,240,300">
+                                <Grid ColumnDefinitions="200,240,300">
                                       
                                       
                                     
-                                    <Grid Grid.Column="0" Background="#a6fff8">
+                                    <Grid Grid.Column="0" Background="#a6fff8" ColumnDefinitions="100,100">
                                       <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding MatchNumber, StringFormat={}Match {0}}}" Margin="3"/>
+                                      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding PartnersWith}" Margin="3"/>
                                     </Grid>
                                     <Grid Grid.Column="1" Background="PaleTurquoise" ColumnDefinitions="60,60,60,60">
                                       <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding APowerCellInner, StringFormat={}{0}PC}}" Grid.Column="0" Margin="3"/>
@@ -71,7 +74,7 @@
                       </ItemsControl.ItemTemplate>
                   </ItemsControl>
                 <Border Background="LightYellow" BorderBrush="Transparent" IsVisible="{Binding has_matches}">
-                  <Grid ColumnDefinitions="100,240,300">
+                  <Grid ColumnDefinitions="200,240,300">
                     <Grid Grid.Column="0" Background="LightYellow">
                       <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Average" Margin="3"/>
                     </Grid>

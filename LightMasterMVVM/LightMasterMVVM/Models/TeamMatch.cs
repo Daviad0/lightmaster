@@ -39,5 +39,7 @@ namespace LightMasterMVVM.Models
         [ForeignKey("TrackedTeam")]
         public int team_instance_id { get; set; }
         public virtual FRCTeamModel TrackedTeam { get; set; }
+        public int[] AlliancePartners { get; set; }
+        public int CycleTime { get; set; }
     }
 }

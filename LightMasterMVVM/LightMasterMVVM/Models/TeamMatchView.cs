@@ -30,6 +30,7 @@ namespace LightMasterMVVM.Models
         private bool _E_ClimbSuccess;
         private bool _E_Balanced;
         private int _DisabledSeconds;
+        private string _PartnersWith;
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
@@ -63,6 +64,22 @@ namespace LightMasterMVVM.Models
                 if (value != this._EventCode)
                 {
                     this._EventCode = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public string PartnersWith
+        {
+            get
+            {
+                return this._PartnersWith;
+            }
+
+            set
+            {
+                if (value != this._PartnersWith)
+                {
+                    this._PartnersWith = value;
                     NotifyPropertyChanged();
                 }
             }

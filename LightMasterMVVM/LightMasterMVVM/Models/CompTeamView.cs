@@ -252,5 +252,22 @@ namespace LightMasterMVVM.Models
                 }
             }
         }
+        private string _avg_cycle_time;
+        public string avg_cycle_time
+        {
+            get
+            {
+                return this._avg_cycle_time;
+            }
+
+            set
+            {
+                if (value != this._avg_cycle_time)
+                {
+                    this._avg_cycle_time = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
     }
 }

@@ -25,6 +25,9 @@
     <ItemsControl Items="{Binding Notifications}">
       <ItemsControl.ItemTemplate>
         <DataTemplate>
+          <!--<Border Width="100" Padding="5" Background="#1E1E1E" BorderBrush="Black" BorderThickness="3,0,0,3" CornerRadius="4">
+            
+          </Border>-->
           <Border Width="350" Margin="10" Padding="40,20,40,20" CornerRadius="5" Background="{Binding BackgroundColor}" IsVisible="{Binding NotificationActive}" Opacity="0.95">
             <Grid ColumnDefinitions="*" RowDefinitions="*">
               <StackPanel Grid.Row="0" Grid.Column="1" Margin="0,0,90,0">

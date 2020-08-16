@@ -65,9 +65,12 @@ namespace LightMasterMVVM.ViewModels
                         var listofincompletematches = new List<TeamMatchView>();
                         var listofviewablematches = new ObservableCollection<TeamMatchView>();
                         bool hasmatches = false;
+                        int[] allcycletimes = new int[listofmatchesunderteam.Count];
+                        int i = 0;
                         foreach (var match in listofmatchesunderteam.OrderBy(x => x.MatchNumber))
                         {
                             var matchview = new TeamMatchView();
+                            
                             matchview.A_InitiationLine = match.A_InitiationLine;
                             matchview.DisabledSeconds = match.DisabledSeconds;
                             matchview.EventCode = match.EventCode;
@@ -81,6 +84,15 @@ namespace LightMasterMVVM.ViewModels
                             matchview.TeamNumber = team.team_number;
                             matchview.T_ControlPanelPosition = match.T_ControlPanelPosition;
                             matchview.T_ControlPanelRotation = match.T_ControlPanelRotation;
+                            if(match.AlliancePartners.Length > 1)
+                            {
+                                matchview.PartnersWith = match.AlliancePartners[0] + ", " + match.AlliancePartners[1];
+                            }
+                            else
+                            {
+                                matchview.PartnersWith = "No One?";
+                            }
+                            
                             matchview.APowerCellInner = match.PowerCellInner[0];
                             matchview.APowerCellOuter = match.PowerCellOuter[0];
                             matchview.APowerCellLower = match.PowerCellLower[0];
@@ -90,6 +102,7 @@ namespace LightMasterMVVM.ViewModels
                             compTeamView.a_pc_lower_avg += match.PowerCellInner[0];
                             compTeamView.a_pc_missed_avg += match.PowerCellInner[0];
                             compTeamView.t_num_cycles += match.NumCycles;
+                            allcycletimes[i] = match.CycleTime;
                             foreach (var pca in match.PowerCellInner.Skip(1))
                             {
                                 compTeamView.t_pc_inner_avg += pca;
@@ -120,9 +133,12 @@ namespace LightMasterMVVM.ViewModels
                             }
                             listofviewablematches.Add(matchview);
                             hasmatches = true;
+                            i++;
+
                         }
                         if (hasmatches)
                         {
+                            compTeamView.avg_cycle_time = allcycletimes.Min().ToString() + "s to " + allcycletimes.Max().ToString() + "s";
                             compTeamView.a_pc_inner_avg = compTeamView.a_pc_inner_avg / (listofcompletedmatches.ToArray().Length + listofincompletematches.ToArray().Length);
                             compTeamView.a_pc_lower_avg = compTeamView.a_pc_lower_avg / (listofcompletedmatches.ToArray().Length + listofincompletematches.ToArray().Length);
                             compTeamView.a_pc_missed_avg = compTeamView.a_pc_missed_avg / (listofcompletedmatches.ToArray().Length + listofincompletematches.ToArray().Length);
@@ -132,6 +148,10 @@ namespace LightMasterMVVM.ViewModels
                             compTeamView.t_pc_missed_avg = compTeamView.t_pc_missed_avg / (listofcompletedmatches.ToArray().Length + listofincompletematches.ToArray().Length);
                             compTeamView.t_pc_outer_avg = compTeamView.t_pc_outer_avg / (listofcompletedmatches.ToArray().Length + listofincompletematches.ToArray().Length);
                             compTeamView.t_num_cycles = compTeamView.t_num_cycles / (listofcompletedmatches.ToArray().Length + listofincompletematches.ToArray().Length);
+                        }
+                        else
+                        {
+                            compTeamView.avg_cycle_time = "---";
                         }
                         compTeamView.has_matches = hasmatches;
                         compTeamView.team_matches = listofviewablematches;

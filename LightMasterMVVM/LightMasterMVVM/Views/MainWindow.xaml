@@ -99,7 +99,7 @@
     </Grid.RowDefinitions>
     <Grid ColumnDefinitions="120,120,120,120,120,120,120" RowDefinitions="120" Grid.Row="0" Margin="30,25,30,30" >
       <Grid Grid.Column="0" ColumnDefinitions="*" RowDefinitions="80">
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Text="LightSwitch" FontSize="20" Foreground="#4e4e4e"/>
+        <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Text="LightSwitch" FontSize="20" Foreground="#4e4e4e"/>
       </Grid>
       <Grid Grid.Column="1" ColumnDefinitions="*" RowDefinitions="80">
         <Button Classes="navbutton" x:Name="seeMatches" Name="seeMatches" Height="35" Width="110" Grid.Row="0" Margin="30,0,30,60">
@@ -137,7 +137,7 @@
 
 
     </Grid>
-    <Grid Grid.Row="0" HorizontalAlignment="Right" Margin="30,10,30,30" ColumnDefinitions="52,52,52">
+    <Grid Grid.Row="0" HorizontalAlignment="Right" Margin="30,10,30,30" ColumnDefinitions="52,52,52,52">
       <Border Background="#1E1E1E" BorderBrush="Black" BorderThickness="2,0,0,2" Height="40" Width="40" CornerRadius="20" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0">
         <Image Source="resm:LightMasterMVVM.Assets.bluetooth-white.png" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="9"/>
       </Border>
@@ -147,6 +147,9 @@
       <Border Background="#1E1E1E" BorderBrush="Black" BorderThickness="2,0,0,2" Height="40" Width="40" CornerRadius="20" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2">
         <Image Source="resm:LightMasterMVVM.Assets.wifi-white.png" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="7"/>
       </Border>
+      <Border Background="#1E1E1E" BorderBrush="Black" BorderThickness="2,0,0,2" Height="40" Width="40" CornerRadius="20" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="3">
+        <Image Source="resm:LightMasterMVVM.Assets.database-white.png" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"/>
+      </Border>
       <Border Name="bluetoothActive" Opacity="0" Background="#2a7afa" BorderBrush="Black" BorderThickness="2,0,0,2" Height="40" Width="40" CornerRadius="20" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0">
         <Image Source="resm:LightMasterMVVM.Assets.bluetooth-white.png" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="9"/>
       </Border>
@@ -155,6 +158,9 @@
       </Border>
       <Border Name="internetActive" Opacity="0" Background="#2a7afa" BorderBrush="Black" BorderThickness="2,0,0,2" Height="40" Width="40" CornerRadius="20" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2">
         <Image Source="resm:LightMasterMVVM.Assets.wifi-white.png" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="7"/>
+      </Border>
+      <Border Name="databaseActive" Opacity="0" Background="#2a7afa" BorderBrush="Black" BorderThickness="2,0,0,2" Height="40" Width="40" CornerRadius="20" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2">
+        <Image Source="resm:LightMasterMVVM.Assets.database-white.png" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"/>
       </Border>
     </Grid>
     <Grid Grid.Row="1" VerticalAlignment="Center">

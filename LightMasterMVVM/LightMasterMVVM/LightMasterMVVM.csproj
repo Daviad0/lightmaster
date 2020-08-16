@@ -21,6 +21,7 @@
     <AvaloniaResource Remove="Assets\bluetoothlogo.png" />
     <AvaloniaResource Remove="Assets\caret-down.png" />
     <AvaloniaResource Remove="Assets\caret-up.png" />
+    <AvaloniaResource Remove="Assets\database-white.png" />
     <AvaloniaResource Remove="Assets\icofont.ttf" />
     <AvaloniaResource Remove="Assets\optionselected.png" />
     <AvaloniaResource Remove="Assets\plugin.png" />
@@ -51,6 +52,7 @@
     <None Remove="Assets\bluetoothlogo.png" />
     <None Remove="Assets\caret-down.png" />
     <None Remove="Assets\caret-up.png" />
+    <None Remove="Assets\database-white.png" />
     <None Remove="Assets\icofont.ttf" />
     <None Remove="Assets\optionselected.png" />
     <None Remove="Assets\plugin.png" />
@@ -72,6 +74,9 @@
     <None Remove="Views\TabletLogs.xaml" />
     <None Remove="Views\Tablets.xaml" />
     <None Remove="Views\TheBlueAlliance.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\database-white.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\bluetooth-white.png" />
