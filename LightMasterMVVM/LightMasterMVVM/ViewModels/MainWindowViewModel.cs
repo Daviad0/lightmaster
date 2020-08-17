@@ -55,7 +55,7 @@ namespace LightMasterMVVM.ViewModels
             {
                 using (var db = new ScoutingContext())
                 {
-                    var listofteams = db.FRCTeams.Where(x => x.event_key == "test_env").ToList();
+                    var listofteams = db.FRCTeams.Where(x => x.event_key == new GetEventCode().EventCode()).ToList();
                     Teams.Clear();
                     foreach (var team in listofteams)
                     {
@@ -308,7 +308,7 @@ namespace LightMasterMVVM.ViewModels
                 List<TeamMatch> dbMatches = new List<TeamMatch>();
                 try
                 {
-                    dbMatches = db.Matches.Where(x => x.ClientSubmitted == true && x.EventCode == "test_env").ToList();
+                    dbMatches = db.Matches.Where(x => x.ClientSubmitted == true && x.EventCode == new GetEventCode().EventCode()).ToList();
                 }
                 catch(Exception ex)
                 {
@@ -520,7 +520,7 @@ namespace LightMasterMVVM.ViewModels
                 DataPoints.Series.Clear();
                 DataPoints.Axes.Clear();
 
-                List<TeamMatch> dbMatches = db.Matches.Where(x => x.ClientSubmitted == true && x.EventCode == "test_env").ToList();
+                List<TeamMatch> dbMatches = db.Matches.Where(x => x.ClientSubmitted == true && x.EventCode == new GetEventCode().EventCode()).ToList();
                 List<int> selectedTeamNumbers = new List<int>();
                 List<AveragePCCountModel> averagePCCountModels = new List<AveragePCCountModel>();
 
@@ -1361,6 +1361,7 @@ namespace LightMasterMVVM.ViewModels
 
         public void SeeMatches(int MatchNum)
         {
+            GetEventCode eventConfig = new GetEventCode();
             tabletViewModel.UserControlVisible = false;
             matchViewModel.UserControlVisible = true;
             CompetitionTeamsViewModel.UserControlVisible = false;
@@ -1369,7 +1370,7 @@ namespace LightMasterMVVM.ViewModels
             {
                 using (var db = new ScoutingContext())
                 {
-                    var r1selectedmatch = db.Matches.Where(x => x.TabletId == "R1" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
+                    var r1selectedmatch = db.Matches.Where(x => x.TabletId == "R1" && x.EventCode == eventConfig.EventCode() && x.MatchNumber == MatchNum).FirstOrDefault();
                     
                     if (r1selectedmatch == null)
                     {
@@ -1424,7 +1425,7 @@ namespace LightMasterMVVM.ViewModels
                         MatchViewModel.Red1CurrentMatch = matchtoput;
                     }
                     //RED2
-                    var r2selectedmatch = db.Matches.Where(x => x.TabletId == "R2" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
+                    var r2selectedmatch = db.Matches.Where(x => x.TabletId == "R2" && x.EventCode == eventConfig.EventCode() && x.MatchNumber == MatchNum).FirstOrDefault();
                     
                     if (r2selectedmatch == null)
                     {
@@ -1479,7 +1480,7 @@ namespace LightMasterMVVM.ViewModels
                         MatchViewModel.Red2CurrentMatch = matchtoput;
                     }
                     //RED3
-                    var r3selectedmatch = db.Matches.Where(x => x.TabletId == "R3" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
+                    var r3selectedmatch = db.Matches.Where(x => x.TabletId == "R3" && x.EventCode == eventConfig.EventCode() && x.MatchNumber == MatchNum).FirstOrDefault();
                     
                     if (r3selectedmatch == null)
                     {
@@ -1534,7 +1535,7 @@ namespace LightMasterMVVM.ViewModels
                         MatchViewModel.Red3CurrentMatch = matchtoput;
                     }
                     //BLUE1
-                    var b1selectedmatch = db.Matches.Where(x => x.TabletId == "B1" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
+                    var b1selectedmatch = db.Matches.Where(x => x.TabletId == "B1" && x.EventCode == eventConfig.EventCode() && x.MatchNumber == MatchNum).FirstOrDefault();
                     
                     if (b1selectedmatch == null)
                     {
@@ -1589,7 +1590,7 @@ namespace LightMasterMVVM.ViewModels
                         MatchViewModel.Blue1CurrentMatch = matchtoput;
                     }
                     //BLUE2
-                    var b2selectedmatch = db.Matches.Where(x => x.TabletId == "B2" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
+                    var b2selectedmatch = db.Matches.Where(x => x.TabletId == "B2" && x.EventCode == eventConfig.EventCode() && x.MatchNumber == MatchNum).FirstOrDefault();
                     
                     if (b2selectedmatch == null)
                     {
@@ -1644,7 +1645,7 @@ namespace LightMasterMVVM.ViewModels
                         MatchViewModel.Blue2CurrentMatch = matchtoput;
                     }
                     //BLUE3
-                    var b3selectedmatch = db.Matches.Where(x => x.TabletId == "B3" && x.EventCode == "test_env" && x.MatchNumber == MatchNum).FirstOrDefault();
+                    var b3selectedmatch = db.Matches.Where(x => x.TabletId == "B3" && x.EventCode == eventConfig.EventCode() && x.MatchNumber == MatchNum).FirstOrDefault();
                     
                     if (b3selectedmatch == null)
                     {
