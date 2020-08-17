@@ -590,7 +590,7 @@ namespace LightMasterMVVM.Views
                             var previousitem = db.Matches.Where(x => x.TabletId == itemtouse.TabletId && x.MatchNumber == itemtouse.MatchNumber && x.EventCode == itemtouse.EventCode).FirstOrDefault();
                             if (previousitem == null)
                             {
-                                TeamMatch newTeamMatch = new TeamMatch() { AlliancePartners = itemtouse.AlliancePartners, A_InitiationLine = itemtouse.A_InitiationLine, ClientLastSubmitted = itemtouse.ClientLastSubmitted, ClientSubmitted = true, DisabledSeconds = itemtouse.DisabledSeconds, IsQualifying = itemtouse.IsQualifying, EventCode = itemtouse.EventCode, E_Balanced = itemtouse.E_Balanced, E_ClimbAttempt = itemtouse.E_ClimbAttempt, E_ClimbSuccess = itemtouse.E_ClimbSuccess, E_Park = itemtouse.E_Park, MatchID = new Random().Next(1, 1000000), MatchNumber = itemtouse.MatchNumber, NumCycles = itemtouse.NumCycles, PowerCellInner = itemtouse.PowerCellInner, PowerCellLower = itemtouse.PowerCellLower, PowerCellMissed = itemtouse.PowerCellMissed, PowerCellOuter = itemtouse.PowerCellOuter, RobotPosition = itemtouse.RobotPosition, ScoutName = itemtouse.ScoutName, TabletId = itemtouse.TabletId, TapLogs = itemtouse.TapLogs, TeamName = itemtouse.TeamName, T_ControlPanelPosition = itemtouse.T_ControlPanelPosition, T_ControlPanelRotation = itemtouse.T_ControlPanelRotation };
+                                TeamMatch newTeamMatch = new TeamMatch() { CycleTime = itemtouse.CycleTime, AlliancePartners = itemtouse.AlliancePartners, A_InitiationLine = itemtouse.A_InitiationLine, ClientLastSubmitted = itemtouse.ClientLastSubmitted, ClientSubmitted = true, DisabledSeconds = itemtouse.DisabledSeconds, IsQualifying = itemtouse.IsQualifying, EventCode = itemtouse.EventCode, E_Balanced = itemtouse.E_Balanced, E_ClimbAttempt = itemtouse.E_ClimbAttempt, E_ClimbSuccess = itemtouse.E_ClimbSuccess, E_Park = itemtouse.E_Park, MatchID = new Random().Next(1, 1000000), MatchNumber = itemtouse.MatchNumber, NumCycles = itemtouse.NumCycles, PowerCellInner = itemtouse.PowerCellInner, PowerCellLower = itemtouse.PowerCellLower, PowerCellMissed = itemtouse.PowerCellMissed, PowerCellOuter = itemtouse.PowerCellOuter, RobotPosition = itemtouse.RobotPosition, ScoutName = itemtouse.ScoutName, TabletId = itemtouse.TabletId, TapLogs = itemtouse.TapLogs, TeamName = itemtouse.TeamName, T_ControlPanelPosition = itemtouse.T_ControlPanelPosition, T_ControlPanelRotation = itemtouse.T_ControlPanelRotation };
                                 try
                                 {
                                     if (db.FRCTeams.Find(itemtouse.TeamNumber, itemtouse.EventCode) != null)
@@ -620,7 +620,7 @@ namespace LightMasterMVVM.Views
                             {
                                 if (previousitem.ClientLastSubmitted != itemtouse.ClientLastSubmitted)
                                 {
-                                    TeamMatch newTeamMatch = new TeamMatch() { AlliancePartners = itemtouse.AlliancePartners, A_InitiationLine = itemtouse.A_InitiationLine, ClientLastSubmitted = itemtouse.ClientLastSubmitted, ClientSubmitted = true, DisabledSeconds = itemtouse.DisabledSeconds, IsQualifying = itemtouse.IsQualifying, EventCode = previousitem.EventCode, E_Balanced = itemtouse.E_Balanced, E_ClimbAttempt = itemtouse.E_ClimbAttempt, E_ClimbSuccess = itemtouse.E_ClimbSuccess, E_Park = itemtouse.E_Park, MatchID = previousitem.MatchID, MatchNumber = previousitem.MatchNumber, NumCycles = itemtouse.NumCycles, PowerCellInner = itemtouse.PowerCellInner, PowerCellLower = itemtouse.PowerCellLower, PowerCellMissed = itemtouse.PowerCellMissed, PowerCellOuter = itemtouse.PowerCellOuter, RobotPosition = itemtouse.RobotPosition, ScoutName = itemtouse.ScoutName, TabletId = itemtouse.TabletId, TapLogs = itemtouse.TapLogs, TeamName = itemtouse.TeamName, T_ControlPanelPosition = itemtouse.T_ControlPanelPosition, T_ControlPanelRotation = itemtouse.T_ControlPanelRotation };
+                                    TeamMatch newTeamMatch = new TeamMatch() { CycleTime = itemtouse.CycleTime, AlliancePartners = itemtouse.AlliancePartners, A_InitiationLine = itemtouse.A_InitiationLine, ClientLastSubmitted = itemtouse.ClientLastSubmitted, ClientSubmitted = true, DisabledSeconds = itemtouse.DisabledSeconds, IsQualifying = itemtouse.IsQualifying, EventCode = previousitem.EventCode, E_Balanced = itemtouse.E_Balanced, E_ClimbAttempt = itemtouse.E_ClimbAttempt, E_ClimbSuccess = itemtouse.E_ClimbSuccess, E_Park = itemtouse.E_Park, MatchID = previousitem.MatchID, MatchNumber = previousitem.MatchNumber, NumCycles = itemtouse.NumCycles, PowerCellInner = itemtouse.PowerCellInner, PowerCellLower = itemtouse.PowerCellLower, PowerCellMissed = itemtouse.PowerCellMissed, PowerCellOuter = itemtouse.PowerCellOuter, RobotPosition = itemtouse.RobotPosition, ScoutName = itemtouse.ScoutName, TabletId = itemtouse.TabletId, TapLogs = itemtouse.TapLogs, TeamName = itemtouse.TeamName, T_ControlPanelPosition = itemtouse.T_ControlPanelPosition, T_ControlPanelRotation = itemtouse.T_ControlPanelRotation };
                                     try
                                     {
                                         newTeamMatch.TrackedTeam = previousitem.TrackedTeam;
@@ -710,6 +710,48 @@ namespace LightMasterMVVM.Views
                 //D = Successful Disconnection
                 control.TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightGray";
                 control.TabletViewModel.BluetoothBorderColors[tabletindex] = "Gray";
+            }
+            else if (rawdata.Substring(3).StartsWith("FS:"))
+            {
+                //FS = Official FIRST Scores
+                string datawithoutid = rawdata;
+                int deviceid = 1000;
+                if (bluetooth)
+                {
+                    datawithoutid = rawdata.Substring(0, 6) + rawdata.Substring(11);
+                    deviceid = int.Parse(rawdata.Substring(6, 4));
+                }
+                var listofofficialmatches = JsonConvert.DeserializeObject<List<TBA_Match>>(datawithoutid.Substring(6));
+                using(var db = new ScoutingContext())
+                {
+                    foreach (var om in listofofficialmatches)
+                    {
+                        if(db.TBAMatches.Find(om.key) != null)
+                        {
+                            try
+                            {
+                                var previousentry = db.TBAMatches.Find(om.key);
+                                previousentry.rawjson = JsonConvert.SerializeObject(om);
+                                db.TBAMatches.Update(previousentry);
+                            }catch(Exception ex)
+                            {
+                                TBA_DB_Model newDBEntry = new TBA_DB_Model() { event_key = om.event_key, match_number = om.match_number, key = om.key, rawjson = JsonConvert.SerializeObject(om) };
+                                db.TBAMatches.Add(newDBEntry);
+                            }
+                            
+                        }
+                        else
+                        {
+                            TBA_DB_Model newDBEntry = new TBA_DB_Model() { event_key = om.event_key, match_number = om.match_number, key = om.key, rawjson = JsonConvert.SerializeObject(om) };
+                            db.TBAMatches.Add(newDBEntry);
+                        }
+                        
+
+                    }
+                    db.SaveChanges();
+                }
+                
+                Console.WriteLine("Successfully gotten");
             }
             else if (rawdata.Substring(3).StartsWith("E:"))
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace LightMasterMVVM.Models
@@ -127,6 +128,7 @@ namespace LightMasterMVVM.Models
         public TBA_Alliances alliances { get; set; }
         public string comp_level { get; set; }
         public string event_key { get; set; }
+        [Key]
         public string key { get; set; }
         public int match_number { get; set; }
         public int post_result_time { get; set; }
@@ -137,5 +139,13 @@ namespace LightMasterMVVM.Models
         public List<TBA_Video> videos { get; set; }
         public string winning_alliance { get; set; }
 
+    }
+    public class TBA_DB_Model
+    {
+        public string rawjson { get; set; }
+        public int match_number { get; set; }
+        public string event_key { get; set; }
+        [Key]
+        public string key { get; set; }
     }
 }

@@ -991,7 +991,7 @@ namespace LightMasterMVVM.ViewModels
                     var previousRed1 = db.Matches.Where(x => x.TabletId == newRed1Match.TabletId && x.MatchNumber == newRed1Match.MatchNumber && x.EventCode == newRed1Match.EventCode).FirstOrDefault();
                     if (previousRed1 != null)
                     {
-                        db.Entry(previousRed1).CurrentValues.SetValues(newRed1Match);
+                        db.Matches.Update(newRed1Match);
                     }
                     newRed2Match.A_InitiationLine = Red2CurrentMatch.A_InitiationLine;
                     newRed2Match.ScoutName = Red2CurrentMatch.ScoutName;
@@ -1023,7 +1023,7 @@ namespace LightMasterMVVM.ViewModels
                     var previousRed2 = db.Matches.Where(x => x.TabletId == newRed2Match.TabletId && x.MatchNumber == newRed2Match.MatchNumber && x.EventCode == newRed2Match.EventCode).FirstOrDefault();
                     if (previousRed2 != null)
                     {
-                        db.Entry(previousRed2).CurrentValues.SetValues(newRed2Match);
+                        db.Matches.Update(newRed2Match);
                     }
                     newRed3Match.A_InitiationLine = Red3CurrentMatch.A_InitiationLine;
                     newRed3Match.ScoutName = Red3CurrentMatch.ScoutName;
@@ -1055,7 +1055,7 @@ namespace LightMasterMVVM.ViewModels
                     var previousRed3 = db.Matches.Where(x => x.TabletId == newRed3Match.TabletId && x.MatchNumber == newRed3Match.MatchNumber && x.EventCode == newRed3Match.EventCode).FirstOrDefault();
                     if (previousRed3 != null)
                     {
-                        db.Entry(previousRed3).CurrentValues.SetValues(newRed3Match);
+                        db.Matches.Update(newRed3Match);
                     }
                     newBlue1Match.A_InitiationLine = Blue1CurrentMatch.A_InitiationLine;
                     newBlue1Match.ScoutName = Blue1CurrentMatch.ScoutName;
@@ -1087,7 +1087,7 @@ namespace LightMasterMVVM.ViewModels
                     var previousBlue1 = db.Matches.Where(x => x.TabletId == newBlue1Match.TabletId && x.MatchNumber == newBlue1Match.MatchNumber && x.EventCode == newBlue1Match.EventCode).FirstOrDefault();
                     if (previousBlue1 != null)
                     {
-                        db.Entry(previousBlue1).CurrentValues.SetValues(newBlue1Match);
+                        db.Matches.Update(newBlue1Match);
                     }
                     newBlue2Match.A_InitiationLine = Blue2CurrentMatch.A_InitiationLine;
                     newBlue2Match.ScoutName = Blue2CurrentMatch.ScoutName;
@@ -1116,6 +1116,7 @@ namespace LightMasterMVVM.ViewModels
                     newBlue2Match.TeamName = originalB2.TeamName;
                     newBlue2Match.T_ControlPanelPosition = Blue2CurrentMatch.T_ControlPanelPosition;
                     newBlue2Match.T_ControlPanelRotation = Blue2CurrentMatch.T_ControlPanelRotation;
+                    newBlue2Match.team_instance_id = originalB2.team_instance_id;
                     var previousBlue2 = db.Matches.Where(x => x.TabletId == newBlue2Match.TabletId && x.MatchNumber == newBlue2Match.MatchNumber && x.EventCode == newBlue2Match.EventCode).FirstOrDefault();
                     if (previousBlue2 != null)
                     {
@@ -1151,7 +1152,7 @@ namespace LightMasterMVVM.ViewModels
                     var previousBlue3 = db.Matches.Where(x => x.TabletId == newBlue3Match.TabletId && x.MatchNumber == newBlue3Match.MatchNumber && x.EventCode == newBlue3Match.EventCode).FirstOrDefault();
                     if (previousBlue3 != null)
                     {
-                        db.Entry(previousBlue3).CurrentValues.SetValues(newBlue3Match);
+                        db.Matches.Update(newBlue3Match);
                     }
                     /*try
                     {

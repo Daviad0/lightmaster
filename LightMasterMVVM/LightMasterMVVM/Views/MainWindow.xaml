@@ -186,7 +186,7 @@
         <Grid ColumnDefinitions="85,50">
           <TextBlock Grid.Column="0" Text="{Binding MatchNumString}" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" FontSize="17"/>
           <Grid Grid.Column="1" RowDefinitions="26,26">
-            <Button Grid.Row="0" Command="{Binding NextMatch}" Name="matchUp" VerticalAlignment="Bottom" Margin="0,0,0,1">
+            <Button Grid.Row="0" Name="matchUp" VerticalAlignment="Bottom" Margin="0,0,0,1">
               <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                   <Image Source="resm:LightMasterMVVM.Assets.caret-up.png"/>
@@ -195,7 +195,7 @@
             </Button>
 
 
-            <Button Grid.Row="1" Command="{Binding PrevMatch}" Name="matchDown" VerticalAlignment="Top" Margin="0,1,0,0" IsVisible="False">
+            <Button Grid.Row="1" Name="matchDown" VerticalAlignment="Top" Margin="0,1,0,0" IsVisible="False">
               <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                   <Image Source="resm:LightMasterMVVM.Assets.caret-down.png"/>
