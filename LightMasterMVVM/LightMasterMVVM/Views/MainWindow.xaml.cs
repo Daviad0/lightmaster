@@ -737,6 +737,14 @@ namespace LightMasterMVVM.Views
                             }catch(Exception ex)
                             {
                                 TBA_DB_Model newDBEntry = new TBA_DB_Model() { event_key = om.event_key, match_number = om.match_number, key = om.key, rawjson = JsonConvert.SerializeObject(om) };
+                                if (om.comp_level == "qm")
+                                {
+                                    newDBEntry.isqualifying = true;
+                                }
+                                else
+                                {
+                                    newDBEntry.isqualifying = false;
+                                }
                                 db.TBAMatches.Add(newDBEntry);
                             }
                             
@@ -744,6 +752,14 @@ namespace LightMasterMVVM.Views
                         else
                         {
                             TBA_DB_Model newDBEntry = new TBA_DB_Model() { event_key = om.event_key, match_number = om.match_number, key = om.key, rawjson = JsonConvert.SerializeObject(om) };
+                            if (om.comp_level == "qm")
+                            {
+                                newDBEntry.isqualifying = true;
+                            }
+                            else
+                            {
+                                newDBEntry.isqualifying = false;
+                            }
                             db.TBAMatches.Add(newDBEntry);
                         }
                         

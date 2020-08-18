@@ -144,6 +144,7 @@ namespace LightMasterMVVM.Models
     {
         public string rawjson { get; set; }
         public int match_number { get; set; }
+        public bool isqualifying { get; set; }
         public string event_key { get; set; }
         [Key]
         public string key { get; set; }
