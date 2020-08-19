@@ -18,22 +18,31 @@
       <Setter Property = "CornerRadius" Value = "6" />
     </Style>
   </UserControl.Styles>
-  <Border BorderBrush="Black" BorderThickness="5,0,0,5" CornerRadius="6" Background="#1E1E1E" Padding="60">
-    <Grid RowDefinitions="100,100,50" HorizontalAlignment="Center">
-      <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" Text="Check with TBA" FontWeight="Bold" FontSize="60" Grid.Row="0"/>
-      <Grid ColumnDefinitions="120,50,120" Grid.Row="1" HorizontalAlignment="Center">
-        <Grid RowDefinitions="30,30" Grid.Column="0" Margin="15,0" HorizontalAlignment="Center">
-          <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" Text="Starting Match" Grid.Row="0"/>
-          <TextBox Foreground="White" Background="#2c2c2c" BorderBrush="Transparent" BorderThickness="0" Text="{Binding MinMatch, Mode=TwoWay}" Grid.Row="1"/>
+  <StackPanel>
+    <Border BorderBrush="Black" BorderThickness="5,0,0,5" CornerRadius="6" Background="#1E1E1E" Padding="30" Margin="10">
+      <Grid RowDefinitions="100,100,50" HorizontalAlignment="Center">
+        <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" Text="Check with TBA" FontWeight="Bold" FontSize="60" Grid.Row="0"/>
+        <Grid ColumnDefinitions="120,50,120" Grid.Row="1" HorizontalAlignment="Center">
+          <Grid RowDefinitions="30,30" Grid.Column="0" Margin="15,0" HorizontalAlignment="Center">
+            <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" Text="Starting Match" Grid.Row="0"/>
+            <TextBox Foreground="White" Background="#2c2c2c" BorderBrush="Transparent" BorderThickness="0" Text="{Binding MinMatch, Mode=TwoWay}" Grid.Row="1"/>
+          </Grid>
+          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="to" FontSize="30" FontWeight="Bold" Grid.Column="1" Margin="0,20,0,0" HorizontalAlignment="Center"/>
+          <Grid RowDefinitions="30,30" Grid.Column="2" Margin="15,0" HorizontalAlignment="Center">
+            <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" Text="Ending Match" Grid.Row="0"/>
+            <TextBox Foreground="White" Background="#2c2c2c" BorderBrush="Transparent" BorderThickness="0" Text="{Binding MaxMatch, Mode=TwoWay}" Grid.Row="1"/>
+          </Grid>
         </Grid>
-        <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="to" FontSize="30" FontWeight="Bold" Grid.Column="1" Margin="0,20,0,0" HorizontalAlignment="Center"/>
-        <Grid RowDefinitions="30,30" Grid.Column="2" Margin="15,0" HorizontalAlignment="Center">
-          <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" Text="Ending Match" Grid.Row="0"/>
-          <TextBox Foreground="White" Background="#2c2c2c" BorderBrush="Transparent" BorderThickness="0" Text="{Binding MaxMatch, Mode=TwoWay}" Grid.Row="1"/>
-        </Grid>
+        <Button FontWeight="Bold" Classes="confirmbutton" Command="{Binding TheBlueAlliance}" Content="Start Checking" Grid.Row="2"/>
       </Grid>
-      <Button FontWeight="Bold" Classes="confirmbutton" Command="{Binding TheBlueAlliance}" Content="Start Checking" Grid.Row="2"/>
-    </Grid>
-  </Border>
-  
+    </Border>
+    <Border BorderBrush="Black" BorderThickness="5,0,0,5" CornerRadius="6" Background="#1E1E1E" Padding="30" Margin="10">
+      <Grid RowDefinitions="100,50" HorizontalAlignment="Center">
+        <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" Text="Get TBA Data" FontWeight="Bold" FontSize="60" Grid.Row="0"/>
+        <Button Name="getTBAData" FontWeight="Bold" Classes="confirmbutton" Command="{Binding TheBlueAlliance}" Content="Get the Data" Grid.Row="1"/>
+      </Grid>
+    </Border>
+  </StackPanel>
+
+
 </UserControl>

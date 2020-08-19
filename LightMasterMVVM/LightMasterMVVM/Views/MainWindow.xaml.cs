@@ -29,6 +29,7 @@ using System.Threading.Tasks;
 using Avalonia.Threading;
 using Websocket.Client;
 using LightMasterMVVM.Scripts;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace LightMasterMVVM.Views
 {
@@ -420,7 +421,6 @@ namespace LightMasterMVVM.Views
         }
         public async void ProcessTest()
         {
-
             Process startTCPforwarding = new Process();
             startTCPforwarding.StartInfo.WorkingDirectory = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "lightmaster"), "LightMasterHub");
             if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
