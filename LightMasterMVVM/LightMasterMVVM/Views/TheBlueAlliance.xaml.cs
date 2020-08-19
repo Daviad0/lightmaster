@@ -84,7 +84,13 @@ namespace LightMasterMVVM.Views
                                 var b1TeamMatch = new TeamMatch() { EventCode = eventcode, PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], MatchNumber = match.match_number, IsQualifying = true, TabletId = "B1", TrackedTeam = db.FRCTeams.Where(x => x.team_number == int.Parse(match.alliances.blue.team_keys[0]) && x.event_key == eventcode).FirstOrDefault() };
                                 var b2TeamMatch = new TeamMatch() { EventCode = eventcode, PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], MatchNumber = match.match_number, IsQualifying = true, TabletId = "B2", TrackedTeam = db.FRCTeams.Where(x => x.team_number == int.Parse(match.alliances.blue.team_keys[1]) && x.event_key == eventcode).FirstOrDefault() };
                                 var b3TeamMatch = new TeamMatch() { EventCode = eventcode, PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], MatchNumber = match.match_number, IsQualifying = true, TabletId = "B3", TrackedTeam = db.FRCTeams.Where(x => x.team_number == int.Parse(match.alliances.blue.team_keys[2]) && x.event_key == eventcode).FirstOrDefault() };
-                                if(db.Matches.Where(x => x.EventCode == eventcode && x.MatchNumber == match.match_number && x.TabletId == "R1").FirstOrDefault() == null)
+                                r1TeamMatch.AlliancePartners = new int[2] { r2TeamMatch.TrackedTeam.team_instance_id, r3TeamMatch.TrackedTeam.team_instance_id };
+                                r2TeamMatch.AlliancePartners = new int[2] { r1TeamMatch.TrackedTeam.team_instance_id, r3TeamMatch.TrackedTeam.team_instance_id };
+                                r3TeamMatch.AlliancePartners = new int[2] { r1TeamMatch.TrackedTeam.team_instance_id, r2TeamMatch.TrackedTeam.team_instance_id };
+                                b1TeamMatch.AlliancePartners = new int[2] { b2TeamMatch.TrackedTeam.team_instance_id, b3TeamMatch.TrackedTeam.team_instance_id };
+                                b2TeamMatch.AlliancePartners = new int[2] { b1TeamMatch.TrackedTeam.team_instance_id, b3TeamMatch.TrackedTeam.team_instance_id };
+                                b3TeamMatch.AlliancePartners = new int[2] { b1TeamMatch.TrackedTeam.team_instance_id, b2TeamMatch.TrackedTeam.team_instance_id };
+                                if (db.Matches.Where(x => x.EventCode == eventcode && x.MatchNumber == match.match_number && x.TabletId == "R1").FirstOrDefault() == null)
                                 {
                                     db.Matches.Add(r1TeamMatch);
                                 }
