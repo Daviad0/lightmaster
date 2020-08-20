@@ -61,6 +61,7 @@ namespace LightMasterMVVM.Views
         private Border teams = new Border();
         public WebsocketClient client = new WebsocketClient(new Uri("ws://localhost:8080"));
         private string previouslySelectedName = "seeTablets";
+        public iDeviceConnectionHandle connection;
         public MainWindow()
         {
             InitializeComponent();
@@ -248,7 +249,7 @@ namespace LightMasterMVVM.Views
                 var lockdown = LibiMobileDevice.Instance.Lockdown;
                 idevice.idevice_event_subscribe((ref iDeviceEvent deviceEvent, IntPtr b) =>
                 {
-                    checkForInternet();
+                    //checkForInternet();
                     try
                     {
                         iDeviceHandle deviceHandle;
@@ -259,20 +260,23 @@ namespace LightMasterMVVM.Views
 
                         string deviceName;
                         lockdown.lockdownd_get_device_name(lockdownHandle, out deviceName).ThrowOnError();
-                        var error = iDeviceError.UnknownError;
-                        while (true)
-                        {
-                            error = idevice.idevice_connect(deviceHandle, 862, out iDeviceConnectionHandle connection);
-                            if(error == iDeviceError.NoDevice || error == iDeviceError.SslError)
+                        Task.Run(async () => {
+                            while (true)
                             {
-                                break;
+                                var error = idevice.idevice_connect(deviceHandle, 862, out iDeviceConnectionHandle connection2);
+                                if (error == iDeviceError.NoDevice || error == iDeviceError.SslError)
+                                {
+                                    Console.WriteLine("UWU");
+                                    break;
+                                }
+                                if (error == iDeviceError.Success)
+                                {
+                                    ReceiveDataFromDevice(connection2, idevice);
+                                    break;
+                                }
                             }
-                            if(error == iDeviceError.Success)
-                            {
-                                ReceiveDataFromDevice(connection, idevice);
-                                break;
-                            }
-                        }
+                        });
+                            
                         
 
 
@@ -419,7 +423,7 @@ namespace LightMasterMVVM.Views
                     catch (Exception ex)
                     {
                         connection.Close();
-                        connection.Dispose();
+                        //connection.Dispose();
                         break;
                     }
 
