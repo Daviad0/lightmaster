@@ -259,18 +259,28 @@ namespace LightMasterMVVM.Views
 
                         string deviceName;
                         lockdown.lockdownd_get_device_name(lockdownHandle, out deviceName).ThrowOnError();
+                        var error = iDeviceError.UnknownError;
+                        while (true)
+                        {
+                            error = idevice.idevice_connect(deviceHandle, 862, out iDeviceConnectionHandle connection);
+                            if(error == iDeviceError.NoDevice || error == iDeviceError.SslError)
+                            {
+                                break;
+                            }
+                            if(error == iDeviceError.Success)
+                            {
+                                ReceiveDataFromDevice(connection, idevice);
+                                break;
+                            }
+                        }
+                        
 
-                        var error = idevice.idevice_connect(deviceHandle, 862, out iDeviceConnectionHandle connection);
 
-
-
-
-
-                        ReceiveDataFromDevice(connection, idevice);
+                        
                     }
                     catch (Exception ex)
                     {
-
+                        
                     }
 
 
