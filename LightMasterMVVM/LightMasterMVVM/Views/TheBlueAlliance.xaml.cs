@@ -49,68 +49,70 @@ namespace LightMasterMVVM.Views
                         {
                             if(match.comp_level == "qm")
                             {
+                                var listofdbteams = db.FRCTeams.Where(x => x.event_key == eventcode).ToList();
                                 if (match.actual_time == 0)
                                 {
                                     Console.WriteLine("Something isn't right... This match has already been completed (Match " + match.match_number + ")");
                                 }
-                                if(db.FRCTeams.Where(x => x.event_key == eventcode && x.team_number == int.Parse(match.alliances.red.team_keys[0])).FirstOrDefault() == null)
+                                if(listofdbteams.Where(x => x.team_number == int.Parse(match.alliances.red.team_keys[0].Substring(3))).FirstOrDefault() == null)
                                 {
-                                    db.FRCTeams.Add(new FRCTeamModel() { event_key = eventcode, team_number = int.Parse(match.alliances.red.team_keys[0]) });
+                                    db.FRCTeams.Add(new FRCTeamModel() { event_key = eventcode, team_number = int.Parse(match.alliances.red.team_keys[0].Substring(3)) });
                                 }
-                                if (db.FRCTeams.Where(x => x.event_key == eventcode && x.team_number == int.Parse(match.alliances.red.team_keys[1])).FirstOrDefault() == null)
+                                if (listofdbteams.Where(x => x.team_number == int.Parse(match.alliances.red.team_keys[1].Substring(3))).FirstOrDefault() == null)
                                 {
-                                    db.FRCTeams.Add(new FRCTeamModel() { event_key = eventcode, team_number = int.Parse(match.alliances.red.team_keys[1]) });
+                                    db.FRCTeams.Add(new FRCTeamModel() { event_key = eventcode, team_number = int.Parse(match.alliances.red.team_keys[1].Substring(3)) });
                                 }
-                                if (db.FRCTeams.Where(x => x.event_key == eventcode && x.team_number == int.Parse(match.alliances.red.team_keys[2])).FirstOrDefault() == null)
+                                if (listofdbteams.Where(x => x.team_number == int.Parse(match.alliances.red.team_keys[2].Substring(3))).FirstOrDefault() == null)
                                 {
-                                    db.FRCTeams.Add(new FRCTeamModel() { event_key = eventcode, team_number = int.Parse(match.alliances.red.team_keys[2]) });
+                                    db.FRCTeams.Add(new FRCTeamModel() { event_key = eventcode, team_number = int.Parse(match.alliances.red.team_keys[2].Substring(3)) });
                                 }
-                                if (db.FRCTeams.Where(x => x.event_key == eventcode && x.team_number == int.Parse(match.alliances.blue.team_keys[0])).FirstOrDefault() == null)
+                                if (listofdbteams.Where(x => x.team_number == int.Parse(match.alliances.blue.team_keys[0].Substring(3))).FirstOrDefault() == null)
                                 {
-                                    db.FRCTeams.Add(new FRCTeamModel() { event_key = eventcode, team_number = int.Parse(match.alliances.blue.team_keys[0]) });
+                                    db.FRCTeams.Add(new FRCTeamModel() { event_key = eventcode, team_number = int.Parse(match.alliances.blue.team_keys[0].Substring(3)) });
                                 }
-                                if (db.FRCTeams.Where(x => x.event_key == eventcode && x.team_number == int.Parse(match.alliances.blue.team_keys[1])).FirstOrDefault() == null)
+                                if (listofdbteams.Where(x => x.team_number == int.Parse(match.alliances.blue.team_keys[1].Substring(3))).FirstOrDefault() == null)
                                 {
-                                    db.FRCTeams.Add(new FRCTeamModel() { event_key = eventcode, team_number = int.Parse(match.alliances.blue.team_keys[1]) });
+                                    db.FRCTeams.Add(new FRCTeamModel() { event_key = eventcode, team_number = int.Parse(match.alliances.blue.team_keys[1].Substring(3)) });
                                 }
-                                if (db.FRCTeams.Where(x => x.event_key == eventcode && x.team_number == int.Parse(match.alliances.blue.team_keys[2])).FirstOrDefault() == null)
+                                if (listofdbteams.Where(x => x.team_number == int.Parse(match.alliances.blue.team_keys[2].Substring(3))).FirstOrDefault() == null)
                                 {
-                                    db.FRCTeams.Add(new FRCTeamModel() { event_key = eventcode, team_number = int.Parse(match.alliances.blue.team_keys[2]) });
+                                    db.FRCTeams.Add(new FRCTeamModel() { event_key = eventcode, team_number = int.Parse(match.alliances.blue.team_keys[2].Substring(3)) });
                                 }
                                 db.SaveChanges();
-                                var r1TeamMatch = new TeamMatch() { EventCode = eventcode, PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], MatchNumber = match.match_number, IsQualifying = true, TabletId = "R1", TrackedTeam = db.FRCTeams.Where(x => x.team_number == int.Parse(match.alliances.red.team_keys[0]) && x.event_key == eventcode).FirstOrDefault() };
-                                var r2TeamMatch = new TeamMatch() { EventCode = eventcode, PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], MatchNumber = match.match_number, IsQualifying = true, TabletId = "R2", TrackedTeam = db.FRCTeams.Where(x => x.team_number == int.Parse(match.alliances.red.team_keys[1]) && x.event_key == eventcode).FirstOrDefault() };
-                                var r3TeamMatch = new TeamMatch() { EventCode = eventcode, PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], MatchNumber = match.match_number, IsQualifying = true, TabletId = "R3", TrackedTeam = db.FRCTeams.Where(x => x.team_number == int.Parse(match.alliances.red.team_keys[2]) && x.event_key == eventcode).FirstOrDefault() };
-                                var b1TeamMatch = new TeamMatch() { EventCode = eventcode, PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], MatchNumber = match.match_number, IsQualifying = true, TabletId = "B1", TrackedTeam = db.FRCTeams.Where(x => x.team_number == int.Parse(match.alliances.blue.team_keys[0]) && x.event_key == eventcode).FirstOrDefault() };
-                                var b2TeamMatch = new TeamMatch() { EventCode = eventcode, PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], MatchNumber = match.match_number, IsQualifying = true, TabletId = "B2", TrackedTeam = db.FRCTeams.Where(x => x.team_number == int.Parse(match.alliances.blue.team_keys[1]) && x.event_key == eventcode).FirstOrDefault() };
-                                var b3TeamMatch = new TeamMatch() { EventCode = eventcode, PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], MatchNumber = match.match_number, IsQualifying = true, TabletId = "B3", TrackedTeam = db.FRCTeams.Where(x => x.team_number == int.Parse(match.alliances.blue.team_keys[2]) && x.event_key == eventcode).FirstOrDefault() };
+                                var r1TeamMatch = new TeamMatch() { EventCode = eventcode, PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], MatchNumber = match.match_number, IsQualifying = true, TabletId = "R1", TrackedTeam = db.FRCTeams.Where(x => x.team_number == int.Parse(match.alliances.red.team_keys[0].Substring(3)) && x.event_key == eventcode).FirstOrDefault() };
+                                var r2TeamMatch = new TeamMatch() { EventCode = eventcode, PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], MatchNumber = match.match_number, IsQualifying = true, TabletId = "R2", TrackedTeam = db.FRCTeams.Where(x => x.team_number == int.Parse(match.alliances.red.team_keys[1].Substring(3)) && x.event_key == eventcode).FirstOrDefault() };
+                                var r3TeamMatch = new TeamMatch() { EventCode = eventcode, PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], MatchNumber = match.match_number, IsQualifying = true, TabletId = "R3", TrackedTeam = db.FRCTeams.Where(x => x.team_number == int.Parse(match.alliances.red.team_keys[2].Substring(3)) && x.event_key == eventcode).FirstOrDefault() };
+                                var b1TeamMatch = new TeamMatch() { EventCode = eventcode, PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], MatchNumber = match.match_number, IsQualifying = true, TabletId = "B1", TrackedTeam = db.FRCTeams.Where(x => x.team_number == int.Parse(match.alliances.blue.team_keys[0].Substring(3)) && x.event_key == eventcode).FirstOrDefault() };
+                                var b2TeamMatch = new TeamMatch() { EventCode = eventcode, PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], MatchNumber = match.match_number, IsQualifying = true, TabletId = "B2", TrackedTeam = db.FRCTeams.Where(x => x.team_number == int.Parse(match.alliances.blue.team_keys[1].Substring(3)) && x.event_key == eventcode).FirstOrDefault() };
+                                var b3TeamMatch = new TeamMatch() { EventCode = eventcode, PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], MatchNumber = match.match_number, IsQualifying = true, TabletId = "B3", TrackedTeam = db.FRCTeams.Where(x => x.team_number == int.Parse(match.alliances.blue.team_keys[2].Substring(3)) && x.event_key == eventcode).FirstOrDefault() };
                                 r1TeamMatch.AlliancePartners = new int[2] { r2TeamMatch.TrackedTeam.team_instance_id, r3TeamMatch.TrackedTeam.team_instance_id };
                                 r2TeamMatch.AlliancePartners = new int[2] { r1TeamMatch.TrackedTeam.team_instance_id, r3TeamMatch.TrackedTeam.team_instance_id };
                                 r3TeamMatch.AlliancePartners = new int[2] { r1TeamMatch.TrackedTeam.team_instance_id, r2TeamMatch.TrackedTeam.team_instance_id };
                                 b1TeamMatch.AlliancePartners = new int[2] { b2TeamMatch.TrackedTeam.team_instance_id, b3TeamMatch.TrackedTeam.team_instance_id };
                                 b2TeamMatch.AlliancePartners = new int[2] { b1TeamMatch.TrackedTeam.team_instance_id, b3TeamMatch.TrackedTeam.team_instance_id };
                                 b3TeamMatch.AlliancePartners = new int[2] { b1TeamMatch.TrackedTeam.team_instance_id, b2TeamMatch.TrackedTeam.team_instance_id };
-                                if (db.Matches.Where(x => x.EventCode == eventcode && x.MatchNumber == match.match_number && x.TabletId == "R1").FirstOrDefault() == null)
+                                var listofalreadydbmatches = db.Matches.Where(x => x.EventCode == eventcode && x.MatchNumber == match.match_number).ToList();
+                                if (listofalreadydbmatches.Where(x => x.EventCode == eventcode && x.MatchNumber == match.match_number && x.TabletId == "R1").FirstOrDefault() == null)
                                 {
                                     db.Matches.Add(r1TeamMatch);
                                 }
-                                if (db.Matches.Where(x => x.EventCode == eventcode && x.MatchNumber == match.match_number && x.TabletId == "R2").FirstOrDefault() == null)
+                                if (listofalreadydbmatches.Where(x => x.EventCode == eventcode && x.MatchNumber == match.match_number && x.TabletId == "R2").FirstOrDefault() == null)
                                 {
                                     db.Matches.Add(r2TeamMatch);
                                 }
-                                if (db.Matches.Where(x => x.EventCode == eventcode && x.MatchNumber == match.match_number && x.TabletId == "R3").FirstOrDefault() == null)
+                                if (listofalreadydbmatches.Where(x => x.EventCode == eventcode && x.MatchNumber == match.match_number && x.TabletId == "R3").FirstOrDefault() == null)
                                 {
                                     db.Matches.Add(r3TeamMatch);
                                 }
-                                if (db.Matches.Where(x => x.EventCode == eventcode && x.MatchNumber == match.match_number && x.TabletId == "B1").FirstOrDefault() == null)
+                                if (listofalreadydbmatches.Where(x => x.EventCode == eventcode && x.MatchNumber == match.match_number && x.TabletId == "B1").FirstOrDefault() == null)
                                 {
                                     db.Matches.Add(b1TeamMatch);
                                 }
-                                if (db.Matches.Where(x => x.EventCode == eventcode && x.MatchNumber == match.match_number && x.TabletId == "B2").FirstOrDefault() == null)
+                                if (listofalreadydbmatches.Where(x => x.EventCode == eventcode && x.MatchNumber == match.match_number && x.TabletId == "B2").FirstOrDefault() == null)
                                 {
                                     db.Matches.Add(b2TeamMatch);
                                 }
-                                if (db.Matches.Where(x => x.EventCode == eventcode && x.MatchNumber == match.match_number && x.TabletId == "B3").FirstOrDefault() == null)
+                                if (listofalreadydbmatches.Where(x => x.EventCode == eventcode && x.MatchNumber == match.match_number && x.TabletId == "B3").FirstOrDefault() == null)
                                 {
                                     db.Matches.Add(b3TeamMatch);
                                 }

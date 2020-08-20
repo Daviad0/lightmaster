@@ -788,34 +788,38 @@ namespace LightMasterMVVM.Views
 
                 control.NotificationViewModel.AddNotification("Data Request", rawdata.Substring(0, 2).ToString() + " requested data", "Blue");
                 GetEventCode eventConfig = new GetEventCode();
-                var listOfMatchesToSend = new List<IO_TeamMatch>()
-                        {
-                            new IO_TeamMatch() { TeamNumber = 862, MatchNumber = 1, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = eventConfig.EventCode(), AlliancePartners = new int[2]{ 5567,4456 } },
-                            new IO_TeamMatch() { TeamNumber = 1023, MatchNumber = 2, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = eventConfig.EventCode(), AlliancePartners = new int[2]{ 5567,4456 } },
-                            new IO_TeamMatch() { TeamNumber = 2014, MatchNumber = 3, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = eventConfig.EventCode(), AlliancePartners = new int[2]{ 5567,4456 } },
-                            new IO_TeamMatch() { TeamNumber = 2020, MatchNumber = 4, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = eventConfig.EventCode(), AlliancePartners = new int[2]{ 5567,4456 } },
-                            new IO_TeamMatch() { TeamNumber = 3145, MatchNumber = 5, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = eventConfig.EventCode(), AlliancePartners = new int[2]{ 5567,4456 } },
-                            new IO_TeamMatch() { TeamNumber = 4005, MatchNumber = 6, TabletId = rawdata.Substring(0,2).ToString(), PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21], EventCode = eventConfig.EventCode(), AlliancePartners = new int[2]{ 5567,4456 } }
-                        };
-                string modelstring = JsonConvert.SerializeObject(listOfMatchesToSend);
-                byte[] bytesToSend = Encoding.ASCII.GetBytes(modelstring);
-                if (modelstring.Length > 480)
+                using(var db = new ScoutingContext())
                 {
-                    int numberofmessages = (int)Math.Ceiling((float)modelstring.Length / (float)480);
-                    var startidentifier = rawdata.Substring(0, 2).ToString() + ":MM:" + deviceid.ToString() + ":" + numberofmessages.ToString();
-                    client.Send(startidentifier);
-                    for (int i = numberofmessages; i > 0; i--)
+                    var listOfDBMatchesToSend = db.Matches.Where(x => x.EventCode == new GetEventCode().EventCode() && x.TabletId == rawdata.Substring(0, 2)).ToList();
+                    var listOfMatchesToSend = new List<IO_TeamMatch>();
+                    foreach (var dbm in listOfDBMatchesToSend.OrderBy(x => x.MatchNumber))
                     {
-                        var simplestring = rawdata.Substring(0, 2).ToString() + ":" + deviceid.ToString() + ":" + new string(modelstring.Skip((numberofmessages - i) * 480).Take(480).ToArray());
-                        client.Send(simplestring);
+                        var correspondingteam = db.FRCTeams.Find(dbm.team_instance_id);
+                        var alliancepartner1 = db.FRCTeams.Find(dbm.AlliancePartners[0]);
+                        var alliancepartner2 = db.FRCTeams.Find(dbm.AlliancePartners[1]);
+                        listOfMatchesToSend.Add(new IO_TeamMatch() { AlliancePartners = new int[2] { alliancepartner1.team_number, alliancepartner2.team_number }, EventCode = dbm.EventCode, TeamNumber = correspondingteam.team_number, MatchNumber = dbm.MatchNumber, TabletId = dbm.TabletId, PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21] });
                     }
+                    string modelstring = JsonConvert.SerializeObject(listOfMatchesToSend);
+                    byte[] bytesToSend = Encoding.ASCII.GetBytes(modelstring);
+                    if (modelstring.Length > 480)
+                    {
+                        int numberofmessages = (int)Math.Ceiling((float)modelstring.Length / (float)480);
+                        var startidentifier = rawdata.Substring(0, 2).ToString() + ":MM:" + deviceid.ToString() + ":" + numberofmessages.ToString();
+                        client.Send(startidentifier);
+                        for (int i = numberofmessages; i > 0; i--)
+                        {
+                            var simplestring = rawdata.Substring(0, 2).ToString() + ":" + deviceid.ToString() + ":" + new string(modelstring.Skip((numberofmessages - i) * 480).Take(480).ToArray());
+                            client.Send(simplestring);
+                        }
+                    }
+                    else
+                    {
+                        client.Send(deviceid.ToString() + ":" + modelstring);
+                    }
+                    control.TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightSalmon";
+                    control.TabletViewModel.BluetoothBorderColors[tabletindex] = "DarkOrange";
                 }
-                else
-                {
-                    client.Send(deviceid.ToString() + ":" + modelstring);
-                }
-                control.TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightSalmon";
-                control.TabletViewModel.BluetoothBorderColors[tabletindex] = "DarkOrange";
+                
             }
 
 

@@ -19,7 +19,7 @@ namespace LightMasterMVVM
             {
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel(),
+
                 };
             }
 
