@@ -48,6 +48,57 @@ namespace LightMasterMVVM.Models
                 }
             }
         }
+        private int _team_instance_id;
+        public int team_instance_id
+        {
+            get
+            {
+                return this._team_instance_id;
+            }
+
+            set
+            {
+                if (value != this._team_instance_id)
+                {
+                    this._team_instance_id = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private int _progress_width;
+        public int progress_width
+        {
+            get
+            {
+                return this._progress_width;
+            }
+
+            set
+            {
+                if (value != this._progress_width)
+                {
+                    this._progress_width = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private double _improvement_rating;
+        public double improvement_rating
+        {
+            get
+            {
+                return this._improvement_rating;
+            }
+
+            set
+            {
+                if (value != this._improvement_rating)
+                {
+                    this._improvement_rating = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
         private string _match_progress;
         public string match_progress
         {

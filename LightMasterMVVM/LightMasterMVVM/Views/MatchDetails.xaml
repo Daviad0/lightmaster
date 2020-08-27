@@ -1,0 +1,261 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="LightMasterMVVM.Views.MatchDetails">
+    
+    <Grid RowDefinitions="290,90,90,290">
+        <Grid ColumnDefinitions="*,*,*" Grid.Row="0">
+            <Border Background="#1E1E1E" BorderBrush="Black" BorderThickness="4,0,0,4" CornerRadius="6" Padding="20" Grid.Column="0" Margin="5,5,10,5">
+                <StackPanel>
+                    <StackPanel IsVisible="{Binding Red1C}">
+                        <Grid ColumnDefinitions="*,*,*" RowDefinitions="20,20,20,20,20,20" Margin="10,5" ToolTip.Tip="Power Cell Count">
+                            <TextBlock VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Text="Auto" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Text="Tele-Op" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Text="Inner" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Text="Outer" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" Text="Lower" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Text="Missed" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="5" Text="% Scored" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="1" Text="{Binding Red1Match.APowerCellInner, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="2" Text="{Binding Red1Match.APowerCellOuter, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="3" Text="{Binding Red1Match.APowerCellLower, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="4" Text="{Binding Red1Match.APowerCellMissed, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="5" Text="{Binding Red1Match.AShotAccuracy, StringFormat={}{0}%}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="1" Text="{Binding Red1Match.TPowerCellInner, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="2" Text="{Binding Red1Match.TPowerCellOuter, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="3" Text="{Binding Red1Match.TPowerCellLower, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="4" Text="{Binding Red1Match.TPowerCellMissed, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="5" Text="{Binding Red1Match.TShotAccuracy, StringFormat={}{0}%}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                        </Grid>
+                        <Grid Margin="10,10" ColumnDefinitions="*,*,*" RowDefinitions="30,20">
+                            <TextBlock VerticalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Parked" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" FontSize="15" Foreground="White" FontWeight="SemiBold"/>
+                            <TextBlock VerticalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Climbed" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" FontSize="15" Foreground="White" FontWeight="SemiBold"/>
+                            <TextBlock VerticalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Balanced" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2" FontSize="15" Foreground="White" FontWeight="SemiBold"/>
+                            <CheckBox IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Red1Match.E_Park}" Grid.Row="0" Grid.Column="0"/>
+                            <CheckBox IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Red1Match.E_ClimbSuccess}" Grid.Row="0" Grid.Column="1"/>
+                            <CheckBox IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Red1Match.E_Balanced}" Grid.Row="0" Grid.Column="2"/>
+                        </Grid>
+                        <TextBlock FontSize="15" Text="{Binding Red1Match.CycleTime, StringFormat={}{0}s Per Cycle of}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" HorizontalAlignment="Center"/>
+                        <TextBlock FontSize="15" Text="{Binding Red1Match.NumCycles, StringFormat={}{0} Cycles}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <Grid IsVisible="{Binding Red1NC}" ColumnDefinitions="*" RowDefinitions="*">
+                        <TextBlock Text="Not Completed" FontSize="30" HorizontalAlignment="Center" Margin="0,95" Grid.Column="0" Grid.Row="0" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" VerticalAlignment="Center" Foreground="LightPink" FontWeight="Bold"/>
+                    </Grid>
+                </StackPanel>
+                
+            </Border>
+            <Border Background="#1E1E1E" BorderBrush="Black" BorderThickness="4,0,0,4" CornerRadius="6" Padding="20" Grid.Column="1" Margin="10,5,10,5">
+                <StackPanel>
+                    <StackPanel IsVisible="{Binding Red2C}">
+                        <Grid ColumnDefinitions="*,*,*" RowDefinitions="20,20,20,20,20,20" Margin="10,5" ToolTip.Tip="Power Cell Count">
+                            <TextBlock VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Text="Auto" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Text="Tele-Op" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Text="Inner" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Text="Outer" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" Text="Lower" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Text="Missed" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="5" Text="% Scored" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="1" Text="{Binding Red2Match.APowerCellInner, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="2" Text="{Binding Red2Match.APowerCellOuter, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="3" Text="{Binding Red2Match.APowerCellLower, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="4" Text="{Binding Red2Match.APowerCellMissed, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="5" Text="{Binding Red2Match.AShotAccuracy, StringFormat={}{0}%}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="1" Text="{Binding Red2Match.TPowerCellInner, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="2" Text="{Binding Red2Match.TPowerCellOuter, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="3" Text="{Binding Red2Match.TPowerCellLower, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="4" Text="{Binding Red2Match.TPowerCellMissed, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="5" Text="{Binding Red2Match.TShotAccuracy, StringFormat={}{0}%}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                        </Grid>
+                        <Grid Margin="10,10" ColumnDefinitions="*,*,*" RowDefinitions="30,20">
+                            <TextBlock VerticalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Parked" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" FontSize="15" Foreground="White" FontWeight="SemiBold"/>
+                            <TextBlock VerticalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Climbed" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" FontSize="15" Foreground="White" FontWeight="SemiBold"/>
+                            <TextBlock VerticalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Balanced" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2" FontSize="15" Foreground="White" FontWeight="SemiBold"/>
+                            <CheckBox IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Red2Match.E_Park}" Grid.Row="0" Grid.Column="0"/>
+                            <CheckBox IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Red2Match.E_ClimbSuccess}" Grid.Row="0" Grid.Column="1"/>
+                            <CheckBox IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Red2Match.E_Balanced}" Grid.Row="0" Grid.Column="2"/>
+                        </Grid>
+                        <TextBlock FontSize="15" Text="{Binding Red2Match.CycleTime, StringFormat={}{0}s Per Cycle of}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" HorizontalAlignment="Center"/>
+                        <TextBlock FontSize="15" Text="{Binding Red2Match.NumCycles, StringFormat={}{0} Cycles}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <Grid IsVisible="{Binding Red2NC}" ColumnDefinitions="*" RowDefinitions="*">
+                        <TextBlock Text="Not Completed" FontSize="30" HorizontalAlignment="Center" Margin="0,95" Grid.Column="0" Grid.Row="0" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" VerticalAlignment="Center" Foreground="LightPink" FontWeight="Bold"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            <Border Background="#1E1E1E" BorderBrush="Black" BorderThickness="4,0,0,4" CornerRadius="6" Padding="20" Grid.Column="2" Margin="10,5,5,5">
+                <StackPanel>
+                    <StackPanel IsVisible="{Binding Red3C}">
+                        <Grid ColumnDefinitions="*,*,*" RowDefinitions="20,20,20,20,20,20" Margin="10,5" ToolTip.Tip="Power Cell Count">
+                            <TextBlock VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Text="Auto" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Text="Tele-Op" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Text="Inner" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Text="Outer" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" Text="Lower" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Text="Missed" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="5" Text="% Scored" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="1" Text="{Binding Red3Match.APowerCellInner, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="2" Text="{Binding Red3Match.APowerCellOuter, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="3" Text="{Binding Red3Match.APowerCellLower, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="4" Text="{Binding Red3Match.APowerCellMissed, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="5" Text="{Binding Red3Match.AShotAccuracy, StringFormat={}{0}%}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="1" Text="{Binding Red3Match.TPowerCellInner, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="2" Text="{Binding Red3Match.TPowerCellOuter, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="3" Text="{Binding Red3Match.TPowerCellLower, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="4" Text="{Binding Red3Match.TPowerCellMissed, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="5" Text="{Binding Red3Match.TShotAccuracy, StringFormat={}{0}%}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink"/>
+                        </Grid>
+                        <Grid Margin="10,10" ColumnDefinitions="*,*,*" RowDefinitions="30,20">
+                            <TextBlock VerticalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Parked" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" FontSize="15" Foreground="White" FontWeight="SemiBold"/>
+                            <TextBlock VerticalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Climbed" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" FontSize="15" Foreground="White" FontWeight="SemiBold"/>
+                            <TextBlock VerticalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Balanced" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2" FontSize="15" Foreground="White" FontWeight="SemiBold"/>
+                            <CheckBox IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Red3Match.E_Park}" Grid.Row="0" Grid.Column="0"/>
+                            <CheckBox IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Red3Match.E_ClimbSuccess}" Grid.Row="0" Grid.Column="1"/>
+                            <CheckBox IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Red3Match.E_Balanced}" Grid.Row="0" Grid.Column="2"/>
+                        </Grid>
+                        <TextBlock FontSize="15" Text="{Binding Red3Match.CycleTime, StringFormat={}{0}s Per Cycle of}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" HorizontalAlignment="Center"/>
+                        <TextBlock FontSize="15" Text="{Binding Red3Match.NumCycles, StringFormat={}{0} Cycles}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <Grid IsVisible="{Binding Red3NC}" ColumnDefinitions="*" RowDefinitions="*">
+                        <TextBlock Text="Not Completed" FontSize="30" HorizontalAlignment="Center" Margin="0,95" Grid.Column="0" Grid.Row="0" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" VerticalAlignment="Center" Foreground="LightPink" FontWeight="Bold"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+        
+        <Border Background="#8f0000" BorderBrush="Black" BorderThickness="4,0,0,4" CornerRadius="6" Padding="0,20,0,20" Grid.Row="1" Margin="5">
+            <Grid ColumnDefinitions="300,300,300" Margin="20,0" VerticalAlignment="Center">
+                <TextBlock Text="{Binding Red1Match.TeamNumber}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontSize="30" HorizontalAlignment="Center" FontWeight="SemiBold" Grid.Column="0"/>
+                <TextBlock Text="{Binding Red2Match.TeamNumber}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontSize="30" HorizontalAlignment="Center" FontWeight="SemiBold" Grid.Column="1"/>
+                <TextBlock Text="{Binding Red3Match.TeamNumber}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightPink" FontSize="30" HorizontalAlignment="Center" FontWeight="SemiBold" Grid.Column="2"/>
+            </Grid>
+        </Border>
+        <Border Background="#11008f" BorderBrush="Black" BorderThickness="4,0,0,4" CornerRadius="6" Padding="0,20,0,20" Grid.Row="2" Margin="5">
+            <Grid ColumnDefinitions="300,300,300" Margin="20,0" VerticalAlignment="Center">
+                <TextBlock Text="{Binding Blue1Match.TeamNumber}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontSize="30" HorizontalAlignment="Center" FontWeight="SemiBold" Grid.Column="0"/>
+                <TextBlock Text="{Binding Blue2Match.TeamNumber}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontSize="30" HorizontalAlignment="Center" FontWeight="SemiBold" Grid.Column="1"/>
+                <TextBlock Text="{Binding Blue3Match.TeamNumber}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontSize="30" HorizontalAlignment="Center" FontWeight="SemiBold" Grid.Column="2"/>
+            </Grid>
+        </Border>
+        <Grid ColumnDefinitions="*,*,*" Grid.Row="3">
+            <Border Background="#1E1E1E" BorderBrush="Black" BorderThickness="4,0,0,4" CornerRadius="6" Padding="20" Grid.Column="0" Margin="5,5,10,5">
+                <StackPanel>
+                    <StackPanel IsVisible="{Binding Blue1C}">
+                        <Grid ColumnDefinitions="*,*,*" RowDefinitions="20,20,20,20,20,20" Margin="10,5" ToolTip.Tip="Power Cell Count">
+                            <TextBlock VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Text="Auto" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Text="Tele-Op" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Text="Inner" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Text="Outer" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" Text="Lower" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Text="Missed" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="5" Text="% Scored" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="1" Text="{Binding Blue1Match.APowerCellInner, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="2" Text="{Binding Blue1Match.APowerCellOuter, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="3" Text="{Binding Blue1Match.APowerCellLower, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="4" Text="{Binding Blue1Match.APowerCellMissed, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="5" Text="{Binding Blue1Match.AShotAccuracy, StringFormat={}{0}%}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="1" Text="{Binding Blue1Match.TPowerCellInner, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="2" Text="{Binding Blue1Match.TPowerCellOuter, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="3" Text="{Binding Blue1Match.TPowerCellLower, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="4" Text="{Binding Blue1Match.TPowerCellMissed, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="5" Text="{Binding Blue1Match.TShotAccuracy, StringFormat={}{0}%}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                        </Grid>
+                        <Grid Margin="10,10" ColumnDefinitions="*,*,*" RowDefinitions="30,20">
+                            <TextBlock VerticalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Parked" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" FontSize="15" Foreground="White" FontWeight="SemiBold"/>
+                            <TextBlock VerticalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Climbed" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" FontSize="15" Foreground="White" FontWeight="SemiBold"/>
+                            <TextBlock VerticalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Balanced" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2" FontSize="15" Foreground="White" FontWeight="SemiBold"/>
+                            <CheckBox IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Blue1Match.E_Park}" Grid.Row="0" Grid.Column="0"/>
+                            <CheckBox IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Blue1Match.E_ClimbSuccess}" Grid.Row="0" Grid.Column="1"/>
+                            <CheckBox IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Blue1Match.E_Balanced}" Grid.Row="0" Grid.Column="2"/>
+                        </Grid>
+                        <TextBlock FontSize="15" Text="{Binding Blue1Match.CycleTime, StringFormat={}{0}s Per Cycle of}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" HorizontalAlignment="Center"/>
+                        <TextBlock FontSize="15" Text="{Binding Blue1Match.NumCycles, StringFormat={}{0} Cycles}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <Grid IsVisible="{Binding Blue1NC}" ColumnDefinitions="*" RowDefinitions="*">
+                        <TextBlock Text="Not Completed" FontSize="30" HorizontalAlignment="Center" Margin="0,95" Grid.Column="0" Grid.Row="0" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" VerticalAlignment="Center" Foreground="LightBlue" FontWeight="Bold"/>
+                    </Grid>
+                </StackPanel>
+                
+            </Border>
+            <Border Background="#1E1E1E" BorderBrush="Black" BorderThickness="4,0,0,4" CornerRadius="6" Padding="20" Grid.Column="1" Margin="10,5,10,5">
+                <StackPanel>
+                    <StackPanel IsVisible="{Binding Blue2C}">
+                        <Grid ColumnDefinitions="*,*,*" RowDefinitions="20,20,20,20,20,20" Margin="10,5" ToolTip.Tip="Power Cell Count">
+                            <TextBlock VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Text="Auto" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Text="Tele-Op" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Text="Inner" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Text="Outer" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" Text="Lower" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Text="Missed" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="5" Text="% Scored" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="1" Text="{Binding Blue2Match.APowerCellInner, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="2" Text="{Binding Blue2Match.APowerCellOuter, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="3" Text="{Binding Blue2Match.APowerCellLower, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="4" Text="{Binding Blue2Match.APowerCellMissed, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="5" Text="{Binding Blue2Match.AShotAccuracy, StringFormat={}{0}%}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="1" Text="{Binding Blue2Match.TPowerCellInner, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="2" Text="{Binding Blue2Match.TPowerCellOuter, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="3" Text="{Binding Blue2Match.TPowerCellLower, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="4" Text="{Binding Blue2Match.TPowerCellMissed, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="5" Text="{Binding Blue2Match.TShotAccuracy, StringFormat={}{0}%}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                        </Grid>
+                        <Grid Margin="10,10" ColumnDefinitions="*,*,*" RowDefinitions="30,20">
+                            <TextBlock VerticalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Parked" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" FontSize="15" Foreground="White" FontWeight="SemiBold"/>
+                            <TextBlock VerticalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Climbed" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" FontSize="15" Foreground="White" FontWeight="SemiBold"/>
+                            <TextBlock VerticalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Balanced" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2" FontSize="15" Foreground="White" FontWeight="SemiBold"/>
+                            <CheckBox IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Blue2Match.E_Park}" Grid.Row="0" Grid.Column="0"/>
+                            <CheckBox IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Blue2Match.E_ClimbSuccess}" Grid.Row="0" Grid.Column="1"/>
+                            <CheckBox IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Blue2Match.E_Balanced}" Grid.Row="0" Grid.Column="2"/>
+                        </Grid>
+                        <TextBlock FontSize="15" Text="{Binding Blue2Match.CycleTime, StringFormat={}{0}s Per Cycle of}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" HorizontalAlignment="Center"/>
+                        <TextBlock FontSize="15" Text="{Binding Blue2Match.NumCycles, StringFormat={}{0} Cycles}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <Grid IsVisible="{Binding Blue2NC}" ColumnDefinitions="*" RowDefinitions="*">
+                        <TextBlock Text="Not Completed" FontSize="30" HorizontalAlignment="Center" Margin="0,95" Grid.Column="0" Grid.Row="0" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" VerticalAlignment="Center" Foreground="LightBlue" FontWeight="Bold"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            <Border Background="#1E1E1E" BorderBrush="Black" BorderThickness="4,0,0,4" CornerRadius="6" Padding="20" Grid.Column="2" Margin="10,5,5,5">
+                <StackPanel>
+                    <StackPanel IsVisible="{Binding Blue3C}">
+                        <Grid ColumnDefinitions="*,*,*" RowDefinitions="20,20,20,20,20,20" Margin="10,5" ToolTip.Tip="Power Cell Count">
+                            <TextBlock VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Text="Auto" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Text="Tele-Op" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Text="Inner" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Text="Outer" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" Text="Lower" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Text="Missed" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold"/>
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="5" Text="% Scored" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="1" Text="{Binding Blue3Match.APowerCellInner, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="2" Text="{Binding Blue3Match.APowerCellOuter, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="3" Text="{Binding Blue3Match.APowerCellLower, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="4" Text="{Binding Blue3Match.APowerCellMissed, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="1" FontSize="15" Grid.Row="5" Text="{Binding Blue3Match.AShotAccuracy, StringFormat={}{0}%}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="1" Text="{Binding Blue3Match.TPowerCellInner, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="2" Text="{Binding Blue3Match.TPowerCellOuter, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="3" Text="{Binding Blue3Match.TPowerCellLower, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="4" Text="{Binding Blue3Match.TPowerCellMissed, StringFormat={}{0} PC}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                            <TextBlock Grid.Column="2" FontSize="15" Grid.Row="5" Text="{Binding Blue3Match.TShotAccuracy, StringFormat={}{0}%}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue"/>
+                        </Grid>
+                        <Grid Margin="10,10" ColumnDefinitions="*,*,*" RowDefinitions="30,20">
+                            <TextBlock VerticalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Parked" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" FontSize="15" Foreground="White" FontWeight="SemiBold"/>
+                            <TextBlock VerticalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Climbed" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" FontSize="15" Foreground="White" FontWeight="SemiBold"/>
+                            <TextBlock VerticalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Balanced" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2" FontSize="15" Foreground="White" FontWeight="SemiBold"/>
+                            <CheckBox IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Blue3Match.E_Park}" Grid.Row="0" Grid.Column="0"/>
+                            <CheckBox IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Blue3Match.E_ClimbSuccess}" Grid.Row="0" Grid.Column="1"/>
+                            <CheckBox IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Blue3Match.E_Balanced}" Grid.Row="0" Grid.Column="2"/>
+                        </Grid>
+                        <TextBlock FontSize="15" Text="{Binding Blue3Match.CycleTime, StringFormat={}{0}s Per Cycle of}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" HorizontalAlignment="Center"/>
+                        <TextBlock FontSize="15" Text="{Binding Blue3Match.NumCycles, StringFormat={}{0} Cycles}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="LightBlue" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <Grid IsVisible="{Binding Blue3NC}" ColumnDefinitions="*" RowDefinitions="*">
+                        <TextBlock Text="Not Completed" FontSize="30" HorizontalAlignment="Center" Margin="0,95" Grid.Column="0" Grid.Row="0" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" VerticalAlignment="Center" Foreground="LightBlue" FontWeight="Bold"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+  
+
+</UserControl>

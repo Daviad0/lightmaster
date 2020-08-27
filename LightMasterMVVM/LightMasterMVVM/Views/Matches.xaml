@@ -41,56 +41,7 @@
     <Style Selector="Button.navbuttonselected2/template/ContentPresenter">
       <Setter Property = "CornerRadius" Value = "6" />
     </Style>
-    <Style Selector="CheckBox">
-      <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
-      <Setter Property="Background" Value="Transparent"/>
-      <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
-      <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
-      <Setter Property="Padding" Value="4,0,0,0"/>
-      <Setter Property="VerticalContentAlignment" Value="Center"/>
-      <Setter Property="HorizontalContentAlignment" Value="Left"/>
-      <Setter Property="Template">
-        <ControlTemplate>
-          <Grid ColumnDefinitions="Auto,*">
-            <Border Name="border"
-                    Background="{TemplateBinding Background}"
-                    BorderBrush="White"
-                    BorderThickness="2"
-                    Width="25"
-                    Height="25"
-                    VerticalAlignment="Center"
-                    CornerRadius="4">
-              <Panel>
-                <Path Name="checkMark"
-                      Fill="LightGreen"
-                      Width="14"
-                      Height="12.75"
-                      Stretch="Uniform"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Center"
-                      Data="M 1145.607177734375,430 C1145.607177734375,430 1141.449951171875,435.0772705078125 1141.449951171875,435.0772705078125 1141.449951171875,435.0772705078125 1139.232177734375,433.0999755859375 1139.232177734375,433.0999755859375 1139.232177734375,433.0999755859375 1138,434.5538330078125 1138,434.5538330078125 1138,434.5538330078125 1141.482177734375,438 1141.482177734375,438 1141.482177734375,438 1141.96875,437.9375 1141.96875,437.9375 1141.96875,437.9375 1147,431.34619140625 1147,431.34619140625 1147,431.34619140625 1145.607177734375,430 1145.607177734375,430 z"/>
-                <Rectangle Name="indeterminateMark"
-                           Fill="{DynamicResource HighlightBrush}"
-                           Width="15"
-                           Height="15"
-                           Stretch="Uniform"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"/>
-              </Panel>
-            </Border>
-            <ContentPresenter Name="PART_ContentPresenter"
-                              TextBlock.Foreground="{TemplateBinding Foreground}"
-                              ContentTemplate="{TemplateBinding ContentTemplate}"
-                              Content="{TemplateBinding Content}"
-                              Margin="{TemplateBinding Padding}"
-                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                              IsVisible="{TemplateBinding Content, Converter={x:Static ObjectConverters.IsNotNull}}"
-                              Grid.Column="1"/>
-          </Grid>
-        </ControlTemplate>
-      </Setter>
-    </Style>
+    
   </UserControl.Styles>
     <Grid ColumnDefinitions="*" RowDefinitions="130,*,100,120" Width="1200">
       <Grid ColumnDefinitions="300,*,*" Grid.Row="0" Margin="0,0,0,0">

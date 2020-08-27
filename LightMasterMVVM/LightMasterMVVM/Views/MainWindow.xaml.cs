@@ -59,6 +59,8 @@ namespace LightMasterMVVM.Views
         private Border tablets = new Border();
         private Border tba = new Border();
         private Border teams = new Border();
+        private Border teamDetails = new Border();
+        private Border matchDetails = new Border();
         public WebsocketClient client = new WebsocketClient(new Uri("ws://localhost:8080"));
         private string previouslySelectedName = "seeTablets";
         public iDeviceConnectionHandle connection;
@@ -95,11 +97,254 @@ namespace LightMasterMVVM.Views
             tablets = this.Find<Border>("tablets");
             tba = this.Find<Border>("tba");
             teams = this.Find<Border>("teams");
+            teamDetails = this.Find<Border>("teamDetails");
+            matchDetails = this.Find<Border>("matchDetails");
             DataContext = control;
             ProcessTest();
             checkForInternet();
-            
-            
+            TryUSB();
+
+            NavMessenger.ShowMatchDetails += async (int matchnum, OriginalPage calledPage) =>
+            {
+                previouslySelectedName = null;
+                control.MatchDetailsViewModel = new MatchDetailsViewModel(matchnum,calledPage);
+                matches.Classes.Remove("show");
+                graph.Classes.Remove("show");
+                tablets.Classes.Remove("show");
+                tba.Classes.Remove("show");
+                teams.Classes.Remove("show");
+                teamDetails.Classes.Remove("show");
+                matchDetails.Classes.Remove("show");
+                matches.Classes.Add("hide");
+                graph.Classes.Add("hide");
+                tablets.Classes.Add("hide");
+                tba.Classes.Add("hide");
+                teams.Classes.Add("hide");
+                teamDetails.Classes.Add("hide");
+                matchDetails.Classes.Add("hide");
+                nav_see_tablets.Classes.Remove("navbuttonselected");
+                nav_see_graph.Classes.Remove("navbuttonselected");
+                nav_see_tba.Classes.Remove("navbuttonselected");
+                nav_see_matches.Classes.Remove("navbuttonselected");
+                nav_see_teams.Classes.Remove("navbuttonselected");
+                nav_try_usb.Classes.Remove("navbuttonselected");
+                nav_see_tablets.Classes.Add("navbutton");
+                nav_see_graph.Classes.Add("navbutton");
+                nav_see_tba.Classes.Add("navbutton");
+                nav_see_matches.Classes.Add("navbutton");
+                nav_see_teams.Classes.Add("navbutton");
+                nav_try_usb.Classes.Add("navbutton");
+                await Task.Delay(100);
+                matches.Opacity = 0;
+                graph.Opacity = 0;
+                tablets.Opacity = 0;
+                tba.Opacity = 0;
+                teams.Opacity = 0;
+                teamDetails.Opacity = 0;
+                matchDetails.Opacity = 0;
+                matches.IsVisible = false;
+                graph.IsVisible = false;
+                tablets.IsVisible = false;
+                tba.IsVisible = false;
+                teams.IsVisible = false;
+                teamDetails.IsVisible = false;
+                matchDetails.IsVisible = false;
+                await Task.Delay(50);
+                matchDetails.IsVisible = true;
+                matchDetails.Classes.Remove("hide");
+                matchDetails.Classes.Add("show");
+                await Task.Delay(100);
+                matchDetails.Opacity = 1;
+            };
+            NavMessenger.ShowTeamDetails += async (int team_instance_id, OriginalPage calledPage) =>
+            {
+                previouslySelectedName = null;
+                control.TeamDetailsViewModel = new TeamDetailsViewModel(team_instance_id, calledPage);
+                matches.Classes.Remove("show");
+                graph.Classes.Remove("show");
+                tablets.Classes.Remove("show");
+                tba.Classes.Remove("show");
+                teams.Classes.Remove("show");
+                teamDetails.Classes.Remove("show");
+                matchDetails.Classes.Remove("show");
+                matches.Classes.Add("hide");
+                graph.Classes.Add("hide");
+                tablets.Classes.Add("hide");
+                tba.Classes.Add("hide");
+                teams.Classes.Add("hide");
+                teamDetails.Classes.Add("hide");
+                matchDetails.Classes.Add("hide");
+                nav_see_tablets.Classes.Remove("navbuttonselected");
+                nav_see_graph.Classes.Remove("navbuttonselected");
+                nav_see_tba.Classes.Remove("navbuttonselected");
+                nav_see_matches.Classes.Remove("navbuttonselected");
+                nav_see_teams.Classes.Remove("navbuttonselected");
+                nav_try_usb.Classes.Remove("navbuttonselected");
+                nav_see_tablets.Classes.Add("navbutton");
+                nav_see_graph.Classes.Add("navbutton");
+                nav_see_tba.Classes.Add("navbutton");
+                nav_see_matches.Classes.Add("navbutton");
+                nav_see_teams.Classes.Add("navbutton");
+                nav_try_usb.Classes.Add("navbutton");
+                await Task.Delay(100);
+                matches.Opacity = 0;
+                graph.Opacity = 0;
+                tablets.Opacity = 0;
+                tba.Opacity = 0;
+                teams.Opacity = 0;
+                teamDetails.Opacity = 0;
+                matchDetails.Opacity = 0;
+                matches.IsVisible = false;
+                graph.IsVisible = false;
+                tablets.IsVisible = false;
+                tba.IsVisible = false;
+                teams.IsVisible = false;
+                teamDetails.IsVisible = false;
+                matchDetails.IsVisible = false;
+                await Task.Delay(50);
+                teamDetails.IsVisible = true;
+                teamDetails.Classes.Remove("hide");
+                teamDetails.Classes.Add("show");
+                await Task.Delay(100);
+                teamDetails.Opacity = 1;
+            };
+            NavMessenger.FromTeamDetails += async (OriginalPage page) =>
+            {
+                matches.Classes.Remove("show");
+                graph.Classes.Remove("show");
+                tablets.Classes.Remove("show");
+                tba.Classes.Remove("show");
+                teams.Classes.Remove("show");
+                teamDetails.Classes.Remove("show");
+                matchDetails.Classes.Remove("show");
+                matches.Classes.Add("hide");
+                graph.Classes.Add("hide");
+                tablets.Classes.Add("hide");
+                tba.Classes.Add("hide");
+                teams.Classes.Add("hide");
+                teamDetails.Classes.Add("hide");
+                matchDetails.Classes.Add("hide");
+                nav_see_tablets.Classes.Remove("navbuttonselected");
+                nav_see_graph.Classes.Remove("navbuttonselected");
+                nav_see_tba.Classes.Remove("navbuttonselected");
+                nav_see_matches.Classes.Remove("navbuttonselected");
+                nav_see_teams.Classes.Remove("navbuttonselected");
+                nav_try_usb.Classes.Remove("navbuttonselected");
+                nav_see_tablets.Classes.Add("navbutton");
+                nav_see_graph.Classes.Add("navbutton");
+                nav_see_tba.Classes.Add("navbutton");
+                nav_see_matches.Classes.Add("navbutton");
+                nav_see_teams.Classes.Add("navbutton");
+                nav_try_usb.Classes.Add("navbutton");
+                await Task.Delay(100);
+                matches.Opacity = 0;
+                graph.Opacity = 0;
+                tablets.Opacity = 0;
+                tba.Opacity = 0;
+                teams.Opacity = 0;
+                teamDetails.Opacity = 0;
+                matchDetails.Opacity = 0;
+                matches.IsVisible = false;
+                graph.IsVisible = false;
+                tablets.IsVisible = false;
+                tba.IsVisible = false;
+                teams.IsVisible = false;
+                teamDetails.IsVisible = false;
+                matchDetails.IsVisible = false;
+                await Task.Delay(50);
+                switch (page)
+                {
+                    case OriginalPage.StatsView:
+                        matches.IsVisible = true;
+                        matches.Classes.Remove("hide");
+                        matches.Classes.Add("show");
+                        nav_see_matches.Classes.Remove("navbutton");
+                        nav_see_matches.Classes.Add("navbuttonselected");
+                        await Task.Delay(100);
+                        matches.Opacity = 1;
+                        previouslySelectedName = matches.Name;
+                        break;
+                    case OriginalPage.TeamList:
+                        teams.IsVisible = true;
+                        teams.Classes.Remove("hide");
+                        teams.Classes.Add("show");
+                        nav_see_teams.Classes.Remove("navbutton");
+                        nav_see_teams.Classes.Add("navbuttonselected");
+                        await Task.Delay(100);
+                        teams.Opacity = 1;
+                        previouslySelectedName = teams.Name;
+                        break;
+                }
+            };
+            NavMessenger.FromMatchDetails += async (OriginalPage page) =>
+            {
+                
+                matches.Classes.Remove("show");
+                graph.Classes.Remove("show");
+                tablets.Classes.Remove("show");
+                tba.Classes.Remove("show");
+                teams.Classes.Remove("show");
+                teamDetails.Classes.Remove("show");
+                matchDetails.Classes.Remove("show");
+                matches.Classes.Add("hide");
+                graph.Classes.Add("hide");
+                tablets.Classes.Add("hide");
+                tba.Classes.Add("hide");
+                teams.Classes.Add("hide");
+                teamDetails.Classes.Add("hide");
+                matchDetails.Classes.Add("hide");
+                nav_see_tablets.Classes.Remove("navbuttonselected");
+                nav_see_graph.Classes.Remove("navbuttonselected");
+                nav_see_tba.Classes.Remove("navbuttonselected");
+                nav_see_matches.Classes.Remove("navbuttonselected");
+                nav_see_teams.Classes.Remove("navbuttonselected");
+                nav_try_usb.Classes.Remove("navbuttonselected");
+                nav_see_tablets.Classes.Add("navbutton");
+                nav_see_graph.Classes.Add("navbutton");
+                nav_see_tba.Classes.Add("navbutton");
+                nav_see_matches.Classes.Add("navbutton");
+                nav_see_teams.Classes.Add("navbutton");
+                nav_try_usb.Classes.Add("navbutton");
+                await Task.Delay(100);
+                matches.Opacity = 0;
+                graph.Opacity = 0;
+                tablets.Opacity = 0;
+                tba.Opacity = 0;
+                teams.Opacity = 0;
+                teamDetails.Opacity = 0;
+                matchDetails.Opacity = 0;
+                matches.IsVisible = false;
+                graph.IsVisible = false;
+                tablets.IsVisible = false;
+                tba.IsVisible = false;
+                teams.IsVisible = false;
+                teamDetails.IsVisible = false;
+                matchDetails.IsVisible = false;
+                await Task.Delay(50);
+                switch (page)
+                {
+                    case OriginalPage.StatsView:
+                        matches.IsVisible = true;
+                        matches.Classes.Remove("hide");
+                        matches.Classes.Add("show");
+                        nav_see_matches.Classes.Remove("navbutton");
+                        nav_see_matches.Classes.Add("navbuttonselected");
+                        await Task.Delay(100);
+                        matches.Opacity = 1;
+                        previouslySelectedName = matches.Name;
+                        break;
+                    case OriginalPage.TeamList:
+                        teams.IsVisible = true;
+                        teams.Classes.Remove("hide");
+                        teams.Classes.Add("show");
+                        nav_see_teams.Classes.Remove("navbutton");
+                        nav_see_teams.Classes.Add("navbuttonselected");
+                        await Task.Delay(100);
+                        teams.Opacity = 1;
+                        previouslySelectedName = teams.Name;
+                        break;
+                }
+            };
 
         }
         public static bool CheckForInternetConnection()
@@ -144,11 +389,15 @@ namespace LightMasterMVVM.Views
                 tablets.Classes.Remove("show");
                 tba.Classes.Remove("show");
                 teams.Classes.Remove("show");
+                teamDetails.Classes.Remove("show");
+                matchDetails.Classes.Remove("show");
                 matches.Classes.Add("hide");
                 graph.Classes.Add("hide");
                 tablets.Classes.Add("hide");
                 tba.Classes.Add("hide");
                 teams.Classes.Add("hide");
+                teamDetails.Classes.Add("hide");
+                matchDetails.Classes.Add("hide");
                 nav_see_tablets.Classes.Remove("navbuttonselected");
                 nav_see_graph.Classes.Remove("navbuttonselected");
                 nav_see_tba.Classes.Remove("navbuttonselected");
@@ -167,11 +416,15 @@ namespace LightMasterMVVM.Views
                 tablets.Opacity = 0;
                 tba.Opacity = 0;
                 teams.Opacity = 0;
+                teamDetails.Opacity = 0;
+                matchDetails.Opacity = 0;
                 matches.IsVisible = false;
                 graph.IsVisible = false;
                 tablets.IsVisible = false;
                 tba.IsVisible = false;
                 teams.IsVisible = false;
+                teamDetails.IsVisible = false;
+                matchDetails.IsVisible = false;
                 await Task.Delay(50);
                 switch (pressedButton.Name)
                 {
@@ -639,6 +892,7 @@ namespace LightMasterMVVM.Views
                                     try
                                     {
                                         newTeamMatch.TrackedTeam = previousitem.TrackedTeam;
+                                        newTeamMatch.team_instance_id = previousitem.team_instance_id;
                                     }
                                     catch (Exception ex)
                                     {
@@ -646,9 +900,10 @@ namespace LightMasterMVVM.Views
                                         db.FRCTeams.Add(newTeamInDb);
                                         db.SaveChanges();
                                         newTeamMatch.TrackedTeam = newTeamInDb;
+                                        newTeamMatch.team_instance_id = db.FRCTeams.Where(x => x.team_number == newTeamInDb.team_number && x.event_key == newTeamInDb.event_key).FirstOrDefault().team_instance_id;
                                     }
 
-                                    db.Matches.Update(newTeamMatch);
+                                    db.Entry<TeamMatch>(previousitem).CurrentValues.SetValues(newTeamMatch);
                                     db.SaveChanges();
                                 }
 

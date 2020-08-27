@@ -35,6 +35,10 @@ namespace LightMasterMVVM.Models
         public bool APIChecked { get; set; }
         public int APIAccuracy { get; set; }
         public string[] TapLogs { get; set; }
+        public bool DefenseFor { get; set; }
+        public bool DefenseAgainst { get; set; }
+        public int[] ShotCoordinates { get; set; }
+        public int[] LoadCoordinates { get; set; }
 
         [ForeignKey("TrackedTeam")]
         public int team_instance_id { get; set; }

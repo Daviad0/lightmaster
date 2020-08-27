@@ -4,8 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="**\*.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="**\*.xaml.cs">
+      <DependentUpon>CompetitionTeams %28copy%29.xaml</DependentUpon>
     </Compile>
     <AvaloniaResource Include="**\*.xaml">
       <SubType>Designer</SubType>

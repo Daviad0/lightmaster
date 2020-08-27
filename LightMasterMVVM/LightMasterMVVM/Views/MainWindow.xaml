@@ -90,6 +90,56 @@
         </Animation>
       </Style.Animations>
     </Style>
+    <Style Selector="CheckBox">
+      <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+      <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
+      <Setter Property="Padding" Value="4,0,0,0"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="HorizontalContentAlignment" Value="Left"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid ColumnDefinitions="Auto,*">
+            <Border Name="border"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="White"
+                    BorderThickness="2"
+                    Width="25"
+                    Height="25"
+                    VerticalAlignment="Center"
+                    CornerRadius="4">
+              <Panel>
+                <Path Name="checkMark"
+                      Fill="LightGreen"
+                      Width="14"
+                      Height="12.75"
+                      Stretch="Uniform"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Data="M 1145.607177734375,430 C1145.607177734375,430 1141.449951171875,435.0772705078125 1141.449951171875,435.0772705078125 1141.449951171875,435.0772705078125 1139.232177734375,433.0999755859375 1139.232177734375,433.0999755859375 1139.232177734375,433.0999755859375 1138,434.5538330078125 1138,434.5538330078125 1138,434.5538330078125 1141.482177734375,438 1141.482177734375,438 1141.482177734375,438 1141.96875,437.9375 1141.96875,437.9375 1141.96875,437.9375 1147,431.34619140625 1147,431.34619140625 1147,431.34619140625 1145.607177734375,430 1145.607177734375,430 z"/>
+                <Rectangle Name="indeterminateMark"
+                           Fill="{DynamicResource HighlightBrush}"
+                           Width="15"
+                           Height="15"
+                           Stretch="Uniform"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+              </Panel>
+            </Border>
+            <ContentPresenter Name="PART_ContentPresenter"
+                              TextBlock.Foreground="{TemplateBinding Foreground}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              Content="{TemplateBinding Content}"
+                              Margin="{TemplateBinding Padding}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              IsVisible="{TemplateBinding Content, Converter={x:Static ObjectConverters.IsNotNull}}"
+                              Grid.Column="1"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+    </Style>
   </Window.Styles>
   <Grid>
     
@@ -97,7 +147,7 @@
       <RowDefinition Height="50"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
-    <Grid ColumnDefinitions="120,120,120,120,120,120,120" RowDefinitions="120" Grid.Row="0" Margin="30,25,30,30" >
+    <Grid ColumnDefinitions="120,120,120,120,120,120,120" RowDefinitions="120" Grid.Row="0" Margin="30,25,30,10" >
       <Grid Grid.Column="0" ColumnDefinitions="*" RowDefinitions="80">
         <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Text="LightSwitch" FontSize="20" Foreground="#4e4e4e"/>
       </Grid>
@@ -137,7 +187,7 @@
 
 
     </Grid>
-    <Grid Grid.Row="0" HorizontalAlignment="Right" Margin="30,10,30,30" ColumnDefinitions="52,52,52,52">
+    <Grid Grid.Row="0" HorizontalAlignment="Right" Margin="30,10,30,10" ColumnDefinitions="52,52,52,52">
       <Border Background="#1E1E1E" BorderBrush="Black" BorderThickness="2,0,0,2" Height="40" Width="40" CornerRadius="20" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0">
         <Image Source="resm:LightMasterMVVM.Assets.bluetooth-white.png" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="9"/>
       </Border>
@@ -159,11 +209,11 @@
       <Border Name="internetActive" Opacity="0" Background="#2a7afa" BorderBrush="Black" BorderThickness="2,0,0,2" Height="40" Width="40" CornerRadius="20" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2">
         <Image Source="resm:LightMasterMVVM.Assets.wifi-white.png" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="7"/>
       </Border>
-      <Border Name="databaseActive" Opacity="0" Background="#2a7afa" BorderBrush="Black" BorderThickness="2,0,0,2" Height="40" Width="40" CornerRadius="20" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2">
+      <Border Name="databaseActive" Opacity="0" Background="#2a7afa" BorderBrush="Black" BorderThickness="2,0,0,2" Height="40" Width="40" CornerRadius="20" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="3">
         <Image Source="resm:LightMasterMVVM.Assets.database-white.png" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"/>
       </Border>
     </Grid>
-    <Grid Grid.Row="1" VerticalAlignment="Center">
+    <Grid Grid.Row="1" VerticalAlignment="Top" Margin="0,15">
       <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0" Name="tablets" Opacity="1" IsVisible="True">
         <screens:Tablets DataContext="{Binding TabletViewModel}"/>
       </Border>
@@ -178,6 +228,12 @@
       </Border>
       <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Name="teams" Opacity="0" IsVisible="False">
         <screens:CompetitionTeams DataContext="{Binding CompetitionTeamsViewModel}"/>
+      </Border>
+      <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Name="matchDetails" Opacity="0" IsVisible="False">
+        <screens:MatchDetails DataContext="{Binding MatchDetailsViewModel}"/>
+      </Border>
+      <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Name="teamDetails" Opacity="0" IsVisible="False">
+        <screens:TeamDetails DataContext="{Binding TeamDetailsViewModel}"/>
       </Border>
       
     </Grid>

@@ -1,0 +1,170 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="LightMasterMVVM.Views.TeamDetails">
+    <UserControl.Styles>
+    <Style Selector="Button.confirmbutton">
+      <Setter Property="Background" Value="White"/>
+      <Setter Property="Foreground" Value="#1E1E1E"/>
+    </Style>
+    <Style Selector="Button.confirmbutton/template/ContentPresenter">
+      <Setter Property = "CornerRadius" Value = "6" />
+    </Style>
+  </UserControl.Styles>
+    <Grid RowDefinitions="140,600,30">
+        
+        <Grid ColumnDefinitions="250,800">
+            <Border Grid.Column="0" Background="#1E1E1E" BorderBrush="Black" BorderThickness="4,0,0,4" CornerRadius="6" Padding="10" Margin="5">
+                <Grid RowDefinitions="*,30">
+                    <TextBlock HorizontalAlignment="Center" Grid.Row="0" VerticalAlignment="Center" Text="{Binding TeamModel.team_number}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" FontSize="70" FontWeight="Bold"/>
+                    <TextBlock HorizontalAlignment="Center" FontSize="20" Grid.Row="1" Margin="0,5,0,0" Text="{Binding TeamModel.team_number, StringFormat={}FRC Team {0}}}" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White"/>
+                </Grid>
+            </Border>
+            <Border Grid.Column="1" Background="#1E1E1E" BorderBrush="Black" BorderThickness="4,0,0,4" CornerRadius="6" Padding="10" Margin="5">
+                <Grid RowDefinitions="*,30" Grid.Column="1">
+                    <Grid ColumnDefinitions="*,*,*,*,*,*" Margin="10,0" VerticalAlignment="Center">
+                        <Grid Grid.Column="0" RowDefinitions="30,20">
+                            <TextBlock Text="{Binding TeamModel.rated_tier, FallbackValue={}---}}" FontWeight="Bold" FontSize="25" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="Rated Tier" Margin="5,0" TextWrapping="Wrap" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="1" RowDefinitions="30,20">
+                            <TextBlock Text="{Binding TeamModel.improvement_rating, FallbackValue={}---}}" Foreground="White" FontWeight="Bold" FontSize="25" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="Improvement" Margin="5,0" TextWrapping="Wrap" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="2" RowDefinitions="30,20">
+                            <TextBlock Text="0.64" Foreground="White" FontWeight="Bold" FontSize="25" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="Auto Score" Margin="5,0" TextWrapping="Wrap" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="3" RowDefinitions="30,20">
+                            <TextBlock Text="1.99" Foreground="White" FontWeight="Bold" FontSize="25" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="Tele-Op Score" Margin="5,0" TextWrapping="Wrap" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="4" RowDefinitions="30,20">
+                            <TextBlock Text="1" FontWeight="Bold" FontSize="25" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="Endgame Score" Margin="5,0" TextWrapping="Wrap" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Column="5" RowDefinitions="30,20">
+                            <TextBlock Text="OK" FontWeight="Bold" FontSize="25" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="Data Validity" Margin="5,0" TextWrapping="Wrap" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Grid>
+                    <Border Grid.Row="1" Background="DimGray" Height="12" CornerRadius="5" Margin="20,0" Width="700" HorizontalAlignment="Center">
+                        <Border Background="LightGreen" Height="6" CornerRadius="3" Margin="3,3" Width="{Binding TeamModel.progress_width}" HorizontalAlignment="Left" VerticalAlignment="Center" >
+
+                        </Border>
+                    </Border>
+                </Grid>
+            </Border>
+                
+                
+                
+        </Grid>
+        <Border Grid.Row="1" Background="#1E1E1E" BorderBrush="Black" BorderThickness="4,0,0,4" CornerRadius="6" Padding="10" Margin="5">
+            <ScrollViewer Height="600" VerticalScrollBarVisibility="Hidden" Grid.Column="1">
+                <StackPanel>
+                    <Grid RowDefinitions="60" ColumnDefinitions="*">
+                         <TextBlock Text="All Matches" Grid.Row="0" Grid.Column="0" Margin="0,20" HorizontalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="40" Foreground="White" FontWeight="Bold"/>
+                        <Button FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Content="Back" VerticalAlignment="Center" Command="{Binding Back}" Classes="confirmbutton" HorizontalAlignment="Left" Padding="10"/>
+                    </Grid>
+                    
+                    <Border Background="DimGray" BorderBrush="Transparent" IsVisible="{Binding TeamModel.has_matches}" CornerRadius="6" Margin="3" Padding="3">
+                      <Grid ColumnDefinitions="200,240,300,120">
+                        <Grid Grid.Column="0" Background="DimGray" ColumnDefinitions="100,100">
+                          <TextBlock FontWeight="Bold" Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Match #" Margin="3" Grid.Column="0"/>
+                          <TextBlock FontWeight="Bold" Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Partners" Margin="3" Grid.Column="1"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Background="DimGray" ColumnDefinitions="60,60,60,60">
+                          <TextBlock FontWeight="Bold" Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Inner" Grid.Column="0" Margin="3" />
+                          <TextBlock FontWeight="Bold" Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Outer" Grid.Column="1" Margin="3"/>
+                          <TextBlock FontWeight="Bold" Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Lower" Grid.Column="2" Margin="3"/>
+                          <TextBlock FontWeight="Bold" Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Missed" Grid.Column="3" Margin="3"/>
+                        </Grid>
+                        <Grid Grid.Column="2" Background="DimGray" ColumnDefinitions="60,60,60,60,60">
+                          <TextBlock FontWeight="Bold" Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Inner" Grid.Column="0" Margin="3"/>
+                          <TextBlock FontWeight="Bold" Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Outer" Grid.Column="1" Margin="3"/>
+                          <TextBlock FontWeight="Bold" Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Lower" Grid.Column="2" Margin="3"/>
+                          <TextBlock FontWeight="Bold" Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Missed" Grid.Column="3" Margin="3"/>
+                          <TextBlock FontWeight="Bold" Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="# Cycles" Grid.Column="4" Margin="3"/>
+                        </Grid>
+                        <Grid Grid.Column="3" Background="DimGray">
+                            <TextBlock FontWeight="Bold" Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Improvement" Grid.Column="0" Margin="3"/>
+                                      
+                      
+                        </Grid>
+                    
+                    
+                      </Grid>
+                    </Border>
+                      <ItemsControl Items="{Binding TeamModel.team_matches}">
+                          <ItemsControl.ItemTemplate>
+                              <DataTemplate>
+                                  <Border Background="#303030" BorderBrush="#303030" CornerRadius="6" Margin="3" Padding="3">
+                                    <Grid ColumnDefinitions="200,240,300,120">
+                                      
+                                      
+                                    
+                                        <Grid Grid.Column="0" Background="#303030" ColumnDefinitions="100,100">
+                                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding MatchNumber, StringFormat={}Match {0}}}" Margin="3" Grid.Column="0"/>
+                                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding PartnersWith}" Margin="3" Grid.Column="1"/>
+                                        </Grid>
+                                        <Grid Grid.Column="1" Background="#303030" ColumnDefinitions="60,60,60,60">
+                                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding APowerCellInner, StringFormat={}{0}PC}}" Grid.Column="0" Margin="3"/>
+                                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding APowerCellOuter, StringFormat={}{0}PC}}" Grid.Column="1" Margin="3"/>
+                                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding APowerCellLower, StringFormat={}{0}PC}}" Grid.Column="2" Margin="3"/>
+                                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding APowerCellMissed, StringFormat={}{0}PC}}" Grid.Column="3" Margin="3"/>
+                                        </Grid>
+                                        <Grid Grid.Column="2" Background="#303030" ColumnDefinitions="60,60,60,60,60">
+                                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TPowerCellInner, StringFormat={}{0}PC}}" Grid.Column="0" Margin="3"/>
+                                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TPowerCellOuter, StringFormat={}{0}PC}}" Grid.Column="1" Margin="3"/>
+                                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TPowerCellLower, StringFormat={}{0}PC}}" Grid.Column="2" Margin="3"/>
+                                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TPowerCellMissed, StringFormat={}{0}PC}}" Grid.Column="3" Margin="3"/>
+                                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding NumCycles}" Grid.Column="4" Margin="3"/>
+                                        </Grid>
+                                        <Grid Grid.Column="3" Background="#303030">
+                                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding ImprovementShotPC}" Grid.Column="0" Margin="3"/>
+                                      
+                      
+                                        </Grid>
+                                      </Grid>
+                                  </Border>
+                              </DataTemplate>
+                          </ItemsControl.ItemTemplate>
+                      </ItemsControl>
+                    <Border Background="DimGray" BorderBrush="Transparent" IsVisible="{Binding TeamModel.has_matches}" CornerRadius="6" Margin="3" Padding="3">
+                      <Grid ColumnDefinitions="200,240,300,120">
+                        <Grid Grid.Column="0" Background="DimGray">
+                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="Average" Margin="3"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Background="DimGray" ColumnDefinitions="60,60,60,60">
+                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TeamModel.a_pc_inner_avg, StringFormat={}{0}PC}}" Grid.Column="0" Margin="3" />
+                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TeamModel.a_pc_outer_avg, StringFormat={}{0}PC}}" Grid.Column="1" Margin="3"/>
+                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TeamModel.a_pc_lower_avg, StringFormat={}{0}PC}}" Grid.Column="2" Margin="3"/>
+                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TeamModel.a_pc_missed_avg, StringFormat={}{0}PC}}" Grid.Column="3" Margin="3"/>
+                        </Grid>
+                        <Grid Grid.Column="2" Background="DimGray" ColumnDefinitions="60,60,60,60,60">
+                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TeamModel.t_pc_inner_avg, StringFormat={}{0}PC}}" Grid.Column="0" Margin="3"/>
+                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TeamModel.t_pc_outer_avg, StringFormat={}{0}PC}}" Grid.Column="1" Margin="3"/>
+                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TeamModel.t_pc_lower_avg, StringFormat={}{0}PC}}" Grid.Column="2" Margin="3"/>
+                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TeamModel.t_pc_missed_avg, StringFormat={}{0}PC}}" Grid.Column="3" Margin="3"/>
+                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding TeamModel.t_num_cycles}" Grid.Column="4" Margin="3"/>
+                        </Grid>
+                        <Grid Grid.Column="3" Background="DimGray" ColumnDefinitions="60,60">
+                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="" Grid.Column="0" Margin="3"/>
+                          <TextBlock Foreground="White" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="" Grid.Column="1" Margin="3"/>
+                      
+                        </Grid>
+
+
+
+                      </Grid>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+        
+    </Grid>
+  
+
+</UserControl>

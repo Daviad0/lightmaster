@@ -18,10 +18,12 @@ namespace LightMasterMVVM.Models
         private int _APowerCellLower;
         private int _APowerCellOuter;
         private int _APowerCellInner;
+        private int _AShotAccuracy;
         private int _TPowerCellMissed;
         private int _TPowerCellLower;
         private int _TPowerCellOuter;
         private int _TPowerCellInner;
+        private int _TShotAccuracy;
         private int _NumCycles;
         private bool _T_ControlPanelRotation;
         private bool _T_ControlPanelPosition;
@@ -31,6 +33,8 @@ namespace LightMasterMVVM.Models
         private bool _E_Balanced;
         private int _DisabledSeconds;
         private string _PartnersWith;
+        private string _ImprovementShotPC;
+        private int _CycleTime;
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
@@ -52,6 +56,22 @@ namespace LightMasterMVVM.Models
                 }
             }
         }
+        public int CycleTime
+        {
+            get
+            {
+                return this._CycleTime;
+            }
+
+            set
+            {
+                if (value != this._CycleTime)
+                {
+                    this._CycleTime = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
         public string EventCode 
         {
             get
@@ -64,6 +84,22 @@ namespace LightMasterMVVM.Models
                 if (value != this._EventCode)
                 {
                     this._EventCode = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public string ImprovementShotPC
+        {
+            get
+            {
+                return this._ImprovementShotPC;
+            }
+
+            set
+            {
+                if (value != this._ImprovementShotPC)
+                {
+                    this._ImprovementShotPC = value;
                     NotifyPropertyChanged();
                 }
             }
@@ -196,6 +232,22 @@ namespace LightMasterMVVM.Models
                 }
             }
         }
+        public int AShotAccuracy
+        {
+            get
+            {
+                return this._AShotAccuracy;
+            }
+
+            set
+            {
+                if (value != this._AShotAccuracy)
+                {
+                    this._AShotAccuracy = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
         public int TPowerCellMissed 
         {
             get
@@ -256,6 +308,22 @@ namespace LightMasterMVVM.Models
                 if (value != this._TPowerCellInner)
                 {
                     this._TPowerCellInner = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public int TShotAccuracy
+        {
+            get
+            {
+                return this._TShotAccuracy;
+            }
+
+            set
+            {
+                if (value != this._TShotAccuracy)
+                {
+                    this._TShotAccuracy = value;
                     NotifyPropertyChanged();
                 }
             }

@@ -33,5 +33,9 @@ namespace LightMasterMVVM.Models
         public string[] TapLogs { get; set; }
         public int[] AlliancePartners { get; set; }
         public int CycleTime { get; set; }
+        public bool DefenseFor { get; set; }
+        public bool DefenseAgainst { get; set; }
+        public int[] ShotCoordinates { get; set; }
+        public int[] LoadCoordinates { get; set; }
     }
 }
