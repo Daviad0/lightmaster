@@ -67,6 +67,7 @@
     <None Remove="Assets\usb-white.png" />
     <None Remove="Assets\wifi-white.png" />
     <None Remove="Views\CompetitionTeams.xaml" />
+    <None Remove="Views\CreateGraph.axaml" />
     <None Remove="Views\DataAnalysis.xaml" />
     <None Remove="Views\MainWindow.xaml" />
     <None Remove="Views\Matches.xaml" />
@@ -125,6 +126,7 @@
     <EmbeddedResource Include="Views\CompetitionTeams.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\CreateGraph.axaml" />
     <EmbeddedResource Include="Views\MainWindow.xaml" />
     <EmbeddedResource Include="Views\NotifyUser.xaml">
       <Generator>MSBuild:Compile</Generator>

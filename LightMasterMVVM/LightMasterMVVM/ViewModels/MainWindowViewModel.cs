@@ -35,6 +35,103 @@ using SharpDX.Direct2D1;
 
 namespace LightMasterMVVM.ViewModels
 {
+    public class CreateGraphViewModel: ViewModelBase
+    {
+        public ObservableCollection<TrackedProperty> orderedBy = new ObservableCollection<TrackedProperty>();
+        public ObservableCollection<TrackedProperty> trackBy = new ObservableCollection<TrackedProperty>();
+        public void AddOrderProperty(string propertyName)
+        {
+            if(!orderedBy.Any(x => x.OrderTypeProperty == propertyName))
+            {
+                orderedBy.Add(new TrackedProperty() { OrderNum = orderedBy.Count, OrderTypeProperty = propertyName });
+            }
+        }
+        public void AddTrackProperty(string propertyName)
+        {
+            if (!trackBy.Any(x => x.OrderTypeProperty == propertyName))
+            {
+                trackBy.Add(new TrackedProperty() { OrderNum = trackBy.Count, OrderTypeProperty = propertyName });
+            }
+        }
+        public void RemoveOrderProperty(string propertyName)
+        {
+            orderedBy.Remove(orderedBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault());
+            int i = 0;
+            foreach(var fixordernum in orderedBy.OrderBy(x => x.OrderNum))
+            {
+                fixordernum.OrderNum = i;
+            }
+        }
+        public void RemoveTrackProperty(string propertyName)
+        {
+            trackBy.Remove(trackBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault());
+            int i = 0;
+            foreach (var fixordernum in trackBy.OrderBy(x => x.OrderNum))
+            {
+                fixordernum.OrderNum = i;
+            }
+        }
+        public void ChangeOrderOfOrderProperty(string propertyName, bool up)
+        {
+            if (up)
+            {
+                try
+                {
+                    orderedBy.OrderBy(x => x.OrderNum).ToArray()[orderedBy.IndexOf(orderedBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault()) - 1].OrderNum = orderedBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault().OrderNum;
+                    var itemtochange = orderedBy.FirstOrDefault(x => x.OrderTypeProperty == propertyName);
+                    itemtochange.OrderNum -= 1;
+                }
+                catch(Exception ex)
+                {
+
+                }
+
+            }
+            else
+            {
+                try
+                {
+                    orderedBy.OrderBy(x => x.OrderNum).ToArray()[orderedBy.IndexOf(orderedBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault()) + 1].OrderNum = orderedBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault().OrderNum;
+                    var itemtochange = orderedBy.FirstOrDefault(x => x.OrderTypeProperty == propertyName);
+                    itemtochange.OrderNum += 1;
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+        }
+        public void ChangeOrderOfTrackProperty(string propertyName, bool up)
+        {
+            if (up)
+            {
+                try
+                {
+                    trackBy.OrderBy(x => x.OrderNum).ToArray()[trackBy.IndexOf(trackBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault()) - 1].OrderNum = trackBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault().OrderNum;
+                    var itemtochange = trackBy.FirstOrDefault(x => x.OrderTypeProperty == propertyName);
+                    itemtochange.OrderNum -= 1;
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+            }
+            else
+            {
+                try
+                {
+                    trackBy.OrderBy(x => x.OrderNum).ToArray()[trackBy.IndexOf(trackBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault()) + 1].OrderNum = trackBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault().OrderNum;
+                    var itemtochange = trackBy.FirstOrDefault(x => x.OrderTypeProperty == propertyName);
+                    itemtochange.OrderNum += 1;
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+        }
+    }
     public class MatchDetailsViewModel: ViewModelBase
     {
         public void Back()
@@ -158,233 +255,240 @@ namespace LightMasterMVVM.ViewModels
         }
         public MatchDetailsViewModel(int matchnum, OriginalPage calledPage)
         {
-            fromPage = calledPage;
-            var testmatch = matchnum;
-            GetEventCode getCode = new GetEventCode();
-            using(var db = new ScoutingContext())
+            try
             {
-                var red1match = db.Matches.Where(x => x.TabletId == "R1" && x.EventCode == getCode.EventCode() && x.MatchNumber == testmatch).FirstOrDefault();
-                var red2match = db.Matches.Where(x => x.TabletId == "R2" && x.EventCode == getCode.EventCode() && x.MatchNumber == testmatch).FirstOrDefault();
-                var red3match = db.Matches.Where(x => x.TabletId == "R3" && x.EventCode == getCode.EventCode() && x.MatchNumber == testmatch).FirstOrDefault();
-                var blue1match = db.Matches.Where(x => x.TabletId == "B1" && x.EventCode == getCode.EventCode() && x.MatchNumber == testmatch).FirstOrDefault();
-                var blue2match = db.Matches.Where(x => x.TabletId == "B2" && x.EventCode == getCode.EventCode() && x.MatchNumber == testmatch).FirstOrDefault();
-                var blue3match = db.Matches.Where(x => x.TabletId == "B3" && x.EventCode == getCode.EventCode() && x.MatchNumber == testmatch).FirstOrDefault();
-                if(red1match == null)
+                fromPage = calledPage;
+                var testmatch = matchnum;
+                GetEventCode getCode = new GetEventCode();
+                using (var db = new ScoutingContext())
                 {
-                    Red1C = false;
-                    Red1NC = true;
-                }
-                else if(red1match.ClientSubmitted == false)
-                {
-                    Red1C = false;
-                    Red1NC = true;
-                    var replacementTMV = new TeamMatchView() { APowerCellInner = red1match.PowerCellInner[0], APowerCellOuter = red1match.PowerCellOuter[0], APowerCellLower = red1match.PowerCellLower[0], APowerCellMissed = red1match.PowerCellMissed[0], E_Park = red1match.E_Park, E_Balanced = red1match.E_Balanced, E_ClimbSuccess = red1match.E_ClimbSuccess, DisabledSeconds = red1match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(red1match.team_instance_id).team_number };
-                    Red1Match = replacementTMV;
-                }
-                else
-                {
-                    Red1C = true;
-                    Red1NC = false;
-                    var replacementTMV = new TeamMatchView() { APowerCellInner = red1match.PowerCellInner[0], APowerCellOuter = red1match.PowerCellOuter[0], APowerCellLower = red1match.PowerCellLower[0], APowerCellMissed = red1match.PowerCellMissed[0], E_Park = red1match.E_Park, E_Balanced = red1match.E_Balanced, E_ClimbSuccess = red1match.E_ClimbSuccess, DisabledSeconds = red1match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(red1match.team_instance_id).team_number };
-                    replacementTMV.AShotAccuracy = (int)Math.Round(((double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter) / (double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter + replacementTMV.APowerCellMissed))*100);
-                    replacementTMV.TPowerCellInner = red1match.PowerCellInner.Sum() - replacementTMV.APowerCellInner;
-                    replacementTMV.TPowerCellOuter = red1match.PowerCellOuter.Sum() - replacementTMV.APowerCellOuter;
-                    replacementTMV.TPowerCellLower = red1match.PowerCellLower.Sum() - replacementTMV.APowerCellLower;
-                    replacementTMV.TPowerCellMissed = red1match.PowerCellMissed.Sum() - replacementTMV.APowerCellMissed;
-                    replacementTMV.CycleTime = red1match.CycleTime;
-                    replacementTMV.NumCycles = red1match.NumCycles;
-                    replacementTMV.TShotAccuracy = (int)Math.Round(((double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter) / (double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellMissed)) * 100);
-                    if((replacementTMV.APowerCellInner + replacementTMV.APowerCellOuter + replacementTMV.APowerCellLower + replacementTMV.APowerCellMissed) <= 0)
+                    var red1match = db.Matches.Where(x => x.TabletId == "R1" && x.EventCode == getCode.EventCode() && x.MatchNumber == testmatch).FirstOrDefault();
+                    var red2match = db.Matches.Where(x => x.TabletId == "R2" && x.EventCode == getCode.EventCode() && x.MatchNumber == testmatch).FirstOrDefault();
+                    var red3match = db.Matches.Where(x => x.TabletId == "R3" && x.EventCode == getCode.EventCode() && x.MatchNumber == testmatch).FirstOrDefault();
+                    var blue1match = db.Matches.Where(x => x.TabletId == "B1" && x.EventCode == getCode.EventCode() && x.MatchNumber == testmatch).FirstOrDefault();
+                    var blue2match = db.Matches.Where(x => x.TabletId == "B2" && x.EventCode == getCode.EventCode() && x.MatchNumber == testmatch).FirstOrDefault();
+                    var blue3match = db.Matches.Where(x => x.TabletId == "B3" && x.EventCode == getCode.EventCode() && x.MatchNumber == testmatch).FirstOrDefault();
+                    if (red1match == null)
                     {
-                        replacementTMV.AShotAccuracy = 0;
+                        Red1C = false;
+                        Red1NC = true;
                     }
-                    if ((replacementTMV.TPowerCellInner + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellMissed) <= 0)
+                    else if (red1match.ClientSubmitted == false)
                     {
-                        replacementTMV.TShotAccuracy = 0;
+                        Red1C = false;
+                        Red1NC = true;
+                        var replacementTMV = new TeamMatchView() { APowerCellInner = red1match.PowerCellInner[0], APowerCellOuter = red1match.PowerCellOuter[0], APowerCellLower = red1match.PowerCellLower[0], APowerCellMissed = red1match.PowerCellMissed[0], E_Park = red1match.E_Park, E_Balanced = red1match.E_Balanced, E_ClimbSuccess = red1match.E_ClimbSuccess, DisabledSeconds = red1match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(red1match.team_instance_id).team_number };
+                        Red1Match = replacementTMV;
                     }
-                    Red1Match = replacementTMV;
-                }
-                
-                if (red2match == null)
-                {
-                    Red2C = false;
-                    Red2NC = true;
-                }
-                else if (red2match.ClientSubmitted == false)
-                {
-                    Red2C = false;
-                    Red2NC = true;
-                    var replacementTMV = new TeamMatchView() { APowerCellInner = red2match.PowerCellInner[0], APowerCellOuter = red2match.PowerCellOuter[0], APowerCellLower = red2match.PowerCellLower[0], APowerCellMissed = red2match.PowerCellMissed[0], E_Park = red2match.E_Park, E_Balanced = red2match.E_Balanced, E_ClimbSuccess = red2match.E_ClimbSuccess, DisabledSeconds = red2match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(red2match.team_instance_id).team_number };
-                    Red2Match = replacementTMV;
-                }
-                else
-                {
-                    Red2C = true;
-                    Red2NC = false;
-                    var replacementTMV = new TeamMatchView() { APowerCellInner = red2match.PowerCellInner[0], APowerCellOuter = red2match.PowerCellOuter[0], APowerCellLower = red2match.PowerCellLower[0], APowerCellMissed = red2match.PowerCellMissed[0], E_Park = red2match.E_Park, E_Balanced = red2match.E_Balanced, E_ClimbSuccess = red2match.E_ClimbSuccess, DisabledSeconds = red2match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(red2match.team_instance_id).team_number };
-                    replacementTMV.AShotAccuracy = (int)Math.Round(((double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter) / (double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter + replacementTMV.APowerCellMissed)) * 100);
-                    replacementTMV.TPowerCellInner = red2match.PowerCellInner.Sum() - replacementTMV.APowerCellInner;
-                    replacementTMV.TPowerCellOuter = red2match.PowerCellOuter.Sum() - replacementTMV.APowerCellOuter;
-                    replacementTMV.TPowerCellLower = red2match.PowerCellLower.Sum() - replacementTMV.APowerCellLower;
-                    replacementTMV.TPowerCellMissed = red2match.PowerCellMissed.Sum() - replacementTMV.APowerCellMissed;
-                    replacementTMV.CycleTime = red2match.CycleTime;
-                    replacementTMV.NumCycles = red2match.NumCycles;
-                    replacementTMV.TShotAccuracy = (int)Math.Round(((double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter) / (double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellMissed)) * 100);
-                    if ((replacementTMV.APowerCellInner + replacementTMV.APowerCellOuter + replacementTMV.APowerCellLower + replacementTMV.APowerCellMissed) <= 0)
+                    else
                     {
-                        replacementTMV.AShotAccuracy = 0;
+                        Red1C = true;
+                        Red1NC = false;
+                        var replacementTMV = new TeamMatchView() { APowerCellInner = red1match.PowerCellInner[0], APowerCellOuter = red1match.PowerCellOuter[0], APowerCellLower = red1match.PowerCellLower[0], APowerCellMissed = red1match.PowerCellMissed[0], E_Park = red1match.E_Park, E_Balanced = red1match.E_Balanced, E_ClimbSuccess = red1match.E_ClimbSuccess, DisabledSeconds = red1match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(red1match.team_instance_id).team_number };
+                        replacementTMV.AShotAccuracy = (int)Math.Round(((double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter) / (double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter + replacementTMV.APowerCellMissed)) * 100);
+                        replacementTMV.TPowerCellInner = red1match.PowerCellInner.Sum() - replacementTMV.APowerCellInner;
+                        replacementTMV.TPowerCellOuter = red1match.PowerCellOuter.Sum() - replacementTMV.APowerCellOuter;
+                        replacementTMV.TPowerCellLower = red1match.PowerCellLower.Sum() - replacementTMV.APowerCellLower;
+                        replacementTMV.TPowerCellMissed = red1match.PowerCellMissed.Sum() - replacementTMV.APowerCellMissed;
+                        replacementTMV.CycleTime = red1match.CycleTime;
+                        replacementTMV.NumCycles = red1match.NumCycles;
+                        replacementTMV.TShotAccuracy = (int)Math.Round(((double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter) / (double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellMissed)) * 100);
+                        if ((replacementTMV.APowerCellInner + replacementTMV.APowerCellOuter + replacementTMV.APowerCellLower + replacementTMV.APowerCellMissed) <= 0)
+                        {
+                            replacementTMV.AShotAccuracy = 0;
+                        }
+                        if ((replacementTMV.TPowerCellInner + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellMissed) <= 0)
+                        {
+                            replacementTMV.TShotAccuracy = 0;
+                        }
+                        Red1Match = replacementTMV;
                     }
-                    if ((replacementTMV.TPowerCellInner + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellMissed) <= 0)
-                    {
-                        replacementTMV.TShotAccuracy = 0;
-                    }
-                    Red2Match = replacementTMV;
-                }
 
-                if (red3match == null)
-                {
-                    Red3C = false;
-                    Red3NC = true;
-                }
-                else if (red3match.ClientSubmitted == false)
-                {
-                    Red3C = false;
-                    Red3NC = true;
-                    var replacementTMV = new TeamMatchView() { APowerCellInner = red3match.PowerCellInner[0], APowerCellOuter = red3match.PowerCellOuter[0], APowerCellLower = red3match.PowerCellLower[0], APowerCellMissed = red3match.PowerCellMissed[0], E_Park = red3match.E_Park, E_Balanced = red3match.E_Balanced, E_ClimbSuccess = red3match.E_ClimbSuccess, DisabledSeconds = red3match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(red3match.team_instance_id).team_number };
-                    Red3Match = replacementTMV;
-                }
-                else
-                {
-                    Red3C = true;
-                    Red3NC = false;
-                    var replacementTMV = new TeamMatchView() { APowerCellInner = red3match.PowerCellInner[0], APowerCellOuter = red3match.PowerCellOuter[0], APowerCellLower = red3match.PowerCellLower[0], APowerCellMissed = red3match.PowerCellMissed[0], E_Park = red3match.E_Park, E_Balanced = red3match.E_Balanced, E_ClimbSuccess = red3match.E_ClimbSuccess, DisabledSeconds = red3match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(red3match.team_instance_id).team_number };
-                    replacementTMV.AShotAccuracy = (int)Math.Round(((double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter) / (double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter + replacementTMV.APowerCellMissed)) * 100);
-                    replacementTMV.TPowerCellInner = red3match.PowerCellInner.Sum() - replacementTMV.APowerCellInner;
-                    replacementTMV.TPowerCellOuter = red3match.PowerCellOuter.Sum() - replacementTMV.APowerCellOuter;
-                    replacementTMV.TPowerCellLower = red3match.PowerCellLower.Sum() - replacementTMV.APowerCellLower;
-                    replacementTMV.TPowerCellMissed = red3match.PowerCellMissed.Sum() - replacementTMV.APowerCellMissed;
-                    replacementTMV.CycleTime = red3match.CycleTime;
-                    replacementTMV.NumCycles = red3match.NumCycles;
-                    replacementTMV.TShotAccuracy = (int)Math.Round(((double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter) / (double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellMissed)) * 100);
-                    if ((replacementTMV.APowerCellInner + replacementTMV.APowerCellOuter + replacementTMV.APowerCellLower + replacementTMV.APowerCellMissed) <= 0)
+                    if (red2match == null)
                     {
-                        replacementTMV.AShotAccuracy = 0;
+                        Red2C = false;
+                        Red2NC = true;
                     }
-                    if ((replacementTMV.TPowerCellInner + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellMissed) <= 0)
+                    else if (red2match.ClientSubmitted == false)
                     {
-                        replacementTMV.TShotAccuracy = 0;
+                        Red2C = false;
+                        Red2NC = true;
+                        var replacementTMV = new TeamMatchView() { APowerCellInner = red2match.PowerCellInner[0], APowerCellOuter = red2match.PowerCellOuter[0], APowerCellLower = red2match.PowerCellLower[0], APowerCellMissed = red2match.PowerCellMissed[0], E_Park = red2match.E_Park, E_Balanced = red2match.E_Balanced, E_ClimbSuccess = red2match.E_ClimbSuccess, DisabledSeconds = red2match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(red2match.team_instance_id).team_number };
+                        Red2Match = replacementTMV;
                     }
-                    Red3Match = replacementTMV;
-                }
+                    else
+                    {
+                        Red2C = true;
+                        Red2NC = false;
+                        var replacementTMV = new TeamMatchView() { APowerCellInner = red2match.PowerCellInner[0], APowerCellOuter = red2match.PowerCellOuter[0], APowerCellLower = red2match.PowerCellLower[0], APowerCellMissed = red2match.PowerCellMissed[0], E_Park = red2match.E_Park, E_Balanced = red2match.E_Balanced, E_ClimbSuccess = red2match.E_ClimbSuccess, DisabledSeconds = red2match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(red2match.team_instance_id).team_number };
+                        replacementTMV.AShotAccuracy = (int)Math.Round(((double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter) / (double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter + replacementTMV.APowerCellMissed)) * 100);
+                        replacementTMV.TPowerCellInner = red2match.PowerCellInner.Sum() - replacementTMV.APowerCellInner;
+                        replacementTMV.TPowerCellOuter = red2match.PowerCellOuter.Sum() - replacementTMV.APowerCellOuter;
+                        replacementTMV.TPowerCellLower = red2match.PowerCellLower.Sum() - replacementTMV.APowerCellLower;
+                        replacementTMV.TPowerCellMissed = red2match.PowerCellMissed.Sum() - replacementTMV.APowerCellMissed;
+                        replacementTMV.CycleTime = red2match.CycleTime;
+                        replacementTMV.NumCycles = red2match.NumCycles;
+                        replacementTMV.TShotAccuracy = (int)Math.Round(((double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter) / (double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellMissed)) * 100);
+                        if ((replacementTMV.APowerCellInner + replacementTMV.APowerCellOuter + replacementTMV.APowerCellLower + replacementTMV.APowerCellMissed) <= 0)
+                        {
+                            replacementTMV.AShotAccuracy = 0;
+                        }
+                        if ((replacementTMV.TPowerCellInner + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellMissed) <= 0)
+                        {
+                            replacementTMV.TShotAccuracy = 0;
+                        }
+                        Red2Match = replacementTMV;
+                    }
 
-                if (blue1match == null)
-                {
-                    Blue1C = false;
-                    Blue1NC = true;
-                }
-                else if (blue1match.ClientSubmitted == false)
-                {
-                    Blue1C = false;
-                    Blue1NC = true;
-                    var replacementTMV = new TeamMatchView() { APowerCellInner = blue1match.PowerCellInner[0], APowerCellOuter = blue1match.PowerCellOuter[0], APowerCellLower = blue1match.PowerCellLower[0], APowerCellMissed = blue1match.PowerCellMissed[0], E_Park = blue1match.E_Park, E_Balanced = blue1match.E_Balanced, E_ClimbSuccess = blue1match.E_ClimbSuccess, DisabledSeconds = blue1match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(blue1match.team_instance_id).team_number };
-                    Blue1Match = replacementTMV;
-                }
-                else
-                {
-                    Blue1C = true;
-                    Blue1NC = false;
-                    var replacementTMV = new TeamMatchView() { APowerCellInner = blue1match.PowerCellInner[0], APowerCellOuter = blue1match.PowerCellOuter[0], APowerCellLower = blue1match.PowerCellLower[0], APowerCellMissed = blue1match.PowerCellMissed[0], E_Park = blue1match.E_Park, E_Balanced = blue1match.E_Balanced, E_ClimbSuccess = blue1match.E_ClimbSuccess, DisabledSeconds = blue1match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(blue1match.team_instance_id).team_number };
-                    replacementTMV.AShotAccuracy = (int)Math.Round(((double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter) / (double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter + replacementTMV.APowerCellMissed)) * 100);
-                    replacementTMV.TPowerCellInner = blue1match.PowerCellInner.Sum() - replacementTMV.APowerCellInner;
-                    replacementTMV.TPowerCellOuter = blue1match.PowerCellOuter.Sum() - replacementTMV.APowerCellOuter;
-                    replacementTMV.TPowerCellLower = blue1match.PowerCellLower.Sum() - replacementTMV.APowerCellLower;
-                    replacementTMV.TPowerCellMissed = blue1match.PowerCellMissed.Sum() - replacementTMV.APowerCellMissed;
-                    replacementTMV.CycleTime = blue1match.CycleTime;
-                    replacementTMV.NumCycles = blue1match.NumCycles;
-                    replacementTMV.TShotAccuracy = (int)Math.Round(((double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter) / (double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellMissed)) * 100);
-                    if ((replacementTMV.APowerCellInner + replacementTMV.APowerCellOuter + replacementTMV.APowerCellLower + replacementTMV.APowerCellMissed) <= 0)
+                    if (red3match == null)
                     {
-                        replacementTMV.AShotAccuracy = 0;
+                        Red3C = false;
+                        Red3NC = true;
                     }
-                    if ((replacementTMV.TPowerCellInner + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellMissed) <= 0)
+                    else if (red3match.ClientSubmitted == false)
                     {
-                        replacementTMV.TShotAccuracy = 0;
+                        Red3C = false;
+                        Red3NC = true;
+                        var replacementTMV = new TeamMatchView() { APowerCellInner = red3match.PowerCellInner[0], APowerCellOuter = red3match.PowerCellOuter[0], APowerCellLower = red3match.PowerCellLower[0], APowerCellMissed = red3match.PowerCellMissed[0], E_Park = red3match.E_Park, E_Balanced = red3match.E_Balanced, E_ClimbSuccess = red3match.E_ClimbSuccess, DisabledSeconds = red3match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(red3match.team_instance_id).team_number };
+                        Red3Match = replacementTMV;
                     }
-                    Blue1Match = replacementTMV;
-                }
+                    else
+                    {
+                        Red3C = true;
+                        Red3NC = false;
+                        var replacementTMV = new TeamMatchView() { APowerCellInner = red3match.PowerCellInner[0], APowerCellOuter = red3match.PowerCellOuter[0], APowerCellLower = red3match.PowerCellLower[0], APowerCellMissed = red3match.PowerCellMissed[0], E_Park = red3match.E_Park, E_Balanced = red3match.E_Balanced, E_ClimbSuccess = red3match.E_ClimbSuccess, DisabledSeconds = red3match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(red3match.team_instance_id).team_number };
+                        replacementTMV.AShotAccuracy = (int)Math.Round(((double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter) / (double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter + replacementTMV.APowerCellMissed)) * 100);
+                        replacementTMV.TPowerCellInner = red3match.PowerCellInner.Sum() - replacementTMV.APowerCellInner;
+                        replacementTMV.TPowerCellOuter = red3match.PowerCellOuter.Sum() - replacementTMV.APowerCellOuter;
+                        replacementTMV.TPowerCellLower = red3match.PowerCellLower.Sum() - replacementTMV.APowerCellLower;
+                        replacementTMV.TPowerCellMissed = red3match.PowerCellMissed.Sum() - replacementTMV.APowerCellMissed;
+                        replacementTMV.CycleTime = red3match.CycleTime;
+                        replacementTMV.NumCycles = red3match.NumCycles;
+                        replacementTMV.TShotAccuracy = (int)Math.Round(((double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter) / (double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellMissed)) * 100);
+                        if ((replacementTMV.APowerCellInner + replacementTMV.APowerCellOuter + replacementTMV.APowerCellLower + replacementTMV.APowerCellMissed) <= 0)
+                        {
+                            replacementTMV.AShotAccuracy = 0;
+                        }
+                        if ((replacementTMV.TPowerCellInner + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellMissed) <= 0)
+                        {
+                            replacementTMV.TShotAccuracy = 0;
+                        }
+                        Red3Match = replacementTMV;
+                    }
 
-                if (blue2match == null)
-                {
-                    Blue2C = false;
-                    Blue2NC = true;
-                }
-                else if (blue2match.ClientSubmitted == false)
-                {
-                    Blue2C = false;
-                    Blue2NC = true;
-                    var replacementTMV = new TeamMatchView() { APowerCellInner = blue2match.PowerCellInner[0], APowerCellOuter = blue2match.PowerCellOuter[0], APowerCellLower = blue2match.PowerCellLower[0], APowerCellMissed = blue2match.PowerCellMissed[0], E_Park = blue2match.E_Park, E_Balanced = blue2match.E_Balanced, E_ClimbSuccess = blue2match.E_ClimbSuccess, DisabledSeconds = blue2match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(blue2match.team_instance_id).team_number };
-                    Blue2Match = replacementTMV;
-                }
-                else
-                {
-                    Blue2C = true;
-                    Blue2NC = false;
-                    var replacementTMV = new TeamMatchView() { APowerCellInner = blue2match.PowerCellInner[0], APowerCellOuter = blue2match.PowerCellOuter[0], APowerCellLower = blue2match.PowerCellLower[0], APowerCellMissed = blue2match.PowerCellMissed[0], E_Park = blue2match.E_Park, E_Balanced = blue2match.E_Balanced, E_ClimbSuccess = blue2match.E_ClimbSuccess, DisabledSeconds = blue2match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(blue2match.team_instance_id).team_number };
-                    replacementTMV.AShotAccuracy = (int)Math.Round(((double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter) / (double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter + replacementTMV.APowerCellMissed)) * 100);
-                    replacementTMV.TPowerCellInner = blue2match.PowerCellInner.Sum() - replacementTMV.APowerCellInner;
-                    replacementTMV.TPowerCellOuter = blue2match.PowerCellOuter.Sum() - replacementTMV.APowerCellOuter;
-                    replacementTMV.TPowerCellLower = blue2match.PowerCellLower.Sum() - replacementTMV.APowerCellLower;
-                    replacementTMV.TPowerCellMissed = blue2match.PowerCellMissed.Sum() - replacementTMV.APowerCellMissed;
-                    replacementTMV.CycleTime = blue2match.CycleTime;
-                    replacementTMV.NumCycles = blue2match.NumCycles;
-                    replacementTMV.TShotAccuracy = (int)Math.Round(((double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter) / (double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellMissed)) * 100);
-                    if ((replacementTMV.APowerCellInner + replacementTMV.APowerCellOuter + replacementTMV.APowerCellLower + replacementTMV.APowerCellMissed) <= 0)
+                    if (blue1match == null)
                     {
-                        replacementTMV.AShotAccuracy = 0;
+                        Blue1C = false;
+                        Blue1NC = true;
                     }
-                    if ((replacementTMV.TPowerCellInner + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellMissed) <= 0)
+                    else if (blue1match.ClientSubmitted == false)
                     {
-                        replacementTMV.TShotAccuracy = 0;
+                        Blue1C = false;
+                        Blue1NC = true;
+                        var replacementTMV = new TeamMatchView() { APowerCellInner = blue1match.PowerCellInner[0], APowerCellOuter = blue1match.PowerCellOuter[0], APowerCellLower = blue1match.PowerCellLower[0], APowerCellMissed = blue1match.PowerCellMissed[0], E_Park = blue1match.E_Park, E_Balanced = blue1match.E_Balanced, E_ClimbSuccess = blue1match.E_ClimbSuccess, DisabledSeconds = blue1match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(blue1match.team_instance_id).team_number };
+                        Blue1Match = replacementTMV;
                     }
-                    Blue2Match = replacementTMV;
-                }
+                    else
+                    {
+                        Blue1C = true;
+                        Blue1NC = false;
+                        var replacementTMV = new TeamMatchView() { APowerCellInner = blue1match.PowerCellInner[0], APowerCellOuter = blue1match.PowerCellOuter[0], APowerCellLower = blue1match.PowerCellLower[0], APowerCellMissed = blue1match.PowerCellMissed[0], E_Park = blue1match.E_Park, E_Balanced = blue1match.E_Balanced, E_ClimbSuccess = blue1match.E_ClimbSuccess, DisabledSeconds = blue1match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(blue1match.team_instance_id).team_number };
+                        replacementTMV.AShotAccuracy = (int)Math.Round(((double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter) / (double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter + replacementTMV.APowerCellMissed)) * 100);
+                        replacementTMV.TPowerCellInner = blue1match.PowerCellInner.Sum() - replacementTMV.APowerCellInner;
+                        replacementTMV.TPowerCellOuter = blue1match.PowerCellOuter.Sum() - replacementTMV.APowerCellOuter;
+                        replacementTMV.TPowerCellLower = blue1match.PowerCellLower.Sum() - replacementTMV.APowerCellLower;
+                        replacementTMV.TPowerCellMissed = blue1match.PowerCellMissed.Sum() - replacementTMV.APowerCellMissed;
+                        replacementTMV.CycleTime = blue1match.CycleTime;
+                        replacementTMV.NumCycles = blue1match.NumCycles;
+                        replacementTMV.TShotAccuracy = (int)Math.Round(((double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter) / (double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellMissed)) * 100);
+                        if ((replacementTMV.APowerCellInner + replacementTMV.APowerCellOuter + replacementTMV.APowerCellLower + replacementTMV.APowerCellMissed) <= 0)
+                        {
+                            replacementTMV.AShotAccuracy = 0;
+                        }
+                        if ((replacementTMV.TPowerCellInner + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellMissed) <= 0)
+                        {
+                            replacementTMV.TShotAccuracy = 0;
+                        }
+                        Blue1Match = replacementTMV;
+                    }
 
-                if (blue3match == null)
-                {
-                    Blue3C = false;
-                    Blue3NC = true;
-                }
-                else if (blue3match.ClientSubmitted == false)
-                {
-                    Blue3C = false;
-                    Blue3NC = true;
-                    var replacementTMV = new TeamMatchView() { APowerCellInner = blue3match.PowerCellInner[0], APowerCellOuter = blue3match.PowerCellOuter[0], APowerCellLower = blue3match.PowerCellLower[0], APowerCellMissed = blue3match.PowerCellMissed[0], E_Park = blue3match.E_Park, E_Balanced = blue3match.E_Balanced, E_ClimbSuccess = blue3match.E_ClimbSuccess, DisabledSeconds = blue3match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(blue3match.team_instance_id).team_number };
-                    Blue3Match = replacementTMV;
-                }
-                else
-                {
-                    Blue3C = true;
-                    Blue3NC = false;
-                    var replacementTMV = new TeamMatchView() { APowerCellInner = blue3match.PowerCellInner[0], APowerCellOuter = blue3match.PowerCellOuter[0], APowerCellLower = blue3match.PowerCellLower[0], APowerCellMissed = blue3match.PowerCellMissed[0], E_Park = blue3match.E_Park, E_Balanced = blue3match.E_Balanced, E_ClimbSuccess = blue3match.E_ClimbSuccess, DisabledSeconds = blue3match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(blue3match.team_instance_id).team_number };
-                    replacementTMV.AShotAccuracy = (int)Math.Round(((double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter) / (double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter + replacementTMV.APowerCellMissed)) * 100);
-                    replacementTMV.TPowerCellInner = blue3match.PowerCellInner.Sum() - replacementTMV.APowerCellInner;
-                    replacementTMV.TPowerCellOuter = blue3match.PowerCellOuter.Sum() - replacementTMV.APowerCellOuter;
-                    replacementTMV.TPowerCellLower = blue3match.PowerCellLower.Sum() - replacementTMV.APowerCellLower;
-                    replacementTMV.TPowerCellMissed = blue3match.PowerCellMissed.Sum() - replacementTMV.APowerCellMissed;
-                    replacementTMV.CycleTime = blue3match.CycleTime;
-                    replacementTMV.NumCycles = blue3match.NumCycles;
-                    replacementTMV.TShotAccuracy = (int)Math.Round(((double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter) / (double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellMissed)) * 100);
-                    if ((replacementTMV.APowerCellInner + replacementTMV.APowerCellOuter + replacementTMV.APowerCellLower + replacementTMV.APowerCellMissed) <= 0)
+                    if (blue2match == null)
                     {
-                        replacementTMV.AShotAccuracy = 0;
+                        Blue2C = false;
+                        Blue2NC = true;
                     }
-                    if ((replacementTMV.TPowerCellInner + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellMissed) <= 0)
+                    else if (blue2match.ClientSubmitted == false)
                     {
-                        replacementTMV.TShotAccuracy = 0;
+                        Blue2C = false;
+                        Blue2NC = true;
+                        var replacementTMV = new TeamMatchView() { APowerCellInner = blue2match.PowerCellInner[0], APowerCellOuter = blue2match.PowerCellOuter[0], APowerCellLower = blue2match.PowerCellLower[0], APowerCellMissed = blue2match.PowerCellMissed[0], E_Park = blue2match.E_Park, E_Balanced = blue2match.E_Balanced, E_ClimbSuccess = blue2match.E_ClimbSuccess, DisabledSeconds = blue2match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(blue2match.team_instance_id).team_number };
+                        Blue2Match = replacementTMV;
                     }
-                    Blue3Match = replacementTMV;
+                    else
+                    {
+                        Blue2C = true;
+                        Blue2NC = false;
+                        var replacementTMV = new TeamMatchView() { APowerCellInner = blue2match.PowerCellInner[0], APowerCellOuter = blue2match.PowerCellOuter[0], APowerCellLower = blue2match.PowerCellLower[0], APowerCellMissed = blue2match.PowerCellMissed[0], E_Park = blue2match.E_Park, E_Balanced = blue2match.E_Balanced, E_ClimbSuccess = blue2match.E_ClimbSuccess, DisabledSeconds = blue2match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(blue2match.team_instance_id).team_number };
+                        replacementTMV.AShotAccuracy = (int)Math.Round(((double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter) / (double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter + replacementTMV.APowerCellMissed)) * 100);
+                        replacementTMV.TPowerCellInner = blue2match.PowerCellInner.Sum() - replacementTMV.APowerCellInner;
+                        replacementTMV.TPowerCellOuter = blue2match.PowerCellOuter.Sum() - replacementTMV.APowerCellOuter;
+                        replacementTMV.TPowerCellLower = blue2match.PowerCellLower.Sum() - replacementTMV.APowerCellLower;
+                        replacementTMV.TPowerCellMissed = blue2match.PowerCellMissed.Sum() - replacementTMV.APowerCellMissed;
+                        replacementTMV.CycleTime = blue2match.CycleTime;
+                        replacementTMV.NumCycles = blue2match.NumCycles;
+                        replacementTMV.TShotAccuracy = (int)Math.Round(((double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter) / (double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellMissed)) * 100);
+                        if ((replacementTMV.APowerCellInner + replacementTMV.APowerCellOuter + replacementTMV.APowerCellLower + replacementTMV.APowerCellMissed) <= 0)
+                        {
+                            replacementTMV.AShotAccuracy = 0;
+                        }
+                        if ((replacementTMV.TPowerCellInner + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellMissed) <= 0)
+                        {
+                            replacementTMV.TShotAccuracy = 0;
+                        }
+                        Blue2Match = replacementTMV;
+                    }
+
+                    if (blue3match == null)
+                    {
+                        Blue3C = false;
+                        Blue3NC = true;
+                    }
+                    else if (blue3match.ClientSubmitted == false)
+                    {
+                        Blue3C = false;
+                        Blue3NC = true;
+                        var replacementTMV = new TeamMatchView() { APowerCellInner = blue3match.PowerCellInner[0], APowerCellOuter = blue3match.PowerCellOuter[0], APowerCellLower = blue3match.PowerCellLower[0], APowerCellMissed = blue3match.PowerCellMissed[0], E_Park = blue3match.E_Park, E_Balanced = blue3match.E_Balanced, E_ClimbSuccess = blue3match.E_ClimbSuccess, DisabledSeconds = blue3match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(blue3match.team_instance_id).team_number };
+                        Blue3Match = replacementTMV;
+                    }
+                    else
+                    {
+                        Blue3C = true;
+                        Blue3NC = false;
+                        var replacementTMV = new TeamMatchView() { APowerCellInner = blue3match.PowerCellInner[0], APowerCellOuter = blue3match.PowerCellOuter[0], APowerCellLower = blue3match.PowerCellLower[0], APowerCellMissed = blue3match.PowerCellMissed[0], E_Park = blue3match.E_Park, E_Balanced = blue3match.E_Balanced, E_ClimbSuccess = blue3match.E_ClimbSuccess, DisabledSeconds = blue3match.DisabledSeconds, TeamNumber = db.FRCTeams.Find(blue3match.team_instance_id).team_number };
+                        replacementTMV.AShotAccuracy = (int)Math.Round(((double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter) / (double)(replacementTMV.APowerCellInner + replacementTMV.APowerCellLower + replacementTMV.APowerCellOuter + replacementTMV.APowerCellMissed)) * 100);
+                        replacementTMV.TPowerCellInner = blue3match.PowerCellInner.Sum() - replacementTMV.APowerCellInner;
+                        replacementTMV.TPowerCellOuter = blue3match.PowerCellOuter.Sum() - replacementTMV.APowerCellOuter;
+                        replacementTMV.TPowerCellLower = blue3match.PowerCellLower.Sum() - replacementTMV.APowerCellLower;
+                        replacementTMV.TPowerCellMissed = blue3match.PowerCellMissed.Sum() - replacementTMV.APowerCellMissed;
+                        replacementTMV.CycleTime = blue3match.CycleTime;
+                        replacementTMV.NumCycles = blue3match.NumCycles;
+                        replacementTMV.TShotAccuracy = (int)Math.Round(((double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter) / (double)(replacementTMV.TPowerCellInner + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellMissed)) * 100);
+                        if ((replacementTMV.APowerCellInner + replacementTMV.APowerCellOuter + replacementTMV.APowerCellLower + replacementTMV.APowerCellMissed) <= 0)
+                        {
+                            replacementTMV.AShotAccuracy = 0;
+                        }
+                        if ((replacementTMV.TPowerCellInner + replacementTMV.TPowerCellOuter + replacementTMV.TPowerCellLower + replacementTMV.TPowerCellMissed) <= 0)
+                        {
+                            replacementTMV.TShotAccuracy = 0;
+                        }
+                        Blue3Match = replacementTMV;
+                    }
                 }
+            }catch(Exception ex)
+            {
+
             }
+            
         }
     }
     public class TeamDetailsViewModel: ViewModelBase
