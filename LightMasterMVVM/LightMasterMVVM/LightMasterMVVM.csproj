@@ -36,6 +36,7 @@
     <AvaloniaResource Remove="Assets\usb-white.png" />
     <AvaloniaResource Remove="Assets\wifi-white.png" />
     <AvaloniaResource Remove="Views\CompetitionTeams.xaml" />
+    <AvaloniaResource Remove="Views\CreateGraph.xaml" />
     <AvaloniaResource Remove="Views\DataAnalysis.xaml" />
     <AvaloniaResource Remove="Views\Matches.xaml" />
     <AvaloniaResource Remove="Views\NotifyUser.xaml" />
@@ -67,7 +68,7 @@
     <None Remove="Assets\usb-white.png" />
     <None Remove="Assets\wifi-white.png" />
     <None Remove="Views\CompetitionTeams.xaml" />
-    <None Remove="Views\CreateGraph.axaml" />
+    <None Remove="Views\CreateGraph.xaml" />
     <None Remove="Views\DataAnalysis.xaml" />
     <None Remove="Views\MainWindow.xaml" />
     <None Remove="Views\Matches.xaml" />
@@ -126,7 +127,9 @@
     <EmbeddedResource Include="Views\CompetitionTeams.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\CreateGraph.axaml" />
+    <EmbeddedResource Include="Views\CreateGraph.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\MainWindow.xaml" />
     <EmbeddedResource Include="Views\NotifyUser.xaml">
       <Generator>MSBuild:Compile</Generator>

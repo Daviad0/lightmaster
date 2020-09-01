@@ -37,98 +37,109 @@ namespace LightMasterMVVM.ViewModels
 {
     public class CreateGraphViewModel: ViewModelBase
     {
-        public ObservableCollection<TrackedProperty> orderedBy = new ObservableCollection<TrackedProperty>();
-        public ObservableCollection<TrackedProperty> trackBy = new ObservableCollection<TrackedProperty>();
+        public ObservableCollection<TrackedProperty> OrderedBy
+        {
+            get => orderedBy;
+            set => SetProperty(ref orderedBy, value);
+        }
+        public ObservableCollection<TrackedProperty> TrackBy
+        {
+            get => trackBy;
+            set => SetProperty(ref trackBy, value);
+        }
+        private ObservableCollection<TrackedProperty> orderedBy = new ObservableCollection<TrackedProperty>();
+        private ObservableCollection<TrackedProperty> trackBy = new ObservableCollection<TrackedProperty>();
         public void AddOrderProperty(string propertyName)
         {
-            if(!orderedBy.Any(x => x.OrderTypeProperty == propertyName))
+            if(!OrderedBy.Any(x => x.OrderTypeProperty == propertyName))
             {
-                orderedBy.Add(new TrackedProperty() { OrderNum = orderedBy.Count, OrderTypeProperty = propertyName });
+                OrderedBy.Add(new TrackedProperty() { OrderNum = OrderedBy.Count, OrderTypeProperty = propertyName });
+                OrderedBy = new ObservableCollection<TrackedProperty>(OrderedBy.OrderBy(x => x.OrderNum).ToList());
             }
         }
         public void AddTrackProperty(string propertyName)
         {
-            if (!trackBy.Any(x => x.OrderTypeProperty == propertyName))
+            if (!TrackBy.Any(x => x.OrderTypeProperty == propertyName))
             {
-                trackBy.Add(new TrackedProperty() { OrderNum = trackBy.Count, OrderTypeProperty = propertyName });
+                TrackBy.Add(new TrackedProperty() { OrderNum = TrackBy.Count, OrderTypeProperty = propertyName });
+                TrackBy = new ObservableCollection<TrackedProperty>(TrackBy.OrderBy(x => x.OrderNum).ToList());
             }
         }
         public void RemoveOrderProperty(string propertyName)
         {
-            orderedBy.Remove(orderedBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault());
+            OrderedBy.Remove(OrderedBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault());
             int i = 0;
-            foreach(var fixordernum in orderedBy.OrderBy(x => x.OrderNum))
+            foreach(var fixordernum in OrderedBy.OrderBy(x => x.OrderNum))
             {
                 fixordernum.OrderNum = i;
             }
+            OrderedBy = new ObservableCollection<TrackedProperty>(OrderedBy.OrderBy(x => x.OrderNum).ToList());
         }
         public void RemoveTrackProperty(string propertyName)
         {
-            trackBy.Remove(trackBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault());
+            TrackBy.Remove(TrackBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault());
             int i = 0;
-            foreach (var fixordernum in trackBy.OrderBy(x => x.OrderNum))
+            foreach (var fixordernum in TrackBy.OrderBy(x => x.OrderNum))
             {
                 fixordernum.OrderNum = i;
             }
+            TrackBy = new ObservableCollection<TrackedProperty>(TrackBy.OrderBy(x => x.OrderNum).ToList());
         }
-        public void ChangeOrderOfOrderProperty(string propertyName, bool up)
+        public void ChangeOrderOfOrderPropertyUp(string propertyName)
         {
-            if (up)
+            try
             {
-                try
-                {
-                    orderedBy.OrderBy(x => x.OrderNum).ToArray()[orderedBy.IndexOf(orderedBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault()) - 1].OrderNum = orderedBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault().OrderNum;
-                    var itemtochange = orderedBy.FirstOrDefault(x => x.OrderTypeProperty == propertyName);
-                    itemtochange.OrderNum -= 1;
-                }
-                catch(Exception ex)
-                {
-
-                }
+                OrderedBy.OrderBy(x => x.OrderNum).ToArray()[OrderedBy.IndexOf(OrderedBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault()) - 1].OrderNum = OrderedBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault().OrderNum;
+                var itemtochange = OrderedBy.FirstOrDefault(x => x.OrderTypeProperty == propertyName);
+                itemtochange.OrderNum -= 1;
+                OrderedBy = new ObservableCollection<TrackedProperty>(OrderedBy.OrderBy(x => x.OrderNum).ToList());
+            }
+            catch(Exception ex)
+            {
 
             }
-            else
-            {
-                try
-                {
-                    orderedBy.OrderBy(x => x.OrderNum).ToArray()[orderedBy.IndexOf(orderedBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault()) + 1].OrderNum = orderedBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault().OrderNum;
-                    var itemtochange = orderedBy.FirstOrDefault(x => x.OrderTypeProperty == propertyName);
-                    itemtochange.OrderNum += 1;
-                }
-                catch (Exception ex)
-                {
 
-                }
+        }
+        public void ChangeOrderOfOrderPropertyDown(string propertyName)
+        {
+            try
+            {
+                OrderedBy.OrderBy(x => x.OrderNum).ToArray()[OrderedBy.IndexOf(OrderedBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault()) + 1].OrderNum = OrderedBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault().OrderNum;
+                var itemtochange = OrderedBy.FirstOrDefault(x => x.OrderTypeProperty == propertyName);
+                itemtochange.OrderNum += 1;
+                OrderedBy = new ObservableCollection<TrackedProperty>(OrderedBy.OrderBy(x => x.OrderNum).ToList());
+            }
+            catch (Exception ex)
+            {
+
             }
         }
-        public void ChangeOrderOfTrackProperty(string propertyName, bool up)
+        public void ChangeOrderOfTrackPropertyUp(string propertyName)
         {
-            if (up)
+            try
             {
-                try
-                {
-                    trackBy.OrderBy(x => x.OrderNum).ToArray()[trackBy.IndexOf(trackBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault()) - 1].OrderNum = trackBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault().OrderNum;
-                    var itemtochange = trackBy.FirstOrDefault(x => x.OrderTypeProperty == propertyName);
-                    itemtochange.OrderNum -= 1;
-                }
-                catch (Exception ex)
-                {
-
-                }
+                TrackBy.OrderBy(x => x.OrderNum).ToArray()[TrackBy.IndexOf(TrackBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault()) - 1].OrderNum = TrackBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault().OrderNum;
+                var itemtochange = TrackBy.FirstOrDefault(x => x.OrderTypeProperty == propertyName);
+                itemtochange.OrderNum -= 1;
+                TrackBy = new ObservableCollection<TrackedProperty>(TrackBy.OrderBy(x => x.OrderNum).ToList());
+            }
+            catch (Exception ex)
+            {
 
             }
-            else
+        }
+        public void ChangeOrderOfTrackPropertyDown(string propertyName)
+        {
+            try
             {
-                try
-                {
-                    trackBy.OrderBy(x => x.OrderNum).ToArray()[trackBy.IndexOf(trackBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault()) + 1].OrderNum = trackBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault().OrderNum;
-                    var itemtochange = trackBy.FirstOrDefault(x => x.OrderTypeProperty == propertyName);
-                    itemtochange.OrderNum += 1;
-                }
-                catch (Exception ex)
-                {
+                TrackBy.OrderBy(x => x.OrderNum).ToArray()[TrackBy.IndexOf(TrackBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault()) + 1].OrderNum = TrackBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault().OrderNum;
+                var itemtochange = TrackBy.FirstOrDefault(x => x.OrderTypeProperty == propertyName);
+                itemtochange.OrderNum += 1;
+                TrackBy = new ObservableCollection<TrackedProperty>(TrackBy.OrderBy(x => x.OrderNum).ToList());
+            }
+            catch (Exception ex)
+            {
 
-                }
             }
         }
     }
@@ -1880,6 +1891,7 @@ namespace LightMasterMVVM.ViewModels
         private NotificationViewModel notificationViewModel = new NotificationViewModel();
         private MatchViewModel matchViewModel = new MatchViewModel();
         private TeamDetailsViewModel teamDetailsViewModel = new TeamDetailsViewModel(-1, OriginalPage.TeamList);
+        private CreateGraphViewModel createGraphViewModel = new CreateGraphViewModel();
         private MatchDetailsViewModel matchDetailsViewModel = new MatchDetailsViewModel(1,OriginalPage.TeamList);
         private string _text = "Initial text";
         private TBAViewModel tbaViewModel = new TBAViewModel();
@@ -1890,6 +1902,11 @@ namespace LightMasterMVVM.ViewModels
         {
             get => currentMatchNum;
             set => SetProperty(ref currentMatchNum, value);
+        }
+        public CreateGraphViewModel CreateGraphViewModel
+        {
+            get => createGraphViewModel;
+            set => SetProperty(ref createGraphViewModel, value);
         }
         public TabletViewModel TabletViewModel
         {
