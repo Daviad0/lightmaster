@@ -10,6 +10,7 @@ namespace LightMasterMVVM.Models
     {
         private int _OrderNum;
         private string _OrderTypeProperty;
+        private bool _Show;
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
@@ -43,6 +44,22 @@ namespace LightMasterMVVM.Models
                 if (value != this._OrderTypeProperty)
                 {
                     this._OrderTypeProperty = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public bool Show
+        {
+            get
+            {
+                return this._Show;
+            }
+
+            set
+            {
+                if (value != this._Show)
+                {
+                    this._Show = value;
                     NotifyPropertyChanged();
                 }
             }

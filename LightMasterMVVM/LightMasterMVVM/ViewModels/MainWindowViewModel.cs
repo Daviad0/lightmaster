@@ -47,13 +47,74 @@ namespace LightMasterMVVM.ViewModels
             get => trackBy;
             set => SetProperty(ref trackBy, value);
         }
+        public ObservableCollection<TrackedProperty> AllOrderOptions
+        {
+            get => allOrderOptions;
+            set => SetProperty(ref allOrderOptions, value);
+        }
+        public ObservableCollection<TrackedProperty> AllTrackOptions
+        {
+            get => allTrackOptions;
+            set => SetProperty(ref allTrackOptions, value);
+        }
         private ObservableCollection<TrackedProperty> orderedBy = new ObservableCollection<TrackedProperty>();
         private ObservableCollection<TrackedProperty> trackBy = new ObservableCollection<TrackedProperty>();
+        private ObservableCollection<TrackedProperty> allOrderOptions = new ObservableCollection<TrackedProperty>()
+        {
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Team Number", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Inner PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Outer PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Lower PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Missed PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Inner PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Outer PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Lower PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Missed PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Inner PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Outer PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Lower PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Missed PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Scored PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Shot PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Park Rate", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Climb Rate", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Balance Rate", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Disabled (s)", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Defense Rate", Show = true}
+
+        };
+        private ObservableCollection<TrackedProperty> allTrackOptions = new ObservableCollection<TrackedProperty>()
+        {
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Inner PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Outer PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Lower PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Missed PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Inner PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Outer PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Lower PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Missed PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Inner PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Outer PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Lower PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Missed PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Scored PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Shot PC", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Park Rate", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Climb Rate", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Balance Rate", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Disabled (s)", Show = true},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Defense Rate", Show = true}
+
+        };
         public void AddOrderProperty(string propertyName)
         {
             if(!OrderedBy.Any(x => x.OrderTypeProperty == propertyName))
             {
-                OrderedBy.Add(new TrackedProperty() { OrderNum = OrderedBy.Count, OrderTypeProperty = propertyName });
+                OrderedBy.Add(new TrackedProperty() { OrderNum = OrderedBy.Count, OrderTypeProperty = propertyName, Show = true });
+                var oldAllItem = AllOrderOptions.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault();
+                var newAllItem = oldAllItem;
+                newAllItem.Show = false;
+                AllOrderOptions[AllOrderOptions.IndexOf(oldAllItem)] = newAllItem;
                 OrderedBy = new ObservableCollection<TrackedProperty>(OrderedBy.OrderBy(x => x.OrderNum).ToList());
             }
         }
@@ -62,27 +123,41 @@ namespace LightMasterMVVM.ViewModels
             if (!TrackBy.Any(x => x.OrderTypeProperty == propertyName))
             {
                 TrackBy.Add(new TrackedProperty() { OrderNum = TrackBy.Count, OrderTypeProperty = propertyName });
+                var oldAllItem = AllTrackOptions.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault();
+                var newAllItem = oldAllItem;
+                newAllItem.Show = false;
+                AllTrackOptions[AllTrackOptions.IndexOf(oldAllItem)] = newAllItem;
                 TrackBy = new ObservableCollection<TrackedProperty>(TrackBy.OrderBy(x => x.OrderNum).ToList());
             }
         }
         public void RemoveOrderProperty(string propertyName)
         {
+            var oldAllItem = AllOrderOptions.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault();
+            var newAllItem = oldAllItem;
+            newAllItem.Show = true;
+            AllOrderOptions[AllOrderOptions.IndexOf(oldAllItem)] = newAllItem;
             OrderedBy.Remove(OrderedBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault());
             int i = 0;
             foreach(var fixordernum in OrderedBy.OrderBy(x => x.OrderNum))
             {
                 fixordernum.OrderNum = i;
             }
+           
             OrderedBy = new ObservableCollection<TrackedProperty>(OrderedBy.OrderBy(x => x.OrderNum).ToList());
         }
         public void RemoveTrackProperty(string propertyName)
         {
+            var oldAllItem = AllTrackOptions.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault();
+            var newAllItem = oldAllItem;
+            newAllItem.Show = true;
+            AllTrackOptions[AllTrackOptions.IndexOf(oldAllItem)] = newAllItem;
             TrackBy.Remove(TrackBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault());
             int i = 0;
             foreach (var fixordernum in TrackBy.OrderBy(x => x.OrderNum))
             {
                 fixordernum.OrderNum = i;
             }
+            
             TrackBy = new ObservableCollection<TrackedProperty>(TrackBy.OrderBy(x => x.OrderNum).ToList());
         }
         public void ChangeOrderOfOrderPropertyUp(string propertyName)
