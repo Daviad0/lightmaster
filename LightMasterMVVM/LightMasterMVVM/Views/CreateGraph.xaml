@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LightMasterMVVM.Views.CreateGraph">
-  <Grid ColumnDefinitions="500,200,200" RowDefinitions="820" HorizontalAlignment="Center">
+  <Grid ColumnDefinitions="500,200,200" RowDefinitions="820,100" HorizontalAlignment="Center">
     <Border Background="#1E1E1E" BorderBrush="Black" Margin="10" BorderThickness="4,0,0,4" Grid.Column="0" Grid.Row="0" CornerRadius="4">
       <Grid ColumnDefinitions="*,*" Margin="10">
         <StackPanel Grid.Column="0" Margin="5,0">
@@ -161,5 +161,6 @@
       
       
     </Border>
+    <Button Content="Go Create Graph" Command="{Binding CreateGraph}" Grid.Row="1"/>
   </Grid>
 </UserControl>

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Windows.Forms.VisualStyles;
+
 namespace LightMasterMVVM.Models
 {
     public enum OriginalPage
@@ -19,5 +21,8 @@ namespace LightMasterMVVM.Models
 
         public static event Action<OriginalPage> FromTeamDetails;
         public static void OnFromTeamDetails(OriginalPage page) => FromTeamDetails?.Invoke(page);
+
+        public static event Action<string[], string[]> CreateNewGraph;
+        public static void OnCreateNewGraph(string[] trackingBy, string[] orderBy) => CreateNewGraph?.Invoke(trackingBy,orderBy);
     }
 }

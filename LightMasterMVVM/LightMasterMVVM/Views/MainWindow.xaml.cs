@@ -103,7 +103,10 @@ namespace LightMasterMVVM.Views
             ProcessTest();
             checkForInternet();
             TryUSB();
-
+            NavMessenger.CreateNewGraph += async (string[] trackingProperties, string[] orderingProperties) =>
+            {
+                control.GraphViewModel = new GraphViewModel(trackingProperties, orderingProperties);
+            };
             NavMessenger.ShowMatchDetails += async (int matchnum, OriginalPage calledPage) =>
             {
                 previouslySelectedName = null;
