@@ -1028,7 +1028,7 @@ namespace LightMasterMVVM.ViewModels
                     var totalshot = 0;
                     var totalscored = 0;
                     int m = 0;
-                    List<TeamMatch> teamMatches = db.Matches.Where(x => x.ClientSubmitted == true).ToList();
+                    List<TeamMatch> teamMatches = db.Matches.Where(x => x.ClientSubmitted == true && x.team_instance_id == team.team_instance_id).ToList();
                     foreach(var match in teamMatches)
                     {
                         int i = 0;
