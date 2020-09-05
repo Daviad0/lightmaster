@@ -1011,7 +1011,12 @@ namespace LightMasterMVVM.ViewModels
                     LegendPosition = LegendPosition.RightTop,
                     LegendOrientation = LegendOrientation.Vertical,
                     LegendBorderThickness = 0,
-                    DefaultColors = new List<OxyColor>() { OxyColor.FromRgb(255, 255, 255) }
+                    DefaultColors = new List<OxyColor>() { OxyColor.FromRgb(255, 255, 255) },
+                    PlotAreaBorderColor = OxyColors.White,
+                    TitleColor = OxyColors.White,
+                    SubtitleColor = OxyColors.White,
+                    LegendTextColor = OxyColors.White,
+                    LegendTitleColor = OxyColors.White
                 };
 
                 List<FRCTeamModel> frcTeams = db.FRCTeams.Where(x => x.event_key == new GetEventCode().EventCode()).ToList();
@@ -1125,7 +1130,7 @@ namespace LightMasterMVVM.ViewModels
                 var s3 = new OxyPlot.Series.BarSeries { Title = "Inner Power Cells", StrokeColor = OxyColors.Black, StrokeThickness = 1 };
                 var categoryAxis = new OxyPlot.Axes.CategoryAxis { Position = AxisPosition.Left, AxisTickToLabelDistance = 2 };
                 var j = 0;
-
+                var listofcolors = new object[7] { OxyColors.DeepPink, OxyColors.Violet, OxyColors.DeepSkyBlue, OxyColors.Turquoise, OxyColors.MediumSeaGreen, OxyColors.GreenYellow, OxyColors.Gold };
                 string trackstring = "";
                 var allbarseriesproperties = new List<string>();
                 foreach(var rawtrackingtype in trackingBy)
@@ -1133,11 +1138,12 @@ namespace LightMasterMVVM.ViewModels
                     
                     OxyPlot.Series.BarSeries newBarSeries = new OxyPlot.Series.BarSeries { Title = rawtrackingtype, StrokeColor = OxyColors.White, StrokeThickness = 1 };
                     newBarSeries.IsStacked = true;
-                    newBarSeries.LabelPlacement = LabelPlacement.Inside;
-                    newBarSeries.FillColor = OxyColors.Gold;
+                    newBarSeries.LabelPlacement = LabelPlacement.Base;
+                    newBarSeries.LabelMargin = 5;
+                    newBarSeries.FillColor = (OxyColor)listofcolors[j];
                     newBarSeries.LabelMargin = 5;
                     newBarSeries.BaseValue = 1;
-                    newBarSeries.TextColor = OxyColors.Black;
+                    newBarSeries.TextColor = OxyColors.White;
                     
                     string trackingtype = "";
                     switch (rawtrackingtype)
@@ -1223,7 +1229,7 @@ namespace LightMasterMVVM.ViewModels
                     barseries.Add(newBarSeries);
                     allbarseriesproperties.Add(trackingtype);
 
-
+                    j++;
                 }
                 
                 foreach (var rawordertype in orderingBy)
@@ -1314,7 +1320,15 @@ namespace LightMasterMVVM.ViewModels
                     foreach(var bar in barseries)
                     {
                         PropertyInfo pinfo = typeof(GraphTeamMatchView).GetProperty(allbarseriesproperties[b]);
-                        barseries.ToArray()[barseries.IndexOf(bar)].Items.Add(new BarItem { Value = (double)pinfo.GetValue(team, null) });
+                        try
+                        {
+                            barseries.ToArray()[barseries.IndexOf(bar)].Items.Add(new BarItem { Value = (double)pinfo.GetValue(team, null) });
+                        }
+                        catch(Exception ex)
+                        {
+                            barseries.ToArray()[barseries.IndexOf(bar)].Items.Add(new BarItem { Value = (int)pinfo.GetValue(team, null) });
+                        }
+                        
                         b++;
                     }
                     //s1.Items.Add(new BarItem { Value = team.AvgLowerPC });
@@ -1325,6 +1339,16 @@ namespace LightMasterMVVM.ViewModels
                 }
                 GraphHeight = (categoryAxis.Labels.Count * 50) + 100;
                 var valueAxis = new OxyPlot.Axes.LinearAxis { Position = AxisPosition.Bottom, MinimumPadding = 0, MaximumPadding = 0.06, AbsoluteMinimum = 0 };
+                valueAxis.AxislineThickness = 2;
+                valueAxis.AxislineColor = OxyColors.White;
+                valueAxis.TicklineColor = OxyColors.White;
+                valueAxis.TextColor = OxyColors.White;
+                valueAxis.AxislineStyle = LineStyle.None;
+                categoryAxis.AxislineThickness = 2;
+                categoryAxis.AxislineColor = OxyColors.White;
+                categoryAxis.TicklineColor = OxyColors.White;
+                categoryAxis.TextColor = OxyColors.White;
+                categoryAxis.AxislineStyle = LineStyle.None;
                 foreach (var bar in barseries)
                 {
                     DataPoints.Series.Add(bar);
@@ -1334,7 +1358,7 @@ namespace LightMasterMVVM.ViewModels
             }
             /*customController = new PlotController();
             customController.UnbindMouseDown(OxyMouseButton.Left);
-            customController.BindMouseEnter(PlotCommands.HoverSnapTrack);
+            customController.BindMouseEnter(PlotCommands.HoverSnack);
             DataPoints = new PlotModel
             {
                 Title = "Total Power Cells",
