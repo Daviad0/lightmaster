@@ -56,6 +56,7 @@ namespace LightMasterMVVM.Views
         private Button match_down = new Button();
         private Border matches = new Border();
         private Border graph = new Border();
+        private Border actualgraphs = new Border();
         private Border tablets = new Border();
         private Border tba = new Border();
         private Border teams = new Border();
@@ -94,6 +95,7 @@ namespace LightMasterMVVM.Views
             database_status = this.Find<Border>("databaseActive");
             matches = this.Find<Border>("matches");
             graph = this.Find<Border>("graphs");
+            actualgraphs = this.Find<Border>("actualgraphs");
             tablets = this.Find<Border>("tablets");
             tba = this.Find<Border>("tba");
             teams = this.Find<Border>("teams");
@@ -105,7 +107,57 @@ namespace LightMasterMVVM.Views
             TryUSB();
             NavMessenger.CreateNewGraph += async (string[] trackingProperties, string[] orderingProperties) =>
             {
+                previouslySelectedName = null;
                 control.GraphViewModel = new GraphViewModel(trackingProperties, orderingProperties);
+                matches.Classes.Remove("show");
+                graph.Classes.Remove("show");
+                tablets.Classes.Remove("show");
+                tba.Classes.Remove("show");
+                teams.Classes.Remove("show");
+                teamDetails.Classes.Remove("show");
+                matchDetails.Classes.Remove("show");
+                matches.Classes.Add("hide");
+                graph.Classes.Add("hide");
+                tablets.Classes.Add("hide");
+                tba.Classes.Add("hide");
+                teams.Classes.Add("hide");
+                actualgraphs.Classes.Add("hide");
+                teamDetails.Classes.Add("hide");
+                matchDetails.Classes.Add("hide");
+                nav_see_tablets.Classes.Remove("navbuttonselected");
+                nav_see_graph.Classes.Remove("navbuttonselected");
+                nav_see_tba.Classes.Remove("navbuttonselected");
+                nav_see_matches.Classes.Remove("navbuttonselected");
+                nav_see_teams.Classes.Remove("navbuttonselected");
+                nav_try_usb.Classes.Remove("navbuttonselected");
+                nav_see_tablets.Classes.Add("navbutton");
+                nav_see_graph.Classes.Add("navbutton");
+                nav_see_tba.Classes.Add("navbutton");
+                nav_see_matches.Classes.Add("navbutton");
+                nav_see_teams.Classes.Add("navbutton");
+                nav_try_usb.Classes.Add("navbutton");
+                await Task.Delay(100);
+                matches.Opacity = 0;
+                graph.Opacity = 0;
+                tablets.Opacity = 0;
+                tba.Opacity = 0;
+                teams.Opacity = 0;
+                teamDetails.Opacity = 0;
+                matchDetails.Opacity = 0;
+                matches.IsVisible = false;
+                graph.IsVisible = false;
+                tablets.IsVisible = false;
+                actualgraphs.IsVisible = false;
+                tba.IsVisible = false;
+                teams.IsVisible = false;
+                teamDetails.IsVisible = false;
+                matchDetails.IsVisible = false;
+                await Task.Delay(50);
+                actualgraphs.IsVisible = true;
+                actualgraphs.Classes.Remove("hide");
+                actualgraphs.Classes.Add("show");
+                await Task.Delay(100);
+                actualgraphs.Opacity = 1;
             };
             NavMessenger.ShowMatchDetails += async (int matchnum, OriginalPage calledPage) =>
             {
@@ -116,6 +168,7 @@ namespace LightMasterMVVM.Views
                 tablets.Classes.Remove("show");
                 tba.Classes.Remove("show");
                 teams.Classes.Remove("show");
+                actualgraphs.Classes.Remove("show");
                 teamDetails.Classes.Remove("show");
                 matchDetails.Classes.Remove("show");
                 matches.Classes.Add("hide");
@@ -149,6 +202,7 @@ namespace LightMasterMVVM.Views
                 graph.IsVisible = false;
                 tablets.IsVisible = false;
                 tba.IsVisible = false;
+                actualgraphs.IsVisible = false;
                 teams.IsVisible = false;
                 teamDetails.IsVisible = false;
                 matchDetails.IsVisible = false;
@@ -175,6 +229,7 @@ namespace LightMasterMVVM.Views
                 tablets.Classes.Add("hide");
                 tba.Classes.Add("hide");
                 teams.Classes.Add("hide");
+                actualgraphs.Classes.Add("hide");
                 teamDetails.Classes.Add("hide");
                 matchDetails.Classes.Add("hide");
                 nav_see_tablets.Classes.Remove("navbuttonselected");
@@ -200,6 +255,7 @@ namespace LightMasterMVVM.Views
                 matches.IsVisible = false;
                 graph.IsVisible = false;
                 tablets.IsVisible = false;
+                actualgraphs.IsVisible = false;
                 tba.IsVisible = false;
                 teams.IsVisible = false;
                 teamDetails.IsVisible = false;
@@ -225,6 +281,7 @@ namespace LightMasterMVVM.Views
                 tablets.Classes.Add("hide");
                 tba.Classes.Add("hide");
                 teams.Classes.Add("hide");
+                actualgraphs.Classes.Add("hide");
                 teamDetails.Classes.Add("hide");
                 matchDetails.Classes.Add("hide");
                 nav_see_tablets.Classes.Remove("navbuttonselected");
@@ -252,6 +309,7 @@ namespace LightMasterMVVM.Views
                 tablets.IsVisible = false;
                 tba.IsVisible = false;
                 teams.IsVisible = false;
+                actualgraphs.IsVisible = false;
                 teamDetails.IsVisible = false;
                 matchDetails.IsVisible = false;
                 await Task.Delay(50);
@@ -294,6 +352,7 @@ namespace LightMasterMVVM.Views
                 tablets.Classes.Add("hide");
                 tba.Classes.Add("hide");
                 teams.Classes.Add("hide");
+                actualgraphs.Classes.Add("hide");
                 teamDetails.Classes.Add("hide");
                 matchDetails.Classes.Add("hide");
                 nav_see_tablets.Classes.Remove("navbuttonselected");
@@ -321,6 +380,7 @@ namespace LightMasterMVVM.Views
                 tablets.IsVisible = false;
                 tba.IsVisible = false;
                 teams.IsVisible = false;
+                actualgraphs.IsVisible = false;
                 teamDetails.IsVisible = false;
                 matchDetails.IsVisible = false;
                 await Task.Delay(50);
@@ -396,6 +456,7 @@ namespace LightMasterMVVM.Views
                 matchDetails.Classes.Remove("show");
                 matches.Classes.Add("hide");
                 graph.Classes.Add("hide");
+                actualgraphs.Classes.Add("hide");
                 tablets.Classes.Add("hide");
                 tba.Classes.Add("hide");
                 teams.Classes.Add("hide");
@@ -424,6 +485,7 @@ namespace LightMasterMVVM.Views
                 matches.IsVisible = false;
                 graph.IsVisible = false;
                 tablets.IsVisible = false;
+                actualgraphs.IsVisible = false;
                 tba.IsVisible = false;
                 teams.IsVisible = false;
                 teamDetails.IsVisible = false;

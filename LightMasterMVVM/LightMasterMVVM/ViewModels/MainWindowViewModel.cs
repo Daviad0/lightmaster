@@ -33,6 +33,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using SharpDX.Direct2D1;
 using Avalonia.Controls.Primitives;
+using System.Reflection;
 
 namespace LightMasterMVVM.ViewModels
 {
@@ -1126,6 +1127,7 @@ namespace LightMasterMVVM.ViewModels
                 var j = 0;
 
                 string trackstring = "";
+                var allbarseriesproperties = new List<string>();
                 foreach(var rawtrackingtype in trackingBy)
                 {
                     
@@ -1160,6 +1162,7 @@ namespace LightMasterMVVM.ViewModels
                             trackingtype = "AInnerPC";
                             newBarSeries.LabelFormatString = "{0} PC";
                             break;
+ 
                         case "A Outer PC":
                             trackingtype = "AOuterPC";
                             newBarSeries.LabelFormatString = "{0} PC";
@@ -1217,30 +1220,115 @@ namespace LightMasterMVVM.ViewModels
                             newBarSeries.LabelFormatString = "{0} PC";
                             break;
                     }
-                    if(trackstring != "")
+                    barseries.Add(newBarSeries);
+                    allbarseriesproperties.Add(trackingtype);
+
+
+                }
+                
+                foreach (var rawordertype in orderingBy)
+                {
+
+                    string trackingtype = "";
+                    switch (rawordertype)
+                    {
+                        case "Total Inner PC":
+                            trackingtype = "TotalInnerPC";
+                            break;
+                        case "Total Outer PC":
+                            trackingtype = "TotalOuterPC";
+                            break;
+                        case "Total Lower PC":
+                            trackingtype = "TotalLowerPC";
+                            break;
+                        case "Total Missed PC":
+                            trackingtype = "TotalMissedPC";
+  
+                            break;
+                        case "A Inner PC":
+                            trackingtype = "AInnerPC";
+                            break;
+                        case "A Outer PC":
+                            trackingtype = "AOuterPC";
+                            break;
+                        case "A Lower PC":
+                            trackingtype = "ALowerPC";
+                            break;
+                        case "A Missed PC":
+                            trackingtype = "AMissedPC";
+                            break;
+                        case "T Inner PC":
+                            trackingtype = "TInnerPC";
+                            break;
+                        case "T Outer PC":
+                            trackingtype = "TOuterPC";
+                            break;
+                        case "T Lower PC":
+                            trackingtype = "TLowerPC";
+                            break;
+                        case "T Missed PC":
+                            trackingtype = "TMissedPC";
+                            break;
+                        case "Total Shot PC":
+                            trackingtype = "TotalShotPC";
+                            
+                            break;
+                        case "Total Scored PC":
+                            trackingtype = "TotalScoredPC";
+                            
+                            break;
+                        case "Park Rate":
+                            trackingtype = "ParkRate";
+                            
+                            break;
+                        case "Climb Rate":
+                            trackingtype = "ClimbRate";
+                            
+                            break;
+                        case "Balance Rate":
+                            trackingtype = "BalanceRate";
+                            
+                            break;
+                        case "Defense Rate":
+                            trackingtype = "DefenseRate";
+                            
+                            break;
+                        case "Disabled (s)":
+                            trackingtype = "Disabled";
+                            
+                            break;
+                    }
+                    if (trackstring != "")
                     {
                         trackstring = trackstring + ", ";
                     }
                     trackstring = trackstring + trackingtype + " DESC";
-                    barseries.Add(newBarSeries);
                     
+
                 }
                 allTeamDataSchemas = OrderByHelper.OrderBy(allTeamDataSchemas, trackstring).ToList();
 
                 foreach (var team in allTeamDataSchemas)
                 {
-
+                    int b = 0;
+                    foreach(var bar in barseries)
+                    {
+                        PropertyInfo pinfo = typeof(GraphTeamMatchView).GetProperty(allbarseriesproperties[b]);
+                        barseries.ToArray()[barseries.IndexOf(bar)].Items.Add(new BarItem { Value = (double)pinfo.GetValue(team, null) });
+                        b++;
+                    }
                     //s1.Items.Add(new BarItem { Value = team.AvgLowerPC });
                     //s2.Items.Add(new BarItem { Value = team.AvgOuterPC });
                     //s3.Items.Add(new BarItem { Value = team.AvgInnerPC });
-                    //categoryAxis.Labels.Add(team.TeamNumber.ToString());
+                    categoryAxis.Labels.Add(team.TeamNumber.ToString());
                     //j++;
                 }
                 GraphHeight = (categoryAxis.Labels.Count * 50) + 100;
                 var valueAxis = new OxyPlot.Axes.LinearAxis { Position = AxisPosition.Bottom, MinimumPadding = 0, MaximumPadding = 0.06, AbsoluteMinimum = 0 };
-                DataPoints.Series.Add(s1);
-                DataPoints.Series.Add(s2);
-                DataPoints.Series.Add(s3);
+                foreach (var bar in barseries)
+                {
+                    DataPoints.Series.Add(bar);
+                }
                 DataPoints.Axes.Add(categoryAxis);
                 DataPoints.Axes.Add(valueAxis);
             }

@@ -223,6 +223,9 @@
       <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0" Name="graphs" Opacity="0" IsVisible="False">
         <screens:CreateGraph DataContext="{Binding CreateGraphViewModel}"/>
       </Border>
+      <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0" Name="actualgraphs" Opacity="0" IsVisible="False">
+        <screens:DataAnalysis DataContext="{Binding GraphViewModel}"/>
+      </Border>
       <Border BorderBrush="Transparent" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Name="tba" Opacity="0" IsVisible="False">
         <screens:TheBlueAlliance DataContext="{Binding TBAViewModel}"/>
       </Border>
