@@ -221,18 +221,8 @@ namespace LightMasterMVVM.ViewModels
         }
         public void CreateGraph()
         {
-            List<string> trackString = new List<string>();
-            foreach(var strobj in TrackBy.OrderBy(x => x.OrderNum))
-            {
-                trackString.Add(strobj.OrderTypeProperty);
-            }
-
-            List<string> orderString = new List<string>();
-            foreach (var strobj in OrderedBy.OrderBy(x => x.OrderNum))
-            {
-                orderString.Add(strobj.OrderTypeProperty);
-            }
-            NavMessenger.OnCreateNewGraph(trackString.ToArray(), orderString.ToArray());
+            //INJECT MODEL INSTEAD OF STRINGS TO DO ASCENDING AND DESCENDING
+            NavMessenger.OnCreateNewGraph(trackBy.ToArray(), orderedBy.ToArray());
         }
     }
     public class MatchDetailsViewModel: ViewModelBase
@@ -997,365 +987,384 @@ namespace LightMasterMVVM.ViewModels
             DataPoints.Axes.Add(new OxyPlot.Axes.LinearAxis());
             DataPoints.Axes.Add(new OxyPlot.Axes.LinearAxis());*/
         }
-        public GraphViewModel(string[] trackingBy, string[] orderingBy)
+        public GraphViewModel(TrackedProperty[] trackingBy, TrackedProperty[] orderingBy)
         {
-            using (var db = new ScoutingContext())
+            try
             {
-                customController = new PlotController();
-                customController.UnbindMouseDown(OxyMouseButton.Left);
-                customController.BindMouseEnter(PlotCommands.HoverSnapTrack);
-                DataPoints = new PlotModel
+                using (var db = new ScoutingContext())
                 {
-                    Title = "Test Graph",
-                    LegendPlacement = LegendPlacement.Outside,
-                    LegendPosition = LegendPosition.RightTop,
-                    LegendOrientation = LegendOrientation.Vertical,
-                    LegendBorderThickness = 0,
-                    DefaultColors = new List<OxyColor>() { OxyColor.FromRgb(255, 255, 255) },
-                    PlotAreaBorderColor = OxyColors.White,
-                    TitleColor = OxyColors.White,
-                    SubtitleColor = OxyColors.White,
-                    LegendTextColor = OxyColors.White,
-                    LegendTitleColor = OxyColors.White
-                };
-
-                List<FRCTeamModel> frcTeams = db.FRCTeams.Where(x => x.event_key == new GetEventCode().EventCode()).ToList();
-                List<GraphTeamMatchView> allTeamDataSchemas = new List<GraphTeamMatchView>();
-
-
-                foreach(var team in frcTeams)
-                {
-                    GraphTeamMatchView modelToAdd = new GraphTeamMatchView();
-                    modelToAdd.TeamNumber = team.team_number;
-                    var totalinner = 0;
-                    var totalouter = 0;
-                    var totallower = 0;
-                    var totalmissed = 0;
-                    var totalshot = 0;
-                    var totalscored = 0;
-                    int m = 0;
-                    List<TeamMatch> teamMatches = db.Matches.Where(x => x.ClientSubmitted == true && x.team_instance_id == team.team_instance_id).ToList();
-                    foreach(var match in teamMatches)
+                    customController = new PlotController();
+                    customController.UnbindMouseDown(OxyMouseButton.Left);
+                    customController.BindMouseEnter(PlotCommands.HoverSnapTrack);
+                    DataPoints = new PlotModel
                     {
-                        int i = 0;
-                        foreach (var toadd in match.PowerCellInner)
+                        Title = "Test Graph",
+                        LegendPlacement = LegendPlacement.Outside,
+                        LegendPosition = LegendPosition.RightTop,
+                        LegendOrientation = LegendOrientation.Vertical,
+                        LegendBorderThickness = 0,
+                        DefaultColors = new List<OxyColor>() { OxyColor.FromRgb(255, 255, 255) },
+                        PlotAreaBorderColor = OxyColors.White,
+                        TitleColor = OxyColors.White,
+                        SubtitleColor = OxyColors.White,
+                        LegendTextColor = OxyColors.White,
+                        LegendTitleColor = OxyColors.White
+                    };
+
+                    List<FRCTeamModel> frcTeams = db.FRCTeams.Where(x => x.event_key == new GetEventCode().EventCode()).ToList();
+                    List<GraphTeamMatchView> allTeamDataSchemas = new List<GraphTeamMatchView>();
+
+
+                    foreach (var team in frcTeams)
+                    {
+                        GraphTeamMatchView modelToAdd = new GraphTeamMatchView();
+                        modelToAdd.TeamNumber = team.team_number;
+                        var totalinner = 0;
+                        var totalouter = 0;
+                        var totallower = 0;
+                        var totalmissed = 0;
+                        var totalshot = 0;
+                        var totalscored = 0;
+                        int m = 0;
+                        List<TeamMatch> teamMatches = db.Matches.Where(x => x.ClientSubmitted == true && x.team_instance_id == team.team_instance_id).ToList();
+                        foreach (var match in teamMatches)
                         {
-                            totalinner += toadd;
-                            totalshot += toadd;
-                            totalscored += toadd;
-                            if (i == 0)
+                            int i = 0;
+                            foreach (var toadd in match.PowerCellInner)
                             {
-                                modelToAdd.AInnerPC += toadd;
+                                totalinner += toadd;
+                                totalshot += toadd;
+                                totalscored += toadd;
+                                if (i == 0)
+                                {
+                                    modelToAdd.AInnerPC += toadd;
+                                }
+                                else
+                                {
+                                    modelToAdd.TInnerPC += toadd;
+                                }
+                                i++;
                             }
-                            else
+                            i = 0;
+                            foreach (var toadd in match.PowerCellOuter)
                             {
-                                modelToAdd.TInnerPC += toadd;
+                                totalouter += toadd;
+                                totalshot += toadd;
+                                totalscored += toadd;
+                                if (i == 0)
+                                {
+                                    modelToAdd.AOuterPC += toadd;
+                                }
+                                else
+                                {
+                                    modelToAdd.TOuterPC += toadd;
+                                }
+                                i++;
                             }
-                            i++;
+                            i = 0;
+                            foreach (var toadd in match.PowerCellLower)
+                            {
+                                totallower += toadd;
+                                totalshot += toadd;
+                                totalscored += toadd;
+                                if (i == 0)
+                                {
+                                    modelToAdd.ALowerPC += toadd;
+                                }
+                                else
+                                {
+                                    modelToAdd.TLowerPC += toadd;
+                                }
+                                i++;
+                            }
+                            i = 0;
+                            foreach (var toadd in match.PowerCellMissed)
+                            {
+                                totalmissed += toadd;
+                                totalshot += toadd;
+                                if (i == 0)
+                                {
+                                    modelToAdd.AMissedPC += toadd;
+                                }
+                                else
+                                {
+                                    modelToAdd.TMissedPC += toadd;
+                                }
+                                i++;
+                            }
+
+                            modelToAdd.Disabled += match.DisabledSeconds;
+                            modelToAdd.DefenseRate += match.DefenseFor ? 1 : 0;
+                            modelToAdd.BalanceRate += match.E_Balanced ? 1 : 0;
+                            modelToAdd.ParkRate += match.E_Park ? 1 : 0;
+                            modelToAdd.ClimbRate += match.E_ClimbSuccess ? 1 : 0;
+                            m++;
                         }
-                        i = 0;
-                        foreach (var toadd in match.PowerCellOuter)
+                        modelToAdd.TotalInnerPC = totalinner / m;
+                        modelToAdd.TotalOuterPC = totalouter / m;
+                        modelToAdd.TotalLowerPC = totallower / m;
+                        modelToAdd.TotalMissedPC = totalmissed / m;
+                        modelToAdd.TotalScoredPC = totalscored / m;
+                        modelToAdd.TotalShotPC = totalshot / m;
+                        modelToAdd.Disabled = modelToAdd.Disabled / m;
+                        modelToAdd.DefenseRate = (double)modelToAdd.DefenseRate / m;
+                        modelToAdd.BalanceRate = (double)modelToAdd.BalanceRate / m;
+                        modelToAdd.ParkRate = (double)modelToAdd.ParkRate / m;
+                        modelToAdd.ClimbRate = (double)modelToAdd.ClimbRate / m;
+                        allTeamDataSchemas.Add(modelToAdd);
+                    }
+
+
+                    var barseries = new List<OxyPlot.Series.BarSeries>();
+
+                    var s1 = new OxyPlot.Series.BarSeries { Title = "Lower Power Cells", StrokeColor = OxyColors.Black, StrokeThickness = 1 };
+                    var s2 = new OxyPlot.Series.BarSeries { Title = "Outer Power Cells", StrokeColor = OxyColors.Black, StrokeThickness = 1 };
+                    var s3 = new OxyPlot.Series.BarSeries { Title = "Inner Power Cells", StrokeColor = OxyColors.Black, StrokeThickness = 1 };
+                    var categoryAxis = new OxyPlot.Axes.CategoryAxis { Position = AxisPosition.Left, AxisTickToLabelDistance = 2 };
+                    var j = 0;
+                    var listofcolors = new object[7] { OxyColors.DeepPink, OxyColors.Violet, OxyColors.DeepSkyBlue, OxyColors.Turquoise, OxyColors.MediumSeaGreen, OxyColors.GreenYellow, OxyColors.Gold };
+                    string trackstring = "";
+                    var allbarseriesproperties = new List<string>();
+                    foreach (var rawtrackingtype in trackingBy.OrderBy(x => x.OrderNum))
+                    {
+
+                        OxyPlot.Series.BarSeries newBarSeries = new OxyPlot.Series.BarSeries { Title = rawtrackingtype.OrderTypeProperty, StrokeColor = OxyColors.White, StrokeThickness = 1 };
+                        newBarSeries.IsStacked = true;
+                        newBarSeries.LabelPlacement = LabelPlacement.Base;
+                        newBarSeries.LabelMargin = 5;
+                        newBarSeries.FillColor = (OxyColor)listofcolors[j];
+                        newBarSeries.LabelMargin = 5;
+                        newBarSeries.BaseValue = 1;
+                        newBarSeries.TextColor = OxyColors.White;
+
+                        string trackingtype = "";
+                        switch (rawtrackingtype.OrderTypeProperty)
                         {
-                            totalouter += toadd;
-                            totalshot += toadd;
-                            totalscored += toadd;
-                            if (i == 0)
-                            {
-                                modelToAdd.AOuterPC += toadd;
-                            }
-                            else
-                            {
-                                modelToAdd.TOuterPC += toadd;
-                            }
-                            i++;
+                            case "Total Inner PC":
+                                trackingtype = "TotalInnerPC";
+                                newBarSeries.LabelFormatString = "{0} PC";
+                                break;
+                            case "Total Outer PC":
+                                trackingtype = "TotalOuterPC";
+                                newBarSeries.LabelFormatString = "{0} PC";
+                                break;
+                            case "Total Lower PC":
+                                trackingtype = "TotalLowerPC";
+                                newBarSeries.LabelFormatString = "{0} PC";
+                                break;
+                            case "Total Missed PC":
+                                trackingtype = "TotalMissedPC";
+                                newBarSeries.LabelFormatString = "{0} PC";
+                                break;
+                            case "A Inner PC":
+                                trackingtype = "AInnerPC";
+                                newBarSeries.LabelFormatString = "{0} PC";
+                                break;
+
+                            case "A Outer PC":
+                                trackingtype = "AOuterPC";
+                                newBarSeries.LabelFormatString = "{0} PC";
+                                break;
+                            case "A Lower PC":
+                                trackingtype = "ALowerPC";
+                                newBarSeries.LabelFormatString = "{0} PC";
+                                break;
+                            case "A Missed PC":
+                                trackingtype = "AMissedPC";
+                                newBarSeries.LabelFormatString = "{0} PC";
+                                break;
+                            case "T Inner PC":
+                                trackingtype = "TInnerPC";
+                                newBarSeries.LabelFormatString = "{0} PC";
+                                break;
+                            case "T Outer PC":
+                                trackingtype = "TOuterPC";
+                                newBarSeries.LabelFormatString = "{0} PC";
+                                break;
+                            case "T Lower PC":
+                                trackingtype = "TLowerPC";
+                                newBarSeries.LabelFormatString = "{0} PC";
+                                break;
+                            case "T Missed PC":
+                                trackingtype = "TMissedPC";
+                                newBarSeries.LabelFormatString = "{0} PC";
+                                break;
+                            case "Total Shot PC":
+                                trackingtype = "TotalShotPC";
+                                newBarSeries.LabelFormatString = "{0} PC";
+                                break;
+                            case "Total Scored PC":
+                                trackingtype = "TotalScoredPC";
+                                newBarSeries.LabelFormatString = "{0} PC";
+                                break;
+                            case "Park Rate":
+                                trackingtype = "ParkRate";
+                                newBarSeries.LabelFormatString = "{0} PC";
+                                break;
+                            case "Climb Rate":
+                                trackingtype = "ClimbRate";
+                                newBarSeries.LabelFormatString = "{0} PC";
+                                break;
+                            case "Balance Rate":
+                                trackingtype = "BalanceRate";
+                                newBarSeries.LabelFormatString = "{0} PC";
+                                break;
+                            case "Defense Rate":
+                                trackingtype = "DefenseRate";
+                                newBarSeries.LabelFormatString = "{0} PC";
+                                break;
+                            case "Disabled (s)":
+                                trackingtype = "Disabled";
+                                newBarSeries.LabelFormatString = "{0} PC";
+                                break;
                         }
-                        i = 0;
-                        foreach (var toadd in match.PowerCellLower)
+                        barseries.Add(newBarSeries);
+                        allbarseriesproperties.Add(trackingtype);
+
+                        j++;
+                    }
+
+                    foreach (var rawordertype in orderingBy.OrderBy(x => x.OrderNum))
+                    {
+
+                        string trackingtype = "";
+                        switch (rawordertype.OrderTypeProperty)
                         {
-                            totallower += toadd;
-                            totalshot += toadd;
-                            totalscored += toadd;
-                            if (i == 0)
-                            {
-                                modelToAdd.ALowerPC += toadd;
-                            }
-                            else
-                            {
-                                modelToAdd.TLowerPC += toadd;
-                            }
-                            i++;
+                            case "Team Number":
+                                trackingtype = "TeamNumbers";
+                                break;
+                            case "Total Inner PC":
+                                trackingtype = "TotalInnerPC";
+                                break;
+                            case "Total Outer PC":
+                                trackingtype = "TotalOuterPC";
+                                break;
+                            case "Total Lower PC":
+                                trackingtype = "TotalLowerPC";
+                                break;
+                            case "Total Missed PC":
+                                trackingtype = "TotalMissedPC";
+
+                                break;
+                            case "A Inner PC":
+                                trackingtype = "AInnerPC";
+                                break;
+                            case "A Outer PC":
+                                trackingtype = "AOuterPC";
+                                break;
+                            case "A Lower PC":
+                                trackingtype = "ALowerPC";
+                                break;
+                            case "A Missed PC":
+                                trackingtype = "AMissedPC";
+                                break;
+                            case "T Inner PC":
+                                trackingtype = "TInnerPC";
+                                break;
+                            case "T Outer PC":
+                                trackingtype = "TOuterPC";
+                                break;
+                            case "T Lower PC":
+                                trackingtype = "TLowerPC";
+                                break;
+                            case "T Missed PC":
+                                trackingtype = "TMissedPC";
+                                break;
+                            case "Total Shot PC":
+                                trackingtype = "TotalShotPC";
+
+                                break;
+                            case "Total Scored PC":
+                                trackingtype = "TotalScoredPC";
+
+                                break;
+                            case "Park Rate":
+                                trackingtype = "ParkRate";
+
+                                break;
+                            case "Climb Rate":
+                                trackingtype = "ClimbRate";
+
+                                break;
+                            case "Balance Rate":
+                                trackingtype = "BalanceRate";
+
+                                break;
+                            case "Defense Rate":
+                                trackingtype = "DefenseRate";
+
+                                break;
+                            case "Disabled (s)":
+                                trackingtype = "Disabled";
+
+                                break;
                         }
-                        i = 0;
-                        foreach (var toadd in match.PowerCellMissed)
+                        if (trackstring != "")
                         {
-                            totalmissed += toadd;
-                            totalshot += toadd;
-                            if (i == 0)
-                            {
-                                modelToAdd.AMissedPC += toadd;
-                            }
-                            else
-                            {
-                                modelToAdd.TMissedPC += toadd;
-                            }
-                            i++;
+                            trackstring = trackstring + ", ";
+                        }
+                        if (rawordertype.Ascending)
+                        {
+                            trackstring = trackstring + trackingtype + " ASC";
+                        }
+                        else
+                        {
+                            trackstring = trackstring + trackingtype + " DESC";
                         }
                         
-                        modelToAdd.Disabled += match.DisabledSeconds;
-                        modelToAdd.DefenseRate += match.DefenseFor ? 1 : 0;
-                        modelToAdd.BalanceRate += match.E_Balanced ? 1 : 0;
-                        modelToAdd.ParkRate += match.E_Park ? 1 : 0;
-                        modelToAdd.ClimbRate += match.E_ClimbSuccess ? 1 : 0;
-                        m++;
+
+
                     }
-                    modelToAdd.TotalInnerPC = totalinner / m;
-                    modelToAdd.TotalOuterPC = totalouter / m;
-                    modelToAdd.TotalLowerPC = totallower / m;
-                    modelToAdd.TotalMissedPC = totalmissed / m;
-                    modelToAdd.TotalScoredPC = totalscored / m;
-                    modelToAdd.TotalShotPC = totalshot / m;
-                    modelToAdd.Disabled = modelToAdd.Disabled / m;
-                    modelToAdd.DefenseRate = (double)modelToAdd.DefenseRate / m;
-                    modelToAdd.BalanceRate = (double)modelToAdd.BalanceRate / m;
-                    modelToAdd.ParkRate = (double)modelToAdd.ParkRate / m;
-                    modelToAdd.ClimbRate = (double)modelToAdd.ClimbRate / m;
-                    allTeamDataSchemas.Add(modelToAdd);
-                }
+                    allTeamDataSchemas = OrderByHelper.OrderBy(allTeamDataSchemas, trackstring).ToList();
 
-
-                var barseries = new List<OxyPlot.Series.BarSeries>();
-
-                var s1 = new OxyPlot.Series.BarSeries { Title = "Lower Power Cells", StrokeColor = OxyColors.Black, StrokeThickness = 1 };
-                var s2 = new OxyPlot.Series.BarSeries { Title = "Outer Power Cells", StrokeColor = OxyColors.Black, StrokeThickness = 1 };
-                var s3 = new OxyPlot.Series.BarSeries { Title = "Inner Power Cells", StrokeColor = OxyColors.Black, StrokeThickness = 1 };
-                var categoryAxis = new OxyPlot.Axes.CategoryAxis { Position = AxisPosition.Left, AxisTickToLabelDistance = 2 };
-                var j = 0;
-                var listofcolors = new object[7] { OxyColors.DeepPink, OxyColors.Violet, OxyColors.DeepSkyBlue, OxyColors.Turquoise, OxyColors.MediumSeaGreen, OxyColors.GreenYellow, OxyColors.Gold };
-                string trackstring = "";
-                var allbarseriesproperties = new List<string>();
-                foreach(var rawtrackingtype in trackingBy)
-                {
-                    
-                    OxyPlot.Series.BarSeries newBarSeries = new OxyPlot.Series.BarSeries { Title = rawtrackingtype, StrokeColor = OxyColors.White, StrokeThickness = 1 };
-                    newBarSeries.IsStacked = true;
-                    newBarSeries.LabelPlacement = LabelPlacement.Base;
-                    newBarSeries.LabelMargin = 5;
-                    newBarSeries.FillColor = (OxyColor)listofcolors[j];
-                    newBarSeries.LabelMargin = 5;
-                    newBarSeries.BaseValue = 1;
-                    newBarSeries.TextColor = OxyColors.White;
-                    
-                    string trackingtype = "";
-                    switch (rawtrackingtype)
+                    foreach (var team in allTeamDataSchemas)
                     {
-                        case "Total Inner PC":
-                            trackingtype = "TotalInnerPC";
-                            newBarSeries.LabelFormatString = "{0} PC";
-                            break;
-                        case "Total Outer PC":
-                            trackingtype = "TotalOuterPC";
-                            newBarSeries.LabelFormatString = "{0} PC";
-                            break;
-                        case "Total Lower PC":
-                            trackingtype = "TotalLowerPC";
-                            newBarSeries.LabelFormatString = "{0} PC";
-                            break;
-                        case "Total Missed PC":
-                            trackingtype = "TotalMissedPC";
-                            newBarSeries.LabelFormatString = "{0} PC";
-                            break;
-                        case "A Inner PC":
-                            trackingtype = "AInnerPC";
-                            newBarSeries.LabelFormatString = "{0} PC";
-                            break;
- 
-                        case "A Outer PC":
-                            trackingtype = "AOuterPC";
-                            newBarSeries.LabelFormatString = "{0} PC";
-                            break;
-                        case "A Lower PC":
-                            trackingtype = "ALowerPC";
-                            newBarSeries.LabelFormatString = "{0} PC";
-                            break;
-                        case "A Missed PC":
-                            trackingtype = "AMissedPC";
-                            newBarSeries.LabelFormatString = "{0} PC";
-                            break;
-                        case "T Inner PC":
-                            trackingtype = "TInnerPC";
-                            newBarSeries.LabelFormatString = "{0} PC";
-                            break;
-                        case "T Outer PC":
-                            trackingtype = "TOuterPC";
-                            newBarSeries.LabelFormatString = "{0} PC";
-                            break;
-                        case "T Lower PC":
-                            trackingtype = "TLowerPC";
-                            newBarSeries.LabelFormatString = "{0} PC";
-                            break;
-                        case "T Missed PC":
-                            trackingtype = "TMissedPC";
-                            newBarSeries.LabelFormatString = "{0} PC";
-                            break;
-                        case "Total Shot PC":
-                            trackingtype = "TotalShotPC";
-                            newBarSeries.LabelFormatString = "{0} PC";
-                            break;
-                        case "Total Scored PC":
-                            trackingtype = "TotalScoredPC";
-                            newBarSeries.LabelFormatString = "{0} PC";
-                            break;
-                        case "Park Rate":
-                            trackingtype = "ParkRate";
-                            newBarSeries.LabelFormatString = "{0} PC";
-                            break;
-                        case "Climb Rate":
-                            trackingtype = "ClimbRate";
-                            newBarSeries.LabelFormatString = "{0} PC";
-                            break;
-                        case "Balance Rate":
-                            trackingtype = "BalanceRate";
-                            newBarSeries.LabelFormatString = "{0} PC";
-                            break;
-                        case "Defense Rate":
-                            trackingtype = "DefenseRate";
-                            newBarSeries.LabelFormatString = "{0} PC";
-                            break;
-                        case "Disabled (s)":
-                            trackingtype = "Disabled";
-                            newBarSeries.LabelFormatString = "{0} PC";
-                            break;
-                    }
-                    barseries.Add(newBarSeries);
-                    allbarseriesproperties.Add(trackingtype);
-
-                    j++;
-                }
-                
-                foreach (var rawordertype in orderingBy)
-                {
-
-                    string trackingtype = "";
-                    switch (rawordertype)
-                    {
-                        case "Total Inner PC":
-                            trackingtype = "TotalInnerPC";
-                            break;
-                        case "Total Outer PC":
-                            trackingtype = "TotalOuterPC";
-                            break;
-                        case "Total Lower PC":
-                            trackingtype = "TotalLowerPC";
-                            break;
-                        case "Total Missed PC":
-                            trackingtype = "TotalMissedPC";
-  
-                            break;
-                        case "A Inner PC":
-                            trackingtype = "AInnerPC";
-                            break;
-                        case "A Outer PC":
-                            trackingtype = "AOuterPC";
-                            break;
-                        case "A Lower PC":
-                            trackingtype = "ALowerPC";
-                            break;
-                        case "A Missed PC":
-                            trackingtype = "AMissedPC";
-                            break;
-                        case "T Inner PC":
-                            trackingtype = "TInnerPC";
-                            break;
-                        case "T Outer PC":
-                            trackingtype = "TOuterPC";
-                            break;
-                        case "T Lower PC":
-                            trackingtype = "TLowerPC";
-                            break;
-                        case "T Missed PC":
-                            trackingtype = "TMissedPC";
-                            break;
-                        case "Total Shot PC":
-                            trackingtype = "TotalShotPC";
-                            
-                            break;
-                        case "Total Scored PC":
-                            trackingtype = "TotalScoredPC";
-                            
-                            break;
-                        case "Park Rate":
-                            trackingtype = "ParkRate";
-                            
-                            break;
-                        case "Climb Rate":
-                            trackingtype = "ClimbRate";
-                            
-                            break;
-                        case "Balance Rate":
-                            trackingtype = "BalanceRate";
-                            
-                            break;
-                        case "Defense Rate":
-                            trackingtype = "DefenseRate";
-                            
-                            break;
-                        case "Disabled (s)":
-                            trackingtype = "Disabled";
-                            
-                            break;
-                    }
-                    if (trackstring != "")
-                    {
-                        trackstring = trackstring + ", ";
-                    }
-                    trackstring = trackstring + trackingtype + " DESC";
-                    
-
-                }
-                allTeamDataSchemas = OrderByHelper.OrderBy(allTeamDataSchemas, trackstring).ToList();
-
-                foreach (var team in allTeamDataSchemas)
-                {
-                    int b = 0;
-                    foreach(var bar in barseries)
-                    {
-                        PropertyInfo pinfo = typeof(GraphTeamMatchView).GetProperty(allbarseriesproperties[b]);
-                        try
+                        int b = 0;
+                        foreach (var bar in barseries)
                         {
-                            barseries.ToArray()[barseries.IndexOf(bar)].Items.Add(new BarItem { Value = (double)pinfo.GetValue(team, null) });
+                            PropertyInfo pinfo = typeof(GraphTeamMatchView).GetProperty(allbarseriesproperties[b]);
+                            try
+                            {
+                                barseries.ToArray()[barseries.IndexOf(bar)].Items.Add(new BarItem { Value = (double)pinfo.GetValue(team, null) });
+                            }
+                            catch (Exception ex)
+                            {
+                                barseries.ToArray()[barseries.IndexOf(bar)].Items.Add(new BarItem { Value = (int)pinfo.GetValue(team, null) });
+                            }
+
+                            b++;
                         }
-                        catch(Exception ex)
-                        {
-                            barseries.ToArray()[barseries.IndexOf(bar)].Items.Add(new BarItem { Value = (int)pinfo.GetValue(team, null) });
-                        }
-                        
-                        b++;
+                        //s1.Items.Add(new BarItem { Value = team.AvgLowerPC });
+                        //s2.Items.Add(new BarItem { Value = team.AvgOuterPC });
+                        //s3.Items.Add(new BarItem { Value = team.AvgInnerPC });
+                        categoryAxis.Labels.Add(team.TeamNumber.ToString());
+                        //j++;
                     }
-                    //s1.Items.Add(new BarItem { Value = team.AvgLowerPC });
-                    //s2.Items.Add(new BarItem { Value = team.AvgOuterPC });
-                    //s3.Items.Add(new BarItem { Value = team.AvgInnerPC });
-                    categoryAxis.Labels.Add(team.TeamNumber.ToString());
-                    //j++;
+                    GraphHeight = (categoryAxis.Labels.Count * 50) + 100;
+                    var valueAxis = new OxyPlot.Axes.LinearAxis { Position = AxisPosition.Bottom, MinimumPadding = 0, MaximumPadding = 0.06, AbsoluteMinimum = 0 };
+                    valueAxis.AxislineThickness = 2;
+                    valueAxis.AxislineColor = OxyColors.White;
+                    valueAxis.TicklineColor = OxyColors.White;
+                    valueAxis.TextColor = OxyColors.White;
+                    valueAxis.AxislineStyle = LineStyle.None;
+                    categoryAxis.AxislineThickness = 2;
+                    categoryAxis.AxislineColor = OxyColors.White;
+                    categoryAxis.TicklineColor = OxyColors.White;
+                    categoryAxis.TextColor = OxyColors.White;
+                    categoryAxis.AxislineStyle = LineStyle.None;
+                    foreach (var bar in barseries)
+                    {
+                        DataPoints.Series.Add(bar);
+                    }
+                    DataPoints.Axes.Add(categoryAxis);
+                    DataPoints.Axes.Add(valueAxis);
                 }
-                GraphHeight = (categoryAxis.Labels.Count * 50) + 100;
-                var valueAxis = new OxyPlot.Axes.LinearAxis { Position = AxisPosition.Bottom, MinimumPadding = 0, MaximumPadding = 0.06, AbsoluteMinimum = 0 };
-                valueAxis.AxislineThickness = 2;
-                valueAxis.AxislineColor = OxyColors.White;
-                valueAxis.TicklineColor = OxyColors.White;
-                valueAxis.TextColor = OxyColors.White;
-                valueAxis.AxislineStyle = LineStyle.None;
-                categoryAxis.AxislineThickness = 2;
-                categoryAxis.AxislineColor = OxyColors.White;
-                categoryAxis.TicklineColor = OxyColors.White;
-                categoryAxis.TextColor = OxyColors.White;
-                categoryAxis.AxislineStyle = LineStyle.None;
-                foreach (var bar in barseries)
-                {
-                    DataPoints.Series.Add(bar);
-                }
-                DataPoints.Axes.Add(categoryAxis);
-                DataPoints.Axes.Add(valueAxis);
             }
+            catch(Exception ex)
+            {
+
+            }
+            
             /*customController = new PlotController();
             customController.UnbindMouseDown(OxyMouseButton.Left);
             customController.BindMouseEnter(PlotCommands.HoverSnack);
@@ -2197,7 +2206,7 @@ namespace LightMasterMVVM.ViewModels
         }
         private int currentMatchNum = 1;
         private string matchNumString = "Match 1";
-        private GraphViewModel graphViewModel = new GraphViewModel(new string[0], new string[0]);
+        private GraphViewModel graphViewModel = new GraphViewModel(new TrackedProperty[0], new TrackedProperty[0]);
         private CompetitionTeamsViewModel competitionTeamsViewModel = new CompetitionTeamsViewModel();
         private TabletViewModel tabletViewModel = new TabletViewModel();
         private NotificationViewModel notificationViewModel = new NotificationViewModel();
@@ -2703,7 +2712,7 @@ namespace LightMasterMVVM.ViewModels
         {
             matchViewModel.UserControlVisible = false;
             tabletViewModel.UserControlVisible = false;
-            GraphViewModel = new GraphViewModel(new string[0], new string[0]);
+            GraphViewModel = new GraphViewModel(new TrackedProperty[0], new TrackedProperty[0]);
             GraphViewModel.UserControlVisible = true;
             TBAViewModel.UserControlVisible = false;
             CompetitionTeamsViewModel.UserControlVisible = false;

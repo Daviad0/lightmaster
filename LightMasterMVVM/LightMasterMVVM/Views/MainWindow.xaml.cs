@@ -105,7 +105,7 @@ namespace LightMasterMVVM.Views
             ProcessTest();
             checkForInternet();
             TryUSB();
-            NavMessenger.CreateNewGraph += async (string[] trackingProperties, string[] orderingProperties) =>
+            NavMessenger.CreateNewGraph += async (TrackedProperty[] trackingProperties, TrackedProperty[] orderingProperties) =>
             {
                 previouslySelectedName = null;
                 control.GraphViewModel = new GraphViewModel(trackingProperties, orderingProperties);
