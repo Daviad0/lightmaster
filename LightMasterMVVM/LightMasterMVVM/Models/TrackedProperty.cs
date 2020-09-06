@@ -12,6 +12,7 @@ namespace LightMasterMVVM.Models
         private string _OrderTypeProperty;
         private bool _Show;
         private bool _Ascending;
+        private bool _Descending;
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
@@ -77,6 +78,22 @@ namespace LightMasterMVVM.Models
                 if (value != this._Ascending)
                 {
                     this._Ascending = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public bool Descending
+        {
+            get
+            {
+                return this._Descending;
+            }
+
+            set
+            {
+                if (value != this._Descending)
+                {
+                    this._Descending = value;
                     NotifyPropertyChanged();
                 }
             }

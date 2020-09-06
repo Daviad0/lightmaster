@@ -63,56 +63,84 @@ namespace LightMasterMVVM.ViewModels
         private ObservableCollection<TrackedProperty> trackBy = new ObservableCollection<TrackedProperty>();
         private ObservableCollection<TrackedProperty> allOrderOptions = new ObservableCollection<TrackedProperty>()
         {
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Team Number", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Inner PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Outer PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Lower PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Missed PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Inner PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Outer PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Lower PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Missed PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Inner PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Outer PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Lower PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Missed PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Scored PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Shot PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Park Rate", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Climb Rate", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Balance Rate", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Disabled (s)", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Defense Rate", Show = true}
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Team Number", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Inner PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Outer PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Lower PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Missed PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Inner PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Outer PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Lower PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Missed PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Inner PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Outer PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Lower PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Missed PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Scored PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Shot PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Park Rate", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Climb Rate", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Balance Rate", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Disabled (s)", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Defense Rate", Show = true, Ascending = true, Descending = false}
 
         };
         private ObservableCollection<TrackedProperty> allTrackOptions = new ObservableCollection<TrackedProperty>()
         {
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Inner PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Outer PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Lower PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Missed PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Inner PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Outer PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Lower PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Missed PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Inner PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Outer PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Lower PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Missed PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Scored PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Shot PC", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Park Rate", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Climb Rate", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Balance Rate", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Disabled (s)", Show = true},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Defense Rate", Show = true}
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Inner PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Outer PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Lower PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Missed PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Inner PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Outer PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Lower PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "A Missed PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Inner PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Outer PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Lower PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "T Missed PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Scored PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Total Shot PC", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Park Rate", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Climb Rate", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Balance Rate", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Disabled (s)", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Defense Rate", Show = true, Ascending = true, Descending = false}
 
         };
+        public void SetOrderSortValue(string propertyName)
+        {
+            if(OrderedBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault().Ascending)
+            {
+                var itemtochange = OrderedBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault();
+                OrderedBy.Remove(itemtochange);
+                itemtochange.Descending = true;
+                itemtochange.Ascending = false;
+                OrderedBy.Add(itemtochange);
+            }
+            else
+            {
+                var itemtochange = OrderedBy.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault();
+                OrderedBy.Remove(itemtochange);
+                itemtochange.Descending = false;
+                itemtochange.Ascending = true;
+                OrderedBy.Add(itemtochange);
+            }
+            int i = 0;
+            foreach (var fixordernum in OrderedBy.OrderBy(x => x.OrderNum))
+            {
+                fixordernum.OrderNum = i;
+                i++;
+            }
+
+            OrderedBy = new ObservableCollection<TrackedProperty>(OrderedBy.OrderBy(x => x.OrderNum).ToList());
+
+        }
         public void AddOrderProperty(string propertyName)
         {
             if(!OrderedBy.Any(x => x.OrderTypeProperty == propertyName))
             {
-                OrderedBy.Add(new TrackedProperty() { OrderNum = OrderedBy.Count, OrderTypeProperty = propertyName, Show = true });
+                OrderedBy.Add(new TrackedProperty() { OrderNum = OrderedBy.Count, OrderTypeProperty = propertyName, Show = true, Ascending = false, Descending = true });
                 var oldAllItem = AllOrderOptions.Where(x => x.OrderTypeProperty == propertyName).FirstOrDefault();
                 var newAllItem = oldAllItem;
                 newAllItem.Show = false;
@@ -143,6 +171,7 @@ namespace LightMasterMVVM.ViewModels
             foreach(var fixordernum in OrderedBy.OrderBy(x => x.OrderNum))
             {
                 fixordernum.OrderNum = i;
+                i++;
             }
            
             OrderedBy = new ObservableCollection<TrackedProperty>(OrderedBy.OrderBy(x => x.OrderNum).ToList());
@@ -158,6 +187,7 @@ namespace LightMasterMVVM.ViewModels
             foreach (var fixordernum in TrackBy.OrderBy(x => x.OrderNum))
             {
                 fixordernum.OrderNum = i;
+                i++;
             }
             
             TrackBy = new ObservableCollection<TrackedProperty>(TrackBy.OrderBy(x => x.OrderNum).ToList());

@@ -5,7 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LightMasterMVVM.Views.CreateGraph">
   <StackPanel>
-    <Grid ColumnDefinitions="500,200,200" RowDefinitions="620" HorizontalAlignment="Center">
+    <Grid ColumnDefinitions="600,250,250" RowDefinitions="620" HorizontalAlignment="Center">
       <Border Background="#1E1E1E" BorderBrush="Black" Margin="10" BorderThickness="4,0,0,4" Grid.Column="0" Grid.Row="0" CornerRadius="4">
         <Grid ColumnDefinitions="*,*" Margin="10">
           <StackPanel Grid.Column="0" Margin="5,0">
@@ -18,30 +18,29 @@
                       <Border Background="#242424" BorderBrush="#101010" BorderThickness="2,0,0,2" CornerRadius="8" Height="40" Padding="10" Margin="10,5">
                         <Grid ColumnDefinitions="2*,20,20,20">
                           <TextBlock Text="{Binding OrderTypeProperty}" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" FontSize="15" FontWeight="Bold" Grid.Column="0"/>
-                          <Button Grid.Column="1" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.RemoveTrackProperty}" CommandParameter="{Binding OrderTypeProperty}">
+                          
+                          <Button Grid.Column="1" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.ChangeOrderOfTrackPropertyUp}" CommandParameter="{Binding OrderTypeProperty}">
+                            <Button.Template>
+                              <ControlTemplate TargetType="{x:Type Button}">
+                                <TextBlock Text="U" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" FontSize="15" FontWeight="Bold" Grid.Column="3"/>
+                              </ControlTemplate>
+                            </Button.Template>
+                          </Button>
+
+                          <Button Grid.Column="2" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.ChangeOrderOfTrackPropertyDown}" CommandParameter="{Binding OrderTypeProperty}">
+                            <Button.Template>
+                              <ControlTemplate TargetType="{x:Type Button}">
+                                <TextBlock Text="D" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" FontSize="15" FontWeight="Bold" Grid.Column="4"/>
+                              </ControlTemplate>
+                            </Button.Template>
+                          </Button>
+                          <Button Grid.Column="3" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.RemoveTrackProperty}" CommandParameter="{Binding OrderTypeProperty}">
                             <Button.Template>
                               <ControlTemplate TargetType="{x:Type Button}">
                                 <TextBlock Text="x" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="LightPink" FontSize="15" FontWeight="Bold" Grid.Column="1"/>
                               </ControlTemplate>
                             </Button.Template>
                           </Button>
-
-                          <Button Grid.Column="2" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.ChangeOrderOfTrackPropertyUp}" CommandParameter="{Binding OrderTypeProperty}">
-                            <Button.Template>
-                              <ControlTemplate TargetType="{x:Type Button}">
-                                <TextBlock Text="U" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" FontSize="15" FontWeight="Bold" Grid.Column="2"/>
-                              </ControlTemplate>
-                            </Button.Template>
-                          </Button>
-
-                          <Button Grid.Column="3" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.ChangeOrderOfTrackPropertyDown}" CommandParameter="{Binding OrderTypeProperty}">
-                            <Button.Template>
-                              <ControlTemplate TargetType="{x:Type Button}">
-                                <TextBlock Text="D" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" FontSize="15" FontWeight="Bold" Grid.Column="3"/>
-                              </ControlTemplate>
-                            </Button.Template>
-                          </Button>
-
                         </Grid>
 
                       </Border>
@@ -60,16 +59,23 @@
                   <ItemsControl.ItemTemplate>
                     <DataTemplate>
                       <Border Background="#242424" BorderBrush="#101010" BorderThickness="2,0,0,2" CornerRadius="8" Height="40" Padding="10" Margin="10,5">
-                        <Grid ColumnDefinitions="2*,20,20,20">
+                        <Grid ColumnDefinitions="2*,20,20,20,20">
                           <TextBlock Text="{Binding OrderTypeProperty}" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" FontSize="15" FontWeight="Bold" Grid.Column="0"/>
-                          <Button Grid.Column="1" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.RemoveOrderProperty}" CommandParameter="{Binding OrderTypeProperty}">
+                          
+                          <Button Grid.Column="1" IsVisible="{Binding Ascending}" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.SetOrderSortValue}" CommandParameter="{Binding OrderTypeProperty}">
                             <Button.Template>
                               <ControlTemplate TargetType="{x:Type Button}">
-                                <TextBlock Text="x" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="LightPink" FontSize="15" FontWeight="Bold" Grid.Column="1"/>
+                                <TextBlock Text="A" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="LightBlue" FontSize="15" FontWeight="Bold" Grid.Column="2"/>
                               </ControlTemplate>
                             </Button.Template>
                           </Button>
-
+                          <Button Grid.Column="1" IsVisible="{Binding Descending}" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.SetOrderSortValue}" CommandParameter="{Binding OrderTypeProperty}">
+                            <Button.Template>
+                              <ControlTemplate TargetType="{x:Type Button}">
+                                <TextBlock Text="D" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="LightBlue" FontSize="15" FontWeight="Bold" Grid.Column="2"/>
+                              </ControlTemplate>
+                            </Button.Template>
+                          </Button>
                           <Button Grid.Column="2" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.ChangeOrderOfOrderPropertyUp}" CommandParameter="{Binding OrderTypeProperty}">
                             <Button.Template>
                               <ControlTemplate TargetType="{x:Type Button}">
@@ -82,6 +88,13 @@
                             <Button.Template>
                               <ControlTemplate TargetType="{x:Type Button}">
                                 <TextBlock Text="D" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" FontSize="15" FontWeight="Bold" Grid.Column="3"/>
+                              </ControlTemplate>
+                            </Button.Template>
+                          </Button>
+                          <Button Grid.Column="4" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.RemoveOrderProperty}" CommandParameter="{Binding OrderTypeProperty}">
+                            <Button.Template>
+                              <ControlTemplate TargetType="{x:Type Button}">
+                                <TextBlock Text="x" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="LightPink" FontSize="15" FontWeight="Bold" Grid.Column="1"/>
                               </ControlTemplate>
                             </Button.Template>
                           </Button>
