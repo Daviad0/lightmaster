@@ -26,6 +26,8 @@ namespace LightMasterMVVM.Models
         private double _ParkRate;
         private double _ClimbRate;
         private double _BalanceRate;
+        private int _CycleTime;
+        private int _NumCycles;
         private int _Disabled;
         private double _DefenseRate;
         public int TeamNumber
@@ -280,6 +282,38 @@ namespace LightMasterMVVM.Models
                 if (value != this._Disabled)
                 {
                     this._Disabled = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public int CycleTime
+        {
+            get
+            {
+                return this._CycleTime;
+            }
+
+            set
+            {
+                if (value != this._CycleTime)
+                {
+                    this._CycleTime = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public int NumCycles
+        {
+            get
+            {
+                return this._NumCycles;
+            }
+
+            set
+            {
+                if (value != this._NumCycles)
+                {
+                    this._NumCycles = value;
                     NotifyPropertyChanged();
                 }
             }

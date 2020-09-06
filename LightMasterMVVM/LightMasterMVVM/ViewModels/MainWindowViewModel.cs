@@ -82,7 +82,9 @@ namespace LightMasterMVVM.ViewModels
             new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Climb Rate", Show = true, Ascending = true, Descending = false},
             new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Balance Rate", Show = true, Ascending = true, Descending = false},
             new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Disabled (s)", Show = true, Ascending = true, Descending = false},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Defense Rate", Show = true, Ascending = true, Descending = false}
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Defense Rate", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "# of Cycles", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Cycle Time", Show = true, Ascending = true, Descending = false}
 
         };
         private ObservableCollection<TrackedProperty> allTrackOptions = new ObservableCollection<TrackedProperty>()
@@ -105,7 +107,9 @@ namespace LightMasterMVVM.ViewModels
             new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Climb Rate", Show = true, Ascending = true, Descending = false},
             new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Balance Rate", Show = true, Ascending = true, Descending = false},
             new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Disabled (s)", Show = true, Ascending = true, Descending = false},
-            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Defense Rate", Show = true, Ascending = true, Descending = false}
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Defense Rate", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "# of Cycles", Show = true, Ascending = true, Descending = false},
+            new TrackedProperty() { OrderNum = 0, OrderTypeProperty = "Cycle Time (s)", Show = true, Ascending = true, Descending = false}
 
         };
         public void SetOrderSortValue(string propertyName)
@@ -1128,8 +1132,12 @@ namespace LightMasterMVVM.ViewModels
                             modelToAdd.BalanceRate += match.E_Balanced ? 1 : 0;
                             modelToAdd.ParkRate += match.E_Park ? 1 : 0;
                             modelToAdd.ClimbRate += match.E_ClimbSuccess ? 1 : 0;
+                            modelToAdd.CycleTime += match.CycleTime;
+                            modelToAdd.NumCycles += match.NumCycles;
                             m++;
                         }
+                        modelToAdd.CycleTime = modelToAdd.CycleTime / m;
+                        modelToAdd.NumCycles = modelToAdd.NumCycles / m;
                         modelToAdd.TotalInnerPC = totalinner / m;
                         modelToAdd.TotalOuterPC = totalouter / m;
                         modelToAdd.TotalLowerPC = totallower / m;
@@ -1247,6 +1255,14 @@ namespace LightMasterMVVM.ViewModels
                                 trackingtype = "Disabled";
                                 newBarSeries.LabelFormatString = "{0} PC";
                                 break;
+                            case "Cycle Time (s)":
+                                trackingtype = "CycleTime";
+                                newBarSeries.LabelFormatString = "{0} PC";
+                                break;
+                            case "# of Cycles":
+                                trackingtype = "NumCycles";
+                                newBarSeries.LabelFormatString = "{0} PC";
+                                break;
                         }
                         barseries.Add(newBarSeries);
                         allbarseriesproperties.Add(trackingtype);
@@ -1326,6 +1342,14 @@ namespace LightMasterMVVM.ViewModels
                                 break;
                             case "Disabled (s)":
                                 trackingtype = "Disabled";
+
+                                break;
+                            case "Cycle Time (s)":
+                                trackingtype = "CycleTime";
+
+                                break;
+                            case "# of Cycles":
+                                trackingtype = "NumCycles";
 
                                 break;
                         }
@@ -1830,6 +1854,10 @@ namespace LightMasterMVVM.ViewModels
                             newLogEntry.Background = "Gray";
                             break;
                         case 1005:
+                            newLogEntry.Description = "Page Changed to 'After Match'";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 1006:
                             newLogEntry.Description = "Page Changed to 'Confirm Form'";
                             newLogEntry.Background = "Gray";
                             break;
@@ -1891,6 +1919,30 @@ namespace LightMasterMVVM.ViewModels
                             break;
                         case 4031:
                             newLogEntry.Description = "Endgame Balanced Marked as NOT CONTRIBUTED";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 8000:
+                            newLogEntry.Description = "Shooting Location Changed to " + logToParse.Split(":")[2];
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 8001:
+                            newLogEntry.Description = "Loading Location Changed to " + logToParse.Split(":")[2];
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 8010:
+                            newLogEntry.Description = "Defense For Marked as YES";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 8011:
+                            newLogEntry.Description = "Defense For Marked as NO";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 8020:
+                            newLogEntry.Description = "Defense Against Marked as YES";
+                            newLogEntry.Background = "Gray";
+                            break;
+                        case 8021:
+                            newLogEntry.Description = "Defense Against Marked as NO";
                             newLogEntry.Background = "Gray";
                             break;
                         case 9000:
