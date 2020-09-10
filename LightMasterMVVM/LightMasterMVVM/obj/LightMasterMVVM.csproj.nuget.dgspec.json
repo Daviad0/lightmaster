@@ -97,6 +97,10 @@
               "target": "Package",
               "version": "[4.7.0, )"
             },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
             "System.IO.Ports": {
               "target": "Package",
               "version": "[4.7.0, )"
