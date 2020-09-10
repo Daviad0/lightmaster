@@ -116,6 +116,10 @@
             "imobiledevice-net": {
               "target": "Package",
               "version": "[1.3.4, )"
+            },
+            "runtime.osx.10.10-x64.CoreCompat.System.Drawing": {
+              "target": "Package",
+              "version": "[5.8.64, )"
             }
           },
           "imports": [

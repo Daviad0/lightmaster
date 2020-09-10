@@ -424,4 +424,3 @@ C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debu
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debug\netcoreapp3.1\runtimes\osx\lib\netstandard2.0\System.IO.Ports.dll
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.IO.Ports.dll
 C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\bin\Debug\netcoreapp3.1\QRCoder.dll
-C:\Users\djree\source\repos\lightmaster\LightMasterMVVM\LightMasterMVVM\obj\Debug\netcoreapp3.1\LightMasterMVVM.csproj.CoreCompileInputs.cache

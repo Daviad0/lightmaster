@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "SbgWU/yqnw/bA2jgAzChF5jX856kviO6redEilaXL3q3BnBKEYuAgyJhZf539rZi48b6Cxq+rZBkKPtdOx525A==",
+  "dgSpecHash": "pZrRVwpALMB3LViQT73Jslna75cmGHY8yJ9bEJ7kG5gzfezXxguV18UHwrYgdGo0Q/5hSr2BieJumMuJnszbLw==",
   "success": true,
   "projectFilePath": "C:\\Users\\djree\\source\\repos\\lightmaster\\LightMasterMVVM\\LightMasterMVVM\\LightMasterMVVM.csproj",
   "expectedPackageFiles": [
@@ -82,6 +82,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.opensuse.13.2-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.opensuse.13.2-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.opensuse.42.1-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.opensuse.42.1-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\djree\\.nuget\\packages\\runtime.osx-x64.runtime.native.system.io.ports\\4.7.0\\runtime.osx-x64.runtime.native.system.io.ports.4.7.0.nupkg.sha512",
+    "C:\\Users\\djree\\.nuget\\packages\\runtime.osx.10.10-x64.corecompat.system.drawing\\5.8.64\\runtime.osx.10.10-x64.corecompat.system.drawing.5.8.64.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.osx.10.10-x64.runtime.native.system.security.cryptography.apple\\4.3.0\\runtime.osx.10.10-x64.runtime.native.system.security.cryptography.apple.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.osx.10.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.osx.10.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.rhel.7-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.rhel.7-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
