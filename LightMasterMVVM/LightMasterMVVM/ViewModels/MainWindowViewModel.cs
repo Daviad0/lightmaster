@@ -34,6 +34,11 @@ using System.Runtime.InteropServices;
 using SharpDX.Direct2D1;
 using Avalonia.Controls.Primitives;
 using System.Reflection;
+using QRCoder;
+using System.Drawing;
+using Avalonia.Data.Converters;
+using System.Globalization;
+using Avalonia.Media.Imaging;
 
 namespace LightMasterMVVM.ViewModels
 {
@@ -2205,10 +2210,12 @@ namespace LightMasterMVVM.ViewModels
 
         }
     }
+    
     public class TabletViewModel : ViewModelBase
     {
         private List<string> testBTD = new List<string>();
         private string _text = "Test";
+        private Avalonia.Media.Imaging.Bitmap _QRImage;
         private ObservableCollection<string> bluetoothBorderColors = new ObservableCollection<string>(new string[6] { "Gray", "Gray", "Gray", "Gray", "Gray", "Gray" }.ToList());
         private ObservableCollection<string> cableBorderColors = new ObservableCollection<string>(new string[6] { "Gray", "Gray", "Gray", "Gray", "Gray", "Gray" }.ToList());
         private ObservableCollection<string> batteryBorderColors = new ObservableCollection<string>(new string[6] { "Gray", "Gray", "Gray", "Gray", "Gray", "Gray" }.ToList());
@@ -2217,6 +2224,11 @@ namespace LightMasterMVVM.ViewModels
         private ObservableCollection<string> batteryBackgroundColors = new ObservableCollection<string>(new string[6] { "LightGray", "LightGray", "LightGray", "LightGray", "LightGray", "LightGray" }.ToList());
         private ObservableCollection<string> batteryAmounts = new ObservableCollection<string>(new string[6] { "Device Not Initialized", "Device Not Initialized", "Device Not Initialized", "Device Not Initialized", "Device Not Initialized", "Device Not Initialized" }.ToList());
         private ObservableCollection<string> lastPings = new ObservableCollection<string>(new string[6] { "Device Not Initialized", "Device Not Initialized", "Device Not Initialized", "Device Not Initialized", "Device Not Initialized", "Device Not Initialized" }.ToList());
+        public Avalonia.Media.Imaging.Bitmap QRImage
+        {
+            get => _QRImage;
+            set => SetProperty(ref _QRImage, value);
+        }
         public string Text
         {
             get => _text;
@@ -2277,6 +2289,22 @@ namespace LightMasterMVVM.ViewModels
         {
             bluetoothBackgroundColors[0] = "Red";
             Text = "WORK";
+        }
+        public TabletViewModel()
+        {
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode("The text which should be encoded.", QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+            System.Drawing.Bitmap qrCodeImage = qrCode.GetGraphic(20);
+            using (MemoryStream memory = new MemoryStream())
+            {
+                qrCodeImage.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
+                memory.Position = 0;
+
+                //AvIrBitmap is our new Avalonia compatible image. You can pass this to your view
+                QRImage = new Avalonia.Media.Imaging.Bitmap(memory);
+            }
+
         }
 
     }

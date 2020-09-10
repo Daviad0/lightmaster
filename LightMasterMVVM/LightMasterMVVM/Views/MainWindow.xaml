@@ -3,6 +3,7 @@
         xmlns:vm="clr-namespace:LightMasterMVVM.ViewModels"
         xmlns:viewModels="clr-namespace:LightMasterMVVM.ViewModels;assembly=LightMasterMVVM"
         xmlns:screens="clr-namespace:LightMasterMVVM.Views"
+        xmlns:local="clr-namespace:LightMasterMVVM"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -10,7 +11,9 @@
         Title="LightMasterMVVM"
         Background="#121212">
 
+  <Window.Resources>
     
+  </Window.Resources>
   <Window.Styles>
     <Style Selector="Button.menu">
       <Setter Property="Background" Value="#2a7afa"/>
