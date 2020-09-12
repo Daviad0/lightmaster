@@ -1049,7 +1049,8 @@ namespace LightMasterMVVM.ViewModels
                         TitleColor = OxyColors.White,
                         SubtitleColor = OxyColors.White,
                         LegendTextColor = OxyColors.White,
-                        LegendTitleColor = OxyColors.White
+                        LegendTitleColor = OxyColors.White,
+                        SelectionColor = OxyColors.Black
                     };
 
                     List<FRCTeamModel> frcTeams = db.FRCTeams.Where(x => x.event_key == new GetEventCode().EventCode()).ToList();
@@ -1284,7 +1285,7 @@ namespace LightMasterMVVM.ViewModels
                         switch (rawordertype.OrderTypeProperty)
                         {
                             case "Team Number":
-                                trackingtype = "TeamNumbers";
+                                trackingtype = "TeamNumber";
                                 break;
                             case "Total Inner PC":
                                 trackingtype = "TotalInnerPC";
@@ -2299,7 +2300,7 @@ namespace LightMasterMVVM.ViewModels
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeData = qrGenerator.CreateQrCode("LRSSQR>862>David Reeves>R1>0000>2", QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
-            System.Drawing.Bitmap qrCodeImage = qrCode.GetGraphic(20, Color.FromArgb(15,63,140), Color.White, icon:bitmap, drawQuietZones:false, iconSizePercent:30, iconBorderWidth:10);
+            System.Drawing.Bitmap qrCodeImage = qrCode.GetGraphic(20, Color.FromArgb(15, 63, 140), Color.White, false);
             using (MemoryStream memory = new MemoryStream())
             {
                 qrCodeImage.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
