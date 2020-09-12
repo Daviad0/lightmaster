@@ -39,6 +39,8 @@ using System.Drawing;
 using Avalonia.Data.Converters;
 using System.Globalization;
 using Avalonia.Media.Imaging;
+using Avalonia;
+using Avalonia.Platform;
 
 namespace LightMasterMVVM.ViewModels
 {
@@ -2292,10 +2294,12 @@ namespace LightMasterMVVM.ViewModels
         }
         public TabletViewModel()
         {
+            var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
+            var bitmap = new System.Drawing.Bitmap(assets.Open(new Uri("resm:LightMasterMVVM.Assets.LightScoutThick.png")));
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode("The text which should be encoded.", QRCodeGenerator.ECCLevel.Q);
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode("LRSSQR>862>David Reeves>R1>0000>2", QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
-            System.Drawing.Bitmap qrCodeImage = qrCode.GetGraphic(20);
+            System.Drawing.Bitmap qrCodeImage = qrCode.GetGraphic(20, Color.FromArgb(15,63,140), Color.White, icon:bitmap, drawQuietZones:false, iconSizePercent:30, iconBorderWidth:10);
             using (MemoryStream memory = new MemoryStream())
             {
                 qrCodeImage.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
