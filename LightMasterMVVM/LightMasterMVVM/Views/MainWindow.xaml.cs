@@ -74,7 +74,7 @@ namespace LightMasterMVVM.Views
 
             
             nav_see_matches = this.Find<Button>("seeMatches");
-            nav_see_matches.Click += NavigationChange;
+            nav_see_matches.Click += UseGivenDataBeta;
             nav_see_graph = this.Find<Button>("seeGraph");
             nav_see_graph.Click += NavigationChange;
             nav_see_tablets = this.Find<Button>("seeTablets");
@@ -870,6 +870,109 @@ namespace LightMasterMVVM.Views
                     internet_status.Opacity = 1;
                 }
             }
+        }
+        public void UseGivenDataBeta(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            AuthenticationLevel Lock = AuthenticationLevel.Authorized;
+            AuthenticationLevel CurrentAuthLevel = AuthenticationLevel.Authorized;
+            string testinput = "R1:a-12345678:01:@12:00*Y>>(data)";
+            /*
+             FORMAT STRING EXAMPLE:
+
+             R1:a-12345678:01:@12:00*Y>>(data)
+
+            RETURN EXAMPLE:
+
+            S!0^a-12345678>>ABCD
+
+             */
+            string tabletid = testinput.Substring(0, 2);
+            TimeSpan timeOfRequest = TimeSpan.Parse(testinput.Substring(18, 5));
+            string uniqueId = testinput.Substring(3, 10);
+            TabletOS deviceOS = (testinput.Substring(3, 1) == "i") ? TabletOS.iOS : TabletOS.Android;
+            int messageType = int.Parse(testinput.Substring(14, 2));
+            string responseExpectation = testinput.Substring(24, 1);
+            string data = testinput.Substring(27);
+            if(CurrentAuthLevel >= Lock)
+            {
+                Console.WriteLine("Authenticated");
+                switch (messageType)
+                {
+                    case 0:
+                        //CRIT EMERGENCY
+                        break;
+                    case 1:
+                        //TECH EMERGENCY
+                        break;
+                    case 2:
+                        //BATTERY NOTICE
+                        break;
+                    case 4:
+                        //DIAGNOSTIC REPORT
+                        break;
+                    case 5:
+                        //DEVICE LOG REPORT
+                        break;
+                    case 6:
+                        //AUTHORIZATION REQUEST
+                        break;
+                    case 7:
+                        //ADMINISTRATOR REQUEST
+                        break;
+                    case 10:
+                        //SCORE REPORT
+                        break;
+                    case 11:
+                        //TBA CHECKING REPORT
+                        break;
+                    case 12:
+                        //TBA MATCHUP REPORT
+                        break;
+                    case 13:
+                        //CHANGE IDENTIFIER NOTICE
+                        break;
+                    case 20:
+                        //MATCH REQUEST
+                        break;
+                    case 21:
+                        //CONFIG REQUEST
+                        break;
+                    case 22:
+                        //SYNC AUTH LEVEL
+                        break;
+                    case 40:
+                        //DATABASE AUTHORIZATION CHECK
+                        break;
+                    case 41:
+                        //DATABASE SELECT REQUEST
+                        break;
+                    case 42:
+                        //DATABASE EDIT REQUEST
+                        break;
+                    case 43:
+                        //DATABASE SAFE CLOSE CONNECTION
+                        break;
+                    
+                }
+            }
+            else
+            {
+                Console.WriteLine("Not Powerful Enough");
+            }
+            Console.WriteLine("Test Parse Completed");
+            
+        }
+        public enum TabletOS
+        {
+            iOS,
+            Android
+        }
+        public enum AuthenticationLevel
+        {
+            Unauthorized,
+            Guest,
+            Authorized,
+            Administrator
         }
         public void UseGivenData(string rawdata, bool bluetooth)
         {
