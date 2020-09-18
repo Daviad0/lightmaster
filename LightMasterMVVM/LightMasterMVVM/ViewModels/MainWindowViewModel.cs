@@ -2286,39 +2286,47 @@ namespace LightMasterMVVM.ViewModels
                 //AvIrBitmap is our new Avalonia compatible image. You can pass this to your view
                 QRImage = new Avalonia.Media.Imaging.Bitmap(memory);
             }*/
-            using(var db = new ScoutingContext())
+            try
             {
-                var allTablets = db.TabletInstances.ToList();
-                var allTabletViews = new ObservableCollection<TabletDataViewModel>();
-                foreach(var dbtablet in allTablets)
+                using (var db = new ScoutingContext())
                 {
-                    TabletDataViewModel newTabletViewModel = new TabletDataViewModel();
-                    switch (dbtablet.AuthenticationLevel)
+                    var allTablets = db.TabletInstances.ToList();
+                    var allTabletViews = new ObservableCollection<TabletDataViewModel>();
+                    foreach (var dbtablet in allTablets)
                     {
-                        case 0:
-                            newTabletViewModel.AuthenticationLevel = "Unauthorized";
-                            break;
-                        case 1:
-                            newTabletViewModel.AuthenticationLevel = "Guest";
-                            break;
-                        case 2:
-                            newTabletViewModel.AuthenticationLevel = "Authorized";
-                            break;
-                        case 3:
-                            newTabletViewModel.AuthenticationLevel = "Administrator";
-                            break;
+                        TabletDataViewModel newTabletViewModel = new TabletDataViewModel();
+                        switch (dbtablet.AuthenticationLevel)
+                        {
+                            case 0:
+                                newTabletViewModel.AuthenticationLevel = "Unauthorized";
+                                break;
+                            case 1:
+                                newTabletViewModel.AuthenticationLevel = "Guest";
+                                break;
+                            case 2:
+                                newTabletViewModel.AuthenticationLevel = "Authorized";
+                                break;
+                            case 3:
+                                newTabletViewModel.AuthenticationLevel = "Administrator";
+                                break;
+                        }
+                        newTabletViewModel.BatteryLevel = dbtablet.LastKnownBattery.ToString() + "%";
+                        newTabletViewModel.BatteryLevelColor = (dbtablet.LastKnownBattery > 50) ? "Green" : "Red";
+                        newTabletViewModel.Identifier = dbtablet.Identifier;
+                        newTabletViewModel.LastSubmittedTest = dbtablet.LastCommunicated.Hour.ToString("00") + ":" + dbtablet.LastCommunicated.Minute.ToString("00");
+                        newTabletViewModel.TabletColorBackground = dbtablet.ColorId.StartsWith("B") ? "Blue" : "Red";
+                        newTabletViewModel.TabletColorName = dbtablet.ColorId;
+                        newTabletViewModel.TabletName = dbtablet.TabletName;
+                        allTabletViews.Add(newTabletViewModel);
                     }
-                    newTabletViewModel.BatteryLevel = dbtablet.LastKnownBattery.ToString() + "%";
-                    newTabletViewModel.BatteryLevelColor = (dbtablet.LastKnownBattery > 50) ? "Green" : "Red";
-                    newTabletViewModel.Identifier = dbtablet.Identifier;
-                    newTabletViewModel.LastSubmittedTest = dbtablet.LastCommunicated.Hour.ToString("00") + ":" + dbtablet.LastCommunicated.Minute.ToString("00");
-                    newTabletViewModel.TabletColorBackground = dbtablet.ColorId.StartsWith("B") ? "Blue" : "Red";
-                    newTabletViewModel.TabletColorName = dbtablet.ColorId;
-                    newTabletViewModel.TabletName = dbtablet.TabletName;
-                    allTabletViews.Add(newTabletViewModel);
+                    Tablets = allTabletViews;
                 }
-                Tablets = allTabletViews;
             }
+            catch(Exception ex)
+            {
+
+            }
+            
 
         }
 
