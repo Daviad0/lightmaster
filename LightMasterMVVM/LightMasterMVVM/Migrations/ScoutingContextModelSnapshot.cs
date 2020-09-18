@@ -65,6 +65,34 @@ namespace LightMasterMVVM.Migrations
                     b.ToTable("TBAMatches");
                 });
 
+            modelBuilder.Entity("LightMasterMVVM.Models.TabletInstance", b =>
+                {
+                    b.Property<string>("Identifier")
+                        .HasColumnType("text");
+
+                    b.Property<int>("AuthenticationLevel")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ColorId")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("DiagnosticReportReceived")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("LastCommunicated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("LastKnownBattery")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TabletName")
+                        .HasColumnType("text");
+
+                    b.HasKey("Identifier");
+
+                    b.ToTable("TabletInstances");
+                });
+
             modelBuilder.Entity("LightMasterMVVM.Models.TeamMatch", b =>
                 {
                     b.Property<int>("MatchID")

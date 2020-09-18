@@ -2434,7 +2434,7 @@ namespace LightMasterMVVM.ViewModels
                 items.Add(d.DeviceName);
                 Console.WriteLine(d.DeviceName);
             }
-            tabletViewModel.TestBTD = items;
+            //tabletViewModel.TestBTD = items;
         }
         
 

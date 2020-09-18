@@ -115,7 +115,7 @@ red1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
     {
       instanceToChange.messagesleft = instanceToChange - 1;
       instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(24)
-      if(instanceToChange.messagesleft = 0){
+      if(instanceToChange.messagesleft < 1){
         sendtomaster("R1", (instanceToChange.rawheader + ">>" + instanceToChange.rawmessage))
       }
     }
@@ -152,7 +152,7 @@ red2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
     {
       instanceToChange.messagesleft = instanceToChange - 1;
       instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(24)
-      if(instanceToChange.messagesleft = 0){
+      if(instanceToChange.messagesleft < 1){
         sendtomaster("R2", (instanceToChange.rawheader + ">>" + instanceToChange.rawmessage))
       }
     }
@@ -190,7 +190,7 @@ red3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
     {
       instanceToChange.messagesleft = instanceToChange - 1;
       instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(24)
-      if(instanceToChange.messagesleft = 0){
+      if(instanceToChange.messagesleft < 1){
         sendtomaster("R3", (instanceToChange.rawheader + ">>" + instanceToChange.rawmessage))
       }
     }
@@ -228,7 +228,7 @@ blue1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
     {
       instanceToChange.messagesleft = instanceToChange - 1;
       instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(24)
-      if(instanceToChange.messagesleft = 0){
+      if(instanceToChange.messagesleft < 1){
         sendtomaster("B1", (instanceToChange.rawheader + ">>" + instanceToChange.rawmessage))
       }
     }
@@ -266,7 +266,7 @@ blue2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
     {
       instanceToChange.messagesleft = instanceToChange - 1;
       instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(24)
-      if(instanceToChange.messagesleft = 0){
+      if(instanceToChange.messagesleft < 1){
         sendtomaster("B2", (instanceToChange.rawheader + ">>" + instanceToChange.rawmessage))
       }
     }
@@ -304,7 +304,7 @@ blue3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
     {
       instanceToChange.messagesleft = instanceToChange - 1;
       instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(24)
-      if(instanceToChange.messagesleft = 0){
+      if(instanceToChange.messagesleft < 1){
         sendtomaster("B3", (instanceToChange.rawheader + ">>" + instanceToChange.rawmessage))
       }
     }
