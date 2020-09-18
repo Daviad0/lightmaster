@@ -2213,34 +2213,15 @@ namespace LightMasterMVVM.ViewModels
 
         }
     }
-    
+
     public class TabletViewModel : ViewModelBase
     {
-        private List<string> testBTD = new List<string>();
-        private string _text = "Test";
         private Avalonia.Media.Imaging.Bitmap _QRImage;
-        private ObservableCollection<string> bluetoothBorderColors = new ObservableCollection<string>(new string[6] { "Gray", "Gray", "Gray", "Gray", "Gray", "Gray" }.ToList());
-        private ObservableCollection<string> cableBorderColors = new ObservableCollection<string>(new string[6] { "Gray", "Gray", "Gray", "Gray", "Gray", "Gray" }.ToList());
-        private ObservableCollection<string> batteryBorderColors = new ObservableCollection<string>(new string[6] { "Gray", "Gray", "Gray", "Gray", "Gray", "Gray" }.ToList());
-        private ObservableCollection<string> bluetoothBackgroundColors = new ObservableCollection<string>(new string[6] { "LightGray", "LightGray", "LightGray", "LightGray", "LightGray", "LightGray" }.ToList());
-        private ObservableCollection<string> cableBackgroundColors = new ObservableCollection<string>(new string[6] { "LightGray", "LightGray", "LightGray", "LightGray", "LightGray", "LightGray" }.ToList());
-        private ObservableCollection<string> batteryBackgroundColors = new ObservableCollection<string>(new string[6] { "LightGray", "LightGray", "LightGray", "LightGray", "LightGray", "LightGray" }.ToList());
-        private ObservableCollection<string> batteryAmounts = new ObservableCollection<string>(new string[6] { "Device Not Initialized", "Device Not Initialized", "Device Not Initialized", "Device Not Initialized", "Device Not Initialized", "Device Not Initialized" }.ToList());
-        private ObservableCollection<string> lastPings = new ObservableCollection<string>(new string[6] { "Device Not Initialized", "Device Not Initialized", "Device Not Initialized", "Device Not Initialized", "Device Not Initialized", "Device Not Initialized" }.ToList());
+        private ObservableCollection<TabletDataViewModel> tablets = new ObservableCollection<TabletDataViewModel>();
         public Avalonia.Media.Imaging.Bitmap QRImage
         {
             get => _QRImage;
             set => SetProperty(ref _QRImage, value);
-        }
-        public string Text
-        {
-            get => _text;
-            set => SetProperty(ref _text, value);
-        }
-        public List<string> TestBTD
-        {
-            get => testBTD;
-            set => SetProperty(ref testBTD, value);
         }
         private bool userControlVisible = false;
         public bool UserControlVisible
@@ -2248,54 +2229,50 @@ namespace LightMasterMVVM.ViewModels
             get => userControlVisible;
             set => SetProperty(ref userControlVisible, value);
         }
-        public ObservableCollection<string> BluetoothBorderColors
+        public ObservableCollection<TabletDataViewModel> Tablets
         {
-            get => bluetoothBorderColors;
-            set => SetProperty(ref bluetoothBorderColors, value);
+            get => tablets;
+            set => SetProperty(ref tablets, value);
         }
-        public ObservableCollection<string> CableBorderColors
+        public void UpdateValues()
         {
-            get => cableBorderColors;
-            set => SetProperty(ref cableBorderColors, value);
-        }
-        public ObservableCollection<string> BatteryBorderColors
-        {
-            get => batteryBorderColors;
-            set => SetProperty(ref batteryBorderColors, value);
-        }
-        public ObservableCollection<string> BluetoothBackgroundColors
-        {
-            get => bluetoothBackgroundColors;
-            set => SetProperty(ref bluetoothBackgroundColors, value);
-        }
-        public ObservableCollection<string> CableBackgroundColors
-        {
-            get => cableBackgroundColors;
-            set => SetProperty(ref cableBackgroundColors, value);
-        }
-        public ObservableCollection<string> BatteryBackgroundColors
-        {
-            get => batteryBackgroundColors;
-            set => SetProperty(ref batteryBackgroundColors, value);
-        }
-        public ObservableCollection<string> BatteryAmounts
-        {
-            get => batteryAmounts;
-            set => SetProperty(ref batteryAmounts, value);
-        }
-        public ObservableCollection<string> LastPings
-        {
-            get => lastPings;
-            set => SetProperty(ref lastPings, value);
-        }
-        public void SetTest()
-        {
-            bluetoothBackgroundColors[0] = "Red";
-            Text = "WORK";
+            using (var db = new ScoutingContext())
+            {
+                var allTablets = db.TabletInstances.ToList();
+                var allTabletViews = new ObservableCollection<TabletDataViewModel>();
+                foreach (var dbtablet in allTablets)
+                {
+                    TabletDataViewModel newTabletViewModel = new TabletDataViewModel();
+                    switch (dbtablet.AuthenticationLevel)
+                    {
+                        case 0:
+                            newTabletViewModel.AuthenticationLevel = "Unauthorized";
+                            break;
+                        case 1:
+                            newTabletViewModel.AuthenticationLevel = "Guest";
+                            break;
+                        case 2:
+                            newTabletViewModel.AuthenticationLevel = "Authorized";
+                            break;
+                        case 3:
+                            newTabletViewModel.AuthenticationLevel = "Administrator";
+                            break;
+                    }
+                    newTabletViewModel.BatteryLevel = dbtablet.LastKnownBattery.ToString() + "%";
+                    newTabletViewModel.BatteryLevelColor = (dbtablet.LastKnownBattery > 50) ? "Green" : "Red";
+                    newTabletViewModel.Identifier = dbtablet.Identifier;
+                    newTabletViewModel.LastSubmittedTest = dbtablet.LastCommunicated.Hour.ToString("00") + ":" + dbtablet.LastCommunicated.Minute.ToString("00");
+                    newTabletViewModel.TabletColorBackground = dbtablet.ColorId.StartsWith("B") ? "Blue" : "Red";
+                    newTabletViewModel.TabletColorName = dbtablet.ColorId;
+                    newTabletViewModel.TabletName = dbtablet.TabletName;
+                    allTabletViews.Add(newTabletViewModel);
+                }
+                Tablets = allTabletViews;
+            }
         }
         public TabletViewModel()
         {
-            var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
+            /*var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
             var bitmap = new System.Drawing.Bitmap(assets.Open(new Uri("resm:LightMasterMVVM.Assets.LightScoutThick.png")));
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeData = qrGenerator.CreateQrCode("LRSSQR>862>David Reeves>R1>0000>2", QRCodeGenerator.ECCLevel.Q);
@@ -2308,6 +2285,39 @@ namespace LightMasterMVVM.ViewModels
 
                 //AvIrBitmap is our new Avalonia compatible image. You can pass this to your view
                 QRImage = new Avalonia.Media.Imaging.Bitmap(memory);
+            }*/
+            using(var db = new ScoutingContext())
+            {
+                var allTablets = db.TabletInstances.ToList();
+                var allTabletViews = new ObservableCollection<TabletDataViewModel>();
+                foreach(var dbtablet in allTablets)
+                {
+                    TabletDataViewModel newTabletViewModel = new TabletDataViewModel();
+                    switch (dbtablet.AuthenticationLevel)
+                    {
+                        case 0:
+                            newTabletViewModel.AuthenticationLevel = "Unauthorized";
+                            break;
+                        case 1:
+                            newTabletViewModel.AuthenticationLevel = "Guest";
+                            break;
+                        case 2:
+                            newTabletViewModel.AuthenticationLevel = "Authorized";
+                            break;
+                        case 3:
+                            newTabletViewModel.AuthenticationLevel = "Administrator";
+                            break;
+                    }
+                    newTabletViewModel.BatteryLevel = dbtablet.LastKnownBattery.ToString() + "%";
+                    newTabletViewModel.BatteryLevelColor = (dbtablet.LastKnownBattery > 50) ? "Green" : "Red";
+                    newTabletViewModel.Identifier = dbtablet.Identifier;
+                    newTabletViewModel.LastSubmittedTest = dbtablet.LastCommunicated.Hour.ToString("00") + ":" + dbtablet.LastCommunicated.Minute.ToString("00");
+                    newTabletViewModel.TabletColorBackground = dbtablet.ColorId.StartsWith("B") ? "Blue" : "Red";
+                    newTabletViewModel.TabletColorName = dbtablet.ColorId;
+                    newTabletViewModel.TabletName = dbtablet.TabletName;
+                    allTabletViews.Add(newTabletViewModel);
+                }
+                Tablets = allTabletViews;
             }
 
         }

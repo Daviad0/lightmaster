@@ -9,9 +9,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LightMasterMVVM.Views.Tablets">
+  <UserControl.Styles>
+    <Style Selector="Button.confirmbutton">
+      <Setter Property="Background" Value="White"/>
+      <Setter Property="Foreground" Value="#1E1E1E"/>
+    </Style>
+    <Style Selector="Button.confirmbutton/template/ContentPresenter">
+      <Setter Property = "CornerRadius" Value = "6" />
+    </Style>
+  </UserControl.Styles>
   <!--<UserControl.DataContext>
     <vm:TabletViewModel/>
   </UserControl.DataContext>-->
+  <!--
   <Grid ColumnDefinitions="260,260,260" RowDefinitions="300,300" HorizontalAlignment="Center">
     <Border Background="#1E1E1E" BorderBrush="Black" BorderThickness="3,0,0,3" Height="300" Width="240" CornerRadius="6" Grid.Row="0" Grid.Column="0" Margin="7">
       <Grid ColumnDefinitions="*" RowDefinitions="230,50" VerticalAlignment="Center">
@@ -122,5 +132,80 @@
 
       </Grid>
     </Border>
-  </Grid>
+  </Grid>-->
+  <StackPanel>
+    <Border Margin="5" Background="#1E1E1E" BorderBrush="Black" BorderThickness="3,0,0,3" CornerRadius="6" Height="50" Width="900">
+      <Grid ColumnDefinitions="120,120,50,80,200,120,150" Margin="10,0">
+        <TextBlock Text="Identifier" FontSize="15" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Grid.Column="0"/>
+        <TextBlock Text="Name" FontSize="15" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Grid.Column="1"/>
+        <TextBlock Text="Color" FontSize="15" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Grid.Column="2"/>
+        <TextBlock Text="Battery" FontSize="15" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Grid.Column="3"/>
+        <TextBlock Text="Last Communicated" FontSize="15" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Grid.Column="4"/>
+        <TextBlock Text="Auth Level" FontSize="15" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Grid.Column="5"/>
+        <TextBlock Text="Options" Margin="5,0,0,0" FontSize="15" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Grid.Column="6"/>
+      </Grid>
+    </Border>
+    <ScrollViewer Height="750" VerticalScrollBarVisibility="Hidden" >
+      <ItemsControl Items="{Binding Tablets}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <Border Margin="5" Background="#1E1E1E" BorderBrush="Black" BorderThickness="3,0,0,3" CornerRadius="6" Height="50" Width="900">
+              <Grid ColumnDefinitions="120,120,50,80,200,120,150" Margin="10,0">
+                <TextBlock Text="{Binding Identifier}" FontSize="15" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0"/>
+                <TextBlock Text="{Binding TabletName}" FontSize="11" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1"/>
+                <Border HorizontalAlignment="Left" Background="{Binding TabletColorBackground}" CornerRadius="4" Width="40" Height="30" Grid.Column="2">
+                  <TextBlock Text="{Binding TabletColorName}" Foreground="White" FontSize="16" FontWeight="Bold" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+
+                <TextBlock Text="{Binding BatteryLevel}" FontSize="15" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="{Binding BatteryLevelColor}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="3"/>
+                <TextBlock Text="{Binding LastSubmittedTest}" FontSize="15" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="4"/>
+                <TextBlock Text="{Binding AuthenticationLevel}" FontSize="15" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="5"/>
+                <Grid Grid.Column="6" ColumnDefinitions="32,32,32,32">
+                  <Button FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" ToolTip.Tip="Unauthorize" Grid.Column="0" Width="36" Height="36">
+                    <Button.Template>
+                      <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="White" CornerRadius="4" Margin="5">
+                          <Image Source="resm:LightMasterMVVM.Assets.ban.png" Margin="5"/>
+                        </Border>
+
+                      </ControlTemplate>
+                    </Button.Template>
+                  </Button>
+                  <Button FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" ToolTip.Tip="Increase Authentication Level" Grid.Column="1" Width="36" Height="36">
+                    <Button.Template>
+                      <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="White" CornerRadius="4" Margin="5">
+                          <Image Source="resm:LightMasterMVVM.Assets.minus.png" Margin="3"/>
+                        </Border>
+                      </ControlTemplate>
+                    </Button.Template>
+                  </Button>
+                  <Button FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" ToolTip.Tip="Decrease Authentication Level" Grid.Column="2" Width="36" Height="36">
+                    <Button.Template>
+                      <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="White" CornerRadius="4" Margin="5">
+                          <Image Source="resm:LightMasterMVVM.Assets.plus.png" Margin="6"/>
+                        </Border>
+                      </ControlTemplate>
+                    </Button.Template>
+                  </Button>
+                  <Button FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" ToolTip.Tip="Terminate Database Entry (double click)" Grid.Column="3" Width="36" Height="36">
+                    <Button.Template>
+                      <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="White" CornerRadius="4" Margin="5">
+                          <Image Source="resm:LightMasterMVVM.Assets.close.png" Margin="3"/>
+                        </Border>
+                      </ControlTemplate>
+                    </Button.Template>
+                  </Button>
+                </Grid>
+              </Grid>
+            </Border>
+
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </ScrollViewer>
+    
+  </StackPanel>
 </UserControl>

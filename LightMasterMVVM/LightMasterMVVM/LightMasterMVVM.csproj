@@ -13,6 +13,7 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
+    <AvaloniaResource Remove="Assets\ban.png" />
     <AvaloniaResource Remove="Assets\battery-full.png" />
     <AvaloniaResource Remove="Assets\Blue1Tablet.png" />
     <AvaloniaResource Remove="Assets\Blue2Tablet.png" />
@@ -21,15 +22,18 @@
     <AvaloniaResource Remove="Assets\bluetoothlogo.png" />
     <AvaloniaResource Remove="Assets\caret-down.png" />
     <AvaloniaResource Remove="Assets\caret-up.png" />
+    <AvaloniaResource Remove="Assets\close.png" />
     <AvaloniaResource Remove="Assets\database-white.png" />
     <AvaloniaResource Remove="Assets\icofont.ttf" />
     <AvaloniaResource Remove="Assets\LightScoutLogo.png" />
     <AvaloniaResource Remove="Assets\LightScoutQR.png" />
     <AvaloniaResource Remove="Assets\LightScoutQRThin.png" />
     <AvaloniaResource Remove="Assets\LightScoutThick.png" />
+    <AvaloniaResource Remove="Assets\minus.png" />
     <AvaloniaResource Remove="Assets\optionselected.png" />
     <AvaloniaResource Remove="Assets\plugin.png" />
     <AvaloniaResource Remove="Assets\plugin.svg" />
+    <AvaloniaResource Remove="Assets\plus.png" />
     <AvaloniaResource Remove="Assets\Red1Tablet.png" />
     <AvaloniaResource Remove="Assets\Red2Tablet.png" />
     <AvaloniaResource Remove="Assets\Red3Tablet.png" />
@@ -50,6 +54,7 @@
     <AvaloniaResource Remove="Views\TheBlueAlliance.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Assets\ban.png" />
     <None Remove="Assets\battery-full.png" />
     <None Remove="Assets\Blue1Tablet.png" />
     <None Remove="Assets\Blue2Tablet.png" />
@@ -58,15 +63,18 @@
     <None Remove="Assets\bluetoothlogo.png" />
     <None Remove="Assets\caret-down.png" />
     <None Remove="Assets\caret-up.png" />
+    <None Remove="Assets\close.png" />
     <None Remove="Assets\database-white.png" />
     <None Remove="Assets\icofont.ttf" />
     <None Remove="Assets\LightScoutLogo.png" />
     <None Remove="Assets\LightScoutQR.png" />
     <None Remove="Assets\LightScoutQRThin.png" />
     <None Remove="Assets\LightScoutThick.png" />
+    <None Remove="Assets\minus.png" />
     <None Remove="Assets\optionselected.png" />
     <None Remove="Assets\plugin.png" />
     <None Remove="Assets\plugin.svg" />
+    <None Remove="Assets\plus.png" />
     <None Remove="Assets\Red1Tablet.png" />
     <None Remove="Assets\Red2Tablet.png" />
     <None Remove="Assets\Red3Tablet.png" />
@@ -86,6 +94,14 @@
     <None Remove="Views\TabletLogs.xaml" />
     <None Remove="Views\Tablets.xaml" />
     <None Remove="Views\TheBlueAlliance.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\ban.png" />
+    <EmbeddedResource Include="Assets\minus.png" />
+    <EmbeddedResource Include="Assets\plus.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\LightScoutThick.png" />

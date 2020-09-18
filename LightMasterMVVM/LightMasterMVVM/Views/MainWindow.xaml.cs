@@ -74,7 +74,7 @@ namespace LightMasterMVVM.Views
 
             
             nav_see_matches = this.Find<Button>("seeMatches");
-            nav_see_matches.Click += UseGivenDataBeta;
+            nav_see_matches.Click += NavigationChange;
             nav_see_graph = this.Find<Button>("seeGraph");
             nav_see_graph.Click += NavigationChange;
             nav_see_tablets = this.Find<Button>("seeTablets");
@@ -805,7 +805,7 @@ namespace LightMasterMVVM.Views
                     else
                     {
                         string rawdata = msg.Text;
-                        UseGivenData(rawdata, true);
+                        UseGivenDataBeta(rawdata, true);
                     }
 
 
@@ -871,11 +871,10 @@ namespace LightMasterMVVM.Views
                 }
             }
         }
-        public void UseGivenDataBeta(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        public void UseGivenDataBeta(string rawdata, bool bluetooth)
         {
             AuthenticationLevel Lock = AuthenticationLevel.Authorized;
             AuthenticationLevel CurrentAuthLevel = AuthenticationLevel.Authorized;
-            string testinput = "R1:a-12345678:01:@12:00*Y>>(data)";
             /*
              FORMAT STRING EXAMPLE:
 
@@ -886,79 +885,192 @@ namespace LightMasterMVVM.Views
             S!0^a-12345678>>ABCD
 
              */
-            string tabletid = testinput.Substring(0, 2);
-            TimeSpan timeOfRequest = TimeSpan.Parse(testinput.Substring(18, 5));
-            string uniqueId = testinput.Substring(3, 10);
-            TabletOS deviceOS = (testinput.Substring(3, 1) == "i") ? TabletOS.iOS : TabletOS.Android;
-            int messageType = int.Parse(testinput.Substring(14, 2));
-            string responseExpectation = testinput.Substring(24, 1);
-            string data = testinput.Substring(27);
-            if(CurrentAuthLevel >= Lock)
+            string tabletid = rawdata.Substring(0, 2);
+            TimeSpan timeOfRequest = TimeSpan.Parse(rawdata.Substring(18, 5));
+            string uniqueId = rawdata.Substring(3, 10);
+            TabletOS deviceOS = (rawdata.Substring(3, 1) == "i") ? TabletOS.iOS : TabletOS.Android;
+            int messageType = int.Parse(rawdata.Substring(14, 2));
+            string responseExpectation = rawdata.Substring(24, 1);
+            string data = rawdata.Substring(27);
+            using(var db = new ScoutingContext()) 
             {
-                Console.WriteLine("Authenticated");
-                switch (messageType)
+                if (CurrentAuthLevel >= Lock)
                 {
-                    case 0:
-                        //CRIT EMERGENCY
-                        break;
-                    case 1:
-                        //TECH EMERGENCY
-                        break;
-                    case 2:
-                        //BATTERY NOTICE
-                        break;
-                    case 4:
-                        //DIAGNOSTIC REPORT
-                        break;
-                    case 5:
-                        //DEVICE LOG REPORT
-                        break;
-                    case 6:
-                        //AUTHORIZATION REQUEST
-                        break;
-                    case 7:
-                        //ADMINISTRATOR REQUEST
-                        break;
-                    case 10:
-                        //SCORE REPORT
-                        break;
-                    case 11:
-                        //TBA CHECKING REPORT
-                        break;
-                    case 12:
-                        //TBA MATCHUP REPORT
-                        break;
-                    case 13:
-                        //CHANGE IDENTIFIER NOTICE
-                        break;
-                    case 20:
-                        //MATCH REQUEST
-                        break;
-                    case 21:
-                        //CONFIG REQUEST
-                        break;
-                    case 22:
-                        //SYNC AUTH LEVEL
-                        break;
-                    case 40:
-                        //DATABASE AUTHORIZATION CHECK
-                        break;
-                    case 41:
-                        //DATABASE SELECT REQUEST
-                        break;
-                    case 42:
-                        //DATABASE EDIT REQUEST
-                        break;
-                    case 43:
-                        //DATABASE SAFE CLOSE CONNECTION
-                        break;
-                    
+                    var instanceOfTablet = db.TabletInstances.Where(x => x.Identifier == uniqueId).FirstOrDefault();
+                    if(instanceOfTablet == null)
+                    {
+                        instanceOfTablet = new TabletInstance() { Identifier = uniqueId, AuthenticationLevel = 1, ColorId = tabletid, LastCommunicated = DateTime.Now, DiagnosticReportReceived = DateTime.Now };
+                        try
+                        {
+                            db.TabletInstances.Add(instanceOfTablet);
+                        }
+                        catch(Exception ex)
+                        {
+
+                        }
+                        
+                    }
+                    Console.WriteLine("Authenticated");
+                    instanceOfTablet.LastCommunicated = DateTime.Now;
+                    switch (messageType)
+                    {
+                        case 0:
+                            //CRIT EMERGENCY
+                            break;
+                        case 1:
+                            //TECH EMERGENCY
+                            break;
+                        case 2:
+                            //BATTERY NOTICE
+                            break;
+                        case 4:
+                            //DIAGNOSTIC REPORT
+                            break;
+                        case 5:
+                            //DEVICE LOG REPORT
+                            break;
+                        case 6:
+                            //AUTHORIZATION REQUEST
+                            break;
+                        case 7:
+                            //ADMINISTRATOR REQUEST
+                            break;
+                        case 10:
+                            control.NotificationViewModel.AddNotification("Scored!", ((instanceOfTablet.TabletName != null && instanceOfTablet.TabletName != "") ? instanceOfTablet.TabletName : instanceOfTablet.Identifier) + " has submitted scores under color " + instanceOfTablet.ColorId, "Turquoise");
+                            var itemstouse = JsonConvert.DeserializeObject<List<IO_TeamMatch>>(data);
+                            foreach (var itemtouse in itemstouse)
+                            {
+                                try
+                                {
+                                    var previousitem = db.Matches.Where(x => x.TabletId == itemtouse.TabletId && x.MatchNumber == itemtouse.MatchNumber && x.EventCode == itemtouse.EventCode).FirstOrDefault();
+                                    if (previousitem == null)
+                                    {
+                                        TeamMatch newTeamMatch = new TeamMatch() { DefenseFor = itemtouse.DefenseFor, DefenseAgainst = itemtouse.DefenseAgainst, LoadCoordinates = itemtouse.LoadCoordinates, ShotCoordinates = itemtouse.ShotCoordinates, CycleTime = itemtouse.CycleTime, AlliancePartners = itemtouse.AlliancePartners, A_InitiationLine = itemtouse.A_InitiationLine, ClientLastSubmitted = itemtouse.ClientLastSubmitted, ClientSubmitted = true, DisabledSeconds = itemtouse.DisabledSeconds, IsQualifying = itemtouse.IsQualifying, EventCode = itemtouse.EventCode, E_Balanced = itemtouse.E_Balanced, E_ClimbAttempt = itemtouse.E_ClimbAttempt, E_ClimbSuccess = itemtouse.E_ClimbSuccess, E_Park = itemtouse.E_Park, MatchID = new Random().Next(1, 1000000), MatchNumber = itemtouse.MatchNumber, NumCycles = itemtouse.NumCycles, PowerCellInner = itemtouse.PowerCellInner, PowerCellLower = itemtouse.PowerCellLower, PowerCellMissed = itemtouse.PowerCellMissed, PowerCellOuter = itemtouse.PowerCellOuter, RobotPosition = itemtouse.RobotPosition, ScoutName = itemtouse.ScoutName, TabletId = itemtouse.TabletId, TapLogs = itemtouse.TapLogs, TeamName = itemtouse.TeamName, T_ControlPanelPosition = itemtouse.T_ControlPanelPosition, T_ControlPanelRotation = itemtouse.T_ControlPanelRotation };
+                                        try
+                                        {
+                                            if (db.FRCTeams.Find(itemtouse.TeamNumber, itemtouse.EventCode) != null)
+                                            {
+                                                newTeamMatch.TrackedTeam = db.FRCTeams.Find(itemtouse.TeamNumber, itemtouse.EventCode);
+                                            }
+                                            else
+                                            {
+                                                FRCTeamModel newTeamInDb = new FRCTeamModel() { event_key = itemtouse.EventCode, team_number = itemtouse.TeamNumber };
+                                                db.FRCTeams.Add(newTeamInDb);
+                                                db.SaveChanges();
+                                                newTeamMatch.TrackedTeam = newTeamInDb;
+                                            }
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            FRCTeamModel newTeamInDb = new FRCTeamModel() { event_key = itemtouse.EventCode, team_number = itemtouse.TeamNumber };
+                                            db.FRCTeams.Add(newTeamInDb);
+                                            db.SaveChanges();
+                                            newTeamMatch.TrackedTeam = newTeamInDb;
+                                        }
+
+                                        itemtouse.MatchID = new Random().Next(1, 100000);
+                                        db.Matches.Add(newTeamMatch);
+                                    }
+                                    else
+                                    {
+                                        if (previousitem.ClientLastSubmitted != itemtouse.ClientLastSubmitted)
+                                        {
+                                            TeamMatch newTeamMatch = new TeamMatch() { DefenseFor = itemtouse.DefenseFor, DefenseAgainst = itemtouse.DefenseAgainst, LoadCoordinates = itemtouse.LoadCoordinates, ShotCoordinates = itemtouse.ShotCoordinates, CycleTime = itemtouse.CycleTime, AlliancePartners = itemtouse.AlliancePartners, A_InitiationLine = itemtouse.A_InitiationLine, ClientLastSubmitted = itemtouse.ClientLastSubmitted, ClientSubmitted = true, DisabledSeconds = itemtouse.DisabledSeconds, IsQualifying = itemtouse.IsQualifying, EventCode = previousitem.EventCode, E_Balanced = itemtouse.E_Balanced, E_ClimbAttempt = itemtouse.E_ClimbAttempt, E_ClimbSuccess = itemtouse.E_ClimbSuccess, E_Park = itemtouse.E_Park, MatchID = previousitem.MatchID, MatchNumber = previousitem.MatchNumber, NumCycles = itemtouse.NumCycles, PowerCellInner = itemtouse.PowerCellInner, PowerCellLower = itemtouse.PowerCellLower, PowerCellMissed = itemtouse.PowerCellMissed, PowerCellOuter = itemtouse.PowerCellOuter, RobotPosition = itemtouse.RobotPosition, ScoutName = itemtouse.ScoutName, TabletId = itemtouse.TabletId, TapLogs = itemtouse.TapLogs, TeamName = itemtouse.TeamName, T_ControlPanelPosition = itemtouse.T_ControlPanelPosition, T_ControlPanelRotation = itemtouse.T_ControlPanelRotation };
+                                            try
+                                            {
+                                                newTeamMatch.TrackedTeam = previousitem.TrackedTeam;
+                                                newTeamMatch.team_instance_id = previousitem.team_instance_id;
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                FRCTeamModel newTeamInDb = new FRCTeamModel() { event_key = itemtouse.EventCode, team_number = itemtouse.TeamNumber };
+                                                db.FRCTeams.Add(newTeamInDb);
+                                                db.SaveChanges();
+                                                newTeamMatch.TrackedTeam = newTeamInDb;
+                                                newTeamMatch.team_instance_id = db.FRCTeams.Where(x => x.team_number == newTeamInDb.team_number && x.event_key == newTeamInDb.event_key).FirstOrDefault().team_instance_id;
+                                            }
+
+                                            db.Entry<TeamMatch>(previousitem).CurrentValues.SetValues(newTeamMatch);
+                                            db.SaveChanges();
+                                        }
+
+                                    }
+
+
+                                }
+                                catch (NpgsqlException ex)
+                                {
+                                    TeamMatch newTeamMatch = new TeamMatch() { DefenseFor = itemtouse.DefenseFor, DefenseAgainst = itemtouse.DefenseAgainst, LoadCoordinates = itemtouse.LoadCoordinates, ShotCoordinates = itemtouse.ShotCoordinates, CycleTime = itemtouse.CycleTime, AlliancePartners = itemtouse.AlliancePartners, A_InitiationLine = itemtouse.A_InitiationLine, ClientLastSubmitted = itemtouse.ClientLastSubmitted, ClientSubmitted = true, DisabledSeconds = itemtouse.DisabledSeconds, IsQualifying = itemtouse.IsQualifying, EventCode = itemtouse.EventCode, E_Balanced = itemtouse.E_Balanced, E_ClimbAttempt = itemtouse.E_ClimbAttempt, E_ClimbSuccess = itemtouse.E_ClimbSuccess, E_Park = itemtouse.E_Park, MatchID = new Random().Next(1, 1000000), MatchNumber = itemtouse.MatchNumber, NumCycles = itemtouse.NumCycles, PowerCellInner = itemtouse.PowerCellInner, PowerCellLower = itemtouse.PowerCellLower, PowerCellMissed = itemtouse.PowerCellMissed, PowerCellOuter = itemtouse.PowerCellOuter, RobotPosition = itemtouse.RobotPosition, ScoutName = itemtouse.ScoutName, TabletId = itemtouse.TabletId, TapLogs = itemtouse.TapLogs, TeamName = itemtouse.TeamName, T_ControlPanelPosition = itemtouse.T_ControlPanelPosition, T_ControlPanelRotation = itemtouse.T_ControlPanelRotation };
+                                    try
+                                    {
+                                        if (db.FRCTeams.Find(itemtouse.TeamNumber, itemtouse.EventCode) != null)
+                                        {
+                                            newTeamMatch.TrackedTeam = db.FRCTeams.Find(itemtouse.TeamNumber, itemtouse.EventCode);
+                                        }
+                                        else
+                                        {
+                                            FRCTeamModel newTeamInDb = new FRCTeamModel() { event_key = itemtouse.EventCode, team_number = itemtouse.TeamNumber };
+                                            db.FRCTeams.Add(newTeamInDb);
+                                            db.SaveChanges();
+                                            newTeamMatch.TrackedTeam = newTeamInDb;
+                                        }
+                                    }
+                                    catch (Exception smex)
+                                    {
+                                        FRCTeamModel newTeamInDb = new FRCTeamModel() { event_key = itemtouse.EventCode, team_number = itemtouse.TeamNumber };
+                                        db.FRCTeams.Add(newTeamInDb);
+                                        db.SaveChanges();
+                                        newTeamMatch.TrackedTeam = newTeamInDb;
+                                    }
+
+                                    itemtouse.MatchID = new Random().Next(1, 100000);
+                                    db.Matches.Add(newTeamMatch);
+                                }
+                            }
+
+
+                            db.SaveChanges();
+                            break;
+                        case 11:
+                            //TBA CHECKING REPORT
+                            break;
+                        case 12:
+                            //TBA MATCHUP REPORT
+                            break;
+                        case 13:
+                            //CHANGE IDENTIFIER NOTICE
+                            break;
+                        case 20:
+                            //MATCH REQUEST
+                            break;
+                        case 21:
+                            //CONFIG REQUEST
+                            break;
+                        case 22:
+                            //SYNC AUTH LEVEL
+                            break;
+                        case 40:
+                            //DATABASE AUTHORIZATION CHECK
+                            break;
+                        case 41:
+                            //DATABASE SELECT REQUEST
+                            break;
+                        case 42:
+                            //DATABASE EDIT REQUEST
+                            break;
+                        case 43:
+                            //DATABASE SAFE CLOSE CONNECTION
+                            break;
+
+                    }
                 }
+                else
+                {
+                    Console.WriteLine("Not Powerful Enough");
+                }
+                control.TabletViewModel.UpdateValues();
             }
-            else
-            {
-                Console.WriteLine("Not Powerful Enough");
-            }
+            
             Console.WriteLine("Test Parse Completed");
             
         }
@@ -1001,7 +1113,7 @@ namespace LightMasterMVVM.Views
             {
                 tabletindex = 2;
             }
-            control.TabletViewModel.LastPings[tabletindex] = "Last ping at: " + DateTime.Now.ToShortTimeString();
+            //control.TabletViewModel.LastPings[tabletindex] = "Last ping at: " + DateTime.Now.ToShortTimeString();
             if (rawdata.Substring(3).StartsWith("S:"))
             {
                 string datawithoutid = rawdata;
@@ -1013,8 +1125,8 @@ namespace LightMasterMVVM.Views
                 }
                 //S = Score
                 control.NotificationViewModel.AddNotification("Scored", datawithoutid.Substring(0, 2).ToString() + " sent scores", "Green");
-                control.TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightBlue";
-                control.TabletViewModel.BluetoothBorderColors[tabletindex] = "Blue";
+                //control.TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightBlue";
+                //control.TabletViewModel.BluetoothBorderColors[tabletindex] = "Blue";
                 var jsontodeserialize = datawithoutid.Substring(5);
                 using (var db = new ScoutingContext())
                 {
@@ -1127,27 +1239,27 @@ namespace LightMasterMVVM.Views
                 var batterylevel = float.Parse(datawithoutid.Substring(5)) * 100;
                 if (batterylevel > 80)
                 {
-                    control.TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightGreen";
-                    control.TabletViewModel.BatteryBorderColors[tabletindex] = "Green";
+                    //control.TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightGreen";
+                    //control.TabletViewModel.BatteryBorderColors[tabletindex] = "Green";
                 }
                 else if (batterylevel > 30 && batterylevel <= 80)
                 {
-                    control.TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightSalmon";
-                    control.TabletViewModel.BatteryBorderColors[tabletindex] = "DarkOrange";
+                    //control.TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightSalmon";
+                    //control.TabletViewModel.BatteryBorderColors[tabletindex] = "DarkOrange";
                 }
                 else
                 {
-                    control.TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightPink";
-                    control.TabletViewModel.BatteryBorderColors[tabletindex] = "IndianRed";
+                    //control.TabletViewModel.BatteryBackgroundColors[tabletindex] = "LightPink";
+                    //control.TabletViewModel.BatteryBorderColors[tabletindex] = "IndianRed";
                 }
-                control.TabletViewModel.BatteryAmounts[tabletindex] = Math.Round(batterylevel).ToString();
+                //control.TabletViewModel.BatteryAmounts[tabletindex] = Math.Round(batterylevel).ToString();
 
             }
             else if (rawdata.Substring(3).StartsWith("D:"))
             {
                 //D = Successful Disconnection
-                control.TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightGray";
-                control.TabletViewModel.BluetoothBorderColors[tabletindex] = "Gray";
+                //control.TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightGray";
+                //control.TabletViewModel.BluetoothBorderColors[tabletindex] = "Gray";
             }
             else if (rawdata.Substring(3).StartsWith("FS:"))
             {
@@ -1210,8 +1322,8 @@ namespace LightMasterMVVM.Views
             else if (rawdata.Substring(3).StartsWith("E:"))
             {
                 //E = Immedient Communication
-                control.TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightSalmon";
-                control.TabletViewModel.BluetoothBorderColors[tabletindex] = "DarkOrange";
+                //control.TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightSalmon";
+                //control.TabletViewModel.BluetoothBorderColors[tabletindex] = "DarkOrange";
             }
             else if (rawdata.Substring(3).StartsWith("RD:"))
             {
@@ -1253,8 +1365,8 @@ namespace LightMasterMVVM.Views
                     {
                         client.Send(deviceid.ToString() + ":" + modelstring);
                     }
-                    control.TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightSalmon";
-                    control.TabletViewModel.BluetoothBorderColors[tabletindex] = "DarkOrange";
+                    //control.TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightSalmon";
+                    //control.TabletViewModel.BluetoothBorderColors[tabletindex] = "DarkOrange";
                 }
                 
             }
