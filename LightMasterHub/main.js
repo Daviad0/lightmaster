@@ -2,7 +2,7 @@ var bleno = require('bleno-mac');
 const WebSocket = require('ws');
 var usb = require('usb');
 
-const wss = new WebSocket.Server({ port: 9959 })
+const wss = new WebSocket.Server({ port: 9958 })
 console.log(wss.path);
 var BlenoPrimaryService = bleno.PrimaryService;
 
@@ -21,7 +21,6 @@ let listOfCallbacks = new Map();
 let toServerAwaiting = new Map();
 
 console.log('Starting up Lighting Robotics Scouting Service');
-
 function BufferQueue(identifier, buffer) {
   this.identifier = identifier;
   this.buffer = buffer;
@@ -95,11 +94,11 @@ red1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   this._value = data;
   var hextocheck = this._value.toString('hex');
   var rawstring = hex2a(hextocheck)
-  if(rawstring.startsWith("L:"))
+  if(rawstring.startsWith("L!"))
   {
     toServerAwaiting.set(rawstring.substring(2,12), new WaitingTabletId(rawstring.substring(2,12), rawstring.substring(0,21), "", parseInt(rawstring.substring(24))))
   }
-  else if(rawstring.startsWith("F:")){
+  else if(rawstring.startsWith("F!")){
     var instanceToChange = toServerAwaiting.get(rawstring.substring(2,12));
     if(parseInt(rawstring.substring(13,15)) == 3)
     {
@@ -113,8 +112,9 @@ red1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
     }
     else
     {
-      instanceToChange.messagesleft = instanceToChange - 1;
-      instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(24)
+      console.log("ERROR: "+rawstring)
+      instanceToChange.messagesleft = instanceToChange.messagesleft - 1;
+      instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(14)
       if(instanceToChange.messagesleft < 1){
         sendtomaster("R1", (instanceToChange.rawheader + ">>" + instanceToChange.rawmessage))
       }
@@ -122,7 +122,8 @@ red1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   }
   else
   {
-    sendtomaster("R1",rawstring);
+    console.log("ERROR: "+rawstring)
+    //sendtomaster("R1","rawstring");
   }
   listOfCallbacks.set(rawstring.substring(2,12), this._updateValueCallback)
 
@@ -132,11 +133,11 @@ red2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   this._value = data;
   var hextocheck = this._value.toString('hex');
   var rawstring = hex2a(hextocheck)
-  if(rawstring.startsWith("L:"))
+  if(rawstring.startsWith("L!"))
   {
     toServerAwaiting.set(rawstring.substring(2,12), new WaitingTabletId(rawstring.substring(2,12), rawstring.substring(0,21), "", parseInt(rawstring.substring(24))))
   }
-  else if(rawstring.startsWith("F:")){
+  else if(rawstring.startsWith("F!")){
     var instanceToChange = toServerAwaiting.get(rawstring.substring(2,12));
     if(parseInt(rawstring.substring(13,15)) == 3)
     {
@@ -150,8 +151,9 @@ red2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
     }
     else
     {
-      instanceToChange.messagesleft = instanceToChange - 1;
-      instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(24)
+      console.log("ERROR: "+rawstring)
+      instanceToChange.messagesleft = instanceToChange.messagesleft - 1;
+      instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(14)
       if(instanceToChange.messagesleft < 1){
         sendtomaster("R2", (instanceToChange.rawheader + ">>" + instanceToChange.rawmessage))
       }
@@ -159,7 +161,8 @@ red2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   }
   else
   {
-    sendtomaster("R2",rawstring);
+    console.log("ERROR: "+rawstring)
+    //sendtomaster("R2","rawstring");
   }
 
   listOfCallbacks.set(rawstring.substring(2,12), this._updateValueCallback)
@@ -170,11 +173,11 @@ red3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   this._value = data;
   var hextocheck = this._value.toString('hex');
   var rawstring = hex2a(hextocheck)
-  if(rawstring.startsWith("L:"))
+  if(rawstring.startsWith("L!"))
   {
     toServerAwaiting.set(rawstring.substring(2,12), new WaitingTabletId(rawstring.substring(2,12), rawstring.substring(0,21), "", parseInt(rawstring.substring(24))))
   }
-  else if(rawstring.startsWith("F:")){
+  else if(rawstring.startsWith("F!")){
     var instanceToChange = toServerAwaiting.get(rawstring.substring(2,12));
     if(parseInt(rawstring.substring(13,15)) == 3)
     {
@@ -188,8 +191,9 @@ red3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
     }
     else
     {
-      instanceToChange.messagesleft = instanceToChange - 1;
-      instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(24)
+      console.log("ERROR: "+rawstring)
+      instanceToChange.messagesleft = instanceToChange.messagesleft - 1;
+      instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(14)
       if(instanceToChange.messagesleft < 1){
         sendtomaster("R3", (instanceToChange.rawheader + ">>" + instanceToChange.rawmessage))
       }
@@ -197,7 +201,8 @@ red3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   }
   else
   {
-    sendtomaster("R3",rawstring);
+    console.log("ERROR: "+rawstring)
+    //sendtomaster("R3","rawstring");
   }
 
   listOfCallbacks.set(rawstring.substring(2,12), this._updateValueCallback)
@@ -208,11 +213,11 @@ blue1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   this._value = data;
   var hextocheck = this._value.toString('hex');
   var rawstring = hex2a(hextocheck)
-  if(rawstring.startsWith("L:"))
+  if(rawstring.startsWith("L!"))
   {
     toServerAwaiting.set(rawstring.substring(2,12), new WaitingTabletId(rawstring.substring(2,12), rawstring.substring(0,21), "", parseInt(rawstring.substring(24))))
   }
-  else if(rawstring.startsWith("F:")){
+  else if(rawstring.startsWith("F!")){
     var instanceToChange = toServerAwaiting.get(rawstring.substring(2,12));
     if(parseInt(rawstring.substring(13,15)) == 3)
     {
@@ -226,8 +231,9 @@ blue1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
     }
     else
     {
-      instanceToChange.messagesleft = instanceToChange - 1;
-      instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(24)
+      console.log("ERROR: "+rawstring)
+      instanceToChange.messagesleft = instanceToChange.messagesleft - 1;
+      instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(14)
       if(instanceToChange.messagesleft < 1){
         sendtomaster("B1", (instanceToChange.rawheader + ">>" + instanceToChange.rawmessage))
       }
@@ -235,7 +241,8 @@ blue1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   }
   else
   {
-    sendtomaster("B1",rawstring);
+    console.log("ERROR: "+rawstring)
+    //sendtomaster("B1","rawstring");
   }
 
   listOfCallbacks.set(rawstring.substring(2,12), this._updateValueCallback)
@@ -246,11 +253,11 @@ blue2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   this._value = data;
   var hextocheck = this._value.toString('hex');
   var rawstring = hex2a(hextocheck)
-  if(rawstring.startsWith("L:"))
+  if(rawstring.startsWith("L!"))
   {
     toServerAwaiting.set(rawstring.substring(2,12), new WaitingTabletId(rawstring.substring(2,12), rawstring.substring(0,21), "", parseInt(rawstring.substring(24))))
   }
-  else if(rawstring.startsWith("F:")){
+  else if(rawstring.startsWith("F!")){
     var instanceToChange = toServerAwaiting.get(rawstring.substring(2,12));
     if(parseInt(rawstring.substring(13,15)) == 3)
     {
@@ -264,8 +271,9 @@ blue2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
     }
     else
     {
-      instanceToChange.messagesleft = instanceToChange - 1;
-      instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(24)
+      console.log("ERROR: "+rawstring)
+      instanceToChange.messagesleft = instanceToChange.messagesleft - 1;
+      instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(14)
       if(instanceToChange.messagesleft < 1){
         sendtomaster("B2", (instanceToChange.rawheader + ">>" + instanceToChange.rawmessage))
       }
@@ -273,7 +281,8 @@ blue2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   }
   else
   {
-    sendtomaster("B2",rawstring);
+    console.log("ERROR: "+rawstring)
+    //sendtomaster("B2","rawstring");
   }
 
   listOfCallbacks.set(rawstring.substring(2,12), this._updateValueCallback)
@@ -284,11 +293,11 @@ blue3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   this._value = data;
   var hextocheck = this._value.toString('hex');
   var rawstring = hex2a(hextocheck)
-  if(rawstring.startsWith("L:"))
+  if(rawstring.startsWith("L!"))
   {
     toServerAwaiting.set(rawstring.substring(2,12), new WaitingTabletId(rawstring.substring(2,12), rawstring.substring(0,21), "", parseInt(rawstring.substring(24))))
   }
-  else if(rawstring.startsWith("F:")){
+  else if(rawstring.startsWith("F!")){
     var instanceToChange = toServerAwaiting.get(rawstring.substring(2,12));
     if(parseInt(rawstring.substring(13,15)) == 3)
     {
@@ -302,8 +311,9 @@ blue3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
     }
     else
     {
-      instanceToChange.messagesleft = instanceToChange - 1;
-      instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(24)
+      console.log("ERROR: "+rawstring)
+      instanceToChange.messagesleft = instanceToChange.messagesleft - 1;
+      instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(14)
       if(instanceToChange.messagesleft < 1){
         sendtomaster("B3", (instanceToChange.rawheader + ">>" + instanceToChange.rawmessage))
       }
@@ -311,7 +321,8 @@ blue3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   }
   else
   {
-    sendtomaster("B3",rawstring);
+    console.log("ERROR: "+rawstring)
+    //sendtomaster("B3","rawstring");
   }
 
   listOfCallbacks.set(rawstring.substring(2,12), this._updateValueCallback)

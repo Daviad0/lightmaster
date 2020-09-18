@@ -781,8 +781,8 @@ namespace LightMasterMVVM.Views
                     control.NotificationViewModel.AddNotification("Unavailable", "Bluetooth Service Not Available!", "Red");
                 };
                 var exitEvent = new ManualResetEvent(false);
-                var url = new Uri("ws://localhost:9959");
-                client.Url = new Uri("ws://localhost:9959");
+                var url = new Uri("ws://localhost:9958");
+                client.Url = new Uri("ws://localhost:9958");
                 client.ReconnectTimeout = null;
                 client.ErrorReconnectTimeout = TimeSpan.FromSeconds(5);
                 client.Start();
@@ -886,7 +886,7 @@ namespace LightMasterMVVM.Views
 
              */
             string tabletid = rawdata.Substring(0, 2);
-            TimeSpan timeOfRequest = TimeSpan.Parse(rawdata.Substring(18, 5));
+            TimeSpan timeOfRequest = TimeSpan.Parse(rawdata.Substring(19, 5));
             string uniqueId = rawdata.Substring(3, 10);
             TabletOS deviceOS = (rawdata.Substring(3, 1) == "i") ? TabletOS.iOS : TabletOS.Android;
             int messageType = int.Parse(rawdata.Substring(14, 2));
