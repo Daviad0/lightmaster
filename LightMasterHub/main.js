@@ -1,6 +1,5 @@
 var bleno = require('bleno-mac');
 const WebSocket = require('ws');
-var usb = require('usb');
 
 const wss = new WebSocket.Server({ port: 9958 })
 console.log(wss.path);
@@ -13,8 +12,6 @@ var blue1s = require('./blue1');
 var blue2s = require('./blue2');
 var blue3s = require('./blue3');
 var queue = require('./queue');
-
-var sendback = "484920544845524521";
 
 var sendingQueue = [];
 let listOfCallbacks = new Map();
