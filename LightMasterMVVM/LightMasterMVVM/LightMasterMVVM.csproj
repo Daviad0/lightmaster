@@ -94,9 +94,11 @@
     <None Remove="Views\TabletLogs.xaml" />
     <None Remove="Views\Tablets.xaml" />
     <None Remove="Views\TheBlueAlliance.xaml" />
+    <None Remove="Assets\close-white.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\close.png" />
+    <EmbeddedResource Include="Assets\close-white.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\ban.png" />

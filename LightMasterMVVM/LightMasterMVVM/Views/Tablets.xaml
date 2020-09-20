@@ -145,7 +145,7 @@
         <TextBlock Text="Options" Margin="5,0,0,0" FontSize="15" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Grid.Column="6"/>
       </Grid>
     </Border>
-    <ScrollViewer Height="750" VerticalScrollBarVisibility="Hidden" >
+    <ScrollViewer Height="600" VerticalScrollBarVisibility="Hidden" >
       <ItemsControl Items="{Binding Tablets}">
         <ItemsControl.ItemTemplate>
           <DataTemplate>
@@ -161,7 +161,7 @@
                 <TextBlock Text="{Binding LastSubmittedTest}" FontSize="15" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="4"/>
                 <TextBlock Text="{Binding AuthenticationLevel}" FontSize="15" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="5"/>
                 <Grid Grid.Column="6" ColumnDefinitions="32,32,32,32">
-                  <Button FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" ToolTip.Tip="Unauthorize" Grid.Column="0" Width="36" Height="36">
+                  <Button FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" ToolTip.Tip="Unauthorize" Grid.Column="0" Width="36" Height="36" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.BanTablet}" CommandParameter="{Binding Identifier}">
                     <Button.Template>
                       <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="White" CornerRadius="4" Margin="5">
@@ -171,7 +171,7 @@
                       </ControlTemplate>
                     </Button.Template>
                   </Button>
-                  <Button FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" ToolTip.Tip="Increase Authentication Level" Grid.Column="1" Width="36" Height="36">
+                  <Button FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" ToolTip.Tip="Decrease Authentication Level" Grid.Column="1" Width="36" Height="36" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.DemoteTablet}" CommandParameter="{Binding Identifier}">
                     <Button.Template>
                       <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="White" CornerRadius="4" Margin="5">
@@ -180,7 +180,7 @@
                       </ControlTemplate>
                     </Button.Template>
                   </Button>
-                  <Button FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" ToolTip.Tip="Decrease Authentication Level" Grid.Column="2" Width="36" Height="36">
+                  <Button FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" ToolTip.Tip="Increase Authentication Level" Grid.Column="2" Width="36" Height="36" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.PromoteTablet}" CommandParameter="{Binding Identifier}">
                     <Button.Template>
                       <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="White" CornerRadius="4" Margin="5">
@@ -189,7 +189,7 @@
                       </ControlTemplate>
                     </Button.Template>
                   </Button>
-                  <Button FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" ToolTip.Tip="Terminate Database Entry (double click)" Grid.Column="3" Width="36" Height="36">
+                  <Button FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" ToolTip.Tip="Terminate Database Entry (double click)" Grid.Column="3" Width="36" Height="36" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.RemoveTablet}" CommandParameter="{Binding Identifier}">
                     <Button.Template>
                       <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="White" CornerRadius="4" Margin="5">

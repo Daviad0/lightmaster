@@ -778,7 +778,7 @@ namespace LightMasterMVVM.Views
                     await Task.Delay(100);
                     bluetooth_status.Opacity = 0;
                     bluetooth_status.IsVisible = false;
-                    control.NotificationViewModel.AddNotification("Unavailable", "Bluetooth Service Not Available!", "Red");
+                    control.NotificationViewModel.AddNotification("Unavailable", "Bluetooth Service Not Available!", "Red",false);
                 };
                 var exitEvent = new ManualResetEvent(false);
                 var url = new Uri("ws://localhost:9958");
@@ -800,12 +800,12 @@ namespace LightMasterMVVM.Views
                             await Task.Delay(100);
                             bluetooth_status.Opacity = 1;
                         });
-                        control.NotificationViewModel.AddNotification("Ready", "Bluetooth Service Ready!", "DeepPink");
+                        control.NotificationViewModel.AddNotification("Ready", "Bluetooth Service Ready!", "DeepPink",false);
                     }
                     else
                     {
-                        string rawdata = msg.Text;
-                        UseGivenDataBeta(rawdata, true);
+                        var rawstring = msg.Text;
+                        UseGivenDataBeta(rawstring, true);
                     }
 
 
@@ -820,7 +820,7 @@ namespace LightMasterMVVM.Views
                         await Task.Delay(100);
                         bluetooth_status.Opacity = 0;
                     });
-                    control.NotificationViewModel.AddNotification("Not Ready", "Bluetooth Service Not Ready!", "Red");
+                    control.NotificationViewModel.AddNotification("Not Ready", "Bluetooth Service Not Ready!", "Red",false);
                 });
             }
             catch (Exception ex)
@@ -829,7 +829,7 @@ namespace LightMasterMVVM.Views
                 await Task.Delay(100);
                 bluetooth_status.Opacity = 0;
                 bluetooth_status.IsVisible = false;
-                control.NotificationViewModel.AddNotification("Unavailable", "Bluetooth Service Not Available!", "Red");
+                control.NotificationViewModel.AddNotification("Unavailable", "Bluetooth Service Not Available!", "Red",false);
             }
             try
             {
@@ -874,7 +874,7 @@ namespace LightMasterMVVM.Views
         public void UseGivenDataBeta(string rawdata, bool bluetooth)
         {
             AuthenticationLevel Lock = AuthenticationLevel.Authorized;
-            AuthenticationLevel CurrentAuthLevel = AuthenticationLevel.Authorized;
+            AuthenticationLevel CurrentAuthLevel = AuthenticationLevel.Administrator;
             /*
              FORMAT STRING EXAMPLE:
 
@@ -886,12 +886,12 @@ namespace LightMasterMVVM.Views
 
              */
             string tabletid = rawdata.Substring(0, 2);
-            TimeSpan timeOfRequest = TimeSpan.Parse(rawdata.Substring(19, 5));
+            TimeSpan timeOfRequest = TimeSpan.Parse(rawdata.Substring(17, 5));
             string uniqueId = rawdata.Substring(3, 10);
             TabletOS deviceOS = (rawdata.Substring(3, 1) == "i") ? TabletOS.iOS : TabletOS.Android;
             int messageType = int.Parse(rawdata.Substring(14, 2));
-            string responseExpectation = rawdata.Substring(24, 1);
-            string data = rawdata.Substring(27);
+            string responseExpectation = rawdata.Substring(23, 1);
+            string data = rawdata.Substring(26);
             using(var db = new ScoutingContext()) 
             {
                 if (CurrentAuthLevel >= Lock)
@@ -910,6 +910,7 @@ namespace LightMasterMVVM.Views
                         }
                         
                     }
+                    db.SaveChanges();
                     Console.WriteLine("Authenticated");
                     instanceOfTablet.LastCommunicated = DateTime.Now;
                     switch (messageType)
@@ -936,8 +937,8 @@ namespace LightMasterMVVM.Views
                             //ADMINISTRATOR REQUEST
                             break;
                         case 10:
-                            control.NotificationViewModel.AddNotification("Scored!", ((instanceOfTablet.TabletName != null && instanceOfTablet.TabletName != "") ? instanceOfTablet.TabletName : instanceOfTablet.Identifier) + " has submitted scores under color " + instanceOfTablet.ColorId, "Turquoise");
-                            var itemstouse = JsonConvert.DeserializeObject<List<IO_TeamMatch>>(data);
+                            control.NotificationViewModel.AddNotification("Scored!", ((instanceOfTablet.TabletName != null && instanceOfTablet.TabletName != "") ? instanceOfTablet.TabletName : instanceOfTablet.Identifier) + " has submitted scores under color " + instanceOfTablet.ColorId, "Turquoise",false);
+                            /*var itemstouse = JsonConvert.DeserializeObject<List<IO_TeamMatch>>(data);
                             foreach (var itemtouse in itemstouse)
                             {
                                 try
@@ -1029,7 +1030,7 @@ namespace LightMasterMVVM.Views
                             }
 
 
-                            db.SaveChanges();
+                            db.SaveChanges();*/
                             break;
                         case 11:
                             //TBA CHECKING REPORT
@@ -1124,7 +1125,7 @@ namespace LightMasterMVVM.Views
                     deviceid = int.Parse(rawdata.Substring(5, 4));
                 }
                 //S = Score
-                control.NotificationViewModel.AddNotification("Scored", datawithoutid.Substring(0, 2).ToString() + " sent scores", "Green");
+                control.NotificationViewModel.AddNotification("Scored", datawithoutid.Substring(0, 2).ToString() + " sent scores", "Green",false);
                 //control.TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightBlue";
                 //control.TabletViewModel.BluetoothBorderColors[tabletindex] = "Blue";
                 var jsontodeserialize = datawithoutid.Substring(5);
@@ -1335,7 +1336,7 @@ namespace LightMasterMVVM.Views
                     deviceid = int.Parse(rawdata.Substring(6, 4));
                 }
 
-                control.NotificationViewModel.AddNotification("Data Request", rawdata.Substring(0, 2).ToString() + " requested data", "Blue");
+                control.NotificationViewModel.AddNotification("Data Request", rawdata.Substring(0, 2).ToString() + " requested data", "Blue",false);
                 GetEventCode eventConfig = new GetEventCode();
                 using(var db = new ScoutingContext())
                 {

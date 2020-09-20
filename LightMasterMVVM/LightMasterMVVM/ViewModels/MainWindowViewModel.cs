@@ -911,7 +911,7 @@ namespace LightMasterMVVM.ViewModels
         private ObservableCollection<NotificationItem> notifications = new ObservableCollection<NotificationItem>()
         {
             new NotificationItem(){ BackgroundColor = "#2a7afa", NotificationText = "Welcome 862 Scouter", NotificationTitle = "Auto Login", NotificationId = 1, NotificationActive = true, timeAdded = DateTime.Now },
-            
+            new NotificationItem(){ BackgroundColor = "#2a7afa", NotificationText = "Hi, I am a test!", NotificationTitle = "Question Test", NotificationId = 2, NotificationActive = true, timeAdded = DateTime.Now, IsPermissionRequest = true },
         };
         public ObservableCollection<NotificationItem> Notifications
         {
@@ -926,7 +926,7 @@ namespace LightMasterMVVM.ViewModels
         {
             Console.WriteLine("REST");
         }
-        public async void AddNotification(string title, string message, string color)
+        public async void AddNotification(string title, string message, string color, bool question)
         {
             List<NotificationItem> oldNotifications = Notifications.ToList();
             if(oldNotifications.Count == 4)
@@ -934,7 +934,7 @@ namespace LightMasterMVVM.ViewModels
                 oldNotifications = oldNotifications.OrderBy(x => x.timeAdded).ToList();
                 oldNotifications.Remove(oldNotifications.First());
             }
-            oldNotifications.Add(new NotificationItem() { BackgroundColor = color, NotificationActive = true, NotificationId = new Random().Next(1, 5000), NotificationText = message, NotificationTitle = title, timeAdded = DateTime.Now });
+            oldNotifications.Add(new NotificationItem() { BackgroundColor = color, NotificationActive = true, NotificationId = new Random().Next(1, 5000), NotificationText = message, NotificationTitle = title, timeAdded = DateTime.Now, IsPermissionRequest = question });
             ObservableCollection<NotificationItem> newNotifications = new ObservableCollection<NotificationItem>(oldNotifications);
             Notifications = newNotifications;
         }
@@ -2216,6 +2216,7 @@ namespace LightMasterMVVM.ViewModels
 
     public class TabletViewModel : ViewModelBase
     {
+        private Dictionary<string, DateTime> DoubleClickRemoveTablet = new Dictionary<string, DateTime>();
         private Avalonia.Media.Imaging.Bitmap _QRImage;
         private ObservableCollection<TabletDataViewModel> tablets = new ObservableCollection<TabletDataViewModel>();
         public Avalonia.Media.Imaging.Bitmap QRImage
@@ -2233,6 +2234,106 @@ namespace LightMasterMVVM.ViewModels
         {
             get => tablets;
             set => SetProperty(ref tablets, value);
+        }
+        public void PromoteTablet(string identifier)
+        {
+            using(var db = new ScoutingContext())
+            {
+                var selectedtablet = Tablets.Where(x => x.Identifier == identifier).FirstOrDefault();
+                var dbtablet = db.TabletInstances.Find(identifier);
+                if(dbtablet.AuthenticationLevel < 3)
+                {
+                    dbtablet.AuthenticationLevel += 1;
+                }
+                switch (dbtablet.AuthenticationLevel)
+                {
+                    case 0:
+                        selectedtablet.AuthenticationLevel = "Unauthorized";
+                        break;
+                    case 1:
+                        selectedtablet.AuthenticationLevel = "Guest";
+                        break;
+                    case 2:
+                        selectedtablet.AuthenticationLevel = "Authorized";
+                        break;
+                    case 3:
+                        selectedtablet.AuthenticationLevel = "Administrator";
+                        break;
+                }
+                Tablets.ToArray()[Tablets.IndexOf(Tablets.Where(x => x.Identifier == identifier).FirstOrDefault())] = selectedtablet;
+                db.TabletInstances.Update(dbtablet);
+                db.SaveChanges();
+            }
+            Tablets = new ObservableCollection<TabletDataViewModel>(Tablets.OrderBy(x => x.TabletColorName).ToList());
+        }
+        public void DemoteTablet(string identifier)
+        {
+            using (var db = new ScoutingContext())
+            {
+                var selectedtablet = Tablets.Where(x => x.Identifier == identifier).FirstOrDefault();
+                var dbtablet = db.TabletInstances.Find(identifier);
+                if (dbtablet.AuthenticationLevel > 1)
+                {
+                    dbtablet.AuthenticationLevel -= 1;
+                }
+                switch (dbtablet.AuthenticationLevel)
+                {
+                    case 0:
+                        selectedtablet.AuthenticationLevel = "Unauthorized";
+                        break;
+                    case 1:
+                        selectedtablet.AuthenticationLevel = "Guest";
+                        break;
+                    case 2:
+                        selectedtablet.AuthenticationLevel = "Authorized";
+                        break;
+                    case 3:
+                        selectedtablet.AuthenticationLevel = "Administrator";
+                        break;
+                }
+                Tablets.ToArray()[Tablets.IndexOf(Tablets.Where(x => x.Identifier == identifier).FirstOrDefault())] = selectedtablet;
+                db.TabletInstances.Update(dbtablet);
+                db.SaveChanges();
+            }
+            Tablets = new ObservableCollection<TabletDataViewModel>(Tablets.OrderBy(x => x.TabletColorName).ToList());
+        }
+        public void BanTablet(string identifier)
+        {
+            using (var db = new ScoutingContext())
+            {
+                var selectedtablet = Tablets.Where(x => x.Identifier == identifier).FirstOrDefault();
+                var dbtablet = db.TabletInstances.Find(identifier);
+                dbtablet.AuthenticationLevel = 0;
+                selectedtablet.AuthenticationLevel = "Unauthorized";
+                Tablets.ToArray()[Tablets.IndexOf(Tablets.Where(x => x.Identifier == identifier).FirstOrDefault())] = selectedtablet;
+                db.TabletInstances.Update(dbtablet);
+                db.SaveChanges();
+            }
+            Tablets = new ObservableCollection<TabletDataViewModel>(Tablets.OrderBy(x => x.TabletColorName).ToList());
+        }
+        public void RemoveTablet(string identifier)
+        {
+            if (!DoubleClickRemoveTablet.ContainsKey(identifier))
+            {
+                DoubleClickRemoveTablet.Add(identifier, DateTime.Now);
+            }
+            else
+            {
+                if((DateTime.Now - DoubleClickRemoveTablet[identifier]) < TimeSpan.FromSeconds(1.25))
+                {
+                    using (var db = new ScoutingContext())
+                    {
+                        Tablets.Remove(Tablets.Where(x => x.Identifier == identifier).FirstOrDefault());
+                        db.TabletInstances.Remove(db.TabletInstances.Find(identifier));
+                    }
+                }
+                else
+                {
+                    DoubleClickRemoveTablet[identifier] = DateTime.Now;
+                }
+            }
+            
+            Tablets = new ObservableCollection<TabletDataViewModel>(Tablets.OrderBy(x => x.TabletColorName).ToList());
         }
         public void UpdateValues()
         {
@@ -2259,7 +2360,7 @@ namespace LightMasterMVVM.ViewModels
                             break;
                     }
                     newTabletViewModel.BatteryLevel = dbtablet.LastKnownBattery.ToString() + "%";
-                    newTabletViewModel.BatteryLevelColor = (dbtablet.LastKnownBattery > 50) ? "Green" : "Red";
+                    newTabletViewModel.BatteryLevelColor = (dbtablet.LastKnownBattery > 50) ? "LightGreen" : "LightPink";
                     newTabletViewModel.Identifier = dbtablet.Identifier;
                     newTabletViewModel.LastSubmittedTest = dbtablet.LastCommunicated.Hour.ToString("00") + ":" + dbtablet.LastCommunicated.Minute.ToString("00");
                     newTabletViewModel.TabletColorBackground = dbtablet.ColorId.StartsWith("B") ? "Blue" : "Red";
@@ -2311,12 +2412,12 @@ namespace LightMasterMVVM.ViewModels
                                 break;
                         }
                         newTabletViewModel.BatteryLevel = dbtablet.LastKnownBattery.ToString() + "%";
-                        newTabletViewModel.BatteryLevelColor = (dbtablet.LastKnownBattery > 50) ? "Green" : "Red";
+                        newTabletViewModel.BatteryLevelColor = (dbtablet.LastKnownBattery > 50) ? "LightGreen" : "LightPink";
                         newTabletViewModel.Identifier = dbtablet.Identifier;
                         newTabletViewModel.LastSubmittedTest = dbtablet.LastCommunicated.Hour.ToString("00") + ":" + dbtablet.LastCommunicated.Minute.ToString("00");
                         newTabletViewModel.TabletColorBackground = dbtablet.ColorId.StartsWith("B") ? "Blue" : "Red";
                         newTabletViewModel.TabletColorName = dbtablet.ColorId;
-                        newTabletViewModel.TabletName = dbtablet.TabletName;
+                        newTabletViewModel.TabletName = (dbtablet.TabletName != null && dbtablet.TabletName != "")?dbtablet.TabletName:"Not Named";
                         allTabletViews.Add(newTabletViewModel);
                     }
                     Tablets = allTabletViews;

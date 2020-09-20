@@ -1,18 +1,20 @@
 ﻿<Properties StartupConfiguration="{D1397E30-5D2E-478E-827D-3D8871C098CE}|Default">
   <MonoDevelop.Ide.ItemProperties.LightMasterMVVM PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="LightMasterMVVM/Views/MainWindow.xaml.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="LightMasterMVVM/Views/NotifyUser.xaml">
     <Files>
-      <File FileName="LightMasterMVVM/ViewModels/MainWindowViewModel.cs" Line="2291" Column="1" />
+      <File FileName="LightMasterMVVM/ViewModels/MainWindowViewModel.cs" Line="909" Column="55" />
       <File FileName="LightMasterMVVM/Views/MainWindow.xaml" />
       <File FileName="LightMasterMVVM/Views/DataAnalysis.xaml" />
       <File FileName="LightMasterMVVM/ViewLocator.cs" />
       <File FileName="LightMasterMVVM/Program.cs" />
       <File FileName="LightMasterMVVM/Views/Tablets.xaml" />
-      <File FileName="LightMasterMVVM/Views/NotifyUser.xaml" />
+      <File FileName="LightMasterMVVM/Views/NotifyUser.xaml" Line="50" Column="1" />
       <File FileName="LightMasterMVVM/App.xaml" />
       <File FileName="LightMasterMVVM/Views/Matches.xaml" />
-      <File FileName="LightMasterMVVM/Views/MainWindow.xaml.cs" Line="785" Column="58" />
+      <File FileName="LightMasterMVVM/Views/MainWindow.xaml.cs" />
       <File FileName="LightMasterMVVM/App.xaml.cs" />
+      <File FileName="LightMasterMVVM/Views/CompetitionTeams.xaml" />
+      <File FileName="LightMasterMVVM/Models/NotificationItem.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -21,9 +23,10 @@
             <Node name="LightMasterMVVM" expanded="True">
               <Node name="Assets" expanded="True" />
               <Node name="Migrations" expanded="True" />
+              <Node name="Models" expanded="True" />
               <Node name="ViewModels" expanded="True" />
               <Node name="Views" expanded="True">
-                <Node name="MainWindow.xaml.cs" selected="True" />
+                <Node name="NotifyUser.xaml" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -35,9 +38,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/Views/MainWindow.xaml.cs" relfile="LightMasterMVVM/Views/MainWindow.xaml.cs" line="894" column="1" />
-      <Breakpoint file="/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/Views/MainWindow.xaml.cs" relfile="LightMasterMVVM/Views/MainWindow.xaml.cs" line="875" column="1" />
+      <Breakpoint file="/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/Views/MainWindow.xaml.cs" relfile="LightMasterMVVM/Views/MainWindow.xaml.cs" line="776" column="1" />
       <Breakpoint file="/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/Views/MainWindow.xaml.cs" relfile="LightMasterMVVM/Views/MainWindow.xaml.cs" line="807" column="1" />
+      <Breakpoint file="/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/Views/MainWindow.xaml.cs" relfile="LightMasterMVVM/Views/MainWindow.xaml.cs" line="1072" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />

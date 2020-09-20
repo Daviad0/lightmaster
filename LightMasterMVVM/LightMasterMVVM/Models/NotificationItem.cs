@@ -14,6 +14,7 @@ namespace LightMasterMVVM.Models
         private string notificationText;
         private string notificationTitle;
         private bool notificationActive;
+        private bool isPermissionRequest;
         private int notificationId;
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
@@ -68,6 +69,22 @@ namespace LightMasterMVVM.Models
                 if (value != this.notificationActive)
                 {
                     this.notificationActive = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public bool IsPermissionRequest
+        {
+            get
+            {
+                return this.isPermissionRequest;
+            }
+
+            set
+            {
+                if (value != this.isPermissionRequest)
+                {
+                    this.isPermissionRequest = value;
                     NotifyPropertyChanged();
                 }
             }

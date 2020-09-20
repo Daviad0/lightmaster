@@ -17,7 +17,7 @@ var sendingQueue = [];
 let listOfCallbacks = new Map();
 let toServerAwaiting = new Map();
 
-console.log('Starting up Lighting Robotics Scouting Service');
+console.log('Starting up Lighting Robotics Scouting Service - v3');
 function BufferQueue(identifier, buffer) {
   this.identifier = identifier;
   this.buffer = buffer;
@@ -41,7 +41,7 @@ wss.on('connection', function connection(ws) {
     sendingQueue.push(new BufferQueue(message.substring(4,14), toByteArray(message.substring(16))));
     //var bufferarraytouse = toByteArrayCallback(message);
   });
-  ws.send('Connection Successfully Received! Client will now receive LIVE tablet updates!');
+  ws.send('Connection Successfully Received! Client will now receive LIVE tablet updates on protocol v3!');
 });
 
 bleno.on('stateChange', function(state) {
@@ -93,7 +93,7 @@ red1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   var rawstring = hex2a(hextocheck)
   if(rawstring.startsWith("L!"))
   {
-    toServerAwaiting.set(rawstring.substring(2,12), new WaitingTabletId(rawstring.substring(2,12), rawstring.substring(0,21), "", parseInt(rawstring.substring(24))))
+    toServerAwaiting.set(rawstring.substring(2,12), new WaitingTabletId(rawstring.substring(2,12), rawstring.substring(0,21), "", parseInt(rawstring.substring(25))))
   }
   else if(rawstring.startsWith("F!")){
     var instanceToChange = toServerAwaiting.get(rawstring.substring(2,12));
@@ -113,7 +113,7 @@ red1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
       instanceToChange.messagesleft = instanceToChange.messagesleft - 1;
       instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(14)
       if(instanceToChange.messagesleft < 1){
-        sendtomaster("R1", (instanceToChange.rawheader + ">>" + instanceToChange.rawmessage))
+        sendtomaster("R1", (instanceToChange.rawheader.substring(2) + ">>" + instanceToChange.rawmessage))
       }
     }
   }
@@ -132,7 +132,7 @@ red2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   var rawstring = hex2a(hextocheck)
   if(rawstring.startsWith("L!"))
   {
-    toServerAwaiting.set(rawstring.substring(2,12), new WaitingTabletId(rawstring.substring(2,12), rawstring.substring(0,21), "", parseInt(rawstring.substring(24))))
+    toServerAwaiting.set(rawstring.substring(2,12), new WaitingTabletId(rawstring.substring(2,12), rawstring.substring(0,21), "", parseInt(rawstring.substring(25))))
   }
   else if(rawstring.startsWith("F!")){
     var instanceToChange = toServerAwaiting.get(rawstring.substring(2,12));
@@ -152,7 +152,7 @@ red2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
       instanceToChange.messagesleft = instanceToChange.messagesleft - 1;
       instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(14)
       if(instanceToChange.messagesleft < 1){
-        sendtomaster("R2", (instanceToChange.rawheader + ">>" + instanceToChange.rawmessage))
+        sendtomaster("R2", (instanceToChange.rawheader.substring(2) + ">>" + instanceToChange.rawmessage))
       }
     }
   }
@@ -172,7 +172,7 @@ red3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
   var rawstring = hex2a(hextocheck)
   if(rawstring.startsWith("L!"))
   {
-    toServerAwaiting.set(rawstring.substring(2,12), new WaitingTabletId(rawstring.substring(2,12), rawstring.substring(0,21), "", parseInt(rawstring.substring(24))))
+    toServerAwaiting.set(rawstring.substring(2,12), new WaitingTabletId(rawstring.substring(2,12), rawstring.substring(0,21), "", parseInt(rawstring.substring(25))))
   }
   else if(rawstring.startsWith("F!")){
     var instanceToChange = toServerAwaiting.get(rawstring.substring(2,12));
@@ -192,7 +192,7 @@ red3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callbac
       instanceToChange.messagesleft = instanceToChange.messagesleft - 1;
       instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(14)
       if(instanceToChange.messagesleft < 1){
-        sendtomaster("R3", (instanceToChange.rawheader + ">>" + instanceToChange.rawmessage))
+        sendtomaster("R3", (instanceToChange.rawheader.substring(2) + ">>" + instanceToChange.rawmessage))
       }
     }
   }
@@ -212,7 +212,7 @@ blue1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   var rawstring = hex2a(hextocheck)
   if(rawstring.startsWith("L!"))
   {
-    toServerAwaiting.set(rawstring.substring(2,12), new WaitingTabletId(rawstring.substring(2,12), rawstring.substring(0,21), "", parseInt(rawstring.substring(24))))
+    toServerAwaiting.set(rawstring.substring(2,12), new WaitingTabletId(rawstring.substring(2,12), rawstring.substring(0,21), "", parseInt(rawstring.substring(25))))
   }
   else if(rawstring.startsWith("F!")){
     var instanceToChange = toServerAwaiting.get(rawstring.substring(2,12));
@@ -232,7 +232,7 @@ blue1s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
       instanceToChange.messagesleft = instanceToChange.messagesleft - 1;
       instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(14)
       if(instanceToChange.messagesleft < 1){
-        sendtomaster("B1", (instanceToChange.rawheader + ">>" + instanceToChange.rawmessage))
+        sendtomaster("B1", (instanceToChange.rawheader.substring(2) + ">>" + instanceToChange.rawmessage))
       }
     }
   }
@@ -252,7 +252,7 @@ blue2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   var rawstring = hex2a(hextocheck)
   if(rawstring.startsWith("L!"))
   {
-    toServerAwaiting.set(rawstring.substring(2,12), new WaitingTabletId(rawstring.substring(2,12), rawstring.substring(0,21), "", parseInt(rawstring.substring(24))))
+    toServerAwaiting.set(rawstring.substring(2,12), new WaitingTabletId(rawstring.substring(2,12), rawstring.substring(0,21), "", parseInt(rawstring.substring(25))))
   }
   else if(rawstring.startsWith("F!")){
     var instanceToChange = toServerAwaiting.get(rawstring.substring(2,12));
@@ -272,7 +272,7 @@ blue2s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
       instanceToChange.messagesleft = instanceToChange.messagesleft - 1;
       instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(14)
       if(instanceToChange.messagesleft < 1){
-        sendtomaster("B2", (instanceToChange.rawheader + ">>" + instanceToChange.rawmessage))
+        sendtomaster("B2", (instanceToChange.rawheader.substring(2) + ">>" + instanceToChange.rawmessage))
       }
     }
   }
@@ -292,7 +292,7 @@ blue3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
   var rawstring = hex2a(hextocheck)
   if(rawstring.startsWith("L!"))
   {
-    toServerAwaiting.set(rawstring.substring(2,12), new WaitingTabletId(rawstring.substring(2,12), rawstring.substring(0,21), "", parseInt(rawstring.substring(24))))
+    toServerAwaiting.set(rawstring.substring(2,12), new WaitingTabletId(rawstring.substring(2,12), rawstring.substring(0,21), "", parseInt(rawstring.substring(25))))
   }
   else if(rawstring.startsWith("F!")){
     var instanceToChange = toServerAwaiting.get(rawstring.substring(2,12));
@@ -312,7 +312,7 @@ blue3s.prototype.onWriteRequest = function(data, offset, withoutResponse, callba
       instanceToChange.messagesleft = instanceToChange.messagesleft - 1;
       instanceToChange.rawmessage = instanceToChange.rawmessage + rawstring.substring(14)
       if(instanceToChange.messagesleft < 1){
-        sendtomaster("B3", (instanceToChange.rawheader + ">>" + instanceToChange.rawmessage))
+        sendtomaster("B3", (instanceToChange.rawheader.substring(2) + ">>" + instanceToChange.rawmessage))
       }
     }
   }
