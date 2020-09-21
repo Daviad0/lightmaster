@@ -1008,8 +1008,8 @@ namespace LightMasterMVVM.ViewModels
         }
         public NotificationViewModel()
         {
-            AddNotification("Auto Login", "Welcome 862 Scouter", "#2a7afa", null);
-            AddNotification("Question Test", "Hi, I am a test!", "#2a7afa", new TabletRequestArgs() { NotificationId = 0, RequestingTabletIdentifier = "a-12345678", RequestTimer = 15, TypeOfRequest = TabletRequestEvent.Demo });
+            AddNotification("Notification Test", "Hi, I am a test!", "#00A572", null);
+            AddNotification("Question Test", "Hi, I am a test!", "#07d0de", new TabletRequestArgs() { NotificationId = 0, RequestingTabletIdentifier = "a-12345678", RequestTimer = 15, TypeOfRequest = TabletRequestEvent.Demo });
         }
     }
     public class TBAViewModel : ViewModelBase

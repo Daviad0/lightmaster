@@ -177,7 +177,7 @@
       </Border>
       
     </Grid>
-    <Button Content="Create New Graph" Command="{Binding CreateGraph}" FontWeight="Bold" Classes="navbutton" Foreground="White" Height="60" Padding="20" Width="400" Margin="10" FontSize="20"/>
+    <Button Content="Create New Graph" Command="{Binding CreateGraph}" FontWeight="Bold" Classes="navbutton" Foreground="White" Height="80" Padding="20" Width="400" Margin="10" FontSize="20"/>
   </StackPanel>
   
 </UserControl>

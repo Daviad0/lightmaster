@@ -953,7 +953,7 @@ namespace LightMasterMVVM.Views
                             //TECH EMERGENCY
                             break;
                         case 2:
-                            //BATTERY NOTICE
+                            control.TabletViewModel.Tablets.ToArray()[control.TabletViewModel.Tablets.IndexOf(control.TabletViewModel.Tablets.Where(x => x.Identifier == uniqueId).FirstOrDefault())].BatteryLevel = data + "%";
                             break;
                         case 4:
                             //DIAGNOSTIC REPORT
@@ -968,8 +968,8 @@ namespace LightMasterMVVM.Views
                             //ADMINISTRATOR REQUEST
                             break;
                         case 10:
-                            control.NotificationViewModel.AddNotification("Scored!", ((instanceOfTablet.TabletName != null && instanceOfTablet.TabletName != "") ? instanceOfTablet.TabletName : instanceOfTablet.Identifier) + " has submitted scores under color " + instanceOfTablet.ColorId, "Turquoise", null);
-                            /*var itemstouse = JsonConvert.DeserializeObject<List<IO_TeamMatch>>(data);
+                            
+                            var itemstouse = JsonConvert.DeserializeObject<List<IO_TeamMatch>>(data);
                             foreach (var itemtouse in itemstouse)
                             {
                                 try
@@ -1059,12 +1059,54 @@ namespace LightMasterMVVM.Views
                                     db.Matches.Add(newTeamMatch);
                                 }
                             }
+                            control.NotificationViewModel.AddNotification("Scored!", ((instanceOfTablet.TabletName != null && instanceOfTablet.TabletName != "") ? instanceOfTablet.TabletName : instanceOfTablet.Identifier) + " has submitted scores under color " + instanceOfTablet.ColorId, "#07d0de", null);
 
-
-                            db.SaveChanges();*/
+                            db.SaveChanges();
                             break;
                         case 11:
-                            //TBA CHECKING REPORT
+                            var listofofficialmatches = JsonConvert.DeserializeObject<List<TBA_Match>>(data);
+                            foreach (var om in listofofficialmatches)
+                            {
+                                if (db.TBAMatches.Find(om.key) != null)
+                                {
+                                    try
+                                    {
+                                        var previousentry = db.TBAMatches.Find(om.key);
+                                        previousentry.rawjson = JsonConvert.SerializeObject(om);
+                                        db.TBAMatches.Update(previousentry);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        TBA_DB_Model newDBEntry = new TBA_DB_Model() { event_key = om.event_key, match_number = om.match_number, key = om.key, rawjson = JsonConvert.SerializeObject(om) };
+                                        if (om.comp_level == "qm")
+                                        {
+                                            newDBEntry.isqualifying = true;
+                                        }
+                                        else
+                                        {
+                                            newDBEntry.isqualifying = false;
+                                        }
+                                        db.TBAMatches.Add(newDBEntry);
+                                    }
+
+                                }
+                                else
+                                {
+                                    TBA_DB_Model newDBEntry = new TBA_DB_Model() { event_key = om.event_key, match_number = om.match_number, key = om.key, rawjson = JsonConvert.SerializeObject(om) };
+                                    if (om.comp_level == "qm")
+                                    {
+                                        newDBEntry.isqualifying = true;
+                                    }
+                                    else
+                                    {
+                                        newDBEntry.isqualifying = false;
+                                    }
+                                    db.TBAMatches.Add(newDBEntry);
+                                }
+
+
+                            }
+                            db.SaveChanges();
                             break;
                         case 12:
                             //TBA MATCHUP REPORT
@@ -1073,7 +1115,35 @@ namespace LightMasterMVVM.Views
                             //CHANGE IDENTIFIER NOTICE
                             break;
                         case 20:
-                            //MATCH REQUEST
+                            
+                            GetEventCode eventConfig = new GetEventCode();
+                            var listOfDBMatchesToSend = db.Matches.Where(x => x.EventCode == new GetEventCode().EventCode() && x.TabletId == rawdata.Substring(0, 2)).ToList();
+                            var listOfMatchesToSend = new List<IO_TeamMatch>();
+                            foreach (var dbm in listOfDBMatchesToSend.OrderBy(x => x.MatchNumber))
+                            {
+                                var correspondingteam = db.FRCTeams.Find(dbm.team_instance_id);
+                                var alliancepartner1 = db.FRCTeams.Find(dbm.AlliancePartners[0]);
+                                var alliancepartner2 = db.FRCTeams.Find(dbm.AlliancePartners[1]);
+                                listOfMatchesToSend.Add(new IO_TeamMatch() { AlliancePartners = new int[2] { alliancepartner1.team_number, alliancepartner2.team_number }, EventCode = dbm.EventCode, TeamNumber = correspondingteam.team_number, MatchNumber = dbm.MatchNumber, TabletId = dbm.TabletId, PowerCellInner = new int[21], PowerCellOuter = new int[21], PowerCellLower = new int[21], PowerCellMissed = new int[21] });
+                            }
+                            string modelstring = JsonConvert.SerializeObject(listOfMatchesToSend);
+                            byte[] bytesToSend = Encoding.ASCII.GetBytes(modelstring);
+                            if (modelstring.Length > 480)
+                            {
+                                int numberofmessages = (int)Math.Ceiling((float)modelstring.Length / (float)480);
+                                var startidentifier = "L!2^" + uniqueId.ToString() + ">>" + numberofmessages.ToString();
+                                client.Send(startidentifier);
+                                for (int i = numberofmessages; i > 0; i--)
+                                {
+                                    var simplestring = "F!2^" + uniqueId + ">>" + new string(modelstring.Skip((numberofmessages - i) * 480).Take(480).ToArray());
+                                    client.Send(simplestring);
+                                }
+                            }
+                            else
+                            {
+                                client.Send("S!2^" + uniqueId + ">>" + modelstring);
+                            }
+                            control.NotificationViewModel.AddNotification("Data Request", rawdata.Substring(0, 2).ToString() + " requested data", "#00A572", null);
                             break;
                         case 21:
                             //CONFIG REQUEST
