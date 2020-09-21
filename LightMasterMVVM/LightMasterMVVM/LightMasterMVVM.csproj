@@ -13,6 +13,7 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
+    <AvaloniaResource Remove="Assets\ascending.png" />
     <AvaloniaResource Remove="Assets\ban.png" />
     <AvaloniaResource Remove="Assets\battery-full.png" />
     <AvaloniaResource Remove="Assets\Blue1Tablet.png" />
@@ -24,6 +25,7 @@
     <AvaloniaResource Remove="Assets\caret-up.png" />
     <AvaloniaResource Remove="Assets\close.png" />
     <AvaloniaResource Remove="Assets\database-white.png" />
+    <AvaloniaResource Remove="Assets\descending.png" />
     <AvaloniaResource Remove="Assets\icofont.ttf" />
     <AvaloniaResource Remove="Assets\LightScoutLogo.png" />
     <AvaloniaResource Remove="Assets\LightScoutQR.png" />
@@ -54,6 +56,7 @@
     <AvaloniaResource Remove="Views\TheBlueAlliance.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Assets\ascending.png" />
     <None Remove="Assets\ban.png" />
     <None Remove="Assets\battery-full.png" />
     <None Remove="Assets\Blue1Tablet.png" />
@@ -65,6 +68,7 @@
     <None Remove="Assets\caret-up.png" />
     <None Remove="Assets\close.png" />
     <None Remove="Assets\database-white.png" />
+    <None Remove="Assets\descending.png" />
     <None Remove="Assets\icofont.ttf" />
     <None Remove="Assets\LightScoutLogo.png" />
     <None Remove="Assets\LightScoutQR.png" />
@@ -95,6 +99,10 @@
     <None Remove="Views\Tablets.xaml" />
     <None Remove="Views\TheBlueAlliance.xaml" />
     <None Remove="Assets\close-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\ascending.png" />
+    <EmbeddedResource Include="Assets\descending.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\close.png" />

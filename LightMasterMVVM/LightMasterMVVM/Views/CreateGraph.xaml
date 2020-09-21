@@ -22,7 +22,7 @@
                           <Button Grid.Column="1" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.ChangeOrderOfTrackPropertyUp}" CommandParameter="{Binding OrderTypeProperty}">
                             <Button.Template>
                               <ControlTemplate TargetType="{x:Type Button}">
-                                <TextBlock Text="U" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" FontSize="15" FontWeight="Bold" Grid.Column="3"/>
+                                <Image Source="resm:LightMasterMVVM.Assets.caret-up.png" Margin="3"/>
                               </ControlTemplate>
                             </Button.Template>
                           </Button>
@@ -30,7 +30,7 @@
                           <Button Grid.Column="2" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.ChangeOrderOfTrackPropertyDown}" CommandParameter="{Binding OrderTypeProperty}">
                             <Button.Template>
                               <ControlTemplate TargetType="{x:Type Button}">
-                                <TextBlock Text="D" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" FontSize="15" FontWeight="Bold" Grid.Column="4"/>
+                                <Image Source="resm:LightMasterMVVM.Assets.caret-down.png" Margin="3"/>
                               </ControlTemplate>
                             </Button.Template>
                           </Button>
@@ -65,21 +65,21 @@
                           <Button Grid.Column="1" IsVisible="{Binding Ascending}" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.SetOrderSortValue}" CommandParameter="{Binding OrderTypeProperty}">
                             <Button.Template>
                               <ControlTemplate TargetType="{x:Type Button}">
-                                <TextBlock Text="A" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="LightBlue" FontSize="15" FontWeight="Bold" Grid.Column="2"/>
+                                <Image Source="resm:LightMasterMVVM.Assets.ascending.png" Margin="2"/>
                               </ControlTemplate>
                             </Button.Template>
                           </Button>
                           <Button Grid.Column="1" IsVisible="{Binding Descending}" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.SetOrderSortValue}" CommandParameter="{Binding OrderTypeProperty}">
                             <Button.Template>
                               <ControlTemplate TargetType="{x:Type Button}">
-                                <TextBlock Text="D" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="LightBlue" FontSize="15" FontWeight="Bold" Grid.Column="2"/>
+                                <Image Source="resm:LightMasterMVVM.Assets.descending.png" Margin="2"/>
                               </ControlTemplate>
                             </Button.Template>
                           </Button>
                           <Button Grid.Column="2" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.ChangeOrderOfOrderPropertyUp}" CommandParameter="{Binding OrderTypeProperty}">
                             <Button.Template>
                               <ControlTemplate TargetType="{x:Type Button}">
-                                <TextBlock Text="U" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" FontSize="15" FontWeight="Bold" Grid.Column="2"/>
+                                <Image Source="resm:LightMasterMVVM.Assets.caret-up.png" Margin="3"/>
                               </ControlTemplate>
                             </Button.Template>
                           </Button>
@@ -87,7 +87,7 @@
                           <Button Grid.Column="3" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.ChangeOrderOfOrderPropertyDown}" CommandParameter="{Binding OrderTypeProperty}">
                             <Button.Template>
                               <ControlTemplate TargetType="{x:Type Button}">
-                                <TextBlock Text="D" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" FontSize="15" FontWeight="Bold" Grid.Column="3"/>
+                                <Image Source="resm:LightMasterMVVM.Assets.caret-down.png" Margin="3"/>
                               </ControlTemplate>
                             </Button.Template>
                           </Button>
@@ -177,7 +177,7 @@
       </Border>
       
     </Grid>
-    <Button Content="Create New Graph" Command="{Binding CreateGraph}" Classes="navbutton" Foreground="White" Height="60" Padding="20" Width="400" Margin="10"/>
+    <Button Content="Create New Graph" Command="{Binding CreateGraph}" FontWeight="Bold" Classes="navbutton" Foreground="White" Height="60" Padding="20" Width="400" Margin="10" FontSize="20"/>
   </StackPanel>
   
 </UserControl>

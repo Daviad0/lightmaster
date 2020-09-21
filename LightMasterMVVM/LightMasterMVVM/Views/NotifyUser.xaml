@@ -8,9 +8,9 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LightMasterMVVM.Views.NotifyUser">
   <UserControl.Styles>
-    <Style Selector="Border.fadingAnimation">
+    <Style Selector="Border.notification">
       <Style.Animations>
-        <Animation Duration="0:0:1">
+        <Animation Duration="0:0:0.5">
           <KeyFrame Cue="0%">
             <Setter Property="Opacity" Value="0.0"/>
           </KeyFrame>
@@ -28,14 +28,37 @@
           <!--<Border Width="100" Padding="5" Background="#1E1E1E" BorderBrush="Black" BorderThickness="3,0,0,3" CornerRadius="4">
             
           </Border>-->
-          <Border Width="350" Margin="10" Padding="40,20,40,20" CornerRadius="5" Background="{Binding BackgroundColor}" IsVisible="{Binding NotificationActive}" Opacity="0.95">
+          <Border Classes="notification" Width="350" Margin="10" Padding="40,20,40,20" CornerRadius="5" Background="{Binding BackgroundColor}" IsVisible="{Binding NotificationActive}">
             <Grid ColumnDefinitions="*" RowDefinitions="*">
               <StackPanel Grid.Row="0" Grid.Column="1" Margin="0,0,90,0">
                 <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Text="{Binding NotificationTitle}" Foreground="White" FontWeight="Bold" FontSize="20"/>
                 <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" TextWrapping="Wrap" Text="{Binding NotificationText}" Foreground="White" FontSize="15"/>
-                <Grid ColumnDefinitions="80,80" Margin="0,5,0,0" IsVisible="{Binding IsPermissionRequest}">
-                    <Button Content="Yes" Background="Black" Foreground="White" Opacity="0.4" Margin="5" Grid.Column="0" Height="40" VerticalAlignment="Center" Padding="5" FontWeight="Bold" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
-                    <Button Content="No" Background="Black" Foreground="White" Opacity="0.4" Margin="5" Grid.Column="1" Height="40" VerticalAlignment="Center" Padding="5" FontWeight="Bold" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
+                <Grid ColumnDefinitions="80,80,80" Margin="0,10,0,0" IsVisible="{Binding IsPermissionRequest}">
+                  <Button Margin="0,5,5,5" Grid.Column="0" Height="40" VerticalAlignment="Center" Command="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl},
+                             Path=DataContext.AcceptRequest}" CommandParameter="{Binding NotificationId}">
+                    <Button.Template>
+                      <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Padding="5" Height="40" CornerRadius="4" Background="White">
+                          <TextBlock Text="Yes" Foreground="{Binding BackgroundColor}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="15" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
+                        </Border>
+                      </ControlTemplate>
+                    </Button.Template>
+                  </Button>
+                  <Button Margin="5,5,5,5" Grid.Column="1" Height="40" VerticalAlignment="Center" Command="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl},
+                             Path=DataContext.CancelNotification}" CommandParameter="{Binding NotificationId}">
+                    <Button.Template>
+                      <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Padding="5" Height="40" CornerRadius="4" Background="White">
+                          <TextBlock Text="No" Foreground="{Binding BackgroundColor}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="15" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik"/>
+                        </Border>
+                      </ControlTemplate>
+                    </Button.Template>
+                  </Button>
+
+                  
+                  <Border Grid.Column="2" VerticalAlignment="Center" Height="40" Width="40" BorderBrush="White" Background="{Binding BackgroundColor}" IsVisible="{Binding IsTimed}" BorderThickness="3" CornerRadius="20">
+                    <TextBlock Text="{Binding SecondsLeft, StringFormat={}{0}s}, Mode=TwoWay}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" FontSize="14" Margin="0,2,0,0"/>
+                  </Border>
                 </Grid>
               </StackPanel>
               <Button IsEnabled="True" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl},

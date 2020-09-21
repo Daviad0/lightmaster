@@ -408,6 +408,37 @@ namespace LightMasterMVVM.Views
                         break;
                 }
             };
+            NavMessenger.NotificationEventAcceptance += async (args) =>
+            {
+                control.NotificationViewModel.UserRequests.Remove(args);
+                control.NotificationViewModel.Notifications.Remove(control.NotificationViewModel.Notifications.Where(x => x.NotificationId == args.NotificationId).FirstOrDefault());
+                switch (args.TypeOfRequest)
+                {
+
+                }
+            };
+            /*NavMessenger.NotificationSeconds += (seconds, notificationId) =>
+            {
+                Console.WriteLine("Text");
+                var secondselapsed = 0;
+                DispatcherTimer timer = new DispatcherTimer();
+                timer = new DispatcherTimer();
+                timer.Interval = new TimeSpan(0, 0, 1);
+                timer.Tick += (s,e) =>
+                {
+                    
+                    control.NotificationViewModel.Notifications.ToArray()[control.NotificationViewModel.Notifications.IndexOf(control.NotificationViewModel.Notifications.Where(x => x.NotificationId == notificationId).FirstOrDefault())].SecondsLeft = seconds - secondselapsed;
+                    if(secondselapsed >= seconds)
+                    {
+                        timer.Stop();
+                    }
+                    secondselapsed++;
+                    
+                };
+                
+                // Start the timer.  Note that this call can be made from any thread.
+                timer.Start();
+            };*/
 
         }
         public static bool CheckForInternetConnection()
@@ -778,7 +809,7 @@ namespace LightMasterMVVM.Views
                     await Task.Delay(100);
                     bluetooth_status.Opacity = 0;
                     bluetooth_status.IsVisible = false;
-                    control.NotificationViewModel.AddNotification("Unavailable", "Bluetooth Service Not Available!", "Red",false);
+                    control.NotificationViewModel.AddNotification("Unavailable", "Bluetooth Service Not Available!", "Red",null);
                 };
                 var exitEvent = new ManualResetEvent(false);
                 var url = new Uri("ws://localhost:9958");
@@ -800,7 +831,7 @@ namespace LightMasterMVVM.Views
                             await Task.Delay(100);
                             bluetooth_status.Opacity = 1;
                         });
-                        control.NotificationViewModel.AddNotification("Ready", "Bluetooth Service Ready!", "DeepPink",false);
+                        control.NotificationViewModel.AddNotification("Ready", "Bluetooth Service Ready!", "DeepPink", null);
                     }
                     else
                     {
@@ -820,7 +851,7 @@ namespace LightMasterMVVM.Views
                         await Task.Delay(100);
                         bluetooth_status.Opacity = 0;
                     });
-                    control.NotificationViewModel.AddNotification("Not Ready", "Bluetooth Service Not Ready!", "Red",false);
+                    control.NotificationViewModel.AddNotification("Not Ready", "Bluetooth Service Not Ready!", "Red", null);
                 });
             }
             catch (Exception ex)
@@ -829,7 +860,7 @@ namespace LightMasterMVVM.Views
                 await Task.Delay(100);
                 bluetooth_status.Opacity = 0;
                 bluetooth_status.IsVisible = false;
-                control.NotificationViewModel.AddNotification("Unavailable", "Bluetooth Service Not Available!", "Red",false);
+                control.NotificationViewModel.AddNotification("Unavailable", "Bluetooth Service Not Available!", "Red", null);
             }
             try
             {
@@ -937,7 +968,7 @@ namespace LightMasterMVVM.Views
                             //ADMINISTRATOR REQUEST
                             break;
                         case 10:
-                            control.NotificationViewModel.AddNotification("Scored!", ((instanceOfTablet.TabletName != null && instanceOfTablet.TabletName != "") ? instanceOfTablet.TabletName : instanceOfTablet.Identifier) + " has submitted scores under color " + instanceOfTablet.ColorId, "Turquoise",false);
+                            control.NotificationViewModel.AddNotification("Scored!", ((instanceOfTablet.TabletName != null && instanceOfTablet.TabletName != "") ? instanceOfTablet.TabletName : instanceOfTablet.Identifier) + " has submitted scores under color " + instanceOfTablet.ColorId, "Turquoise", null);
                             /*var itemstouse = JsonConvert.DeserializeObject<List<IO_TeamMatch>>(data);
                             foreach (var itemtouse in itemstouse)
                             {
@@ -1125,7 +1156,7 @@ namespace LightMasterMVVM.Views
                     deviceid = int.Parse(rawdata.Substring(5, 4));
                 }
                 //S = Score
-                control.NotificationViewModel.AddNotification("Scored", datawithoutid.Substring(0, 2).ToString() + " sent scores", "Green",false);
+                control.NotificationViewModel.AddNotification("Scored", datawithoutid.Substring(0, 2).ToString() + " sent scores", "Green", null);
                 //control.TabletViewModel.BluetoothBackgroundColors[tabletindex] = "LightBlue";
                 //control.TabletViewModel.BluetoothBorderColors[tabletindex] = "Blue";
                 var jsontodeserialize = datawithoutid.Substring(5);
@@ -1336,7 +1367,7 @@ namespace LightMasterMVVM.Views
                     deviceid = int.Parse(rawdata.Substring(6, 4));
                 }
 
-                control.NotificationViewModel.AddNotification("Data Request", rawdata.Substring(0, 2).ToString() + " requested data", "Blue",false);
+                control.NotificationViewModel.AddNotification("Data Request", rawdata.Substring(0, 2).ToString() + " requested data", "Blue", null);
                 GetEventCode eventConfig = new GetEventCode();
                 using(var db = new ScoutingContext())
                 {

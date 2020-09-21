@@ -1,4 +1,5 @@
 ﻿using Avalonia.Styling;
+using DynamicData.Annotations;
 using LightMasterMVVM.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -8,18 +9,23 @@ using System.Text;
 
 namespace LightMasterMVVM.Models
 {
-    public class NotificationItem
+    public class NotificationItem : INotifyPropertyChanged
     {
         private string backgroundColor;
         private string notificationText;
         private string notificationTitle;
         private bool notificationActive;
         private bool isPermissionRequest;
+        private bool isTimed;
         private int notificationId;
+        private int secondsLeft;
         public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
         public DateTime timeAdded { get; set; }
         public string BackgroundColor
@@ -34,7 +40,7 @@ namespace LightMasterMVVM.Models
                 if (value != this.backgroundColor)
                 {
                     this.backgroundColor = value;
-                    NotifyPropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -52,11 +58,26 @@ namespace LightMasterMVVM.Models
                 if (value != this.notificationId)
                 {
                     this.notificationId = value;
-                    NotifyPropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
-        
+        public int SecondsLeft
+        {
+            get
+            {
+                return this.secondsLeft;
+            }
+
+            set
+            {
+                if (value != this.secondsLeft)
+                {
+                    this.secondsLeft = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public bool NotificationActive
         {
             get
@@ -69,7 +90,7 @@ namespace LightMasterMVVM.Models
                 if (value != this.notificationActive)
                 {
                     this.notificationActive = value;
-                    NotifyPropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -85,7 +106,23 @@ namespace LightMasterMVVM.Models
                 if (value != this.isPermissionRequest)
                 {
                     this.isPermissionRequest = value;
-                    NotifyPropertyChanged();
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public bool IsTimed
+        {
+            get
+            {
+                return this.isTimed;
+            }
+
+            set
+            {
+                if (value != this.isTimed)
+                {
+                    this.isTimed = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -101,7 +138,7 @@ namespace LightMasterMVVM.Models
                 if (value != this.notificationText)
                 {
                     this.notificationText = value;
-                    NotifyPropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -117,14 +154,14 @@ namespace LightMasterMVVM.Models
                 if (value != this.notificationTitle)
                 {
                     this.notificationTitle = value;
-                    NotifyPropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
         public void CancelNotification()
         {
             NotificationActive = false;
-            NotifyPropertyChanged();
+            OnPropertyChanged();
         }
     }
 }

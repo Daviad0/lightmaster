@@ -41,6 +41,9 @@ using System.Globalization;
 using Avalonia.Media.Imaging;
 using Avalonia;
 using Avalonia.Platform;
+using OxyPlot.Reporting;
+using ReactiveUI;
+using System.Reactive.Concurrency;
 
 namespace LightMasterMVVM.ViewModels
 {
@@ -908,11 +911,8 @@ namespace LightMasterMVVM.ViewModels
     }
     public class NotificationViewModel : ViewModelBase
     {
-        private ObservableCollection<NotificationItem> notifications = new ObservableCollection<NotificationItem>()
-        {
-            new NotificationItem(){ BackgroundColor = "#2a7afa", NotificationText = "Welcome 862 Scouter", NotificationTitle = "Auto Login", NotificationId = 1, NotificationActive = true, timeAdded = DateTime.Now },
-            new NotificationItem(){ BackgroundColor = "#2a7afa", NotificationText = "Hi, I am a test!", NotificationTitle = "Question Test", NotificationId = 2, NotificationActive = true, timeAdded = DateTime.Now, IsPermissionRequest = true },
-        };
+        public List<TabletRequestArgs> UserRequests = new List<TabletRequestArgs>();
+        private ObservableCollection<NotificationItem> notifications = new ObservableCollection<NotificationItem>();
         public ObservableCollection<NotificationItem> Notifications
         {
             get => notifications;
@@ -926,17 +926,90 @@ namespace LightMasterMVVM.ViewModels
         {
             Console.WriteLine("REST");
         }
-        public async void AddNotification(string title, string message, string color, bool question)
+        public async void AddNotification(string title, string message, string color, TabletRequestArgs questionArgs)
         {
             List<NotificationItem> oldNotifications = Notifications.ToList();
-            if(oldNotifications.Count == 4)
+            if (oldNotifications.Count == 4)
             {
                 oldNotifications = oldNotifications.OrderBy(x => x.timeAdded).ToList();
                 oldNotifications.Remove(oldNotifications.First());
             }
-            oldNotifications.Add(new NotificationItem() { BackgroundColor = color, NotificationActive = true, NotificationId = new Random().Next(1, 5000), NotificationText = message, NotificationTitle = title, timeAdded = DateTime.Now, IsPermissionRequest = question });
-            ObservableCollection<NotificationItem> newNotifications = new ObservableCollection<NotificationItem>(oldNotifications);
-            Notifications = newNotifications;
+            var randomId = new Random().Next(1, 5000);
+            var newNotificationItem = new NotificationItem() { BackgroundColor = color, NotificationActive = true, NotificationId = randomId, NotificationText = message, NotificationTitle = title, timeAdded = DateTime.Now };
+            
+            if (questionArgs != null)
+            {
+                newNotificationItem.IsPermissionRequest = true;
+                
+                UserRequests.Add(new TabletRequestArgs() { NotificationId = randomId, RequestingTabletIdentifier = questionArgs.RequestingTabletIdentifier, RequestTimer = questionArgs.RequestTimer, TypeOfRequest = questionArgs.TypeOfRequest });
+                if (questionArgs.RequestTimer > 0)
+                {
+                    //NavMessenger.OnNotificationSeconds(questionArgs.RequestTimer, randomId);
+                    newNotificationItem.IsTimed = true;
+                    newNotificationItem.SecondsLeft = questionArgs.RequestTimer;
+                }
+
+            }
+            Notifications.Add(newNotificationItem);
+            if (questionArgs != null)
+            {
+                if (questionArgs.RequestTimer > 0)
+                {
+                    for(var i = questionArgs.RequestTimer;i > 0; i--)
+                    {
+                        try
+                        {
+                            Notifications.ToArray()[Notifications.IndexOf(Notifications.Where(x => x.NotificationId == randomId).FirstOrDefault())].SecondsLeft = i;
+                            //Notifications = new ObservableCollection<NotificationItem>(Notifications.ToList());
+                            await Task.Delay(1000);
+                        }
+                        catch(Exception ex)
+                        {
+                            break;
+                        }
+                    }
+                    try
+                    {
+                        Notifications.ToArray()[Notifications.IndexOf(Notifications.Where(x => x.NotificationId == randomId).FirstOrDefault())].SecondsLeft = 0;
+                        await Task.Delay(1000);
+                        Notifications.Remove(Notifications.Where(x => x.NotificationId == randomId).FirstOrDefault());
+                        UserRequests.Remove(UserRequests.Where(x => x.NotificationId == randomId).FirstOrDefault());
+                    }
+                    catch(Exception ex)
+                    {
+
+                    }
+                    
+
+                }
+
+            }
+            
+
+        }
+        public void AcceptRequest(int notificationId)
+        {
+            NavMessenger.OnNotificationEventAcceptance(UserRequests.Where(x => x.NotificationId == notificationId).FirstOrDefault());
+        }
+        public enum TabletRequestEvent
+        {
+            RequestAdmin,
+            RequestAuthorized,
+            EmergencyQuestion,
+            ManualDBKey,
+            Demo
+        }
+        public class TabletRequestArgs
+        {
+            public TabletRequestEvent TypeOfRequest { get; set; }
+            public string RequestingTabletIdentifier { get; set; }
+            public int RequestTimer { get; set; }
+            public int NotificationId { get; set; }
+        }
+        public NotificationViewModel()
+        {
+            AddNotification("Auto Login", "Welcome 862 Scouter", "#2a7afa", null);
+            AddNotification("Question Test", "Hi, I am a test!", "#2a7afa", new TabletRequestArgs() { NotificationId = 0, RequestingTabletIdentifier = "a-12345678", RequestTimer = 15, TypeOfRequest = TabletRequestEvent.Demo });
         }
     }
     public class TBAViewModel : ViewModelBase

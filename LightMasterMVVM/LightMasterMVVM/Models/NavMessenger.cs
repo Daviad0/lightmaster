@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms.VisualStyles;
+using static LightMasterMVVM.ViewModels.NotificationViewModel;
 
 namespace LightMasterMVVM.Models
 {
@@ -24,5 +25,9 @@ namespace LightMasterMVVM.Models
 
         public static event Action<TrackedProperty[], TrackedProperty[]> CreateNewGraph;
         public static void OnCreateNewGraph(TrackedProperty[] trackingBy, TrackedProperty[] orderBy) => CreateNewGraph?.Invoke(trackingBy,orderBy);
+        public static event Action<TabletRequestArgs> NotificationEventAcceptance;
+        public static void OnNotificationEventAcceptance(TabletRequestArgs args) => NotificationEventAcceptance?.Invoke(args);
+        public static event Action<int, int> NotificationSeconds;
+        public static void OnNotificationSeconds(int seconds, int notifid) => NotificationSeconds?.Invoke(seconds, notifid);
     }
 }
