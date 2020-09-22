@@ -951,6 +951,7 @@ namespace LightMasterMVVM.ViewModels
 
             }
             Notifications.Add(newNotificationItem);
+            
             if (questionArgs != null)
             {
                 if (questionArgs.RequestTimer > 0)

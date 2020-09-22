@@ -805,11 +805,14 @@ namespace LightMasterMVVM.Views
                 startTCPforwarding.Start();
                 startTCPforwarding.ErrorDataReceived += async (s, e) =>
                 {
-                    bluetooth_status.Classes.Add("hide");
-                    await Task.Delay(100);
-                    bluetooth_status.Opacity = 0;
-                    bluetooth_status.IsVisible = false;
-                    control.NotificationViewModel.AddNotification("Unavailable", "Bluetooth Service Not Available!", "Red",null);
+                    Dispatcher.UIThread.Post(async () => {
+                        bluetooth_status.Classes.Add("hide");
+                        await Task.Delay(100);
+                        bluetooth_status.Opacity = 0;
+                        bluetooth_status.IsVisible = false;
+                        control.NotificationViewModel.AddNotification("Unavailable", "Bluetooth Service Not Available!", "Red", null);
+                    });
+                    
                 };
                 var exitEvent = new ManualResetEvent(false);
                 var url = new Uri("ws://localhost:9958");
@@ -830,8 +833,9 @@ namespace LightMasterMVVM.Views
                             bluetooth_status.Classes.Add("show");
                             await Task.Delay(100);
                             bluetooth_status.Opacity = 1;
+                            control.NotificationViewModel.AddNotification("Ready", "Bluetooth Service Ready!", "DeepPink", null);
                         });
-                        control.NotificationViewModel.AddNotification("Ready", "Bluetooth Service Ready!", "DeepPink", null);
+                        
                     }
                     else
                     {

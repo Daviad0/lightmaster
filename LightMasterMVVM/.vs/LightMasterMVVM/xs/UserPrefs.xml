@@ -2,13 +2,13 @@
   <MonoDevelop.Ide.ItemProperties.LightMasterMVVM PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="LightMasterMVVM/Views/NotifyUser.xaml">
     <Files>
-      <File FileName="LightMasterMVVM/ViewModels/MainWindowViewModel.cs" Line="909" Column="55" />
+      <File FileName="LightMasterMVVM/ViewModels/MainWindowViewModel.cs" Line="912" Column="55" />
       <File FileName="LightMasterMVVM/Views/MainWindow.xaml" />
       <File FileName="LightMasterMVVM/Views/DataAnalysis.xaml" />
       <File FileName="LightMasterMVVM/ViewLocator.cs" />
       <File FileName="LightMasterMVVM/Program.cs" />
       <File FileName="LightMasterMVVM/Views/Tablets.xaml" />
-      <File FileName="LightMasterMVVM/Views/NotifyUser.xaml" Line="50" Column="1" />
+      <File FileName="LightMasterMVVM/Views/NotifyUser.xaml" Line="73" Column="1" />
       <File FileName="LightMasterMVVM/App.xaml" />
       <File FileName="LightMasterMVVM/Views/Matches.xaml" />
       <File FileName="LightMasterMVVM/Views/MainWindow.xaml.cs" />
