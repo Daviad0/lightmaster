@@ -9,6 +9,7 @@ namespace LightMasterMVVM.Views
         public CompetitionTeams()
         {
             this.InitializeComponent();
+            
         }
 
         private void InitializeComponent()

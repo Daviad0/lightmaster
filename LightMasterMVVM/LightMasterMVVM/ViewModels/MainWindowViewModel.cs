@@ -49,6 +49,7 @@ namespace LightMasterMVVM.ViewModels
 {
     public class CreateGraphViewModel: ViewModelBase
     {
+        public SwitchConfiguration configuration => new ConfigurationData().LoadData();
         public ObservableCollection<TrackedProperty> OrderedBy
         {
             get => orderedBy;
@@ -271,6 +272,7 @@ namespace LightMasterMVVM.ViewModels
     }
     public class MatchDetailsViewModel: ViewModelBase
     {
+        public SwitchConfiguration configuration => new ConfigurationData().LoadData();
         public void Back()
         {
             NavMessenger.OnFromMatchDetails(fromPage);
@@ -396,15 +398,14 @@ namespace LightMasterMVVM.ViewModels
             {
                 fromPage = calledPage;
                 var testmatch = matchnum;
-                GetEventCode getCode = new GetEventCode();
                 using (var db = new ScoutingContext())
                 {
-                    var red1match = db.Matches.Where(x => x.TabletId == "R1" && x.EventCode == getCode.EventCode() && x.MatchNumber == testmatch).FirstOrDefault();
-                    var red2match = db.Matches.Where(x => x.TabletId == "R2" && x.EventCode == getCode.EventCode() && x.MatchNumber == testmatch).FirstOrDefault();
-                    var red3match = db.Matches.Where(x => x.TabletId == "R3" && x.EventCode == getCode.EventCode() && x.MatchNumber == testmatch).FirstOrDefault();
-                    var blue1match = db.Matches.Where(x => x.TabletId == "B1" && x.EventCode == getCode.EventCode() && x.MatchNumber == testmatch).FirstOrDefault();
-                    var blue2match = db.Matches.Where(x => x.TabletId == "B2" && x.EventCode == getCode.EventCode() && x.MatchNumber == testmatch).FirstOrDefault();
-                    var blue3match = db.Matches.Where(x => x.TabletId == "B3" && x.EventCode == getCode.EventCode() && x.MatchNumber == testmatch).FirstOrDefault();
+                    var red1match = db.Matches.Where(x => x.TabletId == "R1" && x.EventCode == configuration.EventCode && x.MatchNumber == testmatch).FirstOrDefault();
+                    var red2match = db.Matches.Where(x => x.TabletId == "R2" && x.EventCode == configuration.EventCode && x.MatchNumber == testmatch).FirstOrDefault();
+                    var red3match = db.Matches.Where(x => x.TabletId == "R3" && x.EventCode == configuration.EventCode && x.MatchNumber == testmatch).FirstOrDefault();
+                    var blue1match = db.Matches.Where(x => x.TabletId == "B1" && x.EventCode == configuration.EventCode && x.MatchNumber == testmatch).FirstOrDefault();
+                    var blue2match = db.Matches.Where(x => x.TabletId == "B2" && x.EventCode == configuration.EventCode && x.MatchNumber == testmatch).FirstOrDefault();
+                    var blue3match = db.Matches.Where(x => x.TabletId == "B3" && x.EventCode == configuration.EventCode && x.MatchNumber == testmatch).FirstOrDefault();
                     if (red1match == null)
                     {
                         Red1C = false;
@@ -630,6 +631,7 @@ namespace LightMasterMVVM.ViewModels
     }
     public class TeamDetailsViewModel: ViewModelBase
     {
+        public SwitchConfiguration configuration => new ConfigurationData().LoadData();
         public OriginalPage fromPage;
         private CompTeamView teamModel = new CompTeamView();
         public void Back()
@@ -837,6 +839,7 @@ namespace LightMasterMVVM.ViewModels
     }
     public class CompetitionTeamsViewModel : ViewModelBase
     {
+        public SwitchConfiguration configuration => new ConfigurationData().LoadData();
         public void ShowTeam(int team_instance_id)
         {
             NavMessenger.OnShowTeamDetails(team_instance_id, OriginalPage.TeamList);
@@ -860,7 +863,7 @@ namespace LightMasterMVVM.ViewModels
                 Teams.Clear();
                 using (var db = new ScoutingContext())
                 {
-                    var listofteams = db.FRCTeams.Where(x => x.event_key == new GetEventCode().EventCode()).ToList();
+                    var listofteams = db.FRCTeams.Where(x => x.event_key == configuration.EventCode).ToList();
                     foreach(var dbteamtest in listofteams.OrderBy(x => x.team_number))
                     {
                         CompTeamView compTeamView = new CompTeamView() { team_number = dbteamtest.team_number, rated_tier = dbteamtest.rated_tier };
@@ -911,6 +914,7 @@ namespace LightMasterMVVM.ViewModels
     }
     public class NotificationViewModel : ViewModelBase
     {
+        public SwitchConfiguration configuration => new ConfigurationData().LoadData();
         public List<TabletRequestArgs> UserRequests = new List<TabletRequestArgs>();
         private ObservableCollection<NotificationItem> notifications = new ObservableCollection<NotificationItem>();
         public ObservableCollection<NotificationItem> Notifications
@@ -1010,11 +1014,12 @@ namespace LightMasterMVVM.ViewModels
         public NotificationViewModel()
         {
             AddNotification("Notification Test", "Hi, I am a test!", "#00A572", null);
-            AddNotification("Question Test", "Hi, I am a test!", "#07d0de", new TabletRequestArgs() { NotificationId = 0, RequestingTabletIdentifier = "a-12345678", RequestTimer = 15, TypeOfRequest = TabletRequestEvent.Demo });
+            AddNotification("Question Test", "Hi, I am a test!", "#F64A8A", new TabletRequestArgs() { NotificationId = 0, RequestingTabletIdentifier = "a-12345678", RequestTimer = 15, TypeOfRequest = TabletRequestEvent.Demo });
         }
     }
     public class TBAViewModel : ViewModelBase
     {
+        public SwitchConfiguration configuration => new ConfigurationData().LoadData();
         private bool userControlVisible = false;
         public bool UserControlVisible
         {
@@ -1042,6 +1047,7 @@ namespace LightMasterMVVM.ViewModels
     }
     public class GraphViewModel : ViewModelBase
     {
+        public SwitchConfiguration configuration => new ConfigurationData().LoadData();
         private bool userControlVisible = false;
         public PlotController customController { get; private set; }
         private int graphHeight = 650;
@@ -1127,7 +1133,7 @@ namespace LightMasterMVVM.ViewModels
                         SelectionColor = OxyColors.Black
                     };
 
-                    List<FRCTeamModel> frcTeams = db.FRCTeams.Where(x => x.event_key == new GetEventCode().EventCode()).ToList();
+                    List<FRCTeamModel> frcTeams = db.FRCTeams.Where(x => x.event_key == configuration.EventCode).ToList();
                     List<GraphTeamMatchView> allTeamDataSchemas = new List<GraphTeamMatchView>();
 
 
@@ -1593,7 +1599,7 @@ namespace LightMasterMVVM.ViewModels
                 DataPoints.Series.Clear();
                 DataPoints.Axes.Clear();
 
-                List<TeamMatch> dbMatches = db.Matches.Where(x => x.ClientSubmitted == true && x.EventCode == new GetEventCode().EventCode()).ToList();
+                List<TeamMatch> dbMatches = db.Matches.Where(x => x.ClientSubmitted == true && x.EventCode == configuration.EventCode).ToList();
                 List<int> selectedTeamNumbers = new List<int>();
                 List<AveragePCCountModel> averagePCCountModels = new List<AveragePCCountModel>();
 
@@ -1717,7 +1723,8 @@ namespace LightMasterMVVM.ViewModels
     }
     public class MatchViewModel : ViewModelBase
     {
-        
+        public SwitchConfiguration configuration => new ConfigurationData().LoadData();
+
         private string testText = "abc";
         private bool red1MatchNotFilled = false;
         private bool red2MatchNotFilled = false;
@@ -2290,6 +2297,7 @@ namespace LightMasterMVVM.ViewModels
 
     public class TabletViewModel : ViewModelBase
     {
+        public SwitchConfiguration configuration => new ConfigurationData().LoadData();
         private Dictionary<string, DateTime> DoubleClickRemoveTablet = new Dictionary<string, DateTime>();
         private Avalonia.Media.Imaging.Bitmap _QRImage;
         private ObservableCollection<TabletDataViewModel> tablets = new ObservableCollection<TabletDataViewModel>();
@@ -2447,11 +2455,11 @@ namespace LightMasterMVVM.ViewModels
         }
         public TabletViewModel()
         {
-            /*var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
+            var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
             var bitmap = new System.Drawing.Bitmap(assets.Open(new Uri("resm:LightMasterMVVM.Assets.LightScoutThick.png")));
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeData = qrGenerator.CreateQrCode("LRSSQR>862>David Reeves>R1>0000>2", QRCodeGenerator.ECCLevel.Q);
-            QRCode qrCode = new QRCode(qrCodeData);
+            QRCoder.QRCode qrCode = new QRCoder.QRCode(qrCodeData);
             System.Drawing.Bitmap qrCodeImage = qrCode.GetGraphic(20, Color.FromArgb(15, 63, 140), Color.White, false);
             using (MemoryStream memory = new MemoryStream())
             {
@@ -2460,7 +2468,7 @@ namespace LightMasterMVVM.ViewModels
 
                 //AvIrBitmap is our new Avalonia compatible image. You can pass this to your view
                 QRImage = new Avalonia.Media.Imaging.Bitmap(memory);
-            }*/
+            }
             try
             {
                 using (var db = new ScoutingContext())
@@ -2508,6 +2516,7 @@ namespace LightMasterMVVM.ViewModels
     }
     public class MainWindowViewModel : ViewModelBase
     {
+        public SwitchConfiguration configuration => new ConfigurationData().LoadData();
         public MainWindowViewModel()
         {
             
@@ -2633,7 +2642,7 @@ namespace LightMasterMVVM.ViewModels
             {
                 using (var db = new ScoutingContext())
                 {
-                    var r1selectedmatch = db.Matches.Where(x => x.TabletId == "R1" && x.EventCode == eventConfig.EventCode() && x.MatchNumber == MatchNum).FirstOrDefault();
+                    var r1selectedmatch = db.Matches.Where(x => x.TabletId == "R1" && x.EventCode == configuration.EventCode && x.MatchNumber == MatchNum).FirstOrDefault();
                     
                     if (r1selectedmatch == null)
                     {
@@ -2688,7 +2697,7 @@ namespace LightMasterMVVM.ViewModels
                         MatchViewModel.Red1CurrentMatch = matchtoput;
                     }
                     //RED2
-                    var r2selectedmatch = db.Matches.Where(x => x.TabletId == "R2" && x.EventCode == eventConfig.EventCode() && x.MatchNumber == MatchNum).FirstOrDefault();
+                    var r2selectedmatch = db.Matches.Where(x => x.TabletId == "R2" && x.EventCode == configuration.EventCode && x.MatchNumber == MatchNum).FirstOrDefault();
                     
                     if (r2selectedmatch == null)
                     {
@@ -2743,7 +2752,7 @@ namespace LightMasterMVVM.ViewModels
                         MatchViewModel.Red2CurrentMatch = matchtoput;
                     }
                     //RED3
-                    var r3selectedmatch = db.Matches.Where(x => x.TabletId == "R3" && x.EventCode == eventConfig.EventCode() && x.MatchNumber == MatchNum).FirstOrDefault();
+                    var r3selectedmatch = db.Matches.Where(x => x.TabletId == "R3" && x.EventCode == configuration.EventCode && x.MatchNumber == MatchNum).FirstOrDefault();
                     
                     if (r3selectedmatch == null)
                     {
@@ -2798,7 +2807,7 @@ namespace LightMasterMVVM.ViewModels
                         MatchViewModel.Red3CurrentMatch = matchtoput;
                     }
                     //BLUE1
-                    var b1selectedmatch = db.Matches.Where(x => x.TabletId == "B1" && x.EventCode == eventConfig.EventCode() && x.MatchNumber == MatchNum).FirstOrDefault();
+                    var b1selectedmatch = db.Matches.Where(x => x.TabletId == "B1" && x.EventCode == configuration.EventCode && x.MatchNumber == MatchNum).FirstOrDefault();
                     
                     if (b1selectedmatch == null)
                     {
@@ -2853,7 +2862,7 @@ namespace LightMasterMVVM.ViewModels
                         MatchViewModel.Blue1CurrentMatch = matchtoput;
                     }
                     //BLUE2
-                    var b2selectedmatch = db.Matches.Where(x => x.TabletId == "B2" && x.EventCode == eventConfig.EventCode() && x.MatchNumber == MatchNum).FirstOrDefault();
+                    var b2selectedmatch = db.Matches.Where(x => x.TabletId == "B2" && x.EventCode == configuration.EventCode && x.MatchNumber == MatchNum).FirstOrDefault();
                     
                     if (b2selectedmatch == null)
                     {
@@ -2908,7 +2917,7 @@ namespace LightMasterMVVM.ViewModels
                         MatchViewModel.Blue2CurrentMatch = matchtoput;
                     }
                     //BLUE3
-                    var b3selectedmatch = db.Matches.Where(x => x.TabletId == "B3" && x.EventCode == eventConfig.EventCode() && x.MatchNumber == MatchNum).FirstOrDefault();
+                    var b3selectedmatch = db.Matches.Where(x => x.TabletId == "B3" && x.EventCode == configuration.EventCode && x.MatchNumber == MatchNum).FirstOrDefault();
                     
                     if (b3selectedmatch == null)
                     {

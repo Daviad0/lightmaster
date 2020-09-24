@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using LightMasterMVVM.Scripts;
 using LightMasterMVVM.ViewModels;
 using LightMasterMVVM.Views;
 
@@ -17,10 +18,21 @@ namespace LightMasterMVVM
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new MainWindow
+                if(new ConfigurationData().LoadData().TeamNumber == 0)
                 {
+                    desktop.MainWindow = new MainWindow
+                    {
 
-                };
+                    };
+                }
+                else
+                {
+                    desktop.MainWindow = new QRCode
+                    {
+
+                    };
+                }
+                
             }
 
             base.OnFrameworkInitializationCompleted();

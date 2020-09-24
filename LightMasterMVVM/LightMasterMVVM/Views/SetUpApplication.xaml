@@ -1,0 +1,173 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="500"
+        x:Class="LightMasterMVVM.Views.SetUpApplication"
+        Title="SetUpApplication"
+        Background="#1E1E1E">
+  <Window.Styles>
+    <Style Selector="Button.menu">
+      <Setter Property="Background" Value="#2a7afa"/>
+      <Setter Property="BorderBrush" Value="Black"/>
+      <Setter Property="BorderThickness" Value="3,0,0,3"/>
+      <Setter Property="Foreground" Value="White"/>
+    </Style>
+    <Style Selector="Button.navbuttonselected">
+      <Setter Property="Background" Value="#2a7afa"/>
+      <Setter Property="BorderBrush" Value="Black"/>
+      <Setter Property="BorderThickness" Value="3,0,0,3"/>
+      <Setter Property="Padding" Value="5"/>
+      <Setter Property="Height" Value="35"/>
+      <Setter Property="Width" Value="110"/>
+    </Style>
+    <Style Selector="Button.navbutton">
+      <Setter Property="Background" Value="#242424"/>
+      <Setter Property="BorderBrush" Value="Black"/>
+      <Setter Property="BorderThickness" Value="3,0,0,3"/>
+      <Setter Property="Padding" Value="5"/>
+      <Setter Property="Height" Value="35"/>
+      <Setter Property="Width" Value="110"/>
+    </Style>
+    <Style Selector="Button.navbutton/template/ContentPresenter">
+      <Setter Property = "CornerRadius" Value = "6" />
+    </Style>
+    <Style Selector="Button:pointerover.navbutton/template/ContentPresenter">
+      <Setter Property = "BorderBrush" Value = "Black" />
+
+      <Setter Property = "Background" Value = "#2c2c2c" />
+    </Style>
+    <Style Selector="Button:pointerover.navbuttonselected/template/ContentPresenter">
+      <Setter Property = "BorderBrush" Value = "Black" />
+      <Setter Property = "Background" Value = "#2a7afa" />
+    </Style>
+    <Style Selector="Button:pressed.navbutton/template/ContentPresenter">
+      <Setter Property = "BorderBrush" Value = "Black" />
+      <Setter Property = "Background" Value = "#141414" />
+    </Style>
+    <Style Selector="Button:pressed.navbuttonselected/template/ContentPresenter">
+      <Setter Property = "BorderBrush" Value = "Black" />
+      <Setter Property = "Background" Value = "#2165d1" />
+    </Style>
+    <Style Selector="Button.navbuttonselected/template/ContentPresenter">
+      <Setter Property = "CornerRadius" Value = "6" />
+    </Style>
+    <Style Selector="Border.navbutton:hover">
+      <Setter Property="Background" Value="#2c2c2c"/>
+    </Style>
+    <Style Selector="Border.navbutton:focus">
+      <Setter Property="Background" Value="#2c2c2c"/>
+    </Style>
+    <Style Selector="Border.navbutton:pressed">
+      <Setter Property="Background" Value="Black"/>
+    </Style>
+    <Style Selector="Border.show">
+      <Style.Animations>
+        <Animation Duration="0:0:.5">
+          <KeyFrame Cue="0%">
+            <Setter Property="Opacity" Value="0.0"/>
+          </KeyFrame>
+          <KeyFrame Cue="100%">
+            <Setter Property="Opacity" Value="1.0"/>
+          </KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+    <Style Selector="Border.hide">
+      <Style.Animations>
+        <Animation Duration="0:0:.5">
+          <KeyFrame Cue="0%">
+            <Setter Property="Opacity" Value="1.0"/>
+          </KeyFrame>
+          <KeyFrame Cue="100%">
+            <Setter Property="Opacity" Value="0.0"/>
+          </KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+    <Style Selector="CheckBox">
+      <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+      <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
+      <Setter Property="Padding" Value="4,0,0,0"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="HorizontalContentAlignment" Value="Left"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid ColumnDefinitions="Auto,*">
+            <Border Name="border"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="White"
+                    BorderThickness="2"
+                    Width="25"
+                    Height="25"
+                    VerticalAlignment="Center"
+                    CornerRadius="4">
+              <Panel>
+                <Path Name="checkMark"
+                      Fill="LightGreen"
+                      Width="14"
+                      Height="12.75"
+                      Stretch="Uniform"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Data="M 1145.607177734375,430 C1145.607177734375,430 1141.449951171875,435.0772705078125 1141.449951171875,435.0772705078125 1141.449951171875,435.0772705078125 1139.232177734375,433.0999755859375 1139.232177734375,433.0999755859375 1139.232177734375,433.0999755859375 1138,434.5538330078125 1138,434.5538330078125 1138,434.5538330078125 1141.482177734375,438 1141.482177734375,438 1141.482177734375,438 1141.96875,437.9375 1141.96875,437.9375 1141.96875,437.9375 1147,431.34619140625 1147,431.34619140625 1147,431.34619140625 1145.607177734375,430 1145.607177734375,430 z"/>
+                <Rectangle Name="indeterminateMark"
+                           Fill="{DynamicResource HighlightBrush}"
+                           Width="15"
+                           Height="15"
+                           Stretch="Uniform"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+              </Panel>
+            </Border>
+            <ContentPresenter Name="PART_ContentPresenter"
+                              TextBlock.Foreground="{TemplateBinding Foreground}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              Content="{TemplateBinding Content}"
+                              Margin="{TemplateBinding Padding}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              IsVisible="{TemplateBinding Content, Converter={x:Static ObjectConverters.IsNotNull}}"
+                              Grid.Column="1"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+  </Window.Styles>
+  <Border BorderThickness="4,0,0,4" BorderBrush="Black" Background="#1E1E1E" Padding="20" CornerRadius="1" Grid.Row="0" Grid.Column="0">
+    <Grid>
+      <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">
+        <TextBlock Text="Set Up LightSwitch" FontSize="20" Foreground="White" HorizontalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="5,5,0,15" FontWeight="Bold"/>
+        <StackPanel Margin="10,8">
+          <TextBlock Text="Team Number" Foreground="White" HorizontalAlignment="Left" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="5,5,0,5"/>
+          <TextBox Name="teamNumberInput" Background="#1E1E1E" HorizontalAlignment="Left" Width="300" BorderThickness="0,0,0,1" Height="30" FontSize="17" MaxLength="4" BorderBrush="#2a7afa" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="#2a7afa"/>
+        </StackPanel>
+        <StackPanel Margin="10,8">
+          <TextBlock Text="Key Scouter" Foreground="White" HorizontalAlignment="Left" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="5,5,0,5"/>
+          <TextBox Name="keyScouterInput" Background="#1E1E1E" HorizontalAlignment="Left" Width="300"  BorderThickness="0,0,0,1" Height="30" FontSize="17" MaxLength="30" BorderBrush="#2a7afa" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="#2a7afa"/>
+        </StackPanel>
+        <StackPanel Margin="10,8">
+          <TextBlock Text="Event Code" Foreground="White" HorizontalAlignment="Left" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="5,5,0,5"/>
+          <TextBox Name="eventCodeInput" Background="#1E1E1E" HorizontalAlignment="Left" Width="300"  BorderThickness="0,0,0,1" Height="30" FontSize="17" MaxLength="20" BorderBrush="#2a7afa" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Foreground="#2a7afa"/>
+        </StackPanel>
+        <Button Classes="navbuttonselected" Name="FinishApplication" Grid.Row="0" Margin="30,20,30,20" Width="110" Height="35" HorizontalAlignment="Center">
+          <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Text="Finish" Foreground="White"/>
+        </Button>
+       
+      </StackPanel>
+      <Button Grid.Row="0" Grid.Column="0" Name="HideWindow" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0">
+        <Button.Template>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Image Source="resm:LightMasterMVVM.Assets.close-white.png" Height="20" Width="20"/>
+          </ControlTemplate>
+        </Button.Template>
+      </Button>
+    </Grid>
+    
+
+  </Border>
+
+
+</Window>

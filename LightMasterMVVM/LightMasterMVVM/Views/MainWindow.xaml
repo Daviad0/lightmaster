@@ -10,7 +10,9 @@
         x:Class="LightMasterMVVM.Views.MainWindow"
         Title="LightMasterMVVM"
         Background="#121212">
-
+  <Window.Background>
+    <SolidColorBrush Opacity="0.1" Color="White"/>
+  </Window.Background>
   <Window.Resources>
     
   </Window.Resources>

@@ -36,6 +36,7 @@ namespace LightMasterMVVM.Views
     public class MainWindow : Window
     {
         private MainWindowViewModel control = new MainWindowViewModel();
+        public SwitchConfiguration configuration => new ConfigurationData().LoadData();
         private Button nav_see_matches = new Button();
         private Button nav_see_graph = new Button();
         private Button nav_see_tablets = new Button();
@@ -72,7 +73,6 @@ namespace LightMasterMVVM.Views
             this.AttachDevTools();
 #endif      
 
-            
             nav_see_matches = this.Find<Button>("seeMatches");
             nav_see_matches.Click += NavigationChange;
             nav_see_graph = this.Find<Button>("seeGraph");
@@ -785,6 +785,7 @@ namespace LightMasterMVVM.Views
         public async void ProcessTest()
         {
             Process startTCPforwarding = new Process();
+            
             startTCPforwarding.StartInfo.WorkingDirectory = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "lightmaster"), "LightMasterHub");
             if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -810,7 +811,7 @@ namespace LightMasterMVVM.Views
                         await Task.Delay(100);
                         bluetooth_status.Opacity = 0;
                         bluetooth_status.IsVisible = false;
-                        control.NotificationViewModel.AddNotification("Unavailable", "Bluetooth Service Not Available!", "Red", null);
+                        control.NotificationViewModel.AddNotification("Unavailable", "The LightSwitch Bluetooth service is not available on this device!", "#fe5b5b", null);
                     });
                     
                 };
@@ -833,7 +834,7 @@ namespace LightMasterMVVM.Views
                             bluetooth_status.Classes.Add("show");
                             await Task.Delay(100);
                             bluetooth_status.Opacity = 1;
-                            control.NotificationViewModel.AddNotification("Ready", "Bluetooth Service Ready!", "DeepPink", null);
+                            control.NotificationViewModel.AddNotification("Ready", "The Bluetooth service is operational and ready to relay messages!", "#F64A8A", null);
                         });
                         
                     }
@@ -855,7 +856,7 @@ namespace LightMasterMVVM.Views
                         await Task.Delay(100);
                         bluetooth_status.Opacity = 0;
                     });
-                    control.NotificationViewModel.AddNotification("Not Ready", "Bluetooth Service Not Ready!", "Red", null);
+                    control.NotificationViewModel.AddNotification("Not Ready", "We disconnected from the service. Attempting to reconnect...", "#fe5b5b", null);
                 });
             }
             catch (Exception ex)
@@ -864,7 +865,7 @@ namespace LightMasterMVVM.Views
                 await Task.Delay(100);
                 bluetooth_status.Opacity = 0;
                 bluetooth_status.IsVisible = false;
-                control.NotificationViewModel.AddNotification("Unavailable", "Bluetooth Service Not Available!", "Red", null);
+                control.NotificationViewModel.AddNotification("Unavailable", "The LightSwitch Bluetooth service is not available on this device!", "#fe5b5b", null);
             }
             try
             {
@@ -1121,7 +1122,7 @@ namespace LightMasterMVVM.Views
                         case 20:
                             
                             GetEventCode eventConfig = new GetEventCode();
-                            var listOfDBMatchesToSend = db.Matches.Where(x => x.EventCode == new GetEventCode().EventCode() && x.TabletId == rawdata.Substring(0, 2)).ToList();
+                            var listOfDBMatchesToSend = db.Matches.Where(x => x.EventCode == configuration.EventCode && x.TabletId == rawdata.Substring(0, 2)).ToList();
                             var listOfMatchesToSend = new List<IO_TeamMatch>();
                             foreach (var dbm in listOfDBMatchesToSend.OrderBy(x => x.MatchNumber))
                             {
@@ -1445,7 +1446,7 @@ namespace LightMasterMVVM.Views
                 GetEventCode eventConfig = new GetEventCode();
                 using(var db = new ScoutingContext())
                 {
-                    var listOfDBMatchesToSend = db.Matches.Where(x => x.EventCode == new GetEventCode().EventCode() && x.TabletId == rawdata.Substring(0, 2)).ToList();
+                    var listOfDBMatchesToSend = db.Matches.Where(x => x.EventCode == configuration.EventCode && x.TabletId == rawdata.Substring(0, 2)).ToList();
                     var listOfMatchesToSend = new List<IO_TeamMatch>();
                     foreach (var dbm in listOfDBMatchesToSend.OrderBy(x => x.MatchNumber))
                     {

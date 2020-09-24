@@ -1,4 +1,5 @@
 ﻿using LightMasterMVVM.Models;
+using LightMasterMVVM.Scripts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,10 @@ namespace LightMasterMVVM.DbAssets
         public DbSet<FRCTeamModel> FRCTeams { get; set; }
         public DbSet<TBA_DB_Model> TBAMatches { get; set; }
         public DbSet<TabletInstance> TabletInstances { get; set; }
+        public SwitchConfiguration configuration => new ConfigurationData().LoadData();
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql("Server=localhost;Port=5432;Database=lightscoutx;User Id=strategy_member;Password=strategy");
+            => optionsBuilder.UseNpgsql("Server=" + configuration.Database.Address + ";Port="+ configuration.Database.Port.ToString() + ";Database="+ configuration.Database.DatabaseName + ";User Id="+ configuration.Database.Username +";Password="+ configuration.Database.Password + "");
 
     }
 }

@@ -44,13 +44,16 @@
     <AvaloniaResource Remove="Assets\SourceSansPro-Bold.ttf" />
     <AvaloniaResource Remove="Assets\ui-bluetooth.png" />
     <AvaloniaResource Remove="Assets\usb-white.png" />
+    <AvaloniaResource Remove="Assets\warning.png" />
     <AvaloniaResource Remove="Assets\wifi-white.png" />
     <AvaloniaResource Remove="Views\CompetitionTeams.xaml" />
+    <AvaloniaResource Remove="Views\ConfirmDialogue.xaml" />
     <AvaloniaResource Remove="Views\CreateGraph.xaml" />
     <AvaloniaResource Remove="Views\DataAnalysis.xaml" />
     <AvaloniaResource Remove="Views\Matches.xaml" />
     <AvaloniaResource Remove="Views\NotifyUser.xaml" />
-    <AvaloniaResource Remove="Views\QRCodeView.xaml" />
+    <AvaloniaResource Remove="Views\QRCode.xaml" />
+    <AvaloniaResource Remove="Views\SetUpApplication.xaml" />
     <AvaloniaResource Remove="Views\TabletLogs.xaml" />
     <AvaloniaResource Remove="Views\Tablets.xaml" />
     <AvaloniaResource Remove="Views\TheBlueAlliance.xaml" />
@@ -87,18 +90,34 @@
     <None Remove="Assets\SourceSansPro-Bold.ttf" />
     <None Remove="Assets\ui-bluetooth.png" />
     <None Remove="Assets\usb-white.png" />
+    <None Remove="Assets\warning.png" />
     <None Remove="Assets\wifi-white.png" />
     <None Remove="Views\CompetitionTeams.xaml" />
+    <None Remove="Views\ConfirmDialogue.xaml" />
     <None Remove="Views\CreateGraph.xaml" />
     <None Remove="Views\DataAnalysis.xaml" />
     <None Remove="Views\MainWindow.xaml" />
     <None Remove="Views\Matches.xaml" />
     <None Remove="Views\NotifyUser.xaml" />
-    <None Remove="Views\QRCodeView.xaml" />
+    <None Remove="Views\QRCode.xaml" />
+    <None Remove="Views\SetUpApplication.xaml" />
     <None Remove="Views\TabletLogs.xaml" />
     <None Remove="Views\Tablets.xaml" />
     <None Remove="Views\TheBlueAlliance.xaml" />
     <None Remove="Assets\close-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ConfirmDialogue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\QRCode.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\ascending.png" />
@@ -182,7 +201,7 @@
     <EmbeddedResource Include="Views\NotifyUser.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\QRCodeView.xaml">
+    <EmbeddedResource Include="Views\SetUpApplication.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\TabletLogs.xaml">
@@ -194,9 +213,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="32feet.NET" Version="3.5.0" />
-    <PackageReference Include="Avalonia" Version="0.9.10" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.9.10" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.10" />
+    <PackageReference Include="Avalonia" Version="0.9.12" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.12" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.12" />
     <PackageReference Include="imobiledevice-net" Version="1.3.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5">
       <PrivateAssets>all</PrivateAssets>
@@ -230,5 +249,13 @@
     <EmbeddedResource Include="Views\DataAnalysis.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\ConfirmDialogue.xaml.cs">
+      <DependentUpon>ConfirmDialogue.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\QRCode.xaml.cs">
+      <DependentUpon>QRCode.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>
