@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="300"
+        mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="340"
         x:Class="LightMasterMVVM.Views.QRCode"
         Title="QRCode"
         Background="Black">
@@ -137,20 +137,31 @@
     </Style>
   </Window.Styles>
   <Border BorderThickness="4,0,0,4" BorderBrush="Black" Background="#1E1E1E" Padding="20">
-    <Grid ColumnDefinitions="100,500">
-      <StackPanel Grid.Column="0">
-        <Button Classes="navbutton" Foreground="White" Content="Red 1" Margin="5"/>
-        <Button Classes="navbutton" Foreground="White" Content="Red 2" Margin="5"/>
-        <Button Classes="navbutton" Foreground="White" Content="Red 3" Margin="5"/>
-        <Button Classes="navbutton" Foreground="White" Content="Blue 1" Margin="5"/>
-        <Button Classes="navbutton" Foreground="White" Content="Blue 2" Margin="5"/>
-        <Button Classes="navbutton" Foreground="White" Content="Blue 3" Margin="5"/>
-      </StackPanel>
-      <Border Grid.Column="1" Background="White" Padding="20" HorizontalAlignment="Left" VerticalAlignment="Top" CornerRadius="8" Margin="46,14,0,0">
-        <Image Name="QRCode" Margin="0" Height="200" Width="200"/>
-      </Border>
-
+    <Grid>
+      <TextBlock Text="Scan QR Code" FontSize="20" Foreground="White" HorizontalAlignment="Center" FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" Margin="5,5,0,15" FontWeight="Bold"/>
+      <Button Grid.Row="0" Grid.Column="0" Name="HideWindow" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0">
+        <Button.Template>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Image Source="resm:LightMasterMVVM.Assets.close-white.png" Height="20" Width="20"/>
+          </ControlTemplate>
+        </Button.Template>
+      </Button>
+      <Grid ColumnDefinitions="100,*" VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="0">
+        <StackPanel Grid.Column="0">
+          <Button Name="Red1" Classes="navbuttonselected" Foreground="White" Content="Red 1" Margin="5"/>
+          <Button Name="Red2" Classes="navbutton" Foreground="White" Content="Red 2" Margin="5"/>
+          <Button Name="Red3" Classes="navbutton" Foreground="White" Content="Red 3" Margin="5"/>
+          <Button Name="Blue1" Classes="navbutton" Foreground="White" Content="Blue 1" Margin="5"/>
+          <Button Name="Blue2" Classes="navbutton" Foreground="White" Content="Blue 2" Margin="5"/>
+          <Button Name="Blue3" Classes="navbutton" Foreground="White" Content="Blue 3" Margin="5"/>
+        </StackPanel>
+        <Border Grid.Column="1" Background="White" Padding="20" HorizontalAlignment="Left" VerticalAlignment="Top" CornerRadius="8" Margin="46,14,0,0">
+          <Image Name="QRCode" Margin="0" Height="200" Width="200"/>
+        </Border>
+        
+      </Grid>
     </Grid>
+
   </Border>
 
 </Window>

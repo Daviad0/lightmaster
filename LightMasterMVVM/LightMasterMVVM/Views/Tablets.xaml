@@ -206,6 +206,15 @@
         </ItemsControl.ItemTemplate>
       </ItemsControl>
     </ScrollViewer>
-    
+    <Button Command="{Binding LaunchQRCodeWindow}" Classes="confirmbutton" HorizontalAlignment="Center" Margin="20">
+      <Button.Template>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Border Background="#1E1E1E" Padding="5" CornerRadius="4">
+            <Image Source="resm:LightMasterMVVM.Assets.close-white.png" Height="20" Width="20"/>
+          </Border>
+          
+        </ControlTemplate>
+      </Button.Template>
+    </Button>
   </StackPanel>
 </UserControl>

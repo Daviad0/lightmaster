@@ -44,6 +44,7 @@ using Avalonia.Platform;
 using OxyPlot.Reporting;
 using ReactiveUI;
 using System.Reactive.Concurrency;
+using QRCode = LightMasterMVVM.Views.QRCode;
 
 namespace LightMasterMVVM.ViewModels
 {
@@ -2511,6 +2512,10 @@ namespace LightMasterMVVM.ViewModels
             }
             
 
+        }
+        public void LaunchQRCodeWindow()
+        {
+            NavMessenger.OnShowWindow(new QRCode(), false);
         }
 
     }

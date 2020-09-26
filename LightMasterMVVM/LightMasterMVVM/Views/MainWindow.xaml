@@ -152,7 +152,7 @@
       <RowDefinition Height="50"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
-    <Grid ColumnDefinitions="120,120,120,120,120,120,120" RowDefinitions="120" Grid.Row="0" Margin="30,25,30,10" >
+    <Grid ColumnDefinitions="120,120,120,120,120,120" RowDefinitions="120" Grid.Row="0" Margin="30,25,30,10" >
       <Grid Grid.Column="0" ColumnDefinitions="*" RowDefinitions="80">
         <TextBlock FontFamily="resm:LightMasterMVVM.Assets?assembly=LightMasterMVVM#Rubik" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Text="LightSwitch" FontSize="20" Foreground="#4e4e4e"/>
       </Grid>
@@ -177,11 +177,6 @@
         </Button>
       </Grid>
       <Grid Grid.Column="5" ColumnDefinitions="*,10" RowDefinitions="80">
-        <Button Classes="navbutton" Name="tryUSB" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
-          <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Text="Test USB" Foreground="White"/>
-        </Button>
-      </Grid>
-      <Grid Grid.Column="6" ColumnDefinitions="*,10" RowDefinitions="80">
         <Button Classes="navbutton" Name="seeTeams" Height="35" Grid.Row="0" Width="110" Margin="30,0,30,10" VerticalAlignment="Top">
           <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Text="Teams" Foreground="White"/>
         </Button>

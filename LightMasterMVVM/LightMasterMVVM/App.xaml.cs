@@ -18,7 +18,7 @@ namespace LightMasterMVVM
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                if(new ConfigurationData().LoadData().TeamNumber == 0)
+                if(new ConfigurationData().LoadData().TeamNumber != 0)
                 {
                     desktop.MainWindow = new MainWindow
                     {
@@ -27,7 +27,7 @@ namespace LightMasterMVVM
                 }
                 else
                 {
-                    desktop.MainWindow = new QRCode
+                    desktop.MainWindow = new SetUpApplication
                     {
 
                     };

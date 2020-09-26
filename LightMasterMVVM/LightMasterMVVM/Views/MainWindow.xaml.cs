@@ -41,7 +41,6 @@ namespace LightMasterMVVM.Views
         private Button nav_see_graph = new Button();
         private Button nav_see_tablets = new Button();
         private Button nav_see_tba = new Button();
-        private Button nav_try_usb = new Button();
         private Button nav_see_teams = new Button();
         private Border bor_nav_see_matches = new Border();
         private Border bor_nav_see_graph = new Border();
@@ -81,8 +80,6 @@ namespace LightMasterMVVM.Views
             nav_see_tablets.Click += NavigationChange;
             nav_see_tba = this.Find<Button>("seeTBA");
             nav_see_tba.Click += NavigationChange;
-            nav_try_usb = this.Find<Button>("tryUSB");
-            nav_try_usb.Click += TryUSBClick;
             nav_see_teams = this.Find<Button>("seeTeams");
             nav_see_teams.Click += NavigationChange;
             match_up = this.Find<Button>("matchUp");
@@ -129,13 +126,11 @@ namespace LightMasterMVVM.Views
                 nav_see_tba.Classes.Remove("navbuttonselected");
                 nav_see_matches.Classes.Remove("navbuttonselected");
                 nav_see_teams.Classes.Remove("navbuttonselected");
-                nav_try_usb.Classes.Remove("navbuttonselected");
                 nav_see_tablets.Classes.Add("navbutton");
                 nav_see_graph.Classes.Add("navbutton");
                 nav_see_tba.Classes.Add("navbutton");
                 nav_see_matches.Classes.Add("navbutton");
                 nav_see_teams.Classes.Add("navbutton");
-                nav_try_usb.Classes.Add("navbutton");
                 await Task.Delay(100);
                 matches.Opacity = 0;
                 graph.Opacity = 0;
@@ -183,13 +178,11 @@ namespace LightMasterMVVM.Views
                 nav_see_tba.Classes.Remove("navbuttonselected");
                 nav_see_matches.Classes.Remove("navbuttonselected");
                 nav_see_teams.Classes.Remove("navbuttonselected");
-                nav_try_usb.Classes.Remove("navbuttonselected");
                 nav_see_tablets.Classes.Add("navbutton");
                 nav_see_graph.Classes.Add("navbutton");
                 nav_see_tba.Classes.Add("navbutton");
                 nav_see_matches.Classes.Add("navbutton");
                 nav_see_teams.Classes.Add("navbutton");
-                nav_try_usb.Classes.Add("navbutton");
                 await Task.Delay(100);
                 matches.Opacity = 0;
                 graph.Opacity = 0;
@@ -237,13 +230,11 @@ namespace LightMasterMVVM.Views
                 nav_see_tba.Classes.Remove("navbuttonselected");
                 nav_see_matches.Classes.Remove("navbuttonselected");
                 nav_see_teams.Classes.Remove("navbuttonselected");
-                nav_try_usb.Classes.Remove("navbuttonselected");
                 nav_see_tablets.Classes.Add("navbutton");
                 nav_see_graph.Classes.Add("navbutton");
                 nav_see_tba.Classes.Add("navbutton");
                 nav_see_matches.Classes.Add("navbutton");
                 nav_see_teams.Classes.Add("navbutton");
-                nav_try_usb.Classes.Add("navbutton");
                 await Task.Delay(100);
                 matches.Opacity = 0;
                 graph.Opacity = 0;
@@ -289,13 +280,11 @@ namespace LightMasterMVVM.Views
                 nav_see_tba.Classes.Remove("navbuttonselected");
                 nav_see_matches.Classes.Remove("navbuttonselected");
                 nav_see_teams.Classes.Remove("navbuttonselected");
-                nav_try_usb.Classes.Remove("navbuttonselected");
                 nav_see_tablets.Classes.Add("navbutton");
                 nav_see_graph.Classes.Add("navbutton");
                 nav_see_tba.Classes.Add("navbutton");
                 nav_see_matches.Classes.Add("navbutton");
                 nav_see_teams.Classes.Add("navbutton");
-                nav_try_usb.Classes.Add("navbutton");
                 await Task.Delay(100);
                 matches.Opacity = 0;
                 graph.Opacity = 0;
@@ -360,13 +349,11 @@ namespace LightMasterMVVM.Views
                 nav_see_tba.Classes.Remove("navbuttonselected");
                 nav_see_matches.Classes.Remove("navbuttonselected");
                 nav_see_teams.Classes.Remove("navbuttonselected");
-                nav_try_usb.Classes.Remove("navbuttonselected");
                 nav_see_tablets.Classes.Add("navbutton");
                 nav_see_graph.Classes.Add("navbutton");
                 nav_see_tba.Classes.Add("navbutton");
                 nav_see_matches.Classes.Add("navbutton");
                 nav_see_teams.Classes.Add("navbutton");
-                nav_try_usb.Classes.Add("navbutton");
                 await Task.Delay(100);
                 matches.Opacity = 0;
                 graph.Opacity = 0;
@@ -416,6 +403,18 @@ namespace LightMasterMVVM.Views
                 {
 
                 }
+            };
+            NavMessenger.ShowWindow += async (window, isdialogue) =>
+            {
+                if (isdialogue)
+                {
+                    window.ShowDialog(this);
+                }
+                else
+                {
+                    window.Show();
+                }
+                
             };
             /*NavMessenger.NotificationSeconds += (seconds, notificationId) =>
             {
@@ -498,13 +497,11 @@ namespace LightMasterMVVM.Views
                 nav_see_tba.Classes.Remove("navbuttonselected");
                 nav_see_matches.Classes.Remove("navbuttonselected");
                 nav_see_teams.Classes.Remove("navbuttonselected");
-                nav_try_usb.Classes.Remove("navbuttonselected");
                 nav_see_tablets.Classes.Add("navbutton");
                 nav_see_graph.Classes.Add("navbutton");
                 nav_see_tba.Classes.Add("navbutton");
                 nav_see_matches.Classes.Add("navbutton");
                 nav_see_teams.Classes.Add("navbutton");
-                nav_try_usb.Classes.Add("navbutton");
                 await Task.Delay(100);
                 matches.Opacity = 0;
                 graph.Opacity = 0;
@@ -855,17 +852,21 @@ namespace LightMasterMVVM.Views
                         bluetooth_status.Classes.Add("hide");
                         await Task.Delay(100);
                         bluetooth_status.Opacity = 0;
+                        control.NotificationViewModel.AddNotification("Not Ready", "We disconnected from the service. Attempting to reconnect...", "#fe5b5b", null);
                     });
-                    control.NotificationViewModel.AddNotification("Not Ready", "We disconnected from the service. Attempting to reconnect...", "#fe5b5b", null);
+                    
                 });
             }
             catch (Exception ex)
             {
-                bluetooth_status.Classes.Add("hide");
-                await Task.Delay(100);
-                bluetooth_status.Opacity = 0;
-                bluetooth_status.IsVisible = false;
-                control.NotificationViewModel.AddNotification("Unavailable", "The LightSwitch Bluetooth service is not available on this device!", "#fe5b5b", null);
+                Dispatcher.UIThread.Post(async () => {
+                    bluetooth_status.Classes.Add("hide");
+                    await Task.Delay(100);
+                    bluetooth_status.Opacity = 0;
+                    bluetooth_status.IsVisible = false;
+                    control.NotificationViewModel.AddNotification("Unavailable", "The LightSwitch Bluetooth service is not available on this device!", "#fe5b5b", null);
+                });
+                
             }
             try
             {

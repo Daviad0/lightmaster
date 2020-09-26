@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Avalonia.Controls;
+using System;
 using System.Windows.Forms.VisualStyles;
 using static LightMasterMVVM.ViewModels.NotificationViewModel;
 
@@ -29,5 +30,7 @@ namespace LightMasterMVVM.Models
         public static void OnNotificationEventAcceptance(TabletRequestArgs args) => NotificationEventAcceptance?.Invoke(args);
         public static event Action<int, int> NotificationSeconds;
         public static void OnNotificationSeconds(int seconds, int notifid) => NotificationSeconds?.Invoke(seconds, notifid);
+        public static event Action<Window,bool> ShowWindow;
+        public static void OnShowWindow(Window newwindowtocreate, bool isDialogue) => ShowWindow?.Invoke(newwindowtocreate, isDialogue);
     }
 }
