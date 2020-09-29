@@ -14,6 +14,7 @@
   </ItemGroup>
   <ItemGroup>
     <AvaloniaResource Remove="Assets\ascending.png" />
+    <AvaloniaResource Remove="Assets\avalonia-logo.ico" />
     <AvaloniaResource Remove="Assets\ban.png" />
     <AvaloniaResource Remove="Assets\battery-full.png" />
     <AvaloniaResource Remove="Assets\Blue1Tablet.png" />
@@ -23,19 +24,29 @@
     <AvaloniaResource Remove="Assets\bluetoothlogo.png" />
     <AvaloniaResource Remove="Assets\caret-down.png" />
     <AvaloniaResource Remove="Assets\caret-up.png" />
+    <AvaloniaResource Remove="Assets\close-white.png" />
     <AvaloniaResource Remove="Assets\close.png" />
     <AvaloniaResource Remove="Assets\database-white.png" />
     <AvaloniaResource Remove="Assets\descending.png" />
+    <AvaloniaResource Remove="Assets\group-color.png" />
+    <AvaloniaResource Remove="Assets\group-white.png" />
     <AvaloniaResource Remove="Assets\icofont.ttf" />
+    <AvaloniaResource Remove="Assets\id-color.png" />
+    <AvaloniaResource Remove="Assets\id-white.png" />
+    <AvaloniaResource Remove="Assets\key-color.png" />
+    <AvaloniaResource Remove="Assets\key-white.png" />
     <AvaloniaResource Remove="Assets\LightScoutLogo.png" />
     <AvaloniaResource Remove="Assets\LightScoutQR.png" />
     <AvaloniaResource Remove="Assets\LightScoutQRThin.png" />
     <AvaloniaResource Remove="Assets\LightScoutThick.png" />
     <AvaloniaResource Remove="Assets\minus.png" />
+    <AvaloniaResource Remove="Assets\notallowed-color.png" />
+    <AvaloniaResource Remove="Assets\notallowed-white.png" />
     <AvaloniaResource Remove="Assets\optionselected.png" />
     <AvaloniaResource Remove="Assets\plugin.png" />
     <AvaloniaResource Remove="Assets\plugin.svg" />
     <AvaloniaResource Remove="Assets\plus.png" />
+    <AvaloniaResource Remove="Assets\qrcode-white.png" />
     <AvaloniaResource Remove="Assets\Red1Tablet.png" />
     <AvaloniaResource Remove="Assets\Red2Tablet.png" />
     <AvaloniaResource Remove="Assets\Red3Tablet.png" />
@@ -72,16 +83,25 @@
     <None Remove="Assets\close.png" />
     <None Remove="Assets\database-white.png" />
     <None Remove="Assets\descending.png" />
+    <None Remove="Assets\group-color.png" />
+    <None Remove="Assets\group-white.png" />
     <None Remove="Assets\icofont.ttf" />
+    <None Remove="Assets\id-color.png" />
+    <None Remove="Assets\id-white.png" />
+    <None Remove="Assets\key-color.png" />
+    <None Remove="Assets\key-white.png" />
     <None Remove="Assets\LightScoutLogo.png" />
     <None Remove="Assets\LightScoutQR.png" />
     <None Remove="Assets\LightScoutQRThin.png" />
     <None Remove="Assets\LightScoutThick.png" />
     <None Remove="Assets\minus.png" />
+    <None Remove="Assets\notallowed-color.png" />
+    <None Remove="Assets\notallowed-white.png" />
     <None Remove="Assets\optionselected.png" />
     <None Remove="Assets\plugin.png" />
     <None Remove="Assets\plugin.svg" />
     <None Remove="Assets\plus.png" />
+    <None Remove="Assets\qrcode-white.png" />
     <None Remove="Assets\Red1Tablet.png" />
     <None Remove="Assets\Red2Tablet.png" />
     <None Remove="Assets\Red3Tablet.png" />
@@ -107,6 +127,16 @@
     <None Remove="Assets\close-white.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Assets\avalonia-logo.ico" />
+    <EmbeddedResource Include="Assets\group-color.png" />
+    <EmbeddedResource Include="Assets\group-white.png" />
+    <EmbeddedResource Include="Assets\id-color.png" />
+    <EmbeddedResource Include="Assets\id-white.png" />
+    <EmbeddedResource Include="Assets\key-color.png" />
+    <EmbeddedResource Include="Assets\key-white.png" />
+    <EmbeddedResource Include="Assets\notallowed-color.png" />
+    <EmbeddedResource Include="Assets\notallowed-white.png" />
+    <EmbeddedResource Include="Assets\qrcode-white.png" />
     <EmbeddedResource Include="Views\ConfirmDialogue.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

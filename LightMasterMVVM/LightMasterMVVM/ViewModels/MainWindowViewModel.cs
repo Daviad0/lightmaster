@@ -2298,6 +2298,30 @@ namespace LightMasterMVVM.ViewModels
 
     public class TabletViewModel : ViewModelBase
     {
+        private bool lockLevel1;
+        private bool lockLevel2;
+        private bool lockLevel3;
+        private bool lockLevel4;
+        public bool LockLevel1
+        {
+            get => lockLevel1;
+            set => SetProperty(ref lockLevel1, value);
+        }
+        public bool LockLevel2
+        {
+            get => lockLevel2;
+            set => SetProperty(ref lockLevel2, value);
+        }
+        public bool LockLevel3
+        {
+            get => lockLevel3;
+            set => SetProperty(ref lockLevel3, value);
+        }
+        public bool LockLevel4
+        {
+            get => lockLevel4;
+            set => SetProperty(ref lockLevel4, value);
+        }
         public SwitchConfiguration configuration => new ConfigurationData().LoadData();
         private Dictionary<string, DateTime> DoubleClickRemoveTablet = new Dictionary<string, DateTime>();
         private Avalonia.Media.Imaging.Bitmap _QRImage;
@@ -2510,12 +2534,51 @@ namespace LightMasterMVVM.ViewModels
             {
 
             }
-            
+            switch (configuration.AuthLockLevel)
+            {
+                case 1:
+                    LockLevel1 = true;
+                    break;
+                case 2:
+                    LockLevel2 = true;
+                    break;
+                case 3:
+                    LockLevel3 = true;
+                    break;
+                case 4:
+                    LockLevel4 = true;
+                    break;
+            }
 
         }
         public void LaunchQRCodeWindow()
         {
             NavMessenger.OnShowWindow(new QRCode(), false);
+        }
+        public void ChangeLockLevel(string tolocklevel)
+        {
+            new ConfigurationData().SaveData("AuthLockLevel", int.Parse(tolocklevel));
+            var newconfig = new ConfigurationData().LoadData();
+            LockLevel1 = false;
+            LockLevel2 = false;
+            LockLevel3 = false;
+            LockLevel4 = false;
+            switch (newconfig.AuthLockLevel)
+            {
+                case 1:
+                    LockLevel1 = true;
+                    break;
+                case 2:
+                    LockLevel2 = true;
+                    break;
+                case 3:
+                    LockLevel3 = true;
+                    break;
+                case 4:
+                    LockLevel4 = true;
+                    break;
+            }
+
         }
 
     }

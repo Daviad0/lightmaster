@@ -206,15 +206,64 @@
         </ItemsControl.ItemTemplate>
       </ItemsControl>
     </ScrollViewer>
-    <Button Command="{Binding LaunchQRCodeWindow}" Classes="confirmbutton" HorizontalAlignment="Center" Margin="20">
-      <Button.Template>
-        <ControlTemplate TargetType="{x:Type Button}">
-          <Border Background="#1E1E1E" Padding="5" CornerRadius="4">
-            <Image Source="resm:LightMasterMVVM.Assets.close-white.png" Height="20" Width="20"/>
+    <Grid HorizontalAlignment="Center" ColumnDefinitions="200,90">
+      <Border BorderBrush="Black" BorderThickness="3,0,0,3" Grid.Column="0" Background="#1E1E1E" Height="50" CornerRadius="10">
+        <Grid Margin="10" ColumnDefinitions="*,*,*,*">
+          <Border IsVisible="{Binding LockLevel4}" Background="#ff5757" Opacity="0.2" CornerRadius="6" Width="40" Grid.Column="0">
+            
           </Border>
+          <Button ToolTip.Tip="No Communications" Grid.Column="0" Command="{Binding ChangeLockLevel}" CommandParameter="4">
+            <Button.Template>
+              <ControlTemplate TargetType="{x:Type Button}">
+                <Image HorizontalAlignment="Center" Source="resm:LightMasterMVVM.Assets.notallowed-color.png" Height="20" Width="20"/>
+              </ControlTemplate>
+            </Button.Template>
+          </Button>
           
-        </ControlTemplate>
-      </Button.Template>
-    </Button>
+          <Border IsVisible="{Binding LockLevel3}" Background="#ffa857" Opacity="0.2" CornerRadius="6" Width="40" Grid.Column="1">
+
+          </Border>
+
+          <Button ToolTip.Tip="Administrator Mode" Grid.Column="1" Command="{Binding ChangeLockLevel}" CommandParameter="3">
+            <Button.Template>
+              <ControlTemplate TargetType="{x:Type Button}">
+                <Image HorizontalAlignment="Center" Source="resm:LightMasterMVVM.Assets.key-color.png" Height="20" Width="20"/>
+              </ControlTemplate>
+            </Button.Template>
+          </Button>
+          <Border IsVisible="{Binding LockLevel2}" Background="#fff457" Opacity="0.2" CornerRadius="6" Width="40" Grid.Column="2">
+
+          </Border>
+          <Button ToolTip.Tip="Authorized Tablets Only" Grid.Column="2" Command="{Binding ChangeLockLevel}" CommandParameter="2">
+            <Button.Template>
+              <ControlTemplate TargetType="{x:Type Button}">
+                <Image HorizontalAlignment="Center" Source="resm:LightMasterMVVM.Assets.id-color.png" Height="20" Width="20"/>
+              </ControlTemplate>
+            </Button.Template>
+          </Button>
+          <Border IsVisible="{Binding LockLevel1}" Background="#57ff6d" Opacity="0.2" CornerRadius="6" Width="40" Grid.Column="3">
+
+          </Border>
+          <Button ToolTip.Tip="All Connections Allowed" Grid.Column="3" Command="{Binding ChangeLockLevel}" CommandParameter="1">
+            <Button.Template>
+              <ControlTemplate TargetType="{x:Type Button}">
+                <Image HorizontalAlignment="Center" Source="resm:LightMasterMVVM.Assets.group-color.png" Height="20" Width="20"/>
+              </ControlTemplate>
+            </Button.Template>
+          </Button>
+        </Grid>
+      </Border>
+      <Button Grid.Column="1" Command="{Binding LaunchQRCodeWindow}" VerticalAlignment="Center" Classes="confirmbutton" HorizontalAlignment="Center" Margin="20">
+        <Button.Template>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border BorderBrush="Black" BorderThickness="3,0,0,3" Background="#1E1E1E" Padding="8" CornerRadius="10">
+              <Image Source="resm:LightMasterMVVM.Assets.qrcode-white.png" Height="31" Width="31"/>
+            </Border>
+
+          </ControlTemplate>
+        </Button.Template>
+      </Button>
+    </Grid>
+
   </StackPanel>
 </UserControl>
