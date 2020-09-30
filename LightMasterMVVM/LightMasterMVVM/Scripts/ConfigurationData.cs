@@ -36,8 +36,17 @@ namespace LightMasterMVVM.Scripts
                 prevresult = JsonConvert.SerializeObject(new SwitchConfiguration() { AuthLockLevel = 1, EventCode = "", KeyScouter = "", TeamNumber = 0, Database = new DBConfiguraton() { Address = "localhost", Confirmed = false, DatabaseName = "lightscoutx", Port = 5432, Password = "strategy", Username = "strategy_member" } });
             }
             var previousobject = JsonConvert.DeserializeObject<SwitchConfiguration>(prevresult);
-            PropertyInfo propertyInfo = previousobject.GetType().GetProperty(propertyName);
-            propertyInfo.SetValue(previousobject, Convert.ChangeType(value, propertyInfo.PropertyType), null);
+            if (propertyName.StartsWith("Database"))
+            {
+                PropertyInfo propertyInfo = previousobject.Database.GetType().GetProperty(propertyName.Substring(9));
+                propertyInfo.SetValue(previousobject, Convert.ChangeType(value, propertyInfo.PropertyType), null);
+            }
+            else
+            {
+                PropertyInfo propertyInfo = previousobject.GetType().GetProperty(propertyName);
+                propertyInfo.SetValue(previousobject, Convert.ChangeType(value, propertyInfo.PropertyType), null);
+            }
+            
 
 
             try

@@ -65,6 +65,7 @@
     <AvaloniaResource Remove="Views\NotifyUser.xaml" />
     <AvaloniaResource Remove="Views\QRCode.xaml" />
     <AvaloniaResource Remove="Views\SetUpApplication.xaml" />
+    <AvaloniaResource Remove="Views\SignIn.xaml" />
     <AvaloniaResource Remove="Views\TabletLogs.xaml" />
     <AvaloniaResource Remove="Views\Tablets.xaml" />
     <AvaloniaResource Remove="Views\TheBlueAlliance.xaml" />
@@ -121,10 +122,16 @@
     <None Remove="Views\NotifyUser.xaml" />
     <None Remove="Views\QRCode.xaml" />
     <None Remove="Views\SetUpApplication.xaml" />
+    <None Remove="Views\SignIn.xaml" />
     <None Remove="Views\TabletLogs.xaml" />
     <None Remove="Views\Tablets.xaml" />
     <None Remove="Views\TheBlueAlliance.xaml" />
     <None Remove="Assets\close-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\SignIn.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\avalonia-logo.ico" />
@@ -286,6 +293,9 @@
     </Compile>
     <Compile Update="Views\QRCode.xaml.cs">
       <DependentUpon>QRCode.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SignIn.xaml.cs">
+      <DependentUpon>SignIn.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

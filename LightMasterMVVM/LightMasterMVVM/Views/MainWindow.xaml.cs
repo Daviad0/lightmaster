@@ -30,6 +30,7 @@ using Avalonia.Threading;
 using Websocket.Client;
 using LightMasterMVVM.Scripts;
 using GalaSoft.MvvmLight.Messaging;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace LightMasterMVVM.Views
 {
@@ -102,6 +103,11 @@ namespace LightMasterMVVM.Views
             ProcessTest();
             checkForInternet();
             TryUSB();
+            if(ApplicationState.DBUsernameUsed != null || ApplicationState.DBUsernameUsed == "")
+            {
+                var loginwindow = new SignIn();
+                loginwindow.Show();
+            }
             NavMessenger.CreateNewGraph += async (TrackedProperty[] trackingProperties, TrackedProperty[] orderingProperties) =>
             {
                 previouslySelectedName = null;
@@ -1158,16 +1164,78 @@ namespace LightMasterMVVM.Views
                             //SYNC AUTH LEVEL
                             break;
                         case 40:
-                            //DATABASE AUTHORIZATION CHECK
+                            var passedDBConfig = JsonConvert.DeserializeObject<DBConfiguraton>(data);
+                            bool successful = true;
+                            try
+                            {
+
+                            }
+                            catch(Exception ex)
+                            {
+                                successful = false;
+                            }
+                            if (successful)
+                            {
+                                var keygenerated = Guid.NewGuid();
+                                if (ApplicationState.DBAuthTokens.ContainsKey(uniqueId))
+                                {
+                                    ApplicationState.DBAuthTokens.Remove(uniqueId);
+                                }
+                                ApplicationState.DBAuthTokens.Add(uniqueId, new DBAuthorizationToken() { Token = keygenerated, TimesAccessed = 0, Assigned = DateTime.Now, Expires = DateTime.Now + TimeSpan.FromHours(1) });
+
+                                client.Send("S!2^" + uniqueId + ">>" + keygenerated.ToString());
+                            }
+
                             break;
                         case 41:
-                            //DATABASE SELECT REQUEST
+                            if (ApplicationState.DBAuthTokens.ContainsKey(uniqueId))
+                            {
+                                var selectedDBToken = ApplicationState.DBAuthTokens.GetValueOrDefault(uniqueId);
+                                if(DateTime.Now > selectedDBToken.Expires)
+                                {
+                                    ApplicationState.DBAuthTokens.GetValueOrDefault(uniqueId).TimesAccessed += 1;
+                                    //GET DATA
+                                }
+                                else
+                                {
+                                    client.Send("S!2^" + uniqueId + ">>" + "401");
+                                    ApplicationState.DBAuthTokens.Remove(uniqueId);
+                                }
+                            }
+                            else
+                            {
+                                client.Send("S!2^" + uniqueId + ">>" + "401");
+                            }
                             break;
                         case 42:
-                            //DATABASE EDIT REQUEST
+                            if (ApplicationState.DBAuthTokens.ContainsKey(uniqueId))
+                            {
+                                var selectedDBToken = ApplicationState.DBAuthTokens.GetValueOrDefault(uniqueId);
+                                if (DateTime.Now > selectedDBToken.Expires)
+                                {
+                                    ApplicationState.DBAuthTokens.GetValueOrDefault(uniqueId).TimesAccessed += 1;
+                                    //SET DATA
+                                }
+                                else
+                                {
+                                    client.Send("S!2^" + uniqueId + ">>" + "401");
+                                    ApplicationState.DBAuthTokens.Remove(uniqueId);
+                                }
+                            }
+                            else
+                            {
+                                client.Send("S!2^" + uniqueId + ">>" + "401");
+                            }
                             break;
                         case 43:
-                            //DATABASE SAFE CLOSE CONNECTION
+                            try
+                            {
+                                ApplicationState.DBAuthTokens.Remove(uniqueId);
+                            }
+                            catch(Exception ex)
+                            {
+
+                            }
                             break;
 
                     }
