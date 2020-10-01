@@ -1,1 +1,1 @@
-{"TeamNumber":862,"EventCode":"2020mijac","KeyScouter":"David Reeves","Database":{"Address":"localhost","Port":5432,"DatabaseName":"lightscoutx","Username":"strategy_member","Password":"strategy","Confirmed":false},"AuthLockLevel":4}
+{"TeamNumber":862,"EventCode":"2020mijac","KeyScouter":"David Reeves","Database":{"Address":"localhost","Port":5432,"DatabaseName":"lightscoutx","Username":"strategy_member","Password":"strategy","Confirmed":false},"AuthLockLevel":2}
