@@ -3,7 +3,6 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="LightMasterMVVM/Views/MainWindow.xaml.cs">
     <Files>
       <File FileName="LightMasterMVVM/ViewModels/MainWindowViewModel.cs" Line="974" Column="35" />
-      <File FileName="LightMasterMVVM/Views/MainWindow.xaml" />
       <File FileName="LightMasterMVVM/Views/DataAnalysis.xaml" />
       <File FileName="LightMasterMVVM/ViewLocator.cs" />
       <File FileName="LightMasterMVVM/Program.cs" />
@@ -11,7 +10,7 @@
       <File FileName="LightMasterMVVM/Views/NotifyUser.xaml" />
       <File FileName="LightMasterMVVM/App.xaml" />
       <File FileName="LightMasterMVVM/Views/Matches.xaml" />
-      <File FileName="LightMasterMVVM/Views/MainWindow.xaml.cs" Line="821" Column="64" />
+      <File FileName="LightMasterMVVM/Views/MainWindow.xaml.cs" Line="651" Column="46" />
       <File FileName="LightMasterMVVM/App.xaml.cs" />
       <File FileName="LightMasterMVVM/Views/CompetitionTeams.xaml" />
       <File FileName="LightMasterMVVM/Models/NotificationItem.cs" />
@@ -38,9 +37,14 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/Views/MainWindow.xaml.cs" relfile="LightMasterMVVM/Views/MainWindow.xaml.cs" line="773" column="1" />
-      <Breakpoint file="/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/Views/MainWindow.xaml.cs" relfile="LightMasterMVVM/Views/MainWindow.xaml.cs" line="805" column="1" />
-      <Breakpoint file="/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/Views/MainWindow.xaml.cs" relfile="LightMasterMVVM/Views/MainWindow.xaml.cs" line="1078" column="1" />
+      <Breakpoint file="/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/Views/MainWindow.xaml.cs" relfile="LightMasterMVVM/Views/MainWindow.xaml.cs" line="1084" column="1" />
+      <Breakpoint file="/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/Views/MainWindow.xaml.cs" relfile="LightMasterMVVM/Views/MainWindow.xaml.cs" line="811" column="1" />
+      <Breakpoint file="/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/Views/MainWindow.xaml.cs" relfile="LightMasterMVVM/Views/MainWindow.xaml.cs" line="854" column="1" />
+      <Breakpoint file="/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/Views/MainWindow.xaml.cs" relfile="LightMasterMVVM/Views/MainWindow.xaml.cs" line="867" column="1" />
+      <Breakpoint file="/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/Views/MainWindow.xaml.cs" relfile="LightMasterMVVM/Views/MainWindow.xaml.cs" line="647" column="1" />
+      <Breakpoint file="/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/Views/MainWindow.xaml.cs" relfile="LightMasterMVVM/Views/MainWindow.xaml.cs" line="675" column="1" />
+      <Breakpoint file="/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/Views/MainWindow.xaml.cs" relfile="LightMasterMVVM/Views/MainWindow.xaml.cs" line="777" column="1" />
+      <Breakpoint file="/Users/daviado/Desktop/lightmaster/LightMasterMVVM/LightMasterMVVM/Views/MainWindow.xaml.cs" relfile="LightMasterMVVM/Views/MainWindow.xaml.cs" line="889" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />

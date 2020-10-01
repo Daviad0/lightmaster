@@ -9,9 +9,9 @@
       "LightMasterMVVM/1.0.0": {
         "dependencies": {
           "32feet.NET": "3.5.0",
-          "Avalonia": "0.9.10",
-          "Avalonia.Desktop": "0.9.10",
-          "Avalonia.ReactiveUI": "0.9.10",
+          "Avalonia": "0.9.12",
+          "Avalonia.Desktop": "0.9.12",
+          "Avalonia.ReactiveUI": "0.9.12",
           "Microsoft.EntityFrameworkCore.Design": "3.1.5",
           "MvvmLightLibs": "5.4.1.1",
           "Newtonsoft.Json": "12.0.3",
@@ -19,9 +19,14 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": "3.1.4",
           "OxyPlot.Avalonia-alpha-2020-04-15": "1.0.0",
           "OxyPlot.Core": "2.0.0",
+          "QRCoder": "1.3.9",
           "System.Configuration.ConfigurationManager": "4.7.0",
+          "System.Drawing.Common": "4.7.0",
+          "System.IO.Ports": "4.7.0",
           "System.Windows.Forms": "4.0.0",
           "Websocket.Client": "4.3.15",
+          "iMobileDevice-net": "1.3.4",
+          "runtime.osx.10.10-x64.CoreCompat.System.Drawing": "5.8.64",
           "System.Reactive.Reference": "4.3.0.0"
         },
         "runtime": {
@@ -32,13 +37,13 @@
         "runtime": {
           "lib/net/InTheHand.Net.Personal.dll": {
             "assemblyVersion": "3.5.605.0",
-            "fileVersion": "3.5.605.0"
+            "fileVersion": "0.0.0.0"
           }
         }
       },
-      "Avalonia/0.9.10": {
+      "Avalonia/0.9.12": {
         "dependencies": {
-          "Avalonia.Remote.Protocol": "0.9.10",
+          "Avalonia.Remote.Protocol": "0.9.12",
           "JetBrains.Annotations": "10.3.0",
           "Serilog": "2.5.0",
           "Serilog.Sinks.Debug": "1.0.0",
@@ -52,98 +57,98 @@
         },
         "runtime": {
           "lib/netcoreapp2.0/Avalonia.Animation.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           },
           "lib/netcoreapp2.0/Avalonia.Base.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           },
           "lib/netcoreapp2.0/Avalonia.Controls.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           },
           "lib/netcoreapp2.0/Avalonia.DesignerSupport.dll": {
             "assemblyVersion": "0.7.0.0",
             "fileVersion": "0.7.0.0"
           },
           "lib/netcoreapp2.0/Avalonia.DesktopRuntime.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           },
           "lib/netcoreapp2.0/Avalonia.Diagnostics.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           },
           "lib/netcoreapp2.0/Avalonia.Dialogs.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           },
           "lib/netcoreapp2.0/Avalonia.Input.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           },
           "lib/netcoreapp2.0/Avalonia.Interactivity.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           },
           "lib/netcoreapp2.0/Avalonia.Layout.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           },
           "lib/netcoreapp2.0/Avalonia.Logging.Serilog.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           },
           "lib/netcoreapp2.0/Avalonia.Markup.Xaml.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           },
           "lib/netcoreapp2.0/Avalonia.Markup.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           },
           "lib/netcoreapp2.0/Avalonia.OpenGL.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           },
           "lib/netcoreapp2.0/Avalonia.Styling.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           },
           "lib/netcoreapp2.0/Avalonia.Themes.Default.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           },
           "lib/netcoreapp2.0/Avalonia.Visuals.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           },
           "lib/netcoreapp2.0/Avalonia.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           }
         }
       },
-      "Avalonia.Desktop/0.9.10": {
+      "Avalonia.Desktop/0.9.12": {
         "dependencies": {
-          "Avalonia": "0.9.10",
-          "Avalonia.Direct2D1": "0.9.10",
-          "Avalonia.Native": "0.9.10",
-          "Avalonia.Skia": "0.9.10",
-          "Avalonia.Win32": "0.9.10",
-          "Avalonia.X11": "0.9.10"
+          "Avalonia": "0.9.12",
+          "Avalonia.Direct2D1": "0.9.12",
+          "Avalonia.Native": "0.9.12",
+          "Avalonia.Skia": "0.9.12",
+          "Avalonia.Win32": "0.9.12",
+          "Avalonia.X11": "0.9.12"
         },
         "runtime": {
           "lib/netstandard2.0/Avalonia.Desktop.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           }
         }
       },
-      "Avalonia.Direct2D1/0.9.10": {
+      "Avalonia.Direct2D1/0.9.12": {
         "dependencies": {
-          "Avalonia": "0.9.10",
+          "Avalonia": "0.9.12",
           "JetBrains.Annotations": "10.3.0",
           "SharpDX": "4.0.1",
           "SharpDX.DXGI": "4.0.1",
@@ -153,33 +158,33 @@
         },
         "runtime": {
           "lib/netstandard2.0/Avalonia.Direct2D1.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           }
         }
       },
-      "Avalonia.FreeDesktop/0.9.10": {
+      "Avalonia.FreeDesktop/0.9.12": {
         "dependencies": {
-          "Avalonia": "0.9.10",
+          "Avalonia": "0.9.12",
           "Tmds.DBus": "0.7.0"
         },
         "runtime": {
           "lib/netstandard2.0/Avalonia.FreeDesktop.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           }
         }
       },
-      "Avalonia.Native/0.9.10": {
+      "Avalonia.Native/0.9.12": {
         "dependencies": {
-          "Avalonia": "0.9.10",
+          "Avalonia": "0.9.12",
           "SharpGen.Runtime": "1.2.1",
           "SharpGen.Runtime.COM": "1.2.0"
         },
         "runtime": {
           "lib/netstandard2.0/Avalonia.Native.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           }
         },
         "runtimeTargets": {
@@ -190,37 +195,37 @@
           }
         }
       },
-      "Avalonia.ReactiveUI/0.9.10": {
+      "Avalonia.ReactiveUI/0.9.12": {
         "dependencies": {
-          "Avalonia": "0.9.10",
+          "Avalonia": "0.9.12",
           "ReactiveUI": "10.3.6",
           "System.Reactive": "4.3.2"
         },
         "runtime": {
           "lib/netstandard2.0/Avalonia.ReactiveUI.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           }
         }
       },
-      "Avalonia.Remote.Protocol/0.9.10": {
+      "Avalonia.Remote.Protocol/0.9.12": {
         "runtime": {
           "lib/netstandard2.0/Avalonia.Remote.Protocol.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           }
         }
       },
-      "Avalonia.Skia/0.9.10": {
+      "Avalonia.Skia/0.9.12": {
         "dependencies": {
-          "Avalonia": "0.9.10",
+          "Avalonia": "0.9.12",
           "Avalonia.Skia.Linux.Natives": "1.68.0.2",
           "SkiaSharp": "1.68.0"
         },
         "runtime": {
           "lib/netstandard2.0/Avalonia.Skia.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           }
         }
       },
@@ -242,28 +247,28 @@
           }
         }
       },
-      "Avalonia.Win32/0.9.10": {
+      "Avalonia.Win32/0.9.12": {
         "dependencies": {
-          "Avalonia": "0.9.10",
+          "Avalonia": "0.9.12",
           "System.Drawing.Common": "4.7.0"
         },
         "runtime": {
           "lib/netstandard2.0/Avalonia.Win32.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           }
         }
       },
-      "Avalonia.X11/0.9.10": {
+      "Avalonia.X11/0.9.12": {
         "dependencies": {
-          "Avalonia": "0.9.10",
-          "Avalonia.FreeDesktop": "0.9.10",
-          "Avalonia.Skia": "0.9.10"
+          "Avalonia": "0.9.12",
+          "Avalonia.FreeDesktop": "0.9.12",
+          "Avalonia.Skia": "0.9.12"
         },
         "runtime": {
           "lib/netstandard2.0/Avalonia.X11.dll": {
-            "assemblyVersion": "0.9.10.0",
-            "fileVersion": "0.9.10.0"
+            "assemblyVersion": "0.9.12.0",
+            "fileVersion": "0.9.12.0"
           }
         }
       },
@@ -275,6 +280,906 @@
           "lib/netstandard2.0/DynamicData.dll": {
             "assemblyVersion": "6.13.0.0",
             "fileVersion": "6.13.9.22443"
+          }
+        }
+      },
+      "iMobileDevice-net/1.3.4": {
+        "runtime": {
+          "lib/netcoreapp3.0/iMobileDevice-net.dll": {
+            "assemblyVersion": "1.3.0.0",
+            "fileVersion": "1.3.4.14366"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/osx-x64/native/idevice_id": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/idevicebackup": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/idevicebackup2": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/idevicecrashreport": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/idevicedate": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/idevicedebug": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/idevicedebugserverproxy": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/idevicediagnostics": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/ideviceenterrecovery": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/ideviceimagemounter": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/ideviceinfo": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/ideviceinstaller": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/idevicename": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/idevicenotificationproxy": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/idevicepair": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/ideviceprovision": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/idevicerestore": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/idevicescreenshot": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/idevicesetlocation": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/idevicesyslog": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/inetcat": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/ios_webkit_debug_proxy": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/iproxy": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/irecovery": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libcrypto.1.0.0.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libideviceactivation-1.0.2.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libideviceactivation-1.0.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libimobiledevice-1.0.6.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libimobiledevice-1.0.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libimobiledevice-net-lighthouse.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libios_webkit_debug_proxy.0.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libios_webkit_debug_proxy.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libirecovery-1.0.3.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libirecovery-1.0.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libplist++-2.0.3.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libplist++-2.0.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libplist-2.0.3.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libplist-2.0.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libssl.1.0.0.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libusbmuxd.6.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libusbmuxd.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/plistutil": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/usbmuxd": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/idevice_id": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/idevicebackup": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/idevicebackup2": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/idevicecrashreport": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/idevicedate": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/idevicedebug": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/idevicedebugserverproxy": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/idevicediagnostics": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/ideviceenterrecovery": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/ideviceimagemounter": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/ideviceinfo": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/ideviceinstaller": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/idevicename": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/idevicenotificationproxy": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/idevicepair": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/ideviceprovision": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/idevicerestore": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/idevicescreenshot": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/idevicesetlocation": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/idevicesyslog": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/inetcat": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/ios_webkit_debug_proxy": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/iproxy": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/irecovery": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/libideviceactivation-1.0.so": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/libimobiledevice-1.0.so": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/libimobiledevice-net-lighthouse.so": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/libios_webkit_debug_proxy.so": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/libirecovery-1.0.so": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/libplist++-2.0.so": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/libplist-2.0.so": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/libusbmuxd.so": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/plistutil": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/ubuntu.16.04-x64/native/usbmuxd": {
+            "rid": "ubuntu.16.04-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/bz2.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/getopt.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/idevice_id.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/ideviceactivation.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/ideviceactivation.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/idevicebackup.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/idevicebackup2.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/idevicecrashreport.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/idevicedate.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/idevicedebug.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/idevicedebugserverproxy.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/idevicediagnostics.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/ideviceenterrecovery.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/ideviceimagemounter.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/ideviceinfo.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/ideviceinstaller.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/idevicename.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/idevicenotificationproxy.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/idevicepair.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/ideviceprovision.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/idevicerestore.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/idevicescreenshot.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/idevicesyslog.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/imobiledevice-net-lighthouse.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/imobiledevice.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/ios_webkit_debug_proxy.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/iproxy.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/irecovery.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/irecovery.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/libcharset.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/libcrypto-1_1-x64.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/libcurl.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/libiconv.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/libssl-1_1-x64.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/libusb-1.0.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/libusb0.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/libxml2.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/lzma.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/pcre.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/pcreposix.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/plist.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/plist_cmp.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/plist_test.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/plistutil.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/pthreadVC3.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/readline.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/usbmuxd.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/usbmuxd.exe": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/vcruntime140.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/zip.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/zlib1.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/bz2.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/getopt.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/idevice_id.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/ideviceactivation.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/idevicebackup.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/idevicebackup2.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/idevicecrashreport.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/idevicedate.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/idevicedebug.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/idevicedebugserverproxy.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/idevicediagnostics.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/ideviceenterrecovery.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/ideviceimagemounter.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/ideviceinfo.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/ideviceinstaller.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/idevicename.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/idevicenotificationproxy.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/idevicepair.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/ideviceprovision.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/idevicerestore.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/idevicescreenshot.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/idevicesyslog.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/imobiledevice-net-lighthouse.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/imobiledevice.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/ios_webkit_debug_proxy.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/iproxy.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/irecovery.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/irecovery.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/libcharset.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/libcrypto-1_1.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/libcurl.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/libiconv.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/libssl-1_1.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/libusb-1.0.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/libusb0.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/libxml2.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/lzma.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/pcre.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/pcreposix.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/plist.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/plist_cmp.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/plist_test.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/plistutil.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/pthreadVC3.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/readline.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/usbmuxd.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/usbmuxd.exe": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/vcruntime140.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/zip.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/zlib1.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
           }
         }
       },
@@ -698,16 +1603,10 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "Microsoft.Win32.Registry/4.0.0": {
+      "Microsoft.Win32.Registry/4.7.0": {
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "3.1.0",
-          "System.Collections": "4.3.0",
-          "System.Globalization": "4.3.0",
-          "System.Resources.ResourceManager": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "System.Runtime.Extensions": "4.3.0",
-          "System.Runtime.Handles": "4.3.0",
-          "System.Runtime.InteropServices": "4.3.0"
+          "System.Security.AccessControl": "4.7.0",
+          "System.Security.Principal.Windows": "4.7.0"
         }
       },
       "Microsoft.Win32.SystemEvents/4.7.0": {
@@ -733,15 +1632,15 @@
         "runtime": {
           "lib/net45/GalaSoft.MvvmLight.Extras.dll": {
             "assemblyVersion": "5.4.1.0",
-            "fileVersion": "5.4.1.0"
+            "fileVersion": "0.0.0.0"
           },
           "lib/net45/GalaSoft.MvvmLight.Platform.dll": {
             "assemblyVersion": "5.4.1.0",
-            "fileVersion": "5.4.1.0"
+            "fileVersion": "0.0.0.0"
           },
           "lib/net45/GalaSoft.MvvmLight.dll": {
             "assemblyVersion": "5.4.1.0",
-            "fileVersion": "5.4.1.0"
+            "fileVersion": "0.0.0.0"
           },
           "lib/net45/System.Windows.Interactivity.dll": {
             "assemblyVersion": "4.5.0.0",
@@ -832,7 +1731,7 @@
       },
       "OxyPlot.Avalonia-alpha-2020-04-15/1.0.0": {
         "dependencies": {
-          "Avalonia": "0.9.10",
+          "Avalonia": "0.9.12",
           "OxyPlot.Core": "2.0.0"
         },
         "runtime": {
@@ -853,6 +1752,17 @@
           }
         }
       },
+      "QRCoder/1.3.9": {
+        "dependencies": {
+          "System.Drawing.Common": "4.7.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/QRCoder.dll": {
+            "assemblyVersion": "1.3.9.0",
+            "fileVersion": "1.3.9.0"
+          }
+        }
+      },
       "ReactiveUI/10.3.6": {
         "dependencies": {
           "DynamicData": "6.13.9",
@@ -870,6 +1780,33 @@
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.fedora.23-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.fedora.24-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
+      "runtime.linux-arm.runtime.native.System.IO.Ports/4.7.0": {
+        "runtimeTargets": {
+          "runtimes/linux-arm/native/System.IO.Ports.Native.so": {
+            "rid": "linux-arm",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "runtime.linux-arm64.runtime.native.System.IO.Ports/4.7.0": {
+        "runtimeTargets": {
+          "runtimes/linux-arm64/native/System.IO.Ports.Native.so": {
+            "rid": "linux-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "runtime.linux-x64.runtime.native.System.IO.Ports/4.7.0": {
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/System.IO.Ports.Native.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
       "runtime.native.System/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0",
@@ -880,6 +1817,14 @@
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0",
           "Microsoft.NETCore.Targets": "1.1.0"
+        }
+      },
+      "runtime.native.System.IO.Ports/4.7.0": {
+        "dependencies": {
+          "runtime.linux-arm.runtime.native.System.IO.Ports": "4.7.0",
+          "runtime.linux-arm64.runtime.native.System.IO.Ports": "4.7.0",
+          "runtime.linux-x64.runtime.native.System.IO.Ports": "4.7.0",
+          "runtime.osx-x64.runtime.native.System.IO.Ports": "4.7.0"
         }
       },
       "runtime.native.System.Net.Http/4.3.0": {
@@ -921,6 +1866,90 @@
       },
       "runtime.opensuse.13.2-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.opensuse.42.1-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
+      "runtime.osx-x64.runtime.native.System.IO.Ports/4.7.0": {
+        "runtimeTargets": {
+          "runtimes/osx-x64/native/System.IO.Ports.Native.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "runtime.osx.10.10-x64.CoreCompat.System.Drawing/5.8.64": {
+        "runtime": {
+          "lib/netstandard2.0/runtime.osx.10.10-x64.CoreCompat.System.Drawing.dll": {
+            "assemblyVersion": "5.8.64.0",
+            "fileVersion": "5.8.64.0"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/osx-x64/native/libcairo.2.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libfontconfig.1.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libfreetype.6.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libgdiplus-lighthouse.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libgdiplus.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libgif.7.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libglib-2.0.0.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libintl.8.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libjpeg.9.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libpcre.1.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libpixman-1.0.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libpng16.16.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libtiff.5.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
       "runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.Apple/4.3.0": {},
       "runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.rhel.7-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
@@ -1202,7 +2231,7 @@
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0",
           "Microsoft.Win32.Primitives": "4.3.0",
-          "Microsoft.Win32.Registry": "4.0.0",
+          "Microsoft.Win32.Registry": "4.7.0",
           "System.Collections": "4.3.0",
           "System.Diagnostics.Debug": "4.3.0",
           "System.Globalization": "4.3.0",
@@ -1423,6 +2452,38 @@
           "System.Threading": "4.3.0",
           "System.Threading.Tasks": "4.3.0",
           "runtime.native.System": "4.3.0"
+        }
+      },
+      "System.IO.Ports/4.7.0": {
+        "dependencies": {
+          "Microsoft.Win32.Registry": "4.7.0",
+          "runtime.native.System.IO.Ports": "4.7.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.IO.Ports.dll": {
+            "assemblyVersion": "4.0.3.0",
+            "fileVersion": "4.700.19.56404"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/linux/lib/netstandard2.0/System.IO.Ports.dll": {
+            "rid": "linux",
+            "assetType": "runtime",
+            "assemblyVersion": "4.0.3.0",
+            "fileVersion": "4.700.19.56404"
+          },
+          "runtimes/osx/lib/netstandard2.0/System.IO.Ports.dll": {
+            "rid": "osx",
+            "assetType": "runtime",
+            "assemblyVersion": "4.0.3.0",
+            "fileVersion": "4.700.19.56404"
+          },
+          "runtimes/win/lib/netstandard2.0/System.IO.Ports.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "4.0.3.0",
+            "fileVersion": "4.700.19.56404"
+          }
         }
       },
       "System.IO.UnmanagedMemoryStream/4.0.1": {
@@ -2236,61 +3297,61 @@
       "path": "32feet.net/3.5.0",
       "hashPath": "32feet.net.3.5.0.nupkg.sha512"
     },
-    "Avalonia/0.9.10": {
+    "Avalonia/0.9.12": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-QL4+5ukdHrxxGQ4V1L2fFuzle2l5sTHw21KZoMrRlocISEpKOU3pwo4FEoEo9tGQIsAus56qjISZ752pZklymg==",
-      "path": "avalonia/0.9.10",
-      "hashPath": "avalonia.0.9.10.nupkg.sha512"
+      "sha512": "sha512-DfqzTQVI5x7Uu6WpxQNdSqkCYsrOp45O4lcVIXxhuBb7IXfL9ax+8LU+rRzRBC/SeZGFD60g20HI9nhiFDoSDg==",
+      "path": "avalonia/0.9.12",
+      "hashPath": "avalonia.0.9.12.nupkg.sha512"
     },
-    "Avalonia.Desktop/0.9.10": {
+    "Avalonia.Desktop/0.9.12": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Mw9gVwwFZLeAWhx05/ACOO+rfhkZuCjCU5FZFIyJfJ9NFuS3Xw2Tdp5Mgivo5KQYaj3R/T+YtisDB7S0C9Qx0g==",
-      "path": "avalonia.desktop/0.9.10",
-      "hashPath": "avalonia.desktop.0.9.10.nupkg.sha512"
+      "sha512": "sha512-e30JwlGf9bUa/4Aizpuy6a2WlIfdoTSy+OwdZDyiayg1kN8tG6py9vNctvWNgC/5QnhRXAzFk1YzWvgLpma0Pg==",
+      "path": "avalonia.desktop/0.9.12",
+      "hashPath": "avalonia.desktop.0.9.12.nupkg.sha512"
     },
-    "Avalonia.Direct2D1/0.9.10": {
+    "Avalonia.Direct2D1/0.9.12": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-6rFoUMCsrP+T+j4BoTP3iuN+S2m9hSgyFymICiGqbxqk8zO1FtGZ+cSvOLkVuiFI5pGTCMVHOGG3zuHN6sX0XA==",
-      "path": "avalonia.direct2d1/0.9.10",
-      "hashPath": "avalonia.direct2d1.0.9.10.nupkg.sha512"
+      "sha512": "sha512-qaWmmkV6O14gDofOVSPweMvPeH0rqDQULPwnvXsQ8obJIFRpD4XkQXtdNX4jS+vi7cKuE/c8u6rbg7FtbfO7BQ==",
+      "path": "avalonia.direct2d1/0.9.12",
+      "hashPath": "avalonia.direct2d1.0.9.12.nupkg.sha512"
     },
-    "Avalonia.FreeDesktop/0.9.10": {
+    "Avalonia.FreeDesktop/0.9.12": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-aVUqY+vpswtbLx1jdBbKETKlOZboxktgBZgZzsslkwi91o1blV+BtO6rlZFAWunPJUQqaNo3Bcnp4v+dKnqJeA==",
-      "path": "avalonia.freedesktop/0.9.10",
-      "hashPath": "avalonia.freedesktop.0.9.10.nupkg.sha512"
+      "sha512": "sha512-kGFGvXFxE78vDfV8kxlkU1iNEbN+3l14xoC0rj1CBn3HHgp7smJaEumtJ64ckuVqaXY1BGat9WLlp0h3G+QJAQ==",
+      "path": "avalonia.freedesktop/0.9.12",
+      "hashPath": "avalonia.freedesktop.0.9.12.nupkg.sha512"
     },
-    "Avalonia.Native/0.9.10": {
+    "Avalonia.Native/0.9.12": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-n7Ia5hwSM0roth8unkG6BlpIMj3+8tzV5RExYPuhxius0dC97+f1DjvqmjqR0vYgsljDmdfgFgPGuyQ3glfYyg==",
-      "path": "avalonia.native/0.9.10",
-      "hashPath": "avalonia.native.0.9.10.nupkg.sha512"
+      "sha512": "sha512-K8ZkaT+CPnhF7TjMmYY2taXrSNkQAMoZdTpgUXlxW5hk6K4pD8oN1mEXuM0MY0BPzXNh8fUNhEEHktt7+D2SHg==",
+      "path": "avalonia.native/0.9.12",
+      "hashPath": "avalonia.native.0.9.12.nupkg.sha512"
     },
-    "Avalonia.ReactiveUI/0.9.10": {
+    "Avalonia.ReactiveUI/0.9.12": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-FJQ80jAyiblYyUdNGb9shAJt4fyED1liOL8vBzmqV+wMwawD6dQC7LXDDWeVhZJ3jOQyg6Or1haqEJX1EW28KA==",
-      "path": "avalonia.reactiveui/0.9.10",
-      "hashPath": "avalonia.reactiveui.0.9.10.nupkg.sha512"
+      "sha512": "sha512-aVbvKHfqSO9TuFCwHzcVQGNbg4uAdjQamfHnW/svz3eEpgpyliGzUj01TfcMCW5nTh0295ohj6Vctm3/Mh1b5Q==",
+      "path": "avalonia.reactiveui/0.9.12",
+      "hashPath": "avalonia.reactiveui.0.9.12.nupkg.sha512"
     },
-    "Avalonia.Remote.Protocol/0.9.10": {
+    "Avalonia.Remote.Protocol/0.9.12": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-lnQ1tmad9GyF/33QD62bwLQA3TdSOZGXgj2in9ZzSAtmxBAf+XYJNbmK09CMRR1pbRF2q+MWUOrnzUyA3uuVGg==",
-      "path": "avalonia.remote.protocol/0.9.10",
-      "hashPath": "avalonia.remote.protocol.0.9.10.nupkg.sha512"
+      "sha512": "sha512-ebj8S6zs0iJUiyegQMrEZlIrEulFuilSHWdxnascTfCZUwUqq5v88di14ksyYtLe49S8gWPsIb4pLeBJsUTQlg==",
+      "path": "avalonia.remote.protocol/0.9.12",
+      "hashPath": "avalonia.remote.protocol.0.9.12.nupkg.sha512"
     },
-    "Avalonia.Skia/0.9.10": {
+    "Avalonia.Skia/0.9.12": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-40jN55qA80ZokrnWE8bd1Q8CWwBsCYhmi2vnU3ER3XnqF0X8u39vSr9lIBix+Riua7TERfzjzzIv6bNPpWJ+AA==",
-      "path": "avalonia.skia/0.9.10",
-      "hashPath": "avalonia.skia.0.9.10.nupkg.sha512"
+      "sha512": "sha512-WiBKVRiroYXCxGvV57lJiut9ISis0zmNWBp0/T56vEGhJkjuZuvImGYG72mKXe/IktzEOpAjs5U4fLCNCJub/Q==",
+      "path": "avalonia.skia/0.9.12",
+      "hashPath": "avalonia.skia.0.9.12.nupkg.sha512"
     },
     "Avalonia.Skia.Linux.Natives/1.68.0.2": {
       "type": "package",
@@ -2299,19 +3360,19 @@
       "path": "avalonia.skia.linux.natives/1.68.0.2",
       "hashPath": "avalonia.skia.linux.natives.1.68.0.2.nupkg.sha512"
     },
-    "Avalonia.Win32/0.9.10": {
+    "Avalonia.Win32/0.9.12": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-W2DYtnDGlEd9MWbzyBAvRfWBLHAWvrxQ23shcH01daLt/ex3IAJ6Wf/X5QkpnW5CU7uIeZk8TaYEZxsW6izqjg==",
-      "path": "avalonia.win32/0.9.10",
-      "hashPath": "avalonia.win32.0.9.10.nupkg.sha512"
+      "sha512": "sha512-idimBlkjqFNR6PvobwB6fNimquClk3ur+JYDPHvP44dhc9Vlz4dd0luWVyekayZAor/rGUAx/zEBWDuEXpckvQ==",
+      "path": "avalonia.win32/0.9.12",
+      "hashPath": "avalonia.win32.0.9.12.nupkg.sha512"
     },
-    "Avalonia.X11/0.9.10": {
+    "Avalonia.X11/0.9.12": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-LGgkoycbPZtbdOQxq9aRsg411wmI0lVzN6hVWmGj5TeJFyeA/aYTknRQ454+sbRO1t2/NFA57W8Qe6F7FXhWKA==",
-      "path": "avalonia.x11/0.9.10",
-      "hashPath": "avalonia.x11.0.9.10.nupkg.sha512"
+      "sha512": "sha512-Wyzk+aWgtBa0tQbQQ+EQ3K72cRBDPwXN5usWNQ9vCf0OwxyKET36Q+RpVIyaSdvPCjpjRqZ7ChtMIrHQaFVcPw==",
+      "path": "avalonia.x11/0.9.12",
+      "hashPath": "avalonia.x11.0.9.12.nupkg.sha512"
     },
     "DynamicData/6.13.9": {
       "type": "package",
@@ -2319,6 +3380,13 @@
       "sha512": "sha512-0fp+XzK80VdsrONdzkusXd2NrNqWRYFixCuGD6mK7mQir2M+t+h6MeiV4sutCnlsg31N10I8Y1wHadmGiJx3iw==",
       "path": "dynamicdata/6.13.9",
       "hashPath": "dynamicdata.6.13.9.nupkg.sha512"
+    },
+    "iMobileDevice-net/1.3.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-BJDBJ1cxXNcsJcaaqfeppNwSwiSxDYJ1dudxsxqNtj67XyushnXvEYUMBn5T817GHOLduKjbx6O9sldMF6R/7Q==",
+      "path": "imobiledevice-net/1.3.4",
+      "hashPath": "imobiledevice-net.1.3.4.nupkg.sha512"
     },
     "JetBrains.Annotations/10.3.0": {
       "type": "package",
@@ -2572,12 +3640,12 @@
       "path": "microsoft.win32.primitives/4.3.0",
       "hashPath": "microsoft.win32.primitives.4.3.0.nupkg.sha512"
     },
-    "Microsoft.Win32.Registry/4.0.0": {
+    "Microsoft.Win32.Registry/4.7.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-q+eLtROUAQ3OxYA5mpQrgyFgzLQxIyrfT2eLpYX5IEPlHmIio2nh4F5bgOaQoGOV865kFKZZso9Oq9RlazvXtg==",
-      "path": "microsoft.win32.registry/4.0.0",
-      "hashPath": "microsoft.win32.registry.4.0.0.nupkg.sha512"
+      "sha512": "sha512-KSrRMb5vNi0CWSGG1++id2ZOs/1QhRqROt+qgbEAdQuGjGrFcl4AOl4/exGPUYz2wUnU42nvJqon1T3U0kPXLA==",
+      "path": "microsoft.win32.registry/4.7.0",
+      "hashPath": "microsoft.win32.registry.4.7.0.nupkg.sha512"
     },
     "Microsoft.Win32.SystemEvents/4.7.0": {
       "type": "package",
@@ -2635,6 +3703,13 @@
       "path": "oxyplot.core/2.0.0",
       "hashPath": "oxyplot.core.2.0.0.nupkg.sha512"
     },
+    "QRCoder/1.3.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IHbhdLATo5dr6wvoDP5vGv9kn/vHkxtyzoTzUdnMU32Ju+/mg82xirHsSvTrhlwXb5X3CrtUhBbVfgSu7brS/A==",
+      "path": "qrcoder/1.3.9",
+      "hashPath": "qrcoder.1.3.9.nupkg.sha512"
+    },
     "ReactiveUI/10.3.6": {
       "type": "package",
       "serviceable": true,
@@ -2663,6 +3738,27 @@
       "path": "runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "hashPath": "runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512"
     },
+    "runtime.linux-arm.runtime.native.System.IO.Ports/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pCaX07mRrO11GfUb+whjn2AJgCofx26slw0sI3XC9v0pEZO8101iK6q4ymZOiI2M4a9sQxLr2LawAEDvF4RNXg==",
+      "path": "runtime.linux-arm.runtime.native.system.io.ports/4.7.0",
+      "hashPath": "runtime.linux-arm.runtime.native.system.io.ports.4.7.0.nupkg.sha512"
+    },
+    "runtime.linux-arm64.runtime.native.System.IO.Ports/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/J6A4bexUUJciGUwrhtzrFW4tIHqoJYlCsz5RudRmqUaqvuG2tjrbn6bEopOFs7CU4gZqAKWcU9pkp180c3DkQ==",
+      "path": "runtime.linux-arm64.runtime.native.system.io.ports/4.7.0",
+      "hashPath": "runtime.linux-arm64.runtime.native.system.io.ports.4.7.0.nupkg.sha512"
+    },
+    "runtime.linux-x64.runtime.native.System.IO.Ports/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-aaaiH4ttfkLizo0OKf++5kPN0yxKbgzcyAD3w52Y3YP96aB/M79fm0r06SedXJGv86Iou6ipj3wUQBMFaL8LnQ==",
+      "path": "runtime.linux-x64.runtime.native.system.io.ports/4.7.0",
+      "hashPath": "runtime.linux-x64.runtime.native.system.io.ports.4.7.0.nupkg.sha512"
+    },
     "runtime.native.System/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -2676,6 +3772,13 @@
       "sha512": "sha512-INBPonS5QPEgn7naufQFXJEp3zX6L4bwHgJ/ZH78aBTpeNfQMtf7C6VrAFhlq2xxWBveIOWyFzQjJ8XzHMhdOQ==",
       "path": "runtime.native.system.io.compression/4.3.0",
       "hashPath": "runtime.native.system.io.compression.4.3.0.nupkg.sha512"
+    },
+    "runtime.native.System.IO.Ports/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-yidiZEGEIOyGnRkZvoV6XbeqzEBg9L47PyZNBymLIsu9HHseF98wiOxR6RnHmMqQMTBlc/EONfw4NT3pw0S6YQ==",
+      "path": "runtime.native.system.io.ports/4.7.0",
+      "hashPath": "runtime.native.system.io.ports.4.7.0.nupkg.sha512"
     },
     "runtime.native.System.Net.Http/4.3.0": {
       "type": "package",
@@ -2725,6 +3828,20 @@
       "sha512": "sha512-KeLz4HClKf+nFS7p/6Fi/CqyLXh81FpiGzcmuS8DGi9lUqSnZ6Es23/gv2O+1XVGfrbNmviF7CckBpavkBoIFQ==",
       "path": "runtime.opensuse.42.1-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "hashPath": "runtime.opensuse.42.1-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512"
+    },
+    "runtime.osx-x64.runtime.native.System.IO.Ports/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-c1h87v6gopjfeAu3WhVGguUhzCdpZFqX8oXrevO1ciuH4g/mFrxnzlo5POlp+TtZdQ1i8yu0ZzBMKbmX2bJJ0g==",
+      "path": "runtime.osx-x64.runtime.native.system.io.ports/4.7.0",
+      "hashPath": "runtime.osx-x64.runtime.native.system.io.ports.4.7.0.nupkg.sha512"
+    },
+    "runtime.osx.10.10-x64.CoreCompat.System.Drawing/5.8.64": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ey7xQgWwixxdrmhzEUvaR4kxZDSQMWQScp8ViLvmL5xCBKG6U3TaMv/jzHilpfQXpHmJ4IylKGzzMvnYX2FwHQ==",
+      "path": "runtime.osx.10.10-x64.corecompat.system.drawing/5.8.64",
+      "hashPath": "runtime.osx.10.10-x64.corecompat.system.drawing.5.8.64.nupkg.sha512"
     },
     "runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.Apple/4.3.0": {
       "type": "package",
@@ -3054,6 +4171,13 @@
       "sha512": "sha512-Xqj4xaFAnLVpss9ZSUIvB/VdJAA7GxZDnFGDKJfiGAnZ5VnFROn6eOHWepFpujCYTsh6wlZ3B33bqYkF0QJ7Eg==",
       "path": "system.io.memorymappedfiles/4.0.0",
       "hashPath": "system.io.memorymappedfiles.4.0.0.nupkg.sha512"
+    },
+    "System.IO.Ports/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tNHiZcdskfRpxU7LBBlA69YYgBqWMBE/JDdmrEIDa4iw944VK1u4+B0FeSls1FUm+Pm4X/Fl0fSGqi8MDhb8/Q==",
+      "path": "system.io.ports/4.7.0",
+      "hashPath": "system.io.ports.4.7.0.nupkg.sha512"
     },
     "System.IO.UnmanagedMemoryStream/4.0.1": {
       "type": "package",

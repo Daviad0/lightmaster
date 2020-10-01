@@ -103,7 +103,7 @@ namespace LightMasterMVVM.Views
             ProcessTest();
             checkForInternet();
             TryUSB();
-            if(ApplicationState.DBUsernameUsed != null || ApplicationState.DBUsernameUsed == "")
+            if(ApplicationState.DBUsernameUsed == null || ApplicationState.DBUsernameUsed == "")
             {
                 var loginwindow = new SignIn();
                 loginwindow.Show();
@@ -597,7 +597,7 @@ namespace LightMasterMVVM.Views
                 ReadOnlyCollection<string> udids;
                 int count = 0;
 
-                var idevice = LibiMobileDevice.Instance.iDevice;
+                /*var idevice = LibiMobileDevice.Instance.iDevice;
                 var lockdown = LibiMobileDevice.Instance.Lockdown;
                 idevice.idevice_event_subscribe((ref iDeviceEvent deviceEvent, IntPtr b) =>
                 {
@@ -641,7 +641,7 @@ namespace LightMasterMVVM.Views
 
 
                 }
-                , new IntPtr(862));
+                , new IntPtr(862));*/
             }
             catch (Exception ex)
             {
