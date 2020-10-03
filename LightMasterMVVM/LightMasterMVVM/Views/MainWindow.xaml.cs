@@ -31,6 +31,8 @@ using Websocket.Client;
 using LightMasterMVVM.Scripts;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using System.Reflection;
+using System.Data.Common;
 
 namespace LightMasterMVVM.Views
 {
@@ -1194,7 +1196,84 @@ namespace LightMasterMVVM.Views
                                 if(DateTime.Now > selectedDBToken.Expires)
                                 {
                                     ApplicationState.DBAuthTokens.GetValueOrDefault(uniqueId).TimesAccessed += 1;
-                                    //GET DATA
+                                    var parseddata = JsonConvert.DeserializeObject<ExternalDBQuery>(data);
+                                    var allteamsselectedbydata = db.FRCTeams.Where(x => parseddata.IncludedTeams.Contains(x.ToString())).ToList();
+                                    List<ExternalDBQueryResult> sendBackList = new List<ExternalDBQueryResult>();
+                                    List<GraphTeamMatchView> rawTeamDatas = new List<GraphTeamMatchView>();
+                                    foreach(var team in allteamsselectedbydata)
+                                    {
+                                        var allmatchesinteam = db.Matches.Where(x => x.team_instance_id == team.team_instance_id && x.ClientSubmitted == true).ToList();
+                                        GraphTeamMatchView useForAdding = new GraphTeamMatchView();
+                                        useForAdding.TeamNumber = team.team_number;
+                                        foreach(var match in allmatchesinteam)
+                                        {
+                                            useForAdding.TInnerPC += match.PowerCellInner.Sum() - match.PowerCellInner[0];
+                                            useForAdding.TOuterPC += match.PowerCellInner.Sum() - match.PowerCellInner[0];
+                                            useForAdding.TLowerPC += match.PowerCellInner.Sum() - match.PowerCellInner[0];
+                                            useForAdding.TMissedPC += match.PowerCellMissed.Sum() - match.PowerCellMissed[0];
+                                            useForAdding.AInnerPC += match.PowerCellInner[0];
+                                            useForAdding.AOuterPC += match.PowerCellInner[0];
+                                            useForAdding.ALowerPC += match.PowerCellInner[0];
+                                            useForAdding.AMissedPC += match.PowerCellMissed[0];
+                                            useForAdding.BalanceRate += match.E_Balanced ? 1 : 0;
+                                            useForAdding.ClimbRate += match.E_ClimbSuccess ? 1 : 0;
+                                            useForAdding.ParkRate += match.E_Park ? 1 : 0;
+                                            useForAdding.TotalInnerPC += match.PowerCellInner.Sum();
+                                            useForAdding.TotalOuterPC += match.PowerCellInner.Sum();
+                                            useForAdding.TotalLowerPC += match.PowerCellInner.Sum();
+                                            useForAdding.TotalMissedPC += match.PowerCellMissed.Sum();
+                                            useForAdding.CycleTime += match.CycleTime;
+                                            useForAdding.DefenseRate += match.DefenseFor ? 1 : 0;
+                                            useForAdding.Disabled += match.DisabledSeconds;
+                                            useForAdding.NumCycles += match.NumCycles;
+                                        }
+                                        if(allmatchesinteam.Count > 0)
+                                        {
+                                            useForAdding.TInnerPC += useForAdding.TInnerPC / allmatchesinteam.Count;
+                                            useForAdding.TOuterPC += useForAdding.TOuterPC / allmatchesinteam.Count;
+                                            useForAdding.TLowerPC += useForAdding.TLowerPC / allmatchesinteam.Count;
+                                            useForAdding.TMissedPC += useForAdding.TMissedPC / allmatchesinteam.Count;
+                                            useForAdding.AInnerPC += useForAdding.AInnerPC / allmatchesinteam.Count;
+                                            useForAdding.AOuterPC += useForAdding.AOuterPC / allmatchesinteam.Count;
+                                            useForAdding.ALowerPC += useForAdding.ALowerPC / allmatchesinteam.Count;
+                                            useForAdding.AMissedPC += useForAdding.AMissedPC / allmatchesinteam.Count;
+                                            useForAdding.BalanceRate += useForAdding.BalanceRate / allmatchesinteam.Count;
+                                            useForAdding.ClimbRate += useForAdding.ClimbRate / allmatchesinteam.Count;
+                                            useForAdding.ParkRate += useForAdding.ParkRate / allmatchesinteam.Count;
+                                            useForAdding.TotalInnerPC += useForAdding.TotalInnerPC / allmatchesinteam.Count;
+                                            useForAdding.TotalOuterPC += useForAdding.TotalOuterPC / allmatchesinteam.Count;
+                                            useForAdding.TotalLowerPC += useForAdding.TotalLowerPC / allmatchesinteam.Count;
+                                            useForAdding.TotalMissedPC += useForAdding.TotalMissedPC / allmatchesinteam.Count;
+                                            useForAdding.CycleTime += useForAdding.CycleTime / allmatchesinteam.Count;
+                                            useForAdding.DefenseRate += useForAdding.DefenseRate / allmatchesinteam.Count;
+                                            useForAdding.Disabled += useForAdding.Disabled / allmatchesinteam.Count;
+                                            useForAdding.NumCycles += useForAdding.NumCycles / allmatchesinteam.Count;
+                                        }
+                                        rawTeamDatas.Add(useForAdding);
+                                    }
+                                    var trackstring = "";
+                                    foreach (var rawordertype in parseddata.OrderByProperties)
+                                    {
+                                        string trackingtype = rawordertype;
+                                        
+                                        if (trackstring != "")
+                                        {
+                                            trackstring = trackstring + ", ";
+                                        }
+                                        trackstring = trackstring + trackingtype;
+                                    }
+                                    rawTeamDatas = OrderByHelper.OrderBy(rawTeamDatas, trackstring).ToList();
+                                    foreach (var team in rawTeamDatas)
+                                    {
+                                        ExternalDBQueryResult toAdd = new ExternalDBQueryResult() { TeamNumber = team.TeamNumber };
+                                        foreach (var sortingtype in parseddata.ReturnProperties)
+                                        {
+                                            PropertyInfo pinfo = typeof(GraphTeamMatchView).GetProperty(sortingtype);
+                                            toAdd.CorrespondingResults.Add((double)pinfo.GetValue(team, null));
+                                        }
+                                        sendBackList.Add(toAdd);
+                                    }
+                                    client.Send("S!2^" + uniqueId + ">>" + JsonConvert.SerializeObject(sendBackList));
                                 }
                                 else
                                 {

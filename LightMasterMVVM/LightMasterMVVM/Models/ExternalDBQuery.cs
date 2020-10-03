@@ -25,6 +25,6 @@ namespace LightMasterMVVM.Models
         [JsonProperty("TEM")]
         public int TeamNumber { get; set; }
         [JsonProperty("RLT")]
-        public List<int> CorrespondingResults { get; set; }
+        public List<double> CorrespondingResults { get; set; }
     }
 }
