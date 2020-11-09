@@ -970,7 +970,13 @@ namespace LightMasterMVVM.Views
                             control.TabletViewModel.Tablets.ToArray()[control.TabletViewModel.Tablets.IndexOf(control.TabletViewModel.Tablets.Where(x => x.Identifier == uniqueId).FirstOrDefault())].BatteryLevel = data + "%";
                             break;
                         case 4:
-                            //DIAGNOSTIC REPORT
+                            var diagnosticreport = JsonConvert.DeserializeObject<DiagnosticReport>(data);
+                            if(diagnosticreport.currentConnection != Connectivity.None)
+                            {
+                                control.NotificationViewModel.AddNotification("Check Internet", "Tablet with UID " + uniqueId.ToString() + " has their WiFi on! Please change this!", "#fe5b5b", null);
+                            }
+                            instanceOfTablet.LastCommunicated = DateTime.Now;
+                            db.TabletInstances.Update(instanceOfTablet);
                             break;
                         case 5:
                             //DEVICE LOG REPORT
